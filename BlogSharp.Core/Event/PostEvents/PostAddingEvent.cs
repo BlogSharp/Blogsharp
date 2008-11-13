@@ -7,12 +7,12 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Event.PostEvents
 {
-	public class PostAddingEvent:AbstractEvent<IPostService>,ICancellableEvent<IPostService>
+	public class PostAddingEvent:AbstractEvent<IPostService>,ICancellableEvent
 	{
 		public PostAddingEvent(IPostService postService,IPost post):base(postService)
 		{
 			this.Cancel = false;
-			this.Post = post;
+			this.post = post;
 		}
 		#region ICancellableEvent<IPostService> Members
 
@@ -24,6 +24,11 @@ namespace BlogSharp.Core.Event.PostEvents
 
 		#endregion
 
-		public IPost Post { get; set; }
+		public IPost Post
+		{
+			get { return post; }
+		}
+
+		private readonly IPost post;
 	}
 }
