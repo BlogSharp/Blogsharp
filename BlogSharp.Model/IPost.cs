@@ -9,6 +9,7 @@ namespace BlogSharp.Model
 	{
 		IBlog Blog { get; set; }
 		IAuthor Author { get; set; }
+
 		DateTime DateCreated { get; set; }
 		DateTime DatePublished { get; set; }
 
