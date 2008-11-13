@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BlogSharp.Core.Event
 {
-	public interface ICancellableEvent<T>:IEvent<T>
+	public interface ICancellableEvent<T>
 	{
 		bool Cancel { get; set; }
 	}

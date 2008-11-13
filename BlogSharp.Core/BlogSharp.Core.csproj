@@ -75,6 +75,7 @@
     <Compile Include="CastleExtensions\DependencyResolvers\ListResolver.cs" />
     <Compile Include="CastleExtensions\Facilities\ControllerRegisterFacility.cs" />
     <Compile Include="Event\AbstractEvent.cs" />
+    <Compile Include="Event\ApplicationEvents\ApplicationStartedEvent.cs" />
     <Compile Include="Event\ApplicationEvents\ApplicationStartingEvent.cs" />
     <Compile Include="Event\ICancellableEvent.cs" />
     <Compile Include="Event\IEvent.cs" />
