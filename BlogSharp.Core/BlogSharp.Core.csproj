@@ -79,6 +79,8 @@
     <Compile Include="Event\ApplicationEvents\ApplicationStartingEvent.cs" />
     <Compile Include="Event\ICancellableEvent.cs" />
     <Compile Include="Event\IEvent.cs" />
+    <Compile Include="Event\MembershipEvents\UserValidatedEvent.cs" />
+    <Compile Include="Event\MembershipEvents\UserValidatingEvent.cs" />
     <Compile Include="Event\PostEvents\CommentAddedEvent.cs" />
     <Compile Include="Event\PostEvents\CommentAddingEvent.cs" />
     <Compile Include="Event\PostEvents\PostAddedEvent.cs" />
@@ -113,9 +115,6 @@
       <Project>{ACD93612-B2E7-4D51-9127-C306EF1F386C}</Project>
       <Name>BlogSharp.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Event\MembershipEvents\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
