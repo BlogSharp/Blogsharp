@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BlogSharp.Model
 {
-	public interface IPost:IIdentifiable<int>
+	public interface IPost : IIdentifiable<int>
 	{
 		IBlog Blog { get; set; }
 		IAuthor Author { get; set; }

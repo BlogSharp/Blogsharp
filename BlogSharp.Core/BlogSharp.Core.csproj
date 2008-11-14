@@ -90,6 +90,7 @@
     <Compile Include="Event\PostEvents\PostAddedEvent.cs" />
     <Compile Include="Event\PostEvents\PostAddingEvent.cs" />
     <Compile Include="IApplication.cs" />
+    <Compile Include="IEntityFactory.cs" />
     <Compile Include="MvcExtensions\ActionResults\RedirectToRefererResult.cs" />
     <Compile Include="MvcExtensions\BlogMvcHandler.cs" />
     <Compile Include="MvcExtensions\ControllerFactories\IExtendedControllerFactory.cs" />

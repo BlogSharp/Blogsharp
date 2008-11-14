@@ -1,34 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BlogSharp.Core.Services.Post;
+﻿using BlogSharp.Core.Services.Post;
 using BlogSharp.Model;
 
 namespace BlogSharp.Core.Event.PostEvents
 {
-	public class PostAddingEvent:AbstractEvent<IPostService>,ICancellableEvent
+	public class PostAddingEvent : AbstractEvent<IPostService>, ICancellableEvent
 	{
-		public PostAddingEvent(IPostService postService,IPost post):base(postService)
+		private readonly IPost post;
+
+		public PostAddingEvent(IPostService postService, IPost post) : base(postService)
 		{
-			this.Cancel = false;
+			Cancel = false;
 			this.post = post;
 		}
-		#region ICancellableEvent<IPostService> Members
-
-		public bool Cancel
-		{ 
-			get;
-			set;
-		}
-
-		#endregion
 
 		public IPost Post
 		{
 			get { return post; }
 		}
 
-		private readonly IPost post;
+		#region ICancellableEvent Members
+
+		public bool Cancel { get; set; }
+
+		#endregion
 	}
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BlogSharp.Core.Services.Encryption
+﻿namespace BlogSharp.Core.Services.Encryption
 {
 	public interface IByteStringConverter
 	{
