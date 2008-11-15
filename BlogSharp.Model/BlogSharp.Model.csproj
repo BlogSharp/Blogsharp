@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="IAuthor.cs" />
     <Compile Include="IBlog.cs" />
+    <Compile Include="IEntity.cs" />
     <Compile Include="IIdentifiable.cs" />
     <Compile Include="IPluginInfo.cs" />
     <Compile Include="IPost.cs" />

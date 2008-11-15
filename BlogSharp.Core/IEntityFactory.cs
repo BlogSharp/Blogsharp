@@ -1,6 +1,8 @@
-﻿namespace BlogSharp.Core
+﻿using BlogSharp.Model;
+
+namespace BlogSharp.Core
 {
-	public interface IEntityFactory<T> where T : class
+	public interface IEntityFactory<T>
 	{
 		T Create();
 	}
