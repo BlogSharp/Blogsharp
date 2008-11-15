@@ -15,10 +15,14 @@ namespace BlogSharp.Core.Impl.Tests
 	}
 	public class EntityFactoryTests
 	{
+		public EntityFactoryTests()
+		{
+			this.postFactory = new EntityFactory<IPost>(new ProxyGenerator());
+		}
+		private readonly IEntityFactory<IPost> postFactory;
 		[Fact]
 		public void CanCreateEntity()
 		{
-			IEntityFactory<IPost> postFactory = new EntityFactory<IPost>(new ProxyGenerator());
 			IPost post = postFactory.Create();
 			Assert.NotNull(post);
 		}
@@ -27,7 +31,6 @@ namespace BlogSharp.Core.Impl.Tests
 		[Fact]
 		public void CanStoreValues()
 		{
-			IEntityFactory<IPost> postFactory = new EntityFactory<IPost>(new ProxyGenerator());
 			IPost post = postFactory.Create();
 			post.Content = "blah";
 			Assert.Equal("blah",post.Content);
@@ -36,10 +39,10 @@ namespace BlogSharp.Core.Impl.Tests
 		[Fact]
 		public void CanCreateListAutomatically()
 		{
-			IEntityFactory<IPost> postFactory = new EntityFactory<IPost>(new ProxyGenerator());
 			IPost post = postFactory.Create();
 			post.List.Add("aaaa");
-			Assert.Equal(1, post.List.Count);
+			post.List.Add("bbbb");
+			Assert.Equal(2, post.List.Count);
 		}
 	}
 }
