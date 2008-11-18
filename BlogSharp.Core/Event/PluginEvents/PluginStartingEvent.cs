@@ -1,6 +1,6 @@
 ﻿using BlogSharp.Core.Services.Plugin;
 
-namespace BlogSharp.Core.Event.PlugingEvents
+namespace BlogSharp.Core.Event.PluginEvents
 {
 	public class PluginStartingEvent : AbstractEvent<IPluginService>, ICancellableEvent
 	{

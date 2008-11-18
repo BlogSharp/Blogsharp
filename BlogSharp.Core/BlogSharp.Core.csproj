@@ -81,10 +81,10 @@
     <Compile Include="Event\IEvent.cs" />
     <Compile Include="Event\MembershipEvents\UserValidatedEvent.cs" />
     <Compile Include="Event\MembershipEvents\UserValidatingEvent.cs" />
-    <Compile Include="Event\PlugingEvents\PluginStartedEvent.cs" />
-    <Compile Include="Event\PlugingEvents\PluginStartingEvent.cs" />
-    <Compile Include="Event\PlugingEvents\PluginStoppedEvent.cs" />
-    <Compile Include="Event\PlugingEvents\PluginStoppingEvent.cs" />
+    <Compile Include="Event\PluginEvents\PluginStartedEvent.cs" />
+    <Compile Include="Event\PluginEvents\PluginStartingEvent.cs" />
+    <Compile Include="Event\PluginEvents\PluginStoppedEvent.cs" />
+    <Compile Include="Event\PluginEvents\PluginStoppingEvent.cs" />
     <Compile Include="Event\PostEvents\CommentAddedEvent.cs" />
     <Compile Include="Event\PostEvents\CommentAddingEvent.cs" />
     <Compile Include="Event\PostEvents\PostAddedEvent.cs" />
