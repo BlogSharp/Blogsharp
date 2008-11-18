@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
-using BlogSharp.Core.CastleExtensions.DependencyResolvers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using BlogSharp.CastleExtensions.DependencyResolvers;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Xunit;
 
-namespace BlogSharp.Core.Impl.Tests.CastleExtensions.DependencyResolvers
+namespace BlogSharp.CastleExtensions.Tests.DependencyResolvers
 {
 	public class EnumerableDependencyResolverTests
 	{
