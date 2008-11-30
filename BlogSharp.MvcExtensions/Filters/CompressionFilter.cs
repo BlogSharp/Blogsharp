@@ -1,19 +1,20 @@
-﻿using System.IO.Compression;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Web;
+using System.IO.Compression;
 using System.Web.Mvc;
 
-namespace BlogSharp.Core.MvcExtensions.Filters
+namespace BlogSharp.MvcExtensions.Filters
 {
-	/// <summary>
-	/// Compresses the controller output
-	/// </summary>
 	public class CompressFilter : ActionFilterAttribute
 	{
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
 			HttpRequestBase request = filterContext.HttpContext.Request;
 			string acceptEncoding = request.Headers["Accept-Encoding"];
-			if (string.IsNullOrEmpty(acceptEncoding))
+			if (string.IsNullOrEmpty(acceptEncoding)) 
 				return;
 			acceptEncoding = acceptEncoding.ToUpperInvariant();
 

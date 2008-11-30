@@ -13,6 +13,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSharp.CastleExtensions"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSharp.CastleExtensions.Tests", "BlogSharp.CastleExtensions.Tests\BlogSharp.CastleExtensions.Tests.csproj", "{BA5E82A2-BE03-40E2-B834-021F25B49862}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSharp.Model.Impl", "BlogSharp.Model.Impl\BlogSharp.Model.Impl.csproj", "{388E212A-2592-4F2B-9BA2-8789F082732C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSharp.Web", "BlogSharp.Web\BlogSharp.Web.csproj", "{FD1F0595-EF35-4CFD-87E2-1E5F7E170026}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSharp.Web.Tests", "BlogSharp.Web.Tests\BlogSharp.Web.Tests.csproj", "{F1045769-5738-438A-AAE8-F898DDC192E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSharp.MvcExtensions", "BlogSharp.MvcExtensions\BlogSharp.MvcExtensions.csproj", "{2925BBF2-86E3-4231-B0C9-AF4E4D02317E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSharp.MvcExtensions.Tests", "BlogSharp.MvcExtensions.Tests\BlogSharp.MvcExtensions.Tests.csproj", "{95374662-013A-4D2D-AE0E-DF3182DD642C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +53,26 @@ Global
 		{BA5E82A2-BE03-40E2-B834-021F25B49862}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA5E82A2-BE03-40E2-B834-021F25B49862}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA5E82A2-BE03-40E2-B834-021F25B49862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{388E212A-2592-4F2B-9BA2-8789F082732C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{388E212A-2592-4F2B-9BA2-8789F082732C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{388E212A-2592-4F2B-9BA2-8789F082732C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{388E212A-2592-4F2B-9BA2-8789F082732C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD1F0595-EF35-4CFD-87E2-1E5F7E170026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD1F0595-EF35-4CFD-87E2-1E5F7E170026}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD1F0595-EF35-4CFD-87E2-1E5F7E170026}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD1F0595-EF35-4CFD-87E2-1E5F7E170026}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1045769-5738-438A-AAE8-F898DDC192E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1045769-5738-438A-AAE8-F898DDC192E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1045769-5738-438A-AAE8-F898DDC192E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1045769-5738-438A-AAE8-F898DDC192E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2925BBF2-86E3-4231-B0C9-AF4E4D02317E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2925BBF2-86E3-4231-B0C9-AF4E4D02317E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2925BBF2-86E3-4231-B0C9-AF4E4D02317E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2925BBF2-86E3-4231-B0C9-AF4E4D02317E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95374662-013A-4D2D-AE0E-DF3182DD642C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95374662-013A-4D2D-AE0E-DF3182DD642C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95374662-013A-4D2D-AE0E-DF3182DD642C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95374662-013A-4D2D-AE0E-DF3182DD642C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

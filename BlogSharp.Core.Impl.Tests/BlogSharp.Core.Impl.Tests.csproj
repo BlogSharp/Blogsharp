@@ -47,10 +47,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="Db4objects.Db4o, Version=7.2.54.11278, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\Db4objects.Db4o.dll</HintPath>
+    </Reference>
+    <Reference Include="Db4objects.Db4o.Linq, Version=7.2.54.11278, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\Db4objects.Db4o.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -73,8 +86,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseTest.cs" />
+    <Compile Include="DataAccess\Db4oRepositoryTests.cs" />
     <Compile Include="EntityFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Post\PostServiceTests.cs" />
     <Compile Include="Structure\FriendlyUrlGeneratorTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,13 +102,16 @@
       <Project>{ABDABEBC-B92A-4F36-AC07-6874B4932C21}</Project>
       <Name>BlogSharp.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BlogSharp.Model.Impl\BlogSharp.Model.Impl.csproj">
+      <Project>{388E212A-2592-4F2B-9BA2-8789F082732C}</Project>
+      <Name>BlogSharp.Model.Impl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlogSharp.Model\BlogSharp.Model.csproj">
       <Project>{ACD93612-B2E7-4D51-9127-C306EF1F386C}</Project>
       <Name>BlogSharp.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CastleExtensions\DependencyResolvers\" />
     <Folder Include="MvcExtensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,6 +12,23 @@
 
 		public TSource EventSource { get; set; }
 
+		object IEvent.EventSource
+		{
+			get
+			{
+				return this.EventSource;
+			}
+			set
+			{
+				this.EventSource = (TSource)value;
+			}
+		}
+
+		
 		#endregion
+
+
+
+
 	}
 }

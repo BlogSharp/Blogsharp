@@ -1,6 +1,9 @@
-﻿namespace BlogSharp.Core.Services.Search
+﻿using BlogSharp.Model;
+
+namespace BlogSharp.Core.Services.Search
 {
-	internal interface IIndexContributor
+	public interface IIndexContributor
 	{
+		ISearchContent Search(string phrase);
 	}
 }

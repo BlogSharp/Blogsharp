@@ -72,11 +72,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\IRepository.cs" />
+    <Compile Include="DataAccess\Repository.cs" />
+    <Compile Include="DI.cs" />
+    <Compile Include="EntityFactory.cs" />
     <Compile Include="Event\AbstractEvent.cs" />
     <Compile Include="Event\ApplicationEvents\ApplicationStartedEvent.cs" />
     <Compile Include="Event\ApplicationEvents\ApplicationStartingEvent.cs" />
     <Compile Include="Event\ICancellableEvent.cs" />
     <Compile Include="Event\IEvent.cs" />
+    <Compile Include="Event\IEventListener.cs" />
     <Compile Include="Event\MembershipEvents\UserValidatedEvent.cs" />
     <Compile Include="Event\MembershipEvents\UserValidatingEvent.cs" />
     <Compile Include="Event\PluginEvents\PluginStartedEvent.cs" />
@@ -85,16 +90,13 @@
     <Compile Include="Event\PluginEvents\PluginStoppingEvent.cs" />
     <Compile Include="Event\PostEvents\CommentAddedEvent.cs" />
     <Compile Include="Event\PostEvents\CommentAddingEvent.cs" />
+    <Compile Include="Event\PostEvents\IPostAddingListener.cs" />
     <Compile Include="Event\PostEvents\PostAddedEvent.cs" />
     <Compile Include="Event\PostEvents\PostAddingEvent.cs" />
+    <Compile Include="Event\PostEvents\PostRemovedEvent.cs" />
+    <Compile Include="Event\PostEvents\PostRemovingEvent.cs" />
     <Compile Include="IApplication.cs" />
     <Compile Include="IEntityFactory.cs" />
-    <Compile Include="MvcExtensions\ActionResults\RedirectToRefererResult.cs" />
-    <Compile Include="MvcExtensions\BlogMvcHandler.cs" />
-    <Compile Include="MvcExtensions\ControllerFactories\IExtendedControllerFactory.cs" />
-    <Compile Include="MvcExtensions\Filters\AntiGoogleWebAcceleratorFilter.cs" />
-    <Compile Include="MvcExtensions\Filters\CompressFilter.cs" />
-    <Compile Include="MvcExtensions\IRouteRegistrar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Compression\IArchiveFile.cs" />
     <Compile Include="Services\Compression\IArchiveItem.cs" />

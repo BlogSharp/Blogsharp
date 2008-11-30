@@ -2,47 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 using BlogSharp.Model;
 using Castle.DynamicProxy;
+using Castle.MicroKernel;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+using Rhino.Mocks;
 using Xunit;
 
 namespace BlogSharp.Core.Impl.Tests
 {
-	public interface IPost
-	{
-		IList<string> List { get; set; }
-		string Content { get; set; }
-	}
-	public class EntityFactoryTests
+	public class EntityFactoryTests:BaseTest
 	{
 		public EntityFactoryTests()
 		{
-			this.postFactory = new EntityFactory<IPost>(new ProxyGenerator());
+			this.windsorContainer = MockRepository.GenerateStub<IWindsorContainer>();
+			DI.SetContainer(windsorContainer);
+			this.entityFactory = new DIEntityFactory<IPost>();
 		}
-		private readonly IEntityFactory<IPost> postFactory;
+
+		private readonly IWindsorContainer windsorContainer;
+		private readonly IEntityFactory<IPost> entityFactory;
+
 		[Fact]
 		public void CanCreateEntity()
 		{
-			IPost post = postFactory.Create();
-			Assert.NotNull(post);
-		}
-
-
-		[Fact]
-		public void CanStoreValues()
-		{
-			IPost post = postFactory.Create();
-			post.Content = "blah";
-			Assert.Equal("blah",post.Content);
-		}
-
-		[Fact]
-		public void CanCreateListAutomatically()
-		{
-			IPost post = postFactory.Create();
-			post.List.Add("aaaa");
-			post.List.Add("bbbb");
-			Assert.Equal(2, post.List.Count);
+			entityFactory.Create();
+			this.windsorContainer.AssertWasCalled(x=>x.Resolve<IPost>());
 		}
 	}
 }

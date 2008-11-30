@@ -2,7 +2,7 @@
 
 namespace BlogSharp.Model
 {
-	public interface IBlog : IIdentifiable<int>
+	public interface IBlog : IIdentifiable<int>, IEntity
 	{
 		string Name { get; set; }
 		IAuthor Founder { get; set; }
