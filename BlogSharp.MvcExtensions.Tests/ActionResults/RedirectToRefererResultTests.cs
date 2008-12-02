@@ -19,7 +19,7 @@ namespace BlogSharp.MvcExtensions.Tests.ActionResults
 			
 		}
 		[Fact]
-		public void RedirectsToReferer()
+		public void Redirects_to_referer_using_HTTP_REFERER_Variable()
 		{
 			var result=new RedirectToRefererResult();
 			

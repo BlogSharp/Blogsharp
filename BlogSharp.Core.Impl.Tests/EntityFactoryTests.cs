@@ -26,7 +26,7 @@ namespace BlogSharp.Core.Impl.Tests
 		private readonly IEntityFactory<IPost> entityFactory;
 
 		[Fact]
-		public void CanCreateEntity()
+		public void Can_create_entity()
 		{
 			entityFactory.Create();
 			this.windsorContainer.AssertWasCalled(x=>x.Resolve<IPost>());

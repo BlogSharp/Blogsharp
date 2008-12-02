@@ -12,7 +12,7 @@ namespace BlogSharp.CastleExtensions.Tests.DependencyResolvers
 	public class EnumerableDependencyResolverTests
 	{
 		[Fact]
-		public void CanResolveIEnumerableWithAllServices()
+		public void Can_resolve_IList_with_all_services()
 		{
 			IWindsorContainer x = new WindsorContainer();
 			x.Kernel.Resolver.AddSubResolver(new ListResolver(x.Kernel));

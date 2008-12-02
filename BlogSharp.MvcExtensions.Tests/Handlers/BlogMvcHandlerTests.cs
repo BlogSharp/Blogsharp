@@ -61,7 +61,7 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 		private IExtendedControllerFactory dummyFactory;
 		private RequestContext context;
 		[Fact]
-		public void CanResolveWithType()
+		public void Factory_should_resolve_given_controller_with_its_type()
 		{
 			var dummyController = new DummyController();
 			dummyFactory.Expect(x => x.CreateController(Arg<RequestContext>.Is.Anything,
@@ -74,7 +74,7 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 			Assert.True(dummyController.WasCalled);
 		}
 		[Fact]
-		public void CanReleaseOnExceptionWithType()
+		public void Can_release_when_exception_occurs()
 		{
 			var dummyController2 = new DummyController2();
 			dummyFactory.Expect(x => x.CreateController(Arg<RequestContext>.Is.Anything,

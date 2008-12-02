@@ -30,7 +30,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		private readonly IPostService postService;
 
 		[Fact]
-		public void AddPostWorksProperly()
+		public void AddPost_calls_underlying_repository_to_save()
 		{
 			var post = GetEntityFactory<IPost>().Create();
 			postService.AddPost(post);
@@ -38,7 +38,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		}
 
 		[Fact]
-		public void AddPostCommentWorksProperly()
+		public void AddComment_calls_underlying_repository()
 		{
 			var postComment = GetEntityFactory<IPostComment>().Create();
 			postService.AddComment(postComment);
@@ -47,7 +47,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		}
 
 		[Fact]
-		public void RemovePostWorksProperly()
+		public void RemovePost_calls_underlyting_repository_to_delete()
 		{
 			var post = GetEntityFactory<IPost>().Create();
 			postService.RemovePost(post);
@@ -56,7 +56,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 
 
 		[Fact]
-		public void RemovePostCommentWorksProperly()
+		public void RemoveComment_calls_underlyting_repository_to_delete()
 		{
 			var post = GetEntityFactory<IPostComment>().Create();
 			postService.RemoveComment(post);

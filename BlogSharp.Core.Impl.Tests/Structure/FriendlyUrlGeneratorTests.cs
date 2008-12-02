@@ -14,7 +14,7 @@ namespace BlogSharp.Core.Impl.Tests.Structure
 		}
 
 		[Fact]
-		public void CanIgnoreNonCharacters()
+		public void Can_ignore_non_alphanumeric_characters()
 		{
 			string str = generator
 				.GenerateUrl("blah.aspx?title={0}", "this is a sample title with 1 numbers in it");

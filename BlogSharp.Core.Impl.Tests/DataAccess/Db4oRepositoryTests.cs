@@ -33,7 +33,7 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 		private readonly IObjectContainer objectContainer;
 		private readonly IRepository<Model.IPost> postRepository;
 		[Fact]
-		public void CanStore()
+		public void Can_store_an_entity()
 		{
 			Model.IPost post = this.GetEntityFactory<Model.IPost>().Create();
 			postRepository.Add(post);
@@ -41,7 +41,7 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 			
 		}
 		[Fact]
-		public void CanDelete()
+		public void Can_delete_the_entity()
 		{
 			Model.IPost post = this.GetEntityFactory<Model.IPost>().Create();
 			postRepository.Remove(post);
