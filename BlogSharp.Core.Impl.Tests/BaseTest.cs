@@ -9,15 +9,14 @@ namespace BlogSharp.Core.Impl.Tests
 {
 	public class BaseTest:IDisposable
 	{
-
 		protected virtual IEntityFactory<T> GetEntityFactory<T>() where T:class
 		{
-
+	
 			var mock=MockRepository.GenerateStub<IEntityFactory<T>>();
 			mock.Expect(x => x.Create()).Return(MockRepository.GenerateStub<T>());
 			return mock;
 		}
-		private IWindsorContainer container;
+
 		public virtual void OnTearDown()
 		{
 			

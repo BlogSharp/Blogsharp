@@ -55,6 +55,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Db4objects.Db4o.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="NVelocity, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\NVelocity.dll</HintPath>
+    </Reference>
     <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Rhino.Mocks.dll</HintPath>
@@ -75,8 +79,14 @@
   <ItemGroup>
     <Compile Include="DataAccess\Db4oRepository.cs" />
     <Compile Include="DIEntityFactory.cs" />
+    <Compile Include="EventHandlers\Membership\PasswordResettedEventListener.cs" />
+    <Compile Include="EventHandlers\Membership\UserRegisteredEventListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Mail\MailService.cs" />
+    <Compile Include="Services\Membership\MembershipService.cs" />
     <Compile Include="Services\Post\PostService.cs" />
+    <Compile Include="Services\Template\DefaultContext.cs" />
+    <Compile Include="Services\Template\NVelocity\NVelocityTemplateEngine.cs" />
     <Compile Include="Structure\FriendlyUrlGeneratorImpl.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -92,9 +102,6 @@
       <Project>{2925BBF2-86E3-4231-B0C9-AF4E4D02317E}</Project>
       <Name>BlogSharp.MvcExtensions</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EventHandlers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

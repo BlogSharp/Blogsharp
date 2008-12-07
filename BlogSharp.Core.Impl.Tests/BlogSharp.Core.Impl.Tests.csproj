@@ -55,6 +55,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Db4objects.Db4o.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="NVelocity, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\NVelocity.dll</HintPath>
+    </Reference>
     <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Rhino.Mocks.dll</HintPath>
@@ -89,8 +93,12 @@
     <Compile Include="BaseTest.cs" />
     <Compile Include="DataAccess\Db4oRepositoryTests.cs" />
     <Compile Include="EntityFactoryTests.cs" />
+    <Compile Include="EventHandlers\Membership\PasswordResettedEventListenerTests.cs" />
+    <Compile Include="EventHandlers\Membership\UserRegisteredEventListenerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Membership\MembershipServiceTests.cs" />
     <Compile Include="Services\Post\PostServiceTests.cs" />
+    <Compile Include="Services\Template\VelocityTemplateEngineTests.cs" />
     <Compile Include="Structure\FriendlyUrlGeneratorTests.cs" />
   </ItemGroup>
   <ItemGroup>
