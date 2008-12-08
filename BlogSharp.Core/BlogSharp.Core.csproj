@@ -108,6 +108,11 @@
     <Compile Include="Services\Encryption\IEncryptionService.cs" />
     <Compile Include="Services\Encryption\IEncryptor.cs" />
     <Compile Include="Services\Encryption\IHasher.cs" />
+    <Compile Include="Services\FileSystem\FileSystemType.cs" />
+    <Compile Include="Services\FileSystem\IDirectory.cs" />
+    <Compile Include="Services\FileSystem\IFile.cs" />
+    <Compile Include="Services\FileSystem\IFileService.cs" />
+    <Compile Include="Services\FileSystem\IFileSystemInfo.cs" />
     <Compile Include="Services\Mail\IMailService.cs" />
     <Compile Include="Services\Membership\IMembershipService.cs" />
     <Compile Include="Services\Plugin\IPlugin.cs" />
@@ -119,6 +124,7 @@
     <Compile Include="Services\Template\ITemplate.cs" />
     <Compile Include="Services\Template\ITemplateContext.cs" />
     <Compile Include="Services\Template\ITemplateEngine.cs" />
+    <Compile Include="Services\Template\ITemplateEngineRegistry.cs" />
     <Compile Include="Services\Template\ITemplateSource.cs" />
     <Compile Include="Structure\IFriendlyUrlGenerator.cs" />
   </ItemGroup>

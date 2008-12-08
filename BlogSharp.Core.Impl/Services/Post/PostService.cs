@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using BlogSharp.Core.DataAccess;
 using BlogSharp.Core.Event.PostEvents;
 using BlogSharp.Core.Services.Post;

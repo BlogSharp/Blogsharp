@@ -9,5 +9,6 @@ namespace BlogSharp.Core.Services.Template
 	public interface ITemplate
 	{
 		string GetContent();
+		ITemplateEngine Engine { get; }
 	}
 }
