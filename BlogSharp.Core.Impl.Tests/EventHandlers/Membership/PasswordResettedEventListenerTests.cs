@@ -29,7 +29,7 @@ namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 		private readonly IEventListener<PasswordResettedEvent> listener;
 
 		[Fact]
-		public void Calls_TemplateEngine_And_TemplateSource_Then_Sends_Email()
+		public void Calls_template_engine_and_template_source_then_sends_email()
 		{
 			var authorMock = MockRepository.GenerateMock<IAuthor>();
 			authorMock.Expect(x => x.Email).Return("blah@blah.com").Repeat.Any();
