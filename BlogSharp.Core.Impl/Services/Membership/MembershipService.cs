@@ -5,17 +5,24 @@ using System.Net.Mail;
 using System.Text;
 using BlogSharp.Core.DataAccess;
 using BlogSharp.Core.Impl.Services.Template;
+using BlogSharp.Core.Services.Encryption;
 using BlogSharp.Core.Services.Mail;
 using BlogSharp.Core.Services.Membership;
 using BlogSharp.Core.Services.Template;
 using BlogSharp.Model;
 using NVelocity.Context;
+using BlogSharp.Core.Event.MembershipEvents;
 
 namespace BlogSharp.Core.Impl.Services.Membership
 {
 	public class MembershipService:IMembershipService
 	{
+		public MembershipService(IEncryptionService encryptionService)
+		{
+			this.encryptionService = encryptionService;
+		}
 
+		private readonly IEncryptionService encryptionService;
 		#region IMembershipService Members
 
 		public IAuthor CreateNewUser(string username, string password, string email)
@@ -25,6 +32,8 @@ namespace BlogSharp.Core.Impl.Services.Membership
 			author.Password = password;
 			author.Email = email;
 			Repository<IAuthor>.Instance.Add(author);
+			var userRegistered = new UserRegisteredEventArgs(author);
+			this.UserRegistered.Raise(this,userRegistered);
 			return author;
 		}
 
@@ -45,13 +54,21 @@ namespace BlogSharp.Core.Impl.Services.Membership
 			return aut;
 		}
 
+		//TODO: Introduce IEncryptionService
 		public void ResetPassword(string email)
 		{
 			var author = Repository<IAuthor>.Instance.GetByExpression(x => x.Email == email).First();
 			author.Password = Guid.NewGuid().ToString();
 			Repository<IAuthor>.Instance.Add(author);
+			var passwordResetEvent = new PasswordResettedEventArgs(author, author.Password);
+			this.PasswordResetted.Raise(this,passwordResetEvent);
 		}
 
+		#endregion
+
+		#region IMembershipService Members
+		public event EventHandler<IMembershipService, UserRegisteredEventArgs> UserRegistered = delegate { };
+		public event EventHandler<IMembershipService, PasswordResettedEventArgs> PasswordResetted=delegate { };
 		#endregion
 	}
 }

@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Text;
 using BlogSharp.Core.DataAccess;
 using BlogSharp.Core.Impl.Services.Membership;
+using BlogSharp.Core.Services.Encryption;
 using BlogSharp.Core.Services.Mail;
 using BlogSharp.Core.Services.Membership;
 using BlogSharp.Model;
@@ -20,7 +21,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Membership
 	{
 		public MembershipServiceTests()
 		{
-			this.membershipService = new MembershipService();
+			this.membershipService = new MembershipService(MockRepository.GenerateMock<IEncryptionService>());
 			var container = MockRepository.GenerateMock<IWindsorContainer>();
 			this.authorRepository = MockRepository.GenerateMock<IRepository<IAuthor>>();
 			container.Expect(x => x.Resolve<IRepository<IAuthor>>()).Return(this.authorRepository).Repeat.Any();
