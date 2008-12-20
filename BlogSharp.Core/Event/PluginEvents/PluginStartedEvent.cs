@@ -2,10 +2,9 @@
 
 namespace BlogSharp.Core.Event.PluginEvents
 {
-	public class ApplicationStarted : AbstractEvent<IPluginService>
+	public class PluginStartedEventArgs : AbstractEventArgs
 	{
-		public ApplicationStarted(IPluginService pluginService)
-			: base(pluginService)
+        public PluginStartedEventArgs()
 		{
 		}
 	}

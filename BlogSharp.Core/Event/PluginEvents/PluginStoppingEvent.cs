@@ -2,10 +2,9 @@
 
 namespace BlogSharp.Core.Event.PluginEvents
 {
-	public class PluginStoppingEvent : AbstractEvent<IPluginService>, ICancellableEvent
+	public class PluginStoppingEvent : AbstractEventArgs, ICancellableEvent
 	{
-		public PluginStoppingEvent(IPluginService pluginService)
-			: base(pluginService)
+		public PluginStoppingEvent(IPlugin plugin)
 		{
 		}
 

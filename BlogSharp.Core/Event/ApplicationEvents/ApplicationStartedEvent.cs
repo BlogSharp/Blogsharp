@@ -1,9 +1,8 @@
 ﻿namespace BlogSharp.Core.Event.ApplicationEvents
 {
-	public class ApplicationStarted : AbstractEvent<IApplication>
+	public class ApplicationStartedEventArgs : AbstractEventArgs
 	{
-		public ApplicationStarted(IApplication app)
-			: base(app)
+		public ApplicationStartedEventArgs()
 		{
 		}
 	}

@@ -8,13 +8,13 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Event.MembershipEvents
 {
-	public class UserRegisteredEvent : AbstractEvent<IMembershipService>
+	public class UserRegisteredEventArgs : AbstractEventArgs
 	{
-		public UserRegisteredEvent(IAuthor author,IMembershipService service):base(service)
+		public UserRegisteredEventArgs(IAuthor author)
 		{
 			this.User = author;
 		}
 
-		public IAuthor User { get; set; }
+		public IAuthor User { get; private set; }
 	}
 }

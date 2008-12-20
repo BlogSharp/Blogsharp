@@ -7,14 +7,14 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Event.PostEvents
 {
-	public class PostRemovingEvent:AbstractEvent<IPostService>,ICancellableEvent
+	public class PostRemovingEventArgs:AbstractEventArgs,ICancellableEvent
 	{
-		public PostRemovingEvent(IPostService postService,IPost post):base(postService)
+		public PostRemovingEventArgs(IPost post)
 		{
-			
+		    this.Post = post;	
 		}
 
-		public IPost Post { get; set; }
+		public IPost Post { get; private set; }
 
 		#region ICancellableEvent Members
 

@@ -1,8 +1,8 @@
 ﻿namespace BlogSharp.Core.Event.ApplicationEvents
 {
-	public class ApplicationStartingEvent : AbstractEvent<IApplication>, ICancellableEvent
+	public class ApplicationStartingEventArgs : AbstractEventArgs, ICancellableEvent
 	{
-		public ApplicationStartingEvent(IApplication app) : base(app)
+		public ApplicationStartingEventArgs()
 		{
 		}
 

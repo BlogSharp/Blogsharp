@@ -6,26 +6,30 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Impl.Services.Post
 {
-	public class PostService:IPostService
+	public class PostService : IPostService
 	{
 		#region IPostService Members
 
 		public void AddPost(IPost post)
 		{
-			PostAddingEvent postAdding=new PostAddingEvent(this,post);
+			var postAdding = new PostAddingEventArgs(post);
+			this.PostAdding.Raise(this,postAdding);
 			if (postAdding.Cancel)
 				return;
 			Repository<IPost>.Instance.Add(post);
-			PostAddedEvent postAdded = new PostAddedEvent(this, post);
+			var postAdded = new PostAddedEventArgs(post);
+			this.PostAdded.Raise(this,postAdded);
 		}
 
 		public void AddComment(IPostComment comment)
 		{
-			CommentAddingEvent commentAdding = new CommentAddingEvent(this,comment);
+			var commentAdding = new CommentAddingEventArgs(comment);
+			this.CommentAdding.Raise(this,commentAdding);
 			if (commentAdding.Cancel)
 				return;
 			Repository<IPostComment>.Instance.Add(comment);
-			CommentAddedEvent commentAdded = new CommentAddedEvent(this, comment);
+			var commentAdded = new CommentAddedEventArgs(comment);
+			this.CommentAdded.Raise(this,commentAdded);
 		}
 
 		public void RemoveComment(IPostComment comment)
@@ -35,11 +39,13 @@ namespace BlogSharp.Core.Impl.Services.Post
 
 		public void RemovePost(IPost post)
 		{
-			PostRemovingEvent postRemoving=new PostRemovingEvent(this,post);
+			var postRemoving = new PostRemovingEventArgs(post);
+			this.PostRemoving.Raise(this,postRemoving);
 			if (postRemoving.Cancel)
 				return;
 			Repository<IPost>.Instance.Remove(post);
-			PostRemovedEvent postRemoved = new PostRemovedEvent(this, post);
+			var postRemoved = new PostRemovedEventArgs(post);
+			this.PostRemoved.Raise(this,postRemoved);
 		}
 
 		public IPost GetPostById(int id)
@@ -52,6 +58,17 @@ namespace BlogSharp.Core.Impl.Services.Post
 			return Repository<IPost>.Instance.GetByExpression(x => x.FriendlyTitle == friendlyTitle).FirstOrDefault();
 		}
 
+		#endregion
+
+		#region IPostService Members
+
+
+		public event EventHandler<IPostService, PostAddingEventArgs> PostAdding = delegate { };
+		public event EventHandler<IPostService, PostAddedEventArgs> PostAdded = delegate { };
+		public event EventHandler<IPostService, PostRemovingEventArgs> PostRemoving = delegate { };
+		public event EventHandler<IPostService, PostRemovedEventArgs> PostRemoved = delegate { };
+		public event EventHandler<IPostService, CommentAddingEventArgs> CommentAdding = delegate { };
+		public event EventHandler<IPostService, CommentAddedEventArgs> CommentAdded = delegate { };
 		#endregion
 	}
 }

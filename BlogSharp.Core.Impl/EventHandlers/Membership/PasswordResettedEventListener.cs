@@ -7,12 +7,13 @@ using BlogSharp.Core.Event;
 using BlogSharp.Core.Event.MembershipEvents;
 using BlogSharp.Core.Impl.Services.Template;
 using BlogSharp.Core.Services.Mail;
+using BlogSharp.Core.Services.Membership;
 using BlogSharp.Core.Services.Template;
 using BlogSharp.Model;
 
 namespace BlogSharp.Core.Impl.EventHandlers.Membership
 {
-	public class PasswordResettedEventListener:IEventListener<PasswordResettedEvent>
+	public class PasswordResettedEventListener
 	{
 		public PasswordResettedEventListener(IMailService mailService,ITemplateEngine engine)
 		{
@@ -22,13 +23,13 @@ namespace BlogSharp.Core.Impl.EventHandlers.Membership
 
 		private readonly IMailService mailService;
 		private readonly ITemplateEngine templateEngine;
-		#region IEventListener<PasswordResettedEvent> Members
+		#region IEventListener<PasswordResettedEventArgs> Members
 
-		public void Handle(PasswordResettedEvent @event)
+		public void Handle(IMembershipService membershipService, PasswordResettedEventArgs eventArgs)
 		{
-			IAuthor author = @event.Author;
+			IAuthor author = eventArgs.Author;
 			DefaultContext context=new DefaultContext();
-			context.Put(new {author = author, newPassword = @event.NewPassword});
+			context.Put(new {author = author, newPassword = eventArgs.NewPassword});
 			ITemplate template = null;
 			string output = templateEngine.Merge(template, context);
 			mailService.Send(new MailAddress(author.Email, author.Username), null, null, "Password Reset Request", output);

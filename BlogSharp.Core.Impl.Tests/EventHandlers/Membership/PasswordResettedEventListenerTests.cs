@@ -26,7 +26,7 @@ namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 
 		private readonly IMailService mailServiceMock;
 		private readonly ITemplateEngine templateEngineMock;
-		private readonly IEventListener<PasswordResettedEvent> listener;
+        private readonly PasswordResettedEventListener listener;
 
 		[Fact]
 		public void Calls_template_engine_and_template_source_then_sends_email()
@@ -34,7 +34,7 @@ namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 			var authorMock = MockRepository.GenerateMock<IAuthor>();
 			authorMock.Expect(x => x.Email).Return("blah@blah.com").Repeat.Any();
 			var membershipServiceMock = MockRepository.GenerateMock<IMembershipService>();
-			listener.Handle(new PasswordResettedEvent(authorMock, "1234", membershipServiceMock));
+			listener.Handle(membershipServiceMock, new PasswordResettedEventArgs(authorMock, "1234"));
 			mailServiceMock.AssertWasCalled(x => x.Send(
 			                                     	Arg<MailAddress>.Matches(y => y.Address == "blah@blah.com"),
 			                                     	Arg<MailAddress>.Is.Anything,

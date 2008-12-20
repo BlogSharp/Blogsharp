@@ -1,10 +1,10 @@
 ﻿namespace BlogSharp.Core.Event
 {
-	public interface IEvent
+	public interface IEventArgs
 	{
 		object EventSource { get; set; }
 	}
-	public interface IEvent<TSource>:IEvent
+	public interface IEventArgs<TSource>:IEventArgs
 	{
 		/// <summary>
 		/// The source that the event is raised from

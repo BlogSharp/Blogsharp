@@ -7,16 +7,15 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Event.MembershipEvents
 {
-	public class PasswordResettedEvent:AbstractEvent<IMembershipService>
+	public class PasswordResettedEventArgs:AbstractEventArgs
 	{
-		public PasswordResettedEvent(IAuthor author,string newPassword,IMembershipService service)
-			: base(service)
+		public PasswordResettedEventArgs(IAuthor author,string newPassword)
 		{
 			this.Author = author;
 			this.NewPassword = newPassword;
 		}
 
-		public IAuthor Author { get; set; }
-		public string NewPassword { get; set; }
+		public IAuthor Author { get; private set; }
+        public string NewPassword { get; private set; }
 	}
 }

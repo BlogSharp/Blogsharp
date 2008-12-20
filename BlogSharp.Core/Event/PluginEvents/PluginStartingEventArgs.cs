@@ -2,11 +2,11 @@
 
 namespace BlogSharp.Core.Event.PluginEvents
 {
-	public class PluginStartingEvent : AbstractEvent<IPluginService>, ICancellableEvent
+	public class PluginStartingEventArgs : AbstractEventArgs, ICancellableEvent
 	{
-		public PluginStartingEvent(IPluginService pluginService)
-			: base(pluginService)
+		public PluginStartingEventArgs(IPlugin plugin)
 		{
+
 		}
 
 		#region ICancellableEvent Members

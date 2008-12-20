@@ -2,12 +2,15 @@
 
 namespace BlogSharp.Core.Event.MembershipEvents
 {
-	public class UserValidatingEvent : AbstractEvent<IPostService>, ICancellableEvent
+	public class UserValidatingEvent : AbstractEventArgs, ICancellableEvent
 	{
-		public UserValidatingEvent(IPostService postService) : base(postService)
+		public UserValidatingEvent(string userName,string password)
 		{
+		    this.Username = userName;
+		    this.Password = password;
 		}
 
+	    public string Password { get; set; }
 		public string Username { get; set; }
 
 		#region ICancellableEvent Members

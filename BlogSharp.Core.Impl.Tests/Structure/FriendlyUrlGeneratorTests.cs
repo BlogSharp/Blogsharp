@@ -10,7 +10,7 @@ namespace BlogSharp.Core.Impl.Tests.Structure
 
 		public FriendlyUrlGeneratorTests()
 		{
-			generator = new FriendlyUrlGeneratorImpl();
+			generator = new FriendlyUrlGenerator();
 		}
 
 		[Fact]

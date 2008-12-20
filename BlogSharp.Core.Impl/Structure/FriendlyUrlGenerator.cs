@@ -4,7 +4,7 @@ using BlogSharp.Core.Structure;
 
 namespace BlogSharp.Core.Impl.Structure
 {
-	public class FriendlyUrlGeneratorImpl : IFriendlyUrlGenerator
+	public class FriendlyUrlGenerator : IFriendlyUrlGenerator
 	{
 		private readonly Regex regex = new Regex(@"\W+");
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using BlogSharp.Core.Services.FileSystem;
 
 namespace BlogSharp.Core.Services.Compression
 {
@@ -11,7 +12,7 @@ namespace BlogSharp.Core.Services.Compression
 		IEnumerable<IArchiveItem> Items { get; }
 		IArchiveItem this[string item] { get; }
 		long Count { get; }
-		void Add(FileInfo fileInfo);
-		void Add(DirectoryInfo directoryInfo);
+		void Add(IFile fileInfo);
+		void Add(IDirectory directoryInfo);
 	}
 }

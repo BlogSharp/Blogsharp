@@ -55,6 +55,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Db4objects.Db4o.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="Ionic.Utils.Zip, Version=1.4.0.0, Culture=neutral, PublicKeyToken=c551e179877da246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\Ionic.Utils.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="NVelocity, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\NVelocity.dll</HintPath>
@@ -88,10 +92,11 @@
     <Compile Include="Services\Template\DefaultContext.cs" />
     <Compile Include="Services\Template\DefaultTemplate.cs" />
     <Compile Include="Services\Template\DefaultTemplateSource.cs" />
+    <Compile Include="Services\Template\MultiTemplateEngine.cs" />
     <Compile Include="Services\Template\NullTemplateEngine.cs" />
     <Compile Include="Services\Template\NVelocity\NVelocityTemplateEngine.cs" />
     <Compile Include="Services\Template\TemplateEngineRegistry.cs" />
-    <Compile Include="Structure\FriendlyUrlGeneratorImpl.cs" />
+    <Compile Include="Structure\FriendlyUrlGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlogSharp.Core\BlogSharp.Core.csproj">
@@ -106,6 +111,9 @@
       <Project>{2925BBF2-86E3-4231-B0C9-AF4E4D02317E}</Project>
       <Name>BlogSharp.MvcExtensions</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\Archive\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
