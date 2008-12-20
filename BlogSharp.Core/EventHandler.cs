@@ -10,18 +10,8 @@ namespace BlogSharp.Core
 	{
 		public static void Raise<TSource,TEventArgs>(this EventHandler<TSource,TEventArgs> @event,TSource source,TEventArgs eventArgs)
 		{
-			Delegate[] delegates = @event.GetInvocationList();
-			foreach (var del in delegates)
-			{
-				try
-				{
-					del.DynamicInvoke(source, eventArgs);
-				}
-				catch
-				{
-					
-				}
-			}
+			if(@event!=null)
+				@event(source, eventArgs);
 		}
 	}
 }
