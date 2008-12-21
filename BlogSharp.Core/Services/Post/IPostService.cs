@@ -12,12 +12,12 @@ namespace BlogSharp.Core.Services.Post
 		IPost GetPostById(int id);
 		IPost GetPostByFriendlyTitle(string friendlyTitle);
 
-	    event EventHandler<IPostService, PostAddingEventArgs> PostAdding;
-        event EventHandler<IPostService, PostAddedEventArgs> PostAdded;
-        event EventHandler<IPostService, PostRemovingEventArgs> PostRemoving;
+		event EventHandler<IPostService, PostAddingEventArgs> PostAdding;
+		event EventHandler<IPostService, PostAddedEventArgs> PostAdded;
+		event EventHandler<IPostService, PostRemovingEventArgs> PostRemoving;
 		event EventHandler<IPostService, PostRemovedEventArgs> PostRemoved;
 
-        event EventHandler<IPostService, CommentAddingEventArgs> CommentAdding;
+		event EventHandler<IPostService, CommentAddingEventArgs> CommentAdding;
 		event EventHandler<IPostService, CommentAddedEventArgs> CommentAdded;
 
 	}
