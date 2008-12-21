@@ -6,6 +6,7 @@ using Castle.Windsor;
 
 namespace BlogSharp.Core
 {
+	//TODO: Destroy it, we don't need it in general!
 	public static class DI
 	{
 		public static void SetContainer(IWindsorContainer container)
