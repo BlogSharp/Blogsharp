@@ -21,17 +21,16 @@ namespace BlogSharp.Core.Impl.Tests.Services.Membership
 	{
 		public MembershipServiceTests()
 		{
-			this.membershipService = new MembershipService(MockRepository.GenerateMock<IEncryptionService>());
+			this.userRepository = MockRepository.GenerateMock<IUserRepository>();
+			this.membershipService = new MembershipService(userRepository,MockRepository.GenerateMock<IEncryptionService>());
 			var container = MockRepository.GenerateMock<IWindsorContainer>();
-			this.authorRepository = MockRepository.GenerateMock<IRepository<IAuthor>>();
-			container.Expect(x => x.Resolve<IRepository<IAuthor>>()).Return(this.authorRepository).Repeat.Any();
 			var entityFactory= MockRepository.GenerateMock<IEntityFactory<IAuthor>>();
-			entityFactory.Expect(x => x.Create()).Return(new Author());
-			container.Expect(x => x.Resolve<IEntityFactory<IAuthor>>()).Return(entityFactory);
+			entityFactory.Expect(x => x.Create()).Return(new Author()).Repeat.Any();
+			container.Expect(x => x.Resolve<IEntityFactory<IAuthor>>()).Return(entityFactory).Repeat.Any();
 			DI.SetContainer(container);
 		}
 
-		private IRepository<IAuthor> authorRepository;
+		private readonly IUserRepository userRepository;
 		private readonly IMembershipService membershipService;
 		 
 		[Fact]
@@ -39,18 +38,22 @@ namespace BlogSharp.Core.Impl.Tests.Services.Membership
 		{
 			
 			membershipService.CreateNewUser("username", "password", "email");
-			this.authorRepository.AssertWasCalled(
-				x => x.Save(Arg<IAuthor>.Matches(a => a.Username == "username" && a.Password == "password" && a.Email == "email")));
+			this.userRepository.AssertWasCalled(
+				x =>
+				x.SaveUser(Arg<IAuthor>.Matches(a => a.Username == "username" &&
+				                                     a.Password == "password" &&
+				                                     a.Email == "email")));
 		}
 
 		[Fact]
 		public void Can_reset_password()
 		{
-			var list = new List<IAuthor> {new Author {Email = "blah@email.com", Password = "1234"}};
-			authorRepository.Expect(x => x.GetByExpression(Arg<Expression<Func<IAuthor,bool>>>.Is.Anything))
-				.Return(list);
-			membershipService.ResetPassword("blah");
-			authorRepository.AssertWasCalled(x => x.Save(list[0]));
+			var author = new Author {Email = "blah@email.com",Password = "1234"};
+			userRepository.Expect(x => x.GetAuthorByEmail("blah@email.com"))
+				.Return(author);
+			membershipService.ResetPassword("blah@email.com");
+			userRepository.AssertWasCalled(x => x.SaveUser(author));
+			Assert.NotEqual(author.Password,"1234");
 		}
 	}
 }

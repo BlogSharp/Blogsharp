@@ -17,17 +17,11 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 	{
 		public PostServiceTests()
 		{
-			this.postService = new PostService();
-			this.postRepository = MockRepository.GenerateMock<IRepository<IPost>>();
-			this.postCommentRepository = MockRepository.GenerateMock<IRepository<IPostComment>>();
-			IWindsorContainer container = MockRepository.GenerateStub<IWindsorContainer>();
-			container.Expect(x => x.Resolve<IRepository<IPost>>()).Return(this.postRepository).Repeat.Any();
-			container.Expect(x => x.Resolve<IRepository<IPostComment>>()).Return(this.postCommentRepository).Repeat.Any();
-			DI.SetContainer(container);
+			this.postRepository = MockRepository.GenerateMock<IPostRepository>();
+			this.postService = new PostService(this.postRepository);
 		}
 		
-		private readonly IRepository<IPost> postRepository;
-		private readonly IRepository<IPostComment> postCommentRepository;
+		private readonly IPostRepository postRepository;
 		private readonly IPostService postService;
 
 		[Fact]
@@ -35,7 +29,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		{
 			var post = GetEntityFactory<IPost>().Create();
 			postService.AddPost(post);
-			postRepository.AssertWasCalled(x=>x.Save(post));
+			postRepository.AssertWasCalled(x=>x.SavePost(post));
 		}
 
 		[Fact]
@@ -43,7 +37,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		{
 			var postComment = GetEntityFactory<IPostComment>().Create();
 			postService.AddComment(postComment);
-			postCommentRepository.AssertWasCalled(x => x.Save(postComment));
+			postRepository.AssertWasCalled(x => x.SaveComment(postComment));
 
 		}
 
@@ -52,16 +46,16 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		{
 			var post = GetEntityFactory<IPost>().Create();
 			postService.RemovePost(post);
-			postRepository.AssertWasCalled(x => x.Remove(post));
+			postRepository.AssertWasCalled(x => x.DeletePost(post));
 		}
 
 
 		[Fact]
 		public void RemoveComment_calls_underlyting_repository_to_delete()
 		{
-			var post = GetEntityFactory<IPostComment>().Create();
-			postService.RemoveComment(post);
-			postCommentRepository.AssertWasCalled(x => x.Remove(post));
+			var comment = GetEntityFactory<IPostComment>().Create();
+			postService.RemoveComment(comment);
+			postRepository.AssertWasCalled(x => x.DeleteComment(comment));
 
 		}
 

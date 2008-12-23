@@ -23,7 +23,6 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 
 			this.objectContainer = MockRepository.GenerateMock<IObjectContainer>();
 			this.blogRepository = new BlogRepository(this.objectContainer);
-			
 		}
 
 		public override void  OnTearDown()
@@ -32,6 +31,8 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 		}
 		private readonly IObjectContainer objectContainer;
 		private readonly IBlogRepository blogRepository;
+
+
 		[Fact]
 		public void Can_store_an_entity()
 		{
@@ -40,6 +41,8 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 			this.objectContainer.AssertWasCalled(x => x.Store(blog));
 			
 		}
+
+
 		[Fact]
 		public void Can_delete_the_entity()
 		{

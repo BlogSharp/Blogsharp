@@ -17,11 +17,13 @@ namespace BlogSharp.Core.Impl.Services.Membership
 {
 	public class MembershipService:IMembershipService
 	{
-		public MembershipService(IEncryptionService encryptionService)
+		public MembershipService(IUserRepository userRepository,IEncryptionService encryptionService)
 		{
 			this.encryptionService = encryptionService;
+			this.userRepository = userRepository;
 		}
 
+		private readonly IUserRepository userRepository;
 		private readonly IEncryptionService encryptionService;
 		#region IMembershipService Members
 
@@ -31,7 +33,7 @@ namespace BlogSharp.Core.Impl.Services.Membership
 			author.Username = username;
 			author.Password = password;
 			author.Email = email;
-			Repository<IAuthor>.Instance.Save(author);
+			userRepository.SaveUser(author);
 			var userRegistered = new UserRegisteredEventArgs(author);
 			this.UserRegistered.Raise(this,userRegistered);
 			return author;
@@ -39,27 +41,27 @@ namespace BlogSharp.Core.Impl.Services.Membership
 
 		public void DeleteUser(string username)
 		{
-			var user=Repository<IAuthor>.Instance.GetByExpression(x => x.Username == username).First();
+			var user = this.userRepository.GetAuthorByUsername(username);
 			DeleteUser(user);
 		}
 
 		public void DeleteUser(IAuthor author)
 		{
-			Repository<IAuthor>.Instance.Remove(author);
+			this.userRepository.RemoveUser(author);
 		}
 
 		public IAuthor GetAuthorInfoByName(string author)
 		{
-			var aut = Repository<IAuthor>.Instance.GetByExpression(x => x.Username==author).First();
+			var aut = this.userRepository.GetAuthorByUsername(author);
 			return aut;
 		}
 
 		//TODO: Introduce IEncryptionService
 		public void ResetPassword(string email)
 		{
-			var author = Repository<IAuthor>.Instance.GetByExpression(x => x.Email == email).First();
+			var author = userRepository.GetAuthorByEmail(email);
 			author.Password = Guid.NewGuid().ToString();
-			Repository<IAuthor>.Instance.Save(author);
+			userRepository.SaveUser(author);
 			var passwordResetEvent = new PasswordResettedEventArgs(author, author.Password);
 			this.PasswordResetted.Raise(this,passwordResetEvent);
 		}

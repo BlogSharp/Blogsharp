@@ -4,7 +4,7 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.DataAccess
 {
-    public interface IPostRepository : IRepository<IPost>
+    public interface IPostRepository
     {
         /// <summary>
         /// Get the post via SEO friendly title in url-rewrite.
@@ -54,7 +54,33 @@ namespace BlogSharp.Core.DataAccess
         /// <returns></returns>
         IQueryable<IPost> GetByTag(int blogId, int tagId, int skip, int take);
 
+		/// <summary>
+		/// Saves the post
+		/// </summary>
+		/// <param name="post"></param>
+    	void SavePost(IPost post);
 
-		
+		/// <summary>
+		/// Adds the comment
+		/// </summary>
+		/// <param name="post"></param>
+		void SaveComment(IPostComment comment);
+
+		/// <summary>
+		/// Delete comment
+		/// </summary>
+		/// <param name="comment"></param>
+    	void DeleteComment(IPostComment comment);
+
+
+		/// <summary>
+		/// Delete post
+		/// </summary>
+		/// <param name="comment"></param>
+		void DeletePost(IPost comment);
+
+    	IPost GetPostByFriendlyTitle(string title);
+
+    	IPost GetPostById(int id);
     }
 }

@@ -77,7 +77,6 @@
     <Compile Include="DataAccess\IPostRepository.cs" />
     <Compile Include="DataAccess\IRepository.cs" />
     <Compile Include="DataAccess\IUserRepository.cs" />
-    <Compile Include="DataAccess\Repository.cs" />
     <Compile Include="DI.cs" />
     <Compile Include="EntityFactory.cs" />
     <Compile Include="EventHandler.cs" />

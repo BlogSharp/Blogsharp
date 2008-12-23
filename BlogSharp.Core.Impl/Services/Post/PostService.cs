@@ -8,6 +8,11 @@ namespace BlogSharp.Core.Impl.Services.Post
 {
 	public class PostService : IPostService
 	{
+		public PostService(IPostRepository postRepository)
+		{
+			this.postRepository = postRepository;
+		}
+		private readonly IPostRepository postRepository;
 		#region IPostService Members
 
 		public void AddPost(IPost post)
@@ -16,7 +21,7 @@ namespace BlogSharp.Core.Impl.Services.Post
 			this.PostAdding.Raise(this,postAdding);
 			if (postAdding.Cancel)
 				return;
-			Repository<IPost>.Instance.Save(post);
+			this.postRepository.SavePost(post);
 			var postAdded = new PostAddedEventArgs(post);
 			this.PostAdded.Raise(this,postAdded);
 		}
@@ -27,14 +32,14 @@ namespace BlogSharp.Core.Impl.Services.Post
 			this.CommentAdding.Raise(this,commentAdding);
 			if (commentAdding.Cancel)
 				return;
-			Repository<IPostComment>.Instance.Save(comment);
+			this.postRepository.SaveComment(comment);
 			var commentAdded = new CommentAddedEventArgs(comment);
 			this.CommentAdded.Raise(this,commentAdded);
 		}
 
 		public void RemoveComment(IPostComment comment)
 		{
-			Repository<IPostComment>.Instance.Remove(comment);
+			postRepository.DeleteComment(comment);
 		}
 
 		public void RemovePost(IPost post)
@@ -43,19 +48,19 @@ namespace BlogSharp.Core.Impl.Services.Post
 			this.PostRemoving.Raise(this,postRemoving);
 			if (postRemoving.Cancel)
 				return;
-			Repository<IPost>.Instance.Remove(post);
+			postRepository.DeletePost(post);
 			var postRemoved = new PostRemovedEventArgs(post);
 			this.PostRemoved.Raise(this,postRemoved);
 		}
 
 		public IPost GetPostById(int id)
 		{
-			return Repository<IPost>.Instance.GetById(id);
+			return postRepository.GetPostById(id);
 		}
 
 		public IPost GetPostByFriendlyTitle(string friendlyTitle)
 		{
-			return Repository<IPost>.Instance.GetByExpression(x => x.FriendlyTitle == friendlyTitle).FirstOrDefault();
+			return postRepository.GetPostByFriendlyTitle(friendlyTitle);
 		}
 
 		#endregion

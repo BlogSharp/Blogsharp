@@ -41,6 +41,7 @@ namespace BlogSharp.Core.Impl.DataAccess
 			this.container.Delete(blog);
 		}
 
+
 		#endregion
 	}
 }
