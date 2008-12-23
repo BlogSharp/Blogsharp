@@ -16,7 +16,7 @@ namespace BlogSharp.Core.Impl.Services.Post
 			this.PostAdding.Raise(this,postAdding);
 			if (postAdding.Cancel)
 				return;
-			Repository<IPost>.Instance.Add(post);
+			Repository<IPost>.Instance.Save(post);
 			var postAdded = new PostAddedEventArgs(post);
 			this.PostAdded.Raise(this,postAdded);
 		}
@@ -27,7 +27,7 @@ namespace BlogSharp.Core.Impl.Services.Post
 			this.CommentAdding.Raise(this,commentAdding);
 			if (commentAdding.Cancel)
 				return;
-			Repository<IPostComment>.Instance.Add(comment);
+			Repository<IPostComment>.Instance.Save(comment);
 			var commentAdded = new CommentAddedEventArgs(comment);
 			this.CommentAdded.Raise(this,commentAdded);
 		}

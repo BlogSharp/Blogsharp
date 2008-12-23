@@ -40,7 +40,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Membership
 			
 			membershipService.CreateNewUser("username", "password", "email");
 			this.authorRepository.AssertWasCalled(
-				x => x.Add(Arg<IAuthor>.Matches(a => a.Username == "username" && a.Password == "password" && a.Email == "email")));
+				x => x.Save(Arg<IAuthor>.Matches(a => a.Username == "username" && a.Password == "password" && a.Email == "email")));
 		}
 
 		[Fact]
@@ -50,7 +50,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Membership
 			authorRepository.Expect(x => x.GetByExpression(Arg<Expression<Func<IAuthor,bool>>>.Is.Anything))
 				.Return(list);
 			membershipService.ResetPassword("blah");
-			authorRepository.AssertWasCalled(x => x.Add(list[0]));
+			authorRepository.AssertWasCalled(x => x.Save(list[0]));
 		}
 	}
 }

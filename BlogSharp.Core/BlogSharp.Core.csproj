@@ -72,7 +72,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\IAuthorRepository.cs" />
+    <Compile Include="DataAccess\IBlogRepository.cs" />
+    <Compile Include="DataAccess\IPostCommentRepository.cs" />
+    <Compile Include="DataAccess\IPostRepository.cs" />
     <Compile Include="DataAccess\IRepository.cs" />
+    <Compile Include="DataAccess\ITagRepository.cs" />
     <Compile Include="DataAccess\Repository.cs" />
     <Compile Include="DI.cs" />
     <Compile Include="EntityFactory.cs" />

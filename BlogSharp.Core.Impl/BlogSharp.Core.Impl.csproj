@@ -77,6 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\BlogRepository.cs" />
     <Compile Include="DataAccess\Db4oRepository.cs" />
     <Compile Include="DIEntityFactory.cs" />
     <Compile Include="EventHandlers\Membership\PasswordResettedEventListener.cs" />

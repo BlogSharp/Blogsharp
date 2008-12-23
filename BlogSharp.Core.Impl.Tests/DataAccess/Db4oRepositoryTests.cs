@@ -36,7 +36,7 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 		public void Can_store_an_entity()
 		{
 			Model.IPost post = this.GetEntityFactory<Model.IPost>().Create();
-			postRepository.Add(post);
+			postRepository.Save(post);
 			this.objectContainer.AssertWasCalled(x=>x.Store(post));
 			
 		}

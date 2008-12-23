@@ -35,7 +35,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		{
 			var post = GetEntityFactory<IPost>().Create();
 			postService.AddPost(post);
-			postRepository.AssertWasCalled(x=>x.Add(post));
+			postRepository.AssertWasCalled(x=>x.Save(post));
 		}
 
 		[Fact]
@@ -43,7 +43,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		{
 			var postComment = GetEntityFactory<IPostComment>().Create();
 			postService.AddComment(postComment);
-			postCommentRepository.AssertWasCalled(x => x.Add(postComment));
+			postCommentRepository.AssertWasCalled(x => x.Save(postComment));
 
 		}
 

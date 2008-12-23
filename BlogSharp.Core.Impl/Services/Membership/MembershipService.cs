@@ -31,7 +31,7 @@ namespace BlogSharp.Core.Impl.Services.Membership
 			author.Username = username;
 			author.Password = password;
 			author.Email = email;
-			Repository<IAuthor>.Instance.Add(author);
+			Repository<IAuthor>.Instance.Save(author);
 			var userRegistered = new UserRegisteredEventArgs(author);
 			this.UserRegistered.Raise(this,userRegistered);
 			return author;
@@ -59,7 +59,7 @@ namespace BlogSharp.Core.Impl.Services.Membership
 		{
 			var author = Repository<IAuthor>.Instance.GetByExpression(x => x.Email == email).First();
 			author.Password = Guid.NewGuid().ToString();
-			Repository<IAuthor>.Instance.Add(author);
+			Repository<IAuthor>.Instance.Save(author);
 			var passwordResetEvent = new PasswordResettedEventArgs(author, author.Password);
 			this.PasswordResetted.Raise(this,passwordResetEvent);
 		}
