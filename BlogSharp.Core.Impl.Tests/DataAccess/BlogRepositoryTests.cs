@@ -34,7 +34,7 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 
 
 		[Fact]
-		public void Can_store_an_entity()
+		public void Can_store_an_blog()
 		{
 			Model.IBlog blog = this.GetEntityFactory<Model.IBlog>().Create();
 			blogRepository.SaveBlog(blog);

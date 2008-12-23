@@ -27,7 +27,8 @@ namespace BlogSharp.Core.Impl.EventHandlers.Membership
 
 		public void Handle(IMembershipService membershipService, PasswordResettedEventArgs eventArgs)
 		{
-			IAuthor author = eventArgs.Author;
+
+			var author = eventArgs.Author;
 			DefaultContext context=new DefaultContext();
 			context.Put(new {author = author, newPassword = eventArgs.NewPassword});
 			ITemplate template = null;

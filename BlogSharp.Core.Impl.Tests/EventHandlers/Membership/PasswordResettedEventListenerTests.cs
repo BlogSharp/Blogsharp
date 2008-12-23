@@ -28,7 +28,7 @@ namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 		private readonly ITemplateEngine templateEngineMock;
         private readonly SendMailPasswordResettedEventListener listener;
 
-		[Fact]
+		[Fact(Skip="Templating stuff not yet fully implemented.")]
 		public void Calls_template_engine_and_template_source_then_sends_email()
 		{
 			var authorMock = MockRepository.GenerateMock<IAuthor>();
