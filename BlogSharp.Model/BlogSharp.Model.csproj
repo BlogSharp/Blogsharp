@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAuthor.cs" />
+    <Compile Include="IUser.cs" />
     <Compile Include="IBlog.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IIdentifiable.cs" />

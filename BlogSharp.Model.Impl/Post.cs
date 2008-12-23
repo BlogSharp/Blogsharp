@@ -20,7 +20,7 @@ namespace BlogSharp.Model.Impl
 			set;
 		}
 
-		public IAuthor Author
+		public IUser User
 		{
 			get;
 			set;

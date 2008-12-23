@@ -8,10 +8,10 @@ namespace BlogSharp.Core.DataAccess
 {
 	public interface IUserRepository
 	{
-		IAuthor GetAuthorByUsername(string username);
-		IAuthor GetAuthorByEmail(string email);
-		void SaveUser(IAuthor author);
-		void RemoveUser(IAuthor author);
+		IUser GetAuthorByUsername(string username);
+		IUser GetAuthorByEmail(string email);
+		void SaveUser(IUser user);
+		void RemoveUser(IUser user);
 		
 	}
 }

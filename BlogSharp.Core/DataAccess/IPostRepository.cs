@@ -36,7 +36,7 @@ namespace BlogSharp.Core.DataAccess
         /// <returns></returns>
         IQueryable<IPost> GetByDate(int blogId, DateTime date, int skip, int take);
         /// <summary>
-        /// Get the Post list of the Author.
+        /// Get the Post list of the User.
         /// </summary>
         /// <param name="blogId"></param>
         /// <param name="authorId"></param>

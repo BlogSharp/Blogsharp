@@ -9,13 +9,13 @@ namespace BlogSharp.Core.Event.MembershipEvents
 {
 	public class PasswordResettedEventArgs:AbstractEventArgs
 	{
-		public PasswordResettedEventArgs(IAuthor author,string newPassword)
+		public PasswordResettedEventArgs(IUser user,string newPassword)
 		{
-			this.Author = author;
+			this.User = user;
 			this.NewPassword = newPassword;
 		}
 
-		public IAuthor Author { get; private set; }
+		public IUser User { get; private set; }
         public string NewPassword { get; private set; }
 	}
 }

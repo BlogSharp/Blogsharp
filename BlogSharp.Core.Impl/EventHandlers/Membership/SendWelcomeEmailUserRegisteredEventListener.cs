@@ -28,7 +28,7 @@ namespace BlogSharp.Core.Impl.EventHandlers.Membership
 		//TODO: Localization is necessary
 		public void Handle(IMembershipService membershipService,UserRegisteredEventArgs eventArgs)
 		{
-			IAuthor user = eventArgs.User;
+			IUser user = eventArgs.User;
 			string merged = templateEngine.Merge(null, null);
 			mailService.Send(new MailAddress(user.Email, user.Username), null, null, "Registration information", merged);
 		}

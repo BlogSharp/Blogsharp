@@ -6,7 +6,7 @@ namespace BlogSharp.Model
 	public interface IPost : IIdentifiable<int>, IEntity
 	{
 		IBlog Blog { get; set; }
-		IAuthor Author { get; set; }
+		IUser User { get; set; }
 
 		DateTime DateCreated { get; set; }
 		DateTime DatePublished { get; set; }

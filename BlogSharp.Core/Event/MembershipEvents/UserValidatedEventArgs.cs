@@ -5,11 +5,11 @@ namespace BlogSharp.Core.Event.MembershipEvents
 {
 	public class UserValidatedEventArgs : AbstractEventArgs
 	{
-		public UserValidatedEventArgs(IAuthor user)
+		public UserValidatedEventArgs(IUser user)
 		{
             this.User = user;
 		}
 
-	    public IAuthor User { get; set; }
+	    public IUser User { get; set; }
 	}
 }

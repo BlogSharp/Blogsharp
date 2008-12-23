@@ -10,11 +10,11 @@ namespace BlogSharp.Core.Event.MembershipEvents
 {
 	public class UserRegisteredEventArgs : AbstractEventArgs
 	{
-		public UserRegisteredEventArgs(IAuthor author)
+		public UserRegisteredEventArgs(IUser user)
 		{
-			this.User = author;
+			this.User = user;
 		}
 
-		public IAuthor User { get; private set; }
+		public IUser User { get; private set; }
 	}
 }

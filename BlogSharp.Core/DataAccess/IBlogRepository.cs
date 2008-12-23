@@ -6,7 +6,7 @@ namespace BlogSharp.Core.DataAccess
     public interface IBlogRepository
     {
         /// <summary>
-        /// Get the Blog of the Founder Author
+        /// Get the Blog of the Founder User
         /// </summary>
         /// <param name="authorId"></param>
         /// <returns></returns>

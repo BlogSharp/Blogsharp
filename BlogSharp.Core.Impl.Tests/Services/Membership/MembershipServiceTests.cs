@@ -24,9 +24,9 @@ namespace BlogSharp.Core.Impl.Tests.Services.Membership
 			this.userRepository = MockRepository.GenerateMock<IUserRepository>();
 			this.membershipService = new MembershipService(userRepository,MockRepository.GenerateMock<IEncryptionService>());
 			var container = MockRepository.GenerateMock<IWindsorContainer>();
-			var entityFactory= MockRepository.GenerateMock<IEntityFactory<IAuthor>>();
+			var entityFactory= MockRepository.GenerateMock<IEntityFactory<IUser>>();
 			entityFactory.Expect(x => x.Create()).Return(new Author()).Repeat.Any();
-			container.Expect(x => x.Resolve<IEntityFactory<IAuthor>>()).Return(entityFactory).Repeat.Any();
+			container.Expect(x => x.Resolve<IEntityFactory<IUser>>()).Return(entityFactory).Repeat.Any();
 			DI.SetContainer(container);
 		}
 
@@ -40,7 +40,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Membership
 			membershipService.CreateNewUser("username", "password", "email");
 			this.userRepository.AssertWasCalled(
 				x =>
-				x.SaveUser(Arg<IAuthor>.Matches(a => a.Username == "username" &&
+				x.SaveUser(Arg<IUser>.Matches(a => a.Username == "username" &&
 				                                     a.Password == "password" &&
 				                                     a.Email == "email")));
 		}

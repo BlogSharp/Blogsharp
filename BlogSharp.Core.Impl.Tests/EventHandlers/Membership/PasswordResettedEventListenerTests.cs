@@ -31,7 +31,7 @@ namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 		[Fact(Skip="Templating stuff not yet fully implemented.")]
 		public void Calls_template_engine_and_template_source_then_sends_email()
 		{
-			var authorMock = MockRepository.GenerateMock<IAuthor>();
+			var authorMock = MockRepository.GenerateMock<IUser>();
 			authorMock.Expect(x => x.Email).Return("blah@blah.com").Repeat.Any();
 			var membershipServiceMock = MockRepository.GenerateMock<IMembershipService>();
 			listener.Handle(membershipServiceMock, new PasswordResettedEventArgs(authorMock, "1234"));

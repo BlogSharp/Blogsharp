@@ -25,11 +25,10 @@ namespace BlogSharp.Core.Impl.Services.Membership
 
 		private readonly IUserRepository userRepository;
 		private readonly IEncryptionService encryptionService;
-		#region IMembershipService Members
 
-		public IAuthor CreateNewUser(string username, string password, string email)
+		public IUser CreateNewUser(string username, string password, string email)
 		{
-			var author = EntityFactory<IAuthor>.Instance.Create();
+			var author = EntityFactory<IUser>.Instance.Create();
 			author.Username = username;
 			author.Password = password;
 			author.Email = email;
@@ -45,12 +44,12 @@ namespace BlogSharp.Core.Impl.Services.Membership
 			DeleteUser(user);
 		}
 
-		public void DeleteUser(IAuthor author)
+		public void DeleteUser(IUser user)
 		{
-			this.userRepository.RemoveUser(author);
+			this.userRepository.RemoveUser(user);
 		}
 
-		public IAuthor GetAuthorInfoByName(string author)
+		public IUser GetAuthorInfoByName(string author)
 		{
 			var aut = this.userRepository.GetAuthorByUsername(author);
 			return aut;
@@ -66,11 +65,8 @@ namespace BlogSharp.Core.Impl.Services.Membership
 			this.PasswordResetted.Raise(this,passwordResetEvent);
 		}
 
-		#endregion
-
-		#region IMembershipService Members
 		public event EventHandler<IMembershipService, UserRegisteredEventArgs> UserRegistered = delegate { };
 		public event EventHandler<IMembershipService, PasswordResettedEventArgs> PasswordResetted=delegate { };
-		#endregion
+
 	}
 }

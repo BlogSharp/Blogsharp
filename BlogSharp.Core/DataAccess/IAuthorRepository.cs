@@ -3,7 +3,7 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.DataAccess
 {
-    public interface IAuthorRepository : IRepository<IAuthor>
+    public interface IAuthorRepository : IRepository<IUser>
     {
         /// <summary>
         /// For login action
@@ -11,33 +11,33 @@ namespace BlogSharp.Core.DataAccess
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        IAuthor GetByCredential(string username, string password);
+        IUser GetByCredential(string username, string password);
         /// <summary>
         /// To check if the username in use.
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        IAuthor GetByUsername(string username);
+        IUser GetByUsername(string username);
         /// <summary>
         /// To check if the e-mail address in use.
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        IAuthor GetByEmail(string email);
+        IUser GetByEmail(string email);
         /// <summary>
-        /// Get the Author of the Post.
+        /// Get the User of the Post.
         /// </summary>
         /// <param name="postId"></param>
         /// <returns></returns>
-        IAuthor GetByPost(int postId);
+        IUser GetByPost(int postId);
         /// <summary>
-        /// Get the Founder Author of the Blog.
+        /// Get the Founder User of the Blog.
         /// </summary>
         /// <param name="blogId"></param>
         /// <returns></returns>
-        IAuthor GetByFoundedBlog(int blogId);
-        IQueryable<IAuthor> Get();
-        IQueryable<IAuthor> Get(int skip, int take);
-        IQueryable<IAuthor> Get(int blogId, int skip, int take);
+        IUser GetByFoundedBlog(int blogId);
+        IQueryable<IUser> Get();
+        IQueryable<IUser> Get(int skip, int take);
+        IQueryable<IUser> Get(int blogId, int skip, int take);
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BlogSharp.Model.Impl
 {
-	public class Author : IAuthor
+	public class Author : IUser
 	{
 		public Author()
 		{
@@ -14,7 +14,7 @@ namespace BlogSharp.Model.Impl
 		}
 
 
-		#region IAuthor Members
+		#region IUser Members
 
 		public IList<IPost> Posts
 		{

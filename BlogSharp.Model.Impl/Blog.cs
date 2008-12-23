@@ -9,7 +9,7 @@ namespace BlogSharp.Model.Impl
 	{
 		public Blog()
 		{
-			this.Authors=new List<IAuthor>();
+			this.Authors=new List<IUser>();
 			this.Posts=new List<IPost>();
 		}
 		#region IBlog Members
@@ -19,12 +19,12 @@ namespace BlogSharp.Model.Impl
 			get; set;
 		}
 
-		public IAuthor Founder
+		public IUser Founder
 		{
 			get; set;
 		}
 
-		public IList<IAuthor> Authors
+		public IList<IUser> Authors
 		{
 			get; set;
 		}
