@@ -53,5 +53,8 @@ namespace BlogSharp.Core.DataAccess
         /// <param name="take"></param>
         /// <returns></returns>
         IQueryable<IPost> GetByTag(int blogId, int tagId, int skip, int take);
+
+
+		
     }
 }

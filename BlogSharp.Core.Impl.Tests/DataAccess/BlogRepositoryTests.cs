@@ -16,13 +16,13 @@ using Model = BlogSharp.Model;
 using MPost=BlogSharp.Model.Impl.Post;
 namespace BlogSharp.Core.Impl.Tests.DataAccess
 {
-	public class Db4oRepositoryTests:BaseTest
+	public class BlogRepositoryTests:BaseTest
 	{
-		public Db4oRepositoryTests()
+		public BlogRepositoryTests()
 		{
 
 			this.objectContainer = MockRepository.GenerateMock<IObjectContainer>();
-			this.postRepository = new Db4oRepository<Model.IPost>(this.objectContainer);
+			this.blogRepository = new BlogRepository(this.objectContainer);
 			
 		}
 
@@ -31,21 +31,21 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 			this.objectContainer.Close();
 		}
 		private readonly IObjectContainer objectContainer;
-		private readonly IRepository<Model.IPost> postRepository;
+		private readonly IBlogRepository blogRepository;
 		[Fact]
 		public void Can_store_an_entity()
 		{
-			Model.IPost post = this.GetEntityFactory<Model.IPost>().Create();
-			postRepository.Save(post);
-			this.objectContainer.AssertWasCalled(x=>x.Store(post));
+			Model.IBlog blog = this.GetEntityFactory<Model.IBlog>().Create();
+			blogRepository.SaveBlog(blog);
+			this.objectContainer.AssertWasCalled(x => x.Store(blog));
 			
 		}
 		[Fact]
 		public void Can_delete_the_entity()
 		{
-			Model.IPost post = this.GetEntityFactory<Model.IPost>().Create();
-			postRepository.Remove(post);
-			this.objectContainer.AssertWasCalled(x=>x.Delete(post));
+			Model.IBlog blog = this.GetEntityFactory<Model.IBlog>().Create();
+			blogRepository.DeleteBlog(blog);
+			this.objectContainer.AssertWasCalled(x => x.Delete(blog));
 		}
 
 		//[Fact]

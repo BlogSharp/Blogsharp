@@ -91,7 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="DataAccess\Db4oRepositoryTests.cs" />
+    <Compile Include="DataAccess\BlogRepositoryTests.cs" />
     <Compile Include="EntityFactoryTests.cs" />
     <Compile Include="EventHandlers\Membership\PasswordResettedEventListenerTests.cs" />
     <Compile Include="EventHandlers\Membership\UserRegisteredEventListenerTests.cs" />

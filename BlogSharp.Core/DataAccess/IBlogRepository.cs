@@ -3,7 +3,7 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.DataAccess
 {
-    public interface IBlogRepository : IRepository<IBlog>
+    public interface IBlogRepository
     {
         /// <summary>
         /// Get the Blog of the Founder Author
@@ -11,7 +11,23 @@ namespace BlogSharp.Core.DataAccess
         /// <param name="authorId"></param>
         /// <returns></returns>
         IBlog GeyByFounder(int authorId);
-        IQueryable<IBlog> Get();
-        IQueryable<IBlog> Get(int skip, int take);
+
+		/// <summary>
+		/// Gets all blog
+		/// </summary>
+		/// <returns></returns>
+    	IQueryable<IBlog> GetAllBlogs();
+
+		/// <summary>
+		/// Saves the blog
+		/// </summary>
+		/// <param name="blog"></param>
+    	void SaveBlog(IBlog blog);
+
+		/// <summary>
+		/// Removes the blog
+		/// </summary>
+		/// <param name="blog"></param>
+    	void DeleteBlog(IBlog blog);
     }
 }

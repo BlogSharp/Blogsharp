@@ -13,7 +13,7 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Impl.EventHandlers.Membership
 {
-	public class PasswordResettedEventListener
+	public class PasswordResettedEventListener:IEventListener<IMembershipService,PasswordResettedEventArgs>
 	{
 		public PasswordResettedEventListener(IMailService mailService,ITemplateEngine engine)
 		{

@@ -9,7 +9,7 @@ using Db4objects.Db4o;
 using Db4objects.Db4o.Linq;
 namespace BlogSharp.Core.Impl.DataAccess
 {
-    public class Db4oRepository<T> : IRepository<T> where T : IIdentifiable<int>
+    public class Db4oRepository
     {
         public Db4oRepository(IObjectContainer container)
         {
@@ -18,33 +18,15 @@ namespace BlogSharp.Core.Impl.DataAccess
 
         protected readonly IObjectContainer container;
         
-        #region IRepository<T> Members
-
-        public void Save(T obj)
+        public void SaveObject(object obj)
         {
             container.Store(obj);
         }
 
-        public void Remove(T obj)
+        public void RemoveObject(object obj)
         {
             container.Delete(obj);
         }
 
-        public T GetById(int id)
-        {
-            return container.Cast<T>().Where(x => x.Id == id).FirstOrDefault();
-        }
-
-        public IEnumerable<T> GetByExpression(Expression<Func<T, bool>> predicate)
-        {
-            return container.Cast<T>().Where(predicate);
-        }
-
-        public IEnumerable<T> GetByExpression(Expression<Func<T, bool>> predicate, System.Linq.Expressions.Expression<Func<T, int>> order)
-        {
-            return container.Cast<T>().Where(predicate).OrderBy(order);
-        }
-
-        #endregion
     }
 }

@@ -12,7 +12,7 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Impl.EventHandlers.Membership
 {
-	public class UserRegisteredEventListener
+	public class UserRegisteredEventListener:IEventListener<IMembershipService,UserRegisteredEventArgs>
 	{
 		public UserRegisteredEventListener(IMailService mailService,
 											ITemplateEngine templateEngine)

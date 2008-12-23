@@ -6,10 +6,10 @@ using Db4objects.Db4o.Linq;
 
 namespace BlogSharp.Core.Impl.DataAccess
 {
-    public class BlogRepository : Db4oRepository<IBlog>, IBlogRepository
+    public class BlogRepository : Db4oRepository, IBlogRepository
     {
         public BlogRepository(IObjectContainer container)
-            : base(container)
+			:base(container)
         {
 
         }
@@ -23,19 +23,24 @@ namespace BlogSharp.Core.Impl.DataAccess
         /// <returns></returns>
         public IBlog GeyByFounder(int authorId)
         {
-            throw new System.NotImplementedException();
+        	return container.Query<IBlog>(x => x.Founder.Id == authorId).FirstOrDefault();
         }
 
-        public IQueryable<IBlog> Get()
+        public IQueryable<IBlog> GetAllBlogs()
         {
             return container.Cast<IBlog>().AsQueryable();
         }
 
-        public IQueryable<IBlog> Get(int skip, int take)
-        {
-            return container.Cast<IBlog>().Skip(skip).Take(take).AsQueryable();
-        }
+		public void SaveBlog(IBlog blog)
+		{
+			this.container.Store(blog);
+		}
 
-        #endregion
-    }
+		public void DeleteBlog(IBlog blog)
+		{
+			this.container.Delete(blog);
+		}
+
+		#endregion
+	}
 }
