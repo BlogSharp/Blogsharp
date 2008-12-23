@@ -13,9 +13,9 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Impl.EventHandlers.Membership
 {
-	public class PasswordResettedEventListener:IEventListener<IMembershipService,PasswordResettedEventArgs>
+	public class SendMailPasswordResettedEventListener:IEventListener<IMembershipService,PasswordResettedEventArgs>
 	{
-		public PasswordResettedEventListener(IMailService mailService,ITemplateEngine engine)
+		public SendMailPasswordResettedEventListener(IMailService mailService,ITemplateEngine engine)
 		{
 			this.mailService = mailService;
 			this.templateEngine = engine;

@@ -21,12 +21,12 @@ namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 		{
 			mailServiceMock = MockRepository.GenerateMock<IMailService>();
 			templateEngineMock = MockRepository.GenerateMock<ITemplateEngine>();
-			this.listener = new UserRegisteredEventListener(mailServiceMock, templateEngineMock);
+			this.listener = new SendWelcomeEmailUserRegisteredEventListener(mailServiceMock, templateEngineMock);
 		}
 
 		private readonly IMailService mailServiceMock;
 		private readonly ITemplateEngine templateEngineMock;
-        private readonly UserRegisteredEventListener listener;
+        private readonly SendWelcomeEmailUserRegisteredEventListener listener;
 
 		[Fact]
 		public void Calls_templateEngine_and_templateSource_then_sends_email()
