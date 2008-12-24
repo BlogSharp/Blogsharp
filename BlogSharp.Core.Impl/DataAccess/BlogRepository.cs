@@ -33,14 +33,13 @@ namespace BlogSharp.Core.Impl.DataAccess
 
 		public void SaveBlog(IBlog blog)
 		{
-			this.container.Store(blog);
+			SaveObject(blog);
 		}
 
 		public void DeleteBlog(IBlog blog)
 		{
-			this.container.Delete(blog);
+			RemoveObject(blog);
 		}
-
 
 		#endregion
 	}

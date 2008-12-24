@@ -60,7 +60,7 @@ namespace BlogSharp.Core.Impl.Services.Post
 
 		public IPost GetPostByFriendlyTitle(string friendlyTitle)
 		{
-			return postRepository.GetPostByFriendlyTitle(friendlyTitle);
+			return postRepository.GetByTitle(friendlyTitle);
 		}
 
 		#endregion

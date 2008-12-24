@@ -72,7 +72,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\IAuthorRepository.cs" />
     <Compile Include="DataAccess\IBlogRepository.cs" />
     <Compile Include="DataAccess\IPostRepository.cs" />
     <Compile Include="DataAccess\IRepository.cs" />

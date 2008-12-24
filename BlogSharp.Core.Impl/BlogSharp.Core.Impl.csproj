@@ -79,6 +79,8 @@
   <ItemGroup>
     <Compile Include="DataAccess\BlogRepository.cs" />
     <Compile Include="DataAccess\Db4oRepository.cs" />
+    <Compile Include="DataAccess\PostRepository.cs" />
+    <Compile Include="DataAccess\UserRepository.cs" />
     <Compile Include="DIEntityFactory.cs" />
     <Compile Include="EventHandlers\Membership\SendMailPasswordResettedEventListener.cs" />
     <Compile Include="EventHandlers\Membership\SendWelcomeEmailUserRegisteredEventListener.cs" />
