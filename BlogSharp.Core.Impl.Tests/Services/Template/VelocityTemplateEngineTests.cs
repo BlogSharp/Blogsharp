@@ -27,8 +27,8 @@ namespace BlogSharp.Core.Impl.Tests.Services.Template
 		{
 			ITemplate template=MockRepository.GenerateStub<ITemplate>();
 			template.Expect(x => x.GetContent()).Return("$person.Name");
-			var context = new DefaultContext();
-			context.Put("person", new {Name = "Mahmut"});
+			var context = new Dictionary<string, object>();
+			context["person"] = new {Name = "Mahmut"};
 			StringWriter sw = new StringWriter();
 			this.velocityEngine.Merge(template, context, sw);
 			Assert.Equal("Mahmut",sw.GetStringBuilder().ToString());

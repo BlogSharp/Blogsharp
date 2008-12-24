@@ -92,7 +92,6 @@
     <Compile Include="Services\Mail\MailService.cs" />
     <Compile Include="Services\Membership\MembershipService.cs" />
     <Compile Include="Services\Post\PostService.cs" />
-    <Compile Include="Services\Template\DefaultContext.cs" />
     <Compile Include="Services\Template\DefaultTemplate.cs" />
     <Compile Include="Services\Template\DefaultTemplateSource.cs" />
     <Compile Include="Services\Template\MultiTemplateEngine.cs" />

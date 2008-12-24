@@ -15,12 +15,13 @@ namespace BlogSharp.Core.Impl.EventHandlers.Membership
 {
 	public class SendMailPasswordResettedEventListener:IEventListener<IMembershipService,PasswordResettedEventArgs>
 	{
-		public SendMailPasswordResettedEventListener(IMailService mailService,ITemplateEngine engine)
+		public SendMailPasswordResettedEventListener(IMailService mailService,ITemplateEngine engine,ITemplateSource templateSource)
 		{
 			this.mailService = mailService;
 			this.templateEngine = engine;
+			this.templateSource = templateSource;
 		}
-
+		private readonly ITemplateSource templateSource;
 		private readonly IMailService mailService;
 		private readonly ITemplateEngine templateEngine;
 		#region IEventListener<PasswordResettedEventArgs> Members
@@ -28,12 +29,13 @@ namespace BlogSharp.Core.Impl.EventHandlers.Membership
 		public void Handle(IMembershipService membershipService, PasswordResettedEventArgs eventArgs)
 		{
 
-			var author = eventArgs.User;
-			DefaultContext context=new DefaultContext();
-			context.Put(new {author = author, newPassword = eventArgs.NewPassword});
-			ITemplate template = null;
-			string output = templateEngine.Merge(template, context);
-			mailService.Send(new MailAddress(author.Email, author.Username), null, null, "Password Reset Request", output);
+			var user = eventArgs.User;
+			var dictionary = new Dictionary<string, object>();
+			dictionary.Add("user", user);
+			dictionary.Add("newPassword", eventArgs.NewPassword);
+			ITemplate template = templateSource.GetTemplateWithKey("membership_passwordreset");
+			string output = templateEngine.Merge(template, dictionary);
+			mailService.Send(new MailAddress(user.Email, user.Username), null, null, "Password Reset Request", output);
 		}
 
 		#endregion

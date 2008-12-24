@@ -20,11 +20,10 @@ namespace BlogSharp.Core.Impl.Services.Template.NVelocity
 		private readonly VelocityEngine velocityEngine;
 		#region ITemplateEngine Members
 
-		public void Merge(ITemplate template, ITemplateContext context,TextWriter output)
+		public void Merge(ITemplate template, IDictionary<string,object> context,TextWriter output)
 		{
-			var values = context.GetValues();
 			var ncontext=new global::NVelocity.VelocityContext();
-			foreach (var pair in values)
+			foreach (var pair in context)
 			{
 				ncontext.Put(pair.Key, pair.Value);
 			}
@@ -37,11 +36,10 @@ namespace BlogSharp.Core.Impl.Services.Template.NVelocity
 		#region ITemplateEngine Members
 
 
-		public string Merge(ITemplate template, ITemplateContext context)
+		public string Merge(ITemplate template, IDictionary<string,object> context)
 		{
-			var values = context.GetValues();
 			var ncontext = new global::NVelocity.VelocityContext();
-			foreach (var pair in values)
+			foreach (var pair in context)
 			{
 				ncontext.Put(pair.Key, pair.Value);
 			}

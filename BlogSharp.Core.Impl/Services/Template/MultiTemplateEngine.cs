@@ -14,12 +14,12 @@ namespace BlogSharp.Core.Impl.Services.Template
 		}
 		#region ITemplateEngine Members
 
-		public void Merge(ITemplate template, ITemplateContext context, System.IO.TextWriter output)
+		public void Merge(ITemplate template, IDictionary<string, object> context, System.IO.TextWriter output)
 		{
 			throw new NotImplementedException();
 		}
 
-		public string Merge(ITemplate template, ITemplateContext context)
+		public string Merge(ITemplate template, IDictionary<string, object> context)
 		{
 			throw new NotImplementedException();
 		}
