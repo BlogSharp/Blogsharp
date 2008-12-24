@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using BlogSharp.Model;
 
 namespace BlogSharp.Core.DataAccess
@@ -16,7 +16,7 @@ namespace BlogSharp.Core.DataAccess
 		/// Gets all blog
 		/// </summary>
 		/// <returns></returns>
-    	IQueryable<IBlog> GetAllBlogs();
+    	IList<IBlog> GetAllBlogs();
 
 		/// <summary>
 		/// Saves the blog

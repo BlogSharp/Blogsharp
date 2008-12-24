@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using BlogSharp.Core.DataAccess;
 using BlogSharp.Model;
 using Db4objects.Db4o;
@@ -26,9 +27,9 @@ namespace BlogSharp.Core.Impl.DataAccess
         	return container.Query<IBlog>(x => x.Founder.Id == authorId).FirstOrDefault();
         }
 
-        public IQueryable<IBlog> GetAllBlogs()
+        public IList<IBlog> GetAllBlogs()
         {
-            return container.Cast<IBlog>().AsQueryable();
+            return container.Cast<IBlog>().ToList();
         }
 
 		public void SaveBlog(IBlog blog)

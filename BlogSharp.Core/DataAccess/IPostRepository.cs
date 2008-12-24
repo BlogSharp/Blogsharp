@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using BlogSharp.Model;
 
 namespace BlogSharp.Core.DataAccess
@@ -11,7 +11,7 @@ namespace BlogSharp.Core.DataAccess
         /// </summary>
         /// <param name="blogId"></param>
         /// <returns></returns>
-        IQueryable<IPost> GetByBlog(int blogId);
+        IList<IPost> GetByBlog(int blogId);
         /// <summary>
         /// Get the Post List of the Blog, with paging support.
         /// </summary>
@@ -19,7 +19,7 @@ namespace BlogSharp.Core.DataAccess
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        IQueryable<IPost> GetByBlog(int blogId, int skip, int take);
+        IList<IPost> GetByBlog(int blogId, int skip, int take);
         /// <summary>
         /// Get the Post list via selected date on the calander.
         /// </summary>
@@ -28,7 +28,7 @@ namespace BlogSharp.Core.DataAccess
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        IQueryable<IPost> GetByDate(int blogId, DateTime date, int skip, int take);
+        IList<IPost> GetByDate(int blogId, DateTime date, int skip, int take);
         /// <summary>
         /// Get the Post list of the User.
         /// </summary>
@@ -37,7 +37,7 @@ namespace BlogSharp.Core.DataAccess
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        IQueryable<IPost> GetByAuthor(int blogId, int authorId, int skip, int take);
+        IList<IPost> GetByAuthor(int blogId, int authorId, int skip, int take);
         /// <summary>
         /// Get the Post list via Tag.
         /// </summary>
@@ -46,7 +46,7 @@ namespace BlogSharp.Core.DataAccess
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        IQueryable<IPost> GetByTag(int blogId, int tagId, int skip, int take);
+        IList<IPost> GetByTag(int blogId, int tagId, int skip, int take);
 
 		/// <summary>
 		/// Saves the post

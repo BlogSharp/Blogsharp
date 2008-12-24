@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BlogSharp.Core.DataAccess;
 using BlogSharp.Model;
@@ -21,9 +22,9 @@ namespace BlogSharp.Core.Impl.DataAccess
         /// </summary>
         /// <param name="blogId"></param>
         /// <returns></returns>
-        public IQueryable<IPost> GetByBlog(int blogId)
+        public IList<IPost> GetByBlog(int blogId)
         {
-            return container.Query<IPost>(x => x.Blog.Id == blogId).AsQueryable();
+            return container.Query<IPost>(x => x.Blog.Id == blogId).OrderByDescending(x => x.DatePublished).ToList();
         }
 
         /// <summary>
@@ -33,9 +34,9 @@ namespace BlogSharp.Core.Impl.DataAccess
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        public IQueryable<IPost> GetByBlog(int blogId, int skip, int take)
+        public IList<IPost> GetByBlog(int blogId, int skip, int take)
         {
-            return container.Query<IPost>(x => x.Blog.Id == blogId).Skip(skip).Take(take).AsQueryable();
+            return container.Query<IPost>(x => x.Blog.Id == blogId).OrderByDescending(x => x.DatePublished).Skip(skip).Take(take).ToList();
         }
 
         /// <summary>
@@ -46,9 +47,9 @@ namespace BlogSharp.Core.Impl.DataAccess
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        public IQueryable<IPost> GetByDate(int blogId, DateTime date, int skip, int take)
+        public IList<IPost> GetByDate(int blogId, DateTime date, int skip, int take)
         {
-            return container.Query<IPost>(x => x.Blog.Id == blogId && x.DatePublished == date).Skip(skip).Take(take).AsQueryable();
+            return container.Query<IPost>(x => x.Blog.Id == blogId && x.DatePublished == date).Skip(skip).Take(take).ToList();
         }
 
         /// <summary>
@@ -59,9 +60,9 @@ namespace BlogSharp.Core.Impl.DataAccess
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        public IQueryable<IPost> GetByAuthor(int blogId, int authorId, int skip, int take)
+        public IList<IPost> GetByAuthor(int blogId, int authorId, int skip, int take)
         {
-            return container.Query<IPost>(x => x.Blog.Id == blogId && x.User.Id == authorId).Skip(skip).Take(take).AsQueryable();
+            return container.Query<IPost>(x => x.Blog.Id == blogId && x.User.Id == authorId).OrderByDescending(x => x.DatePublished).Skip(skip).Take(take).ToList();
         }
 
         /// <summary>
@@ -72,10 +73,11 @@ namespace BlogSharp.Core.Impl.DataAccess
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        public IQueryable<IPost> GetByTag(int blogId, int tagId, int skip, int take)
+        public IList<IPost> GetByTag(int blogId, int tagId, int skip, int take)
         {
-            // TODO: Nasil query yapiliyor bu ?
-            return container.Query<IPost>(x => x.Blog.Id == blogId).Skip(skip).Take(take).AsQueryable();
+            // TODO: Blog suzmesine ihtiyac var mi?
+            var tag = container.Query<ITag>(x => x.Id == tagId).SingleOrDefault();
+            return container.Query<IPost>(x => x.Blog.Id == blogId && x.Tags.Contains(tag)).OrderByDescending(x => x.DatePublished).Skip(skip).Take(take).ToList();
         }
 
         /// <summary>
@@ -102,7 +104,7 @@ namespace BlogSharp.Core.Impl.DataAccess
         /// <param name="comment"></param>
         public void SaveComment(IPostComment comment)
         {
-           SaveObject(comment);
+            SaveObject(comment);
         }
 
         /// <summary>
@@ -123,7 +125,6 @@ namespace BlogSharp.Core.Impl.DataAccess
         {
             return container.Query<IPost>(x => x.FriendlyTitle == friendlyTitle).SingleOrDefault();
         }
-
 
         public IPost GetPostById(int id)
         {
