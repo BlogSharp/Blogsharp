@@ -84,6 +84,8 @@
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
     <Compile Include="DataAccess\BlogRepositoryTests.cs" />
+    <Compile Include="DataAccess\PostRepositoryTest.cs" />
+    <Compile Include="DataAccess\UserRepositoryTest.cs" />
     <Compile Include="EntityFactoryTests.cs" />
     <Compile Include="EventHandlers\Membership\PasswordResettedEventListenerTests.cs" />
     <Compile Include="EventHandlers\Membership\UserRegisteredEventListenerTests.cs" />

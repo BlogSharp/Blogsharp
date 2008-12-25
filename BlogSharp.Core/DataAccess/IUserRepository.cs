@@ -8,6 +8,7 @@ namespace BlogSharp.Core.DataAccess
 		IUser GetAuthorByEmail(string email);
 		void SaveUser(IUser user);
 		void RemoveUser(IUser user);
+		IUser GetById(int id);
 		
 	}
 }

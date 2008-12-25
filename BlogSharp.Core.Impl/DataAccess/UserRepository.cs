@@ -35,6 +35,11 @@ namespace BlogSharp.Core.Impl.DataAccess
             RemoveObject(user);
         }
 
-        #endregion
+    	public IUser GetById(int id)
+    	{
+    		return container.Query<IUser>(x => x.Id == id).SingleOrDefault();
+    	}
+
+    	#endregion
     }
 }

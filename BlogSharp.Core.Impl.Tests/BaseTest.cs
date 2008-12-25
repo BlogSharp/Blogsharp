@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Castle.Windsor;
+using System.IO;
 using Rhino.Mocks;
 
 namespace BlogSharp.Core.Impl.Tests
@@ -21,11 +18,22 @@ namespace BlogSharp.Core.Impl.Tests
 		{
 			
 		}
+        
+        /// <summary>
+        /// Lets MapPath fonctionality into the class library.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        protected static string MapPath(string path)
+        {
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+        }
+
 		#region IDisposable Members
 
 		public void Dispose()
 		{
-			this.OnTearDown();
+			OnTearDown();
 		}
 
 		#endregion
