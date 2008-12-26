@@ -24,7 +24,7 @@ namespace BlogSharp.Core.Impl.DataAccess
 		/// <returns></returns>
 		public IList<IPost> GetByBlog(int blogId)
 		{
-			return container.Query<IPost>(x => x.Blog.Id == blogId, (x, y) => x.DatePublished.CompareTo(y.DatePublished));
+			return container.Query<IPost>(x => x.Blog.Id == blogId, (x, y) => y.DatePublished.CompareTo(x.DatePublished));
 		}
 
 		/// <summary>
@@ -36,7 +36,8 @@ namespace BlogSharp.Core.Impl.DataAccess
 		/// <returns></returns>
 		public IList<IPost> GetByBlog(int blogId, int skip, int take)
 		{
-			return container.Query<IPost>(x => x.Blog.Id == blogId, (x, y) => x.DatePublished.CompareTo(y.DatePublished)).Skip(skip).Take(take).ToList();
+			return container.Query<IPost>(x => x.Blog.Id == blogId, (x, y) => x.DatePublished.CompareTo(y.DatePublished))
+				.Skip(skip).Take(take).ToList();
 		}
 
 		/// <summary>
@@ -50,7 +51,8 @@ namespace BlogSharp.Core.Impl.DataAccess
 		public IList<IPost> GetByDate(int blogId, DateTime date, int skip, int take)
 		{
 			date = date.Date;
-			return container.Query<IPost>(x => x.Blog.Id == blogId && x.DatePublished >= date).Skip(skip).Take(take).ToList();
+			return container.Query<IPost>(x => x.Blog.Id == blogId && x.DatePublished >= date)
+				.Skip(skip).Take(take).ToList();
 		}
 
 		/// <summary>
@@ -63,7 +65,8 @@ namespace BlogSharp.Core.Impl.DataAccess
 		/// <returns></returns>
 		public IList<IPost> GetByAuthor(int blogId, int authorId, int skip, int take)
 		{
-			return container.Query<IPost>(x => x.Blog.Id == blogId && x.User.Id == authorId, (x, y) => x.DatePublished.CompareTo(y.DatePublished)).Skip(skip).Take(take).ToList();
+			return container.Query<IPost>(x => x.Blog.Id == blogId && x.User.Id == authorId)
+				.Skip(skip).Take(take).ToList();
 		}
 
 		/// <summary>
@@ -116,6 +119,7 @@ namespace BlogSharp.Core.Impl.DataAccess
 		/// <param name="comment"></param>
 		public void DeleteComment(IPostComment comment)
 		{
+			comment.Post.Comments.Remove(comment);
 			RemoveObject(comment);
 		}
 
