@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
+using BlogSharp.Web.AreaLib;
 
 namespace BlogSharp.Web
 {
@@ -13,16 +10,23 @@ namespace BlogSharp.Web
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-			routes.MapRoute(
-				"Default",                                              // Route name
-				"{controller}/{action}/{id}",                           // URL with parameters
-				new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
-			);
+			routes.MapAreas("{controller}/{action}/{id}",
+				"BlogSharp.Web",
+				new[] { "Admin" });
+
+			routes.MapRootArea("{controller}/{action}/{id}",
+				"BlogSharp.Web",
+				new { controller = "Home", action = "Index", id = "" });
+
+			//RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
 
 		}
 
 		protected void Application_Start()
 		{
+			ViewEngines.Engines.Clear();
+			ViewEngines.Engines.Add(new AreaViewEngine());
+
 			RegisterRoutes(RouteTable.Routes);
 		}
 	}

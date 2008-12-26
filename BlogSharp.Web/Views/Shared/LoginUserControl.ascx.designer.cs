@@ -8,10 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlogSharp.Web.Views.Shared
-{
-
-	public partial class LoginUserControl
-	{
-	}
+namespace BlogSharp.Web.Views.Shared {
+    
+    
+    public partial class LoginUserControl {
+    }
 }

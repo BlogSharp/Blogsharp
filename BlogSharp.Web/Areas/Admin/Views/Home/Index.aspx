@@ -1,4 +1,4 @@
-<%@ Page Language="C#" MasterPageFile="../Shared/Site.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="BlogSharp.Web.Areas.Admin.Views.Home.Index" %>
+<%@ Page Language="C#" MasterPageFile="../Shared/Site.Master" AutoEventWireup="true" Inherits="System.Web.Mvc.ViewPage" %>
 
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%= Html.Encode(ViewData["Message"]) %></h2>

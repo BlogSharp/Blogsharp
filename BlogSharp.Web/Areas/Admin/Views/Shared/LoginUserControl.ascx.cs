@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BlogSharp.Web.Views.Home
+namespace BlogSharp.Web.Areas.Admin.Views.Shared
 {
-	public partial class About : ViewPage
+	public partial class LoginUserControl : System.Web.Mvc.ViewUserControl
 	{
 	}
 }

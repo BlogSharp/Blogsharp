@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BlogSharp.Web.Views.Home
+namespace BlogSharp.Web.Areas.Admin.Views.Home
 {
 	public partial class Index : ViewPage
 	{

@@ -8,8 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlogSharp.Web.Areas.Admin.Views.Home
+namespace BlogSharp.Web.Areas.Admin.Views.Shared
 {
-	public partial class Index {
+	public partial class Error {
 	}
 }

@@ -10,8 +10,6 @@
 
 namespace BlogSharp.Web.Views.Home
 {
-
-
 	public partial class About
 	{
 	}

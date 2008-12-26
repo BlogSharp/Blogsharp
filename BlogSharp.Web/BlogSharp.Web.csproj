@@ -65,6 +65,33 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AreaLib\AreaRouteHelper.cs" />
+    <Compile Include="AreaLib\AreaViewEngine.cs" />
+    <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PostController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Views\Shared\Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\LoginUserControl.ascx.cs">
+      <DependentUpon>LoginUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\LoginUserControl.ascx.designer.cs">
+      <DependentUpon>LoginUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Shared\Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\MembershipController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Default.aspx.cs">
@@ -112,10 +139,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\Error.aspx" />
+    <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Areas\Admin\Content\Site.css" />
     <Content Include="Scripts\jquery-1.2.6.js" />
     <Content Include="Scripts\jquery-1.2.6.min.js" />
     <Content Include="Scripts\MicrosoftAjax.js" />
@@ -128,6 +157,36 @@
     <Content Include="Views\Shared\LoginUserControl.ascx" />
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Blog\Detail.aspx" />
+    <Content Include="Areas\Admin\Views\Blog\List.aspx" />
+    <Content Include="Areas\Admin\Views\Home\About.aspx" />
+    <Content Include="Areas\Admin\Views\Home\Index.aspx" />
+    <Content Include="Areas\Admin\Views\Post\Detail.aspx" />
+    <Content Include="Areas\Admin\Views\Post\List.aspx" />
+    <Content Include="Areas\Admin\Views\Shared\LoginUserControl.ascx" />
+    <Content Include="Areas\Admin\Views\Shared\Site.Master" />
+    <Content Include="Areas\Admin\Views\User\Detail.aspx" />
+    <Content Include="Areas\Admin\Views\User\List.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlogSharp.Core.Impl\BlogSharp.Core.Impl.csproj">
+      <Project>{71467906-275B-46B0-97FD-4FAB644448B6}</Project>
+      <Name>BlogSharp.Core.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlogSharp.Core\BlogSharp.Core.csproj">
+      <Project>{ABDABEBC-B92A-4F36-AC07-6874B4932C21}</Project>
+      <Name>BlogSharp.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlogSharp.Model.Impl\BlogSharp.Model.Impl.csproj">
+      <Project>{388E212A-2592-4F2B-9BA2-8789F082732C}</Project>
+      <Name>BlogSharp.Model.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlogSharp.Model\BlogSharp.Model.csproj">
+      <Project>{ACD93612-B2E7-4D51-9127-C306EF1F386C}</Project>
+      <Name>BlogSharp.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
