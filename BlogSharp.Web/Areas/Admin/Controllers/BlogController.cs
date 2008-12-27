@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
+﻿using System.Web.Mvc;
 
 namespace BlogSharp.Web.Areas.Admin.Controllers
 {
@@ -12,6 +7,11 @@ namespace BlogSharp.Web.Areas.Admin.Controllers
 		public ActionResult Index()
 		{
 			return View("List");
+		}
+
+		public ActionResult Detail(int? id)
+		{
+			return View("Detail");
 		}
 	}
 }
