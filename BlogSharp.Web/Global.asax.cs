@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using BlogSharp.Web.AreaLib;
+using BlogSharp.MvcExtensions.Areas;
 
 namespace BlogSharp.Web
 {
