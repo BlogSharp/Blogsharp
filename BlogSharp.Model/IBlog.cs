@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BlogSharp.Model
 {
-	public interface IBlog : IIdentifiable<int>, IEntity
+	public interface IBlog : IIdentifiable<Guid>, IEntity
 	{
 		string Name { get; set; }
 		IUser Founder { get; set; }

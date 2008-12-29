@@ -1,5 +1,4 @@
-﻿using BlogSharp.Core.Services.Post;
-using BlogSharp.Model;
+﻿using BlogSharp.Model;
 
 namespace BlogSharp.Core.Event.MembershipEvents
 {

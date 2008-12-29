@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BlogSharp.Model;
 
 namespace BlogSharp.Core.DataAccess
@@ -10,7 +11,7 @@ namespace BlogSharp.Core.DataAccess
         /// </summary>
         /// <param name="authorId"></param>
         /// <returns></returns>
-        IBlog GeyByFounder(int authorId);
+        IBlog GeyByFounder(Guid authorId);
 
 		/// <summary>
 		/// Gets all blog

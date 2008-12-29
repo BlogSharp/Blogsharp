@@ -1,6 +1,8 @@
-﻿namespace BlogSharp.Model
+﻿using System;
+
+namespace BlogSharp.Model
 {
-	public interface ITag : IIdentifiable<int>
+	public interface ITag : IIdentifiable<Guid>
 	{
 		string Name { get; set; }
 	}

@@ -5,17 +5,18 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 	<h2>
 		Blog Overview</h2>
+		<a href="Blog/Detail">New Blog</a>
 	<table>
 		<tr>
 			<td>
-				Name
+				<b>Name</b>
 			</td>
 		</tr>
-		<%--
+		
 		<% foreach (var blog in ViewData.Model)
 		 { %>
-		<tr><td><%=blog.Name %></td></tr>
+		<tr><td><a href="Blog/Detail/<%=blog.Id %>"><%=blog.Name %></a></td></tr>
 		<%} %>
-		--%>
+		
 	</table>
 </asp:Content>

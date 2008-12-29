@@ -101,6 +101,10 @@
     <Compile Include="Structure\FriendlyUrlGeneratorTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BlogSharp.CastleExtensions\BlogSharp.CastleExtensions.csproj">
+      <Project>{3310EA27-977F-4ED8-81F8-9484AC8EB757}</Project>
+      <Name>BlogSharp.CastleExtensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlogSharp.Core.Impl\BlogSharp.Core.Impl.csproj">
       <Project>{71467906-275B-46B0-97FD-4FAB644448B6}</Project>
       <Name>BlogSharp.Core.Impl</Name>

@@ -11,7 +11,7 @@ namespace BlogSharp.Core.DataAccess
         /// </summary>
         /// <param name="blogId"></param>
         /// <returns></returns>
-        IList<IPost> GetByBlog(int blogId);
+        IList<IPost> GetByBlog(Guid blogId);
         /// <summary>
         /// Get the Post List of the Blog, with paging support.
         /// </summary>
@@ -19,7 +19,7 @@ namespace BlogSharp.Core.DataAccess
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        IList<IPost> GetByBlog(int blogId, int skip, int take);
+		IList<IPost> GetByBlog(Guid blogId, int skip, int take);
         /// <summary>
         /// Get the Post list via selected date on the calander.
         /// </summary>
@@ -28,7 +28,7 @@ namespace BlogSharp.Core.DataAccess
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        IList<IPost> GetByDate(int blogId, DateTime date, int skip, int take);
+		IList<IPost> GetByDate(Guid blogId, DateTime date, int skip, int take);
         /// <summary>
         /// Get the Post list of the User.
         /// </summary>
@@ -37,7 +37,7 @@ namespace BlogSharp.Core.DataAccess
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        IList<IPost> GetByAuthor(int blogId, int authorId, int skip, int take);
+		IList<IPost> GetByAuthor(Guid blogId, Guid authorId, int skip, int take);
         /// <summary>
         /// Get the Post list via Tag.
         /// </summary>
@@ -46,7 +46,7 @@ namespace BlogSharp.Core.DataAccess
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        IList<IPost> GetByTag(int blogId, int tagId, int skip, int take);
+		IList<IPost> GetByTag(Guid blogId, Guid tagId, int skip, int take);
 
 		/// <summary>
 		/// Saves the post
@@ -79,6 +79,6 @@ namespace BlogSharp.Core.DataAccess
         /// <returns></returns>
         IPost GetByTitle(string friendlyTitle);
 
-    	IPost GetPostById(int id);
+		IPost GetPostById(Guid id);
     }
 }

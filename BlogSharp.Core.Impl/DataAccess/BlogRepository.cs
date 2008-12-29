@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using BlogSharp.CastleExtensions.Facilities.Db4o;
 using BlogSharp.Core.DataAccess;
 using BlogSharp.Model;
 using Db4objects.Db4o;
@@ -9,10 +11,10 @@ namespace BlogSharp.Core.Impl.DataAccess
 {
     public class BlogRepository : Db4oRepository, IBlogRepository
     {
-        public BlogRepository(IObjectContainer container)
-			:base(container)
+		public BlogRepository(ISessionManager session)
+			: base(session)
         {
-
+			
         }
 
         #region Implementation of IBlogRepository
@@ -22,24 +24,36 @@ namespace BlogSharp.Core.Impl.DataAccess
         /// </summary>
         /// <param name="authorId"></param>
         /// <returns></returns>
-        public IBlog GeyByFounder(int authorId)
+        public IBlog GeyByFounder(Guid authorId)
         {
-        	return container.Query<IBlog>(x => x.Founder.Id == authorId).FirstOrDefault();
+			using (container = session.OpenFile())
+			{
+				return container.Query<IBlog>(x => x.Founder.Id == authorId).FirstOrDefault();
+			}
         }
 
         public IList<IBlog> GetAllBlogs()
         {
-            return container.Cast<IBlog>().ToList();
+			using (container = session.OpenFile())
+			{
+				return container.Cast<IBlog>().ToList();
+			}
         }
 
 		public void SaveBlog(IBlog blog)
 		{
-			SaveObject(blog);
+			using (container = session.OpenFile())
+			{
+				SaveObject(blog);
+			}
 		}
 
 		public void DeleteBlog(IBlog blog)
 		{
-			RemoveObject(blog);
+			using (container = session.OpenFile())
+			{
+				RemoveObject(blog);
+			}
 		}
 
 		#endregion

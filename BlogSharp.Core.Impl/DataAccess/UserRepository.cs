@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using BlogSharp.CastleExtensions.Facilities.Db4o;
 using BlogSharp.Core.DataAccess;
 using BlogSharp.Model;
 using Db4objects.Db4o;
@@ -7,10 +9,10 @@ namespace BlogSharp.Core.Impl.DataAccess
 {
     public class UserRepository : Db4oRepository, IUserRepository
     {
-        public UserRepository(IObjectContainer container)
-            : base(container)
+        public UserRepository(ISessionManager session)
+            : base(session)
         {
-
+        	container = session.OpenFile();
         }
 
         #region Implementation of IUserRepository
@@ -35,7 +37,7 @@ namespace BlogSharp.Core.Impl.DataAccess
             RemoveObject(user);
         }
 
-    	public IUser GetById(int id)
+    	public IUser GetById(Guid id)
     	{
     		return container.Query<IUser>(x => x.Id == id).SingleOrDefault();
     	}

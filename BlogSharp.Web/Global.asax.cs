@@ -1,6 +1,9 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using BlogSharp.Core;
+using BlogSharp.Core.Impl.Installers;
 using BlogSharp.MvcExtensions.Areas;
+using Castle.Windsor;
 
 namespace BlogSharp.Web
 {
@@ -26,6 +29,10 @@ namespace BlogSharp.Web
 		{
 			ViewEngines.Engines.Clear();
 			ViewEngines.Engines.Add(new AreaViewEngine());
+
+			IWindsorContainer container = new WindsorContainer();
+			container.Install(new ComponentInstaller());
+			DI.SetContainer(container); 
 
 			RegisterRoutes(RouteTable.Routes);
 		}

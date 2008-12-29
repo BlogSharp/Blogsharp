@@ -50,7 +50,7 @@ namespace BlogSharp.Model.Impl
 
 		#region IIdentifiable<int> Members
 
-		public int Id
+		public Guid Id
 		{
 			get;
 			set;

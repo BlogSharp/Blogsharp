@@ -1,10 +1,11 @@
+using System;
 using System.Linq;
 using BlogSharp.Core.DataAccess;
 using BlogSharp.Core.Event.PostEvents;
-using BlogSharp.Core.Services.Post;
+using BlogSharp.Core.Services.Model;
 using BlogSharp.Model;
 
-namespace BlogSharp.Core.Impl.Services.Post
+namespace BlogSharp.Core.Impl.Services.Model
 {
 	public class PostService : IPostService
 	{
@@ -13,6 +14,7 @@ namespace BlogSharp.Core.Impl.Services.Post
 			this.postRepository = postRepository;
 		}
 		private readonly IPostRepository postRepository;
+		
 		#region IPostService Members
 
 		public void AddPost(IPost post)
@@ -53,7 +55,7 @@ namespace BlogSharp.Core.Impl.Services.Post
 			this.PostRemoved.Raise(this,postRemoved);
 		}
 
-		public IPost GetPostById(int id)
+		public IPost GetPostById(Guid id)
 		{
 			return postRepository.GetPostById(id);
 		}
