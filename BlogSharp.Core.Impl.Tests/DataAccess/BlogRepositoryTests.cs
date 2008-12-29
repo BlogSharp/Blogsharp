@@ -20,7 +20,6 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 	{
 		public BlogRepositoryTests()
 		{
-
 			this.objectContainer = MockRepository.GenerateMock<IObjectContainer>();
 			this.blogRepository = new BlogRepository(this.objectContainer);
 		}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using BlogSharp.CastleExtensions.Facilities.Db4o;
 using BlogSharp.Core.DataAccess;
 using BlogSharp.Core.Impl.DataAccess;
 using BlogSharp.Model;
@@ -13,18 +14,19 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 {
 	public class UserRepositoryTest : BaseTest
 	{
-		private readonly IObjectContainer objectContainer;
+		private readonly ISessionManager session;
 		private readonly IUserRepository userRepository;
 
 		public UserRepositoryTest()
 		{
-			objectContainer = Db4oFactory.OpenFile("test.db4o");
-			userRepository = new UserRepository(objectContainer);
+			session = new BlogSharpSessionManager();
+			userRepository = new UserRepository(session);
 		}
 
 		public override void OnTearDown()
 		{
-			objectContainer.Close();
+			//objectContainer.Close();
+			// TODO: SessionManager Close implementasyonu ?
 			File.Delete(MapPath("test.db4o"));
 		}
 
@@ -51,13 +53,13 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 		public void Can_get_by_username()
 		{
 			var user = GetEntityFactory<IUser>().Create();
-			user.Id = 1;
+			user.Id = Guid.Empty;
 			user.Username= "TestUser";
 			userRepository.SaveUser(user);
 
 			var foundUser = userRepository.GetAuthorByUsername("TestUser");
 			Assert.NotNull(foundUser);
-			Assert.Equal(1, foundUser.Id);
+			Assert.Equal(Guid.Empty, foundUser.Id);
 			Assert.Equal("TestUser", foundUser.Username);
 		}
 
@@ -65,13 +67,13 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 		public void Can_get_by_email()
 		{
 			var user = GetEntityFactory<IUser>().Create();
-			user.Id = 1;
+			user.Id = Guid.Empty;
 			user.Email = "TestUserEmail";
 			userRepository.SaveUser(user);
 
 			var foundUser = userRepository.GetAuthorByEmail("TestUserEmail");
 			Assert.NotNull(foundUser);
-			Assert.Equal(1, foundUser.Id);
+			Assert.Equal(Guid.Empty, foundUser.Id);
 			Assert.Equal("TestUserEmail", foundUser.Email);
 		}
 	}
