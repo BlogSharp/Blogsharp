@@ -1,5 +1,4 @@
-﻿using System;
-using BlogSharp.Model;
+﻿using BlogSharp.Model;
 
 namespace BlogSharp.Core.DataAccess
 {
@@ -9,7 +8,7 @@ namespace BlogSharp.Core.DataAccess
 		IUser GetAuthorByEmail(string email);
 		void SaveUser(IUser user);
 		void RemoveUser(IUser user);
-		IUser GetById(Guid id);
+		IUser GetById(int id);
 		
 	}
 }

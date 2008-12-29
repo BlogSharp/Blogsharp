@@ -38,7 +38,7 @@ namespace BlogSharp.Model.Impl
 
 		#region IIdentifiable<int> Members
 
-		public Guid Id
+		public int Id
 		{
 			get; set;
 		}

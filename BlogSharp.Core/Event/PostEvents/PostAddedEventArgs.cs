@@ -1,4 +1,5 @@
-﻿using BlogSharp.Model;
+﻿using BlogSharp.Core.Services.Post;
+using BlogSharp.Model;
 
 namespace BlogSharp.Core.Event.PostEvents
 {

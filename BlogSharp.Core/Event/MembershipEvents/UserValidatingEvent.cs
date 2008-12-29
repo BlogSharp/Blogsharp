@@ -1,4 +1,6 @@
-﻿namespace BlogSharp.Core.Event.MembershipEvents
+﻿using BlogSharp.Core.Services.Post;
+
+namespace BlogSharp.Core.Event.MembershipEvents
 {
 	public class UserValidatingEvent : AbstractEventArgs, ICancellableEvent
 	{

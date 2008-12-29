@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace BlogSharp.Model
+﻿namespace BlogSharp.Model
 {
-	public interface IPostComment : IIdentifiable<Guid>
+	public interface IPostComment : IIdentifiable<int>
 	{
 		IPost Post { get; set; }
 		string Comment { get; set; }

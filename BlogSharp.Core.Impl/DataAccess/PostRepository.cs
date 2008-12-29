@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BlogSharp.CastleExtensions.Facilities.Db4o;
 using BlogSharp.Core.DataAccess;
 using BlogSharp.Model;
 using Db4objects.Db4o;
@@ -10,11 +9,11 @@ namespace BlogSharp.Core.Impl.DataAccess
 {
 	public class PostRepository : Db4oRepository, IPostRepository
 	{
-		public PostRepository(ISessionManager session)
-			: base(session)
-        {
-			container = session.OpenFile();
-        }
+		public PostRepository(IObjectContainer container)
+			: base(container)
+		{
+
+		}
 
 		#region Implementation of IPostRepository
 
@@ -23,7 +22,7 @@ namespace BlogSharp.Core.Impl.DataAccess
 		/// </summary>
 		/// <param name="blogId"></param>
 		/// <returns></returns>
-		public IList<IPost> GetByBlog(Guid blogId)
+		public IList<IPost> GetByBlog(int blogId)
 		{
 			return container.Query<IPost>(x => x.Blog.Id == blogId, (x, y) => y.DatePublished.CompareTo(x.DatePublished));
 		}
@@ -35,7 +34,7 @@ namespace BlogSharp.Core.Impl.DataAccess
 		/// <param name="skip"></param>
 		/// <param name="take"></param>
 		/// <returns></returns>
-		public IList<IPost> GetByBlog(Guid blogId, int skip, int take)
+		public IList<IPost> GetByBlog(int blogId, int skip, int take)
 		{
 			return container.Query<IPost>(x => x.Blog.Id == blogId, (x, y) => x.DatePublished.CompareTo(y.DatePublished))
 				.Skip(skip).Take(take).ToList();
@@ -49,7 +48,7 @@ namespace BlogSharp.Core.Impl.DataAccess
 		/// <param name="skip"></param>
 		/// <param name="take"></param>
 		/// <returns></returns>
-		public IList<IPost> GetByDate(Guid blogId, DateTime date, int skip, int take)
+		public IList<IPost> GetByDate(int blogId, DateTime date, int skip, int take)
 		{
 			date = date.Date;
 			return container.Query<IPost>(x => x.Blog.Id == blogId && x.DatePublished >= date)
@@ -64,7 +63,7 @@ namespace BlogSharp.Core.Impl.DataAccess
 		/// <param name="skip"></param>
 		/// <param name="take"></param>
 		/// <returns></returns>
-		public IList<IPost> GetByAuthor(Guid blogId, Guid authorId, int skip, int take)
+		public IList<IPost> GetByAuthor(int blogId, int authorId, int skip, int take)
 		{
 			return container.Query<IPost>(x => x.Blog.Id == blogId && x.User.Id == authorId)
 				.Skip(skip).Take(take).ToList();
@@ -78,7 +77,7 @@ namespace BlogSharp.Core.Impl.DataAccess
 		/// <param name="skip"></param>
 		/// <param name="take"></param>
 		/// <returns></returns>
-		public IList<IPost> GetByTag(Guid blogId, Guid tagId, int skip, int take)
+		public IList<IPost> GetByTag(int blogId, int tagId, int skip, int take)
 		{
 			var tag = container.Query<ITag>(x => x.Id == tagId).SingleOrDefault();
 			return
@@ -134,7 +133,7 @@ namespace BlogSharp.Core.Impl.DataAccess
 			return container.Query<IPost>(x => x.FriendlyTitle == friendlyTitle).SingleOrDefault();
 		}
 
-		public IPost GetPostById(Guid id)
+		public IPost GetPostById(int id)
 		{
 			return container.Query<IPost>(x => x.Id == id).SingleOrDefault();
 		}

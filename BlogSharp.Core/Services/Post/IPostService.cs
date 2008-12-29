@@ -1,8 +1,7 @@
-﻿using System;
-using BlogSharp.Core.Event.PostEvents;
+﻿using BlogSharp.Core.Event.PostEvents;
 using BlogSharp.Model;
 
-namespace BlogSharp.Core.Services.Model
+namespace BlogSharp.Core.Services.Post
 {
 	public interface IPostService
 	{
@@ -10,7 +9,7 @@ namespace BlogSharp.Core.Services.Model
 		void AddComment(IPostComment comment);
 		void RemoveComment(IPostComment comment);
 		void RemovePost(IPost post);
-		IPost GetPostById(Guid id);
+		IPost GetPostById(int id);
 		IPost GetPostByFriendlyTitle(string friendlyTitle);
 
 		event EventHandler<IPostService, PostAddingEventArgs> PostAdding;

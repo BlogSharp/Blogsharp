@@ -117,10 +117,9 @@
     <Compile Include="Services\FileSystem\IFileSystemInfo.cs" />
     <Compile Include="Services\Mail\IMailService.cs" />
     <Compile Include="Services\Membership\IMembershipService.cs" />
-    <Compile Include="Services\Model\IBlogService.cs" />
     <Compile Include="Services\Plugin\IPlugin.cs" />
     <Compile Include="Services\Plugin\IPluginService.cs" />
-    <Compile Include="Services\Model\IPostService.cs" />
+    <Compile Include="Services\Post\IPostService.cs" />
     <Compile Include="Services\Search\IIndexContributor.cs" />
     <Compile Include="Services\Search\ISearchContentTransformer.cs" />
     <Compile Include="Services\Search\ISearchService.cs" />

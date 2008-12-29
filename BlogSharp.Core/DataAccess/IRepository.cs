@@ -5,11 +5,11 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.DataAccess
 {
-    public interface IRepository<T> where T : IIdentifiable<Guid>
+    public interface IRepository<T> where T : IIdentifiable<int>
     {
         void Save(T obj);
         void Delete(T obj);
-        T GetById(Guid id);
+        T GetById(int id);
         IEnumerable<T> GetByExpression(Expression<Func<T, bool>> predicate);
         IEnumerable<T> GetByExpression(Expression<Func<T, bool>> predicate, Expression<Func<T, int>> order);
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BlogSharp.Model
 {
-	public interface IPost : IIdentifiable<Guid>, IEntity
+	public interface IPost : IIdentifiable<int>, IEntity
 	{
 		IBlog Blog { get; set; }
 		IUser User { get; set; }

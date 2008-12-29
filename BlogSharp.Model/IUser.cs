@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BlogSharp.Model
 {
-	public interface IUser : IIdentifiable<Guid>, IEntity
+	public interface IUser : IIdentifiable<int>, IEntity
 	{
 		IList<IPost> Posts { get; set; }
 		IList<IBlog> Blogs { get; set; }
