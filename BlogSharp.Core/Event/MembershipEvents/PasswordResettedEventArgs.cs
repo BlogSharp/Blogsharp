@@ -7,9 +7,10 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Event.MembershipEvents
 {
-	public class PasswordResettedEventArgs:AbstractEventArgs
+	public class PasswordResettedEventArgs:AbstractEventArgs<IMembershipService>
 	{
-		public PasswordResettedEventArgs(IUser user,string newPassword)
+		public PasswordResettedEventArgs(IMembershipService service,IUser user, string newPassword)
+			:base(service)
 		{
 			this.User = user;
 			this.NewPassword = newPassword;

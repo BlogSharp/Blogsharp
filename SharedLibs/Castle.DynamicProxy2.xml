@@ -43,7 +43,7 @@
             </summary>
         </member>
         <member name="T:Castle.DynamicProxy.Generators.Emitters.LdcOpCodesDictionary">
-            <summary>
+            <summary>s
             Provides appropriate Ldc.X opcode for the type of primitive value to be loaded.
             </summary>
         </member>
@@ -110,7 +110,6 @@
             </summary>
             <remarks>
             TODO: 
-            - Use the interceptor selector if provided
             - Add tests and fixes for 'leaking this' problem
             </remarks>
         </member>

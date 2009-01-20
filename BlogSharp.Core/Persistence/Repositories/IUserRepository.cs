@@ -1,6 +1,6 @@
 ﻿using BlogSharp.Model;
 
-namespace BlogSharp.Core.DataAccess
+namespace BlogSharp.Core.Persistence.Repositories
 {
 	public interface IUserRepository
 	{

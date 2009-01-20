@@ -72,10 +72,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\IBlogRepository.cs" />
-    <Compile Include="DataAccess\IPostRepository.cs" />
-    <Compile Include="DataAccess\IRepository.cs" />
-    <Compile Include="DataAccess\IUserRepository.cs" />
+    <Compile Include="Persistence\Repositories\IBlogRepository.cs" />
+    <Compile Include="Persistence\Repositories\IPostRepository.cs" />
+    <Compile Include="Persistence\Repositories\IRepository.cs" />
+    <Compile Include="Persistence\Repositories\IUserRepository.cs" />
     <Compile Include="DI.cs" />
     <Compile Include="EntityFactory.cs" />
     <Compile Include="EventHandler.cs" />
@@ -135,6 +135,9 @@
       <Project>{ACD93612-B2E7-4D51-9127-C306EF1F386C}</Project>
       <Name>BlogSharp.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataAccess\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

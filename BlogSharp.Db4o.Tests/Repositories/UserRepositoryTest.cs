@@ -3,37 +3,31 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using BlogSharp.Core.DataAccess;
-using BlogSharp.Core.Impl.DataAccess;
+using BlogSharp.Core.Persistence.Repositories;
+using BlogSharp.Db4o.Repositories;
+using BlogSharp.Db4o.Tests;
 using BlogSharp.Model;
 using Db4objects.Db4o;
 using Xunit;
 
-namespace BlogSharp.Core.Impl.Tests.DataAccess
+namespace BlogSharp.Db4o.Tests.Repositories
 {
 	public class UserRepositoryTest : BaseTest
 	{
-		private readonly IObjectContainer objectContainer;
 		private readonly IUserRepository userRepository;
 
 		public UserRepositoryTest()
 		{
-			objectContainer = Db4oFactory.OpenFile("test.db4o");
-			userRepository = new UserRepository(objectContainer);
+			this.userRepository = new UserRepository(this.objectContainerManager);
 		}
-
-		public override void OnTearDown()
-		{
-			objectContainer.Close();
-			File.Delete(MapPath("test.db4o"));
-		}
-
 
 		[Fact]
 		public void Can_store_an_user()
 		{
 			var user = GetEntityFactory<IUser>().Create();
 			userRepository.SaveUser(user);
+			var id = objectContainer.GetID(user);
+			Assert.True(id>0);
 		}
 
 		[Fact]
@@ -43,8 +37,8 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 			user.Id = 1;
 			userRepository.SaveUser(user);
 			userRepository.RemoveUser(user);
-			var foundUser = userRepository.GetById(1);
-			Assert.Null(foundUser);
+			var id = objectContainer.GetID(user);
+			Assert.True(id==0);
 		}
 
 		[Fact]
@@ -52,8 +46,8 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 		{
 			var user = GetEntityFactory<IUser>().Create();
 			user.Id = 1;
-			user.Username= "TestUser";
-			userRepository.SaveUser(user);
+			user.Username = "TestUser";
+			objectContainer.Store(user);
 
 			var foundUser = userRepository.GetAuthorByUsername("TestUser");
 			Assert.NotNull(foundUser);
@@ -74,5 +68,6 @@ namespace BlogSharp.Core.Impl.Tests.DataAccess
 			Assert.Equal(1, foundUser.Id);
 			Assert.Equal("TestUserEmail", foundUser.Email);
 		}
+
 	}
 }

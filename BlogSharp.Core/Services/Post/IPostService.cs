@@ -1,6 +1,6 @@
 ﻿using BlogSharp.Core.Event.PostEvents;
 using BlogSharp.Model;
-
+using System;
 namespace BlogSharp.Core.Services.Post
 {
 	public interface IPostService
@@ -12,13 +12,12 @@ namespace BlogSharp.Core.Services.Post
 		IPost GetPostById(int id);
 		IPost GetPostByFriendlyTitle(string friendlyTitle);
 
-		event EventHandler<IPostService, PostAddingEventArgs> PostAdding;
-		event EventHandler<IPostService, PostAddedEventArgs> PostAdded;
-		event EventHandler<IPostService, PostRemovingEventArgs> PostRemoving;
-		event EventHandler<IPostService, PostRemovedEventArgs> PostRemoved;
+		event EventHandler<PostAddingEventArgs> PostAdding;
+		event EventHandler<PostAddedEventArgs> PostAdded;
+		event EventHandler<PostRemovingEventArgs> PostRemoving;
+		event EventHandler<PostRemovedEventArgs> PostRemoved;
 
-		event EventHandler<IPostService, CommentAddingEventArgs> CommentAdding;
-		event EventHandler<IPostService, CommentAddedEventArgs> CommentAdded;
-
+		event EventHandler<CommentAddingEventArgs> CommentAdding;
+		event EventHandler<CommentAddedEventArgs> CommentAdded;
 	}
 }

@@ -1,11 +1,14 @@
-﻿using BlogSharp.Core.Services.Plugin;
+﻿using System;
+using BlogSharp.Core.Services.Plugin;
 
 namespace BlogSharp.Core.Event.PluginEvents
 {
-	public class PluginStartedEventArgs : AbstractEventArgs
+	public class PluginStartedEventArgs : AbstractEventArgs<IPluginService>
 	{
-        public PluginStartedEventArgs()
+        public PluginStartedEventArgs(IPluginService service)
+			:base(service)
 		{
+			throw new NotImplementedException();
 		}
 	}
 }

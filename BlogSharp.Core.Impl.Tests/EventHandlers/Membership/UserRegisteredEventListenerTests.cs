@@ -37,7 +37,7 @@ namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 			var authorMock = MockRepository.GenerateMock<IUser>();
 			authorMock.Expect(x => x.Email).Return("blah@blah.com").Repeat.Any();
 			var membershipServiceMock = MockRepository.GenerateMock<IMembershipService>();
-			listener.Handle(membershipServiceMock,new UserRegisteredEventArgs(authorMock));
+			listener.Handle(new UserRegisteredEventArgs(membershipServiceMock, authorMock));
 			templateSourceMock.AssertWasCalled(x => x.GetTemplateWithKey("membership_welcome"));
 			mailServiceMock.AssertWasCalled(x => x.Send(
 			                                     	Arg<MailAddress>.Matches(y => y.Address == "blah@blah.com"),

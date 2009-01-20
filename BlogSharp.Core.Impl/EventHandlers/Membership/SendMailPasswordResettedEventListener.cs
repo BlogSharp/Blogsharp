@@ -13,7 +13,7 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Impl.EventHandlers.Membership
 {
-	public class SendMailPasswordResettedEventListener:IEventListener<IMembershipService,PasswordResettedEventArgs>
+	public class SendMailPasswordResettedEventListener:IEventListener<PasswordResettedEventArgs>
 	{
 		public SendMailPasswordResettedEventListener(IMailService mailService,ITemplateEngine engine,ITemplateSource templateSource)
 		{
@@ -26,7 +26,7 @@ namespace BlogSharp.Core.Impl.EventHandlers.Membership
 		private readonly ITemplateEngine templateEngine;
 		#region IEventListener<PasswordResettedEventArgs> Members
 
-		public void Handle(IMembershipService membershipService, PasswordResettedEventArgs eventArgs)
+		public void Handle(PasswordResettedEventArgs eventArgs)
 		{
 
 			var user = eventArgs.User;

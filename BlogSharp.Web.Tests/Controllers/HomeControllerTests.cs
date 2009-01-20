@@ -11,7 +11,7 @@ namespace BlogSharp.Web.Tests.Controllers
 			[Fact]
 			public void ReturnsViewResultWithDefaultViewName()
 			{
-				var controller = new HomeController();
+				var controller = new HomeController(null);
 				var result = controller.Index();
 				var viewResult = Assert.IsType<ViewResult>(result);
 				Assert.Null(viewResult.ViewName);
@@ -20,7 +20,7 @@ namespace BlogSharp.Web.Tests.Controllers
 			[Fact]
 			public void SetsViewDataWithNoModel()
 			{
-				var controller = new HomeController();
+				var controller = new HomeController(null);
 				var result = (ViewResult)controller.Index();
 				Assert.Equal("Home Page", result.ViewData["Title"]);
 				Assert.Equal("Welcome to ASP.NET MVC!", result.ViewData["Message"]);
@@ -33,7 +33,7 @@ namespace BlogSharp.Web.Tests.Controllers
 			[Fact]
 			public void ReturnsViewResultWithDefaultViewName()
 			{
-				var controller = new HomeController();
+				var controller = new HomeController(null);
 				var result = controller.About();
 				var viewResult = Assert.IsType<ViewResult>(result);
 				Assert.Null(viewResult.ViewName);
@@ -42,7 +42,7 @@ namespace BlogSharp.Web.Tests.Controllers
 			[Fact]
 			public void SetsViewDataWithNoModel()
 			{
-				var controller = new HomeController();
+				var controller = new HomeController(null);
 				var result = (ViewResult)controller.About();
 				Assert.Equal("About Page", result.ViewData["Title"]);
 				Assert.Null(result.ViewData.Model);

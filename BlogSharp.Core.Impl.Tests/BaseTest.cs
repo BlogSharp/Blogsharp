@@ -32,16 +32,6 @@ namespace BlogSharp.Core.Impl.Tests
 			
 		}
         
-        /// <summary>
-        /// Lets MapPath fonctionality into the class library.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        protected static string MapPath(string path)
-        {
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
-        }
-
 		#region IDisposable Members
 
 		public void Dispose()

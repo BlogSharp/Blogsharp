@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BlogSharp.Core.DataAccess;
+using BlogSharp.Core.Persistence.Repositories;
 using BlogSharp.Model;
 using Db4objects.Db4o;
-using Db4objects.Db4o.Linq;
 
-namespace BlogSharp.Core.Impl.DataAccess
+namespace BlogSharp.Db4o.Repositories
 {
     public class BlogRepository : Db4oRepository, IBlogRepository
     {
-        public BlogRepository(IObjectContainer container)
-			:base(container)
+        public BlogRepository(IObjectContainerManager containerManager)
+			: base(containerManager)
         {
 
         }
@@ -24,12 +23,12 @@ namespace BlogSharp.Core.Impl.DataAccess
         /// <returns></returns>
         public IBlog GeyByFounder(int authorId)
         {
-        	return container.Query<IBlog>(x => x.Founder.Id == authorId).FirstOrDefault();
+        	return container.GetContainer().Query<IBlog>(x => x.Founder.Id == authorId).FirstOrDefault();
         }
 
         public IList<IBlog> GetAllBlogs()
         {
-            return container.Cast<IBlog>().ToList();
+			return container.GetContainer().Query<IBlog>();
         }
 
 		public void SaveBlog(IBlog blog)

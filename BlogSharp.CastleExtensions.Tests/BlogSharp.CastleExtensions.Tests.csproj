@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyResolvers\ListResolverTests.cs" />
+    <Compile Include="DependencyResolvers\ServiceIdResolverTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

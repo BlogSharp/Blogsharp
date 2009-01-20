@@ -7,6 +7,10 @@ namespace BlogSharp.Model.Impl
 {
 	public class Tag : ITag
 	{
+		public Tag()
+		{
+			this.Posts=new List<IPost>();
+		}
 
 		#region ITag Members
 
@@ -33,5 +37,16 @@ namespace BlogSharp.Model.Impl
 
 		#endregion
 
+
+		#region ITag Members
+
+
+		public IList<IPost> Posts
+		{
+			get; 
+			set;
+		}
+
+		#endregion
 	}
 }

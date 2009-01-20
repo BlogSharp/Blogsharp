@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
-using BlogSharp.Core.DataAccess;
 using BlogSharp.Core.Impl.Services.Template;
+using BlogSharp.Core.Persistence.Repositories;
 using BlogSharp.Core.Services.Encryption;
 using BlogSharp.Core.Services.Mail;
 using BlogSharp.Core.Services.Membership;
@@ -33,8 +33,8 @@ namespace BlogSharp.Core.Impl.Services.Membership
 			author.Password = password;
 			author.Email = email;
 			userRepository.SaveUser(author);
-			var userRegistered = new UserRegisteredEventArgs(author);
-			this.UserRegistered.Raise(this,userRegistered);
+			var userRegistered = new UserRegisteredEventArgs(this,author);
+			this.UserRegistered.Raise(userRegistered);
 			return author;
 		}
 
@@ -61,12 +61,12 @@ namespace BlogSharp.Core.Impl.Services.Membership
 			var author = userRepository.GetAuthorByEmail(email);
 			author.Password = Guid.NewGuid().ToString();
 			userRepository.SaveUser(author);
-			var passwordResetEvent = new PasswordResettedEventArgs(author, author.Password);
-			this.PasswordResetted.Raise(this,passwordResetEvent);
+			var passwordResetEvent = new PasswordResettedEventArgs(this,author, author.Password);
+			this.PasswordResetted.Raise(passwordResetEvent);
 		}
 
-		public event EventHandler<IMembershipService, UserRegisteredEventArgs> UserRegistered = delegate { };
-		public event EventHandler<IMembershipService, PasswordResettedEventArgs> PasswordResetted=delegate { };
+		public event EventHandler<UserRegisteredEventArgs> UserRegistered = delegate { };
+		public event EventHandler<PasswordResettedEventArgs> PasswordResetted=delegate { };
 
 	}
 }

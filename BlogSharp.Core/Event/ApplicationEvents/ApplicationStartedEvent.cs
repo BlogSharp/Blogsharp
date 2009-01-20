@@ -2,7 +2,7 @@
 {
 	public class ApplicationStartedEventArgs : AbstractEventArgs
 	{
-		public ApplicationStartedEventArgs()
+		public ApplicationStartedEventArgs():base(null)
 		{
 		}
 	}

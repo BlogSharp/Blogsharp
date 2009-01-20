@@ -2,13 +2,13 @@
 {
 	public interface IEventArgs
 	{
-		object EventSource { get; set; }
+		object Source { get; }
 	}
 	public interface IEventArgs<TSource>:IEventArgs
 	{
 		/// <summary>
 		/// The source that the event is raised from
 		/// </summary>
-		new TSource EventSource { get; set; }
+		new TSource Source { get; }
 	}
 }

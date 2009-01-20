@@ -1,10 +1,12 @@
-﻿using BlogSharp.Core.Services.Post;
+﻿using BlogSharp.Core.Services.Membership;
+using BlogSharp.Core.Services.Post;
 
 namespace BlogSharp.Core.Event.MembershipEvents
 {
-	public class UserValidatingEvent : AbstractEventArgs, ICancellableEvent
+	public class UserValidatingEvent : AbstractEventArgs<IMembershipService>, ICancellableEvent
 	{
-		public UserValidatingEvent(string userName,string password)
+		public UserValidatingEvent(IMembershipService service,string userName, string password)
+			:base(service)
 		{
 		    this.Username = userName;
 		    this.Password = password;

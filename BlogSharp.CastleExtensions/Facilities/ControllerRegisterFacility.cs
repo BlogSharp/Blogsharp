@@ -5,6 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using Castle.Core;
 using Castle.MicroKernel.Facilities;
+using Castle.MicroKernel.Registration;
 
 namespace BlogSharp.CastleExtensions.Facilities
 {

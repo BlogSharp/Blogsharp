@@ -14,8 +14,8 @@ namespace BlogSharp.Core.Services.Membership
 		void DeleteUser(IUser user);
 		IUser GetAuthorInfoByName(string author);
 		void ResetPassword(string email);
-		event EventHandler<IMembershipService, UserRegisteredEventArgs> UserRegistered;
-		event EventHandler<IMembershipService, PasswordResettedEventArgs> PasswordResetted;
+		event EventHandler<UserRegisteredEventArgs> UserRegistered;
+		event EventHandler<PasswordResettedEventArgs> PasswordResetted;
 
 	}
 }

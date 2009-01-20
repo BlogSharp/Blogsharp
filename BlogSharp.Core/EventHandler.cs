@@ -6,20 +6,21 @@ using BlogSharp.Core.Event;
 
 namespace BlogSharp.Core
 {
-    public delegate void EventHandler<TSource,TEventArgs>(TSource source,TEventArgs eventArgs);
-	public interface IEventListener<TSource,TEventArgs> where TEventArgs:AbstractEventArgs
+    public delegate void EventHandler<TEventArgs>(TEventArgs eventArgs);
+	public interface IEventListener<TEventArgs> where TEventArgs:IEventArgs
 	{
-		void Handle(TSource source, TEventArgs eventArgs);
+		void Handle(TEventArgs eventArgs);
 	}
 
 
 
 	public static class EventHandlerHelpers
 	{
-		public static void Raise<TSource,TEventArgs>(this EventHandler<TSource,TEventArgs> @event,TSource source,TEventArgs eventArgs)
+		public static void Raise<TEventArgs>(this EventHandler<TEventArgs> @event,TEventArgs eventArgs)
+			where TEventArgs : IEventArgs
 		{
 			if(@event!=null)
-				@event(source, eventArgs);
+				@event(eventArgs);
 		}
 	}
 }

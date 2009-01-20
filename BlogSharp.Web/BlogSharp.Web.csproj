@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FD1F0595-EF35-4CFD-87E2-1E5F7E170026}</ProjectGuid>
     <ProjectTypeGuids>{603c0e0b-db56-11dc-be95-000d561079b0};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -30,6 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.MicroKernel, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\Castle.MicroKernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
@@ -167,8 +179,14 @@
     <Content Include="Areas\Admin\Views\Shared\Site.Master" />
     <Content Include="Areas\Admin\Views\User\Detail.aspx" />
     <Content Include="Areas\Admin\Views\User\List.aspx" />
+    <Content Include="Configuration\castle.xml" />
+    <Content Include="Configuration\dataaccess.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BlogSharp.CastleExtensions\BlogSharp.CastleExtensions.csproj">
+      <Project>{3310EA27-977F-4ED8-81F8-9484AC8EB757}</Project>
+      <Name>BlogSharp.CastleExtensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlogSharp.Core.Impl\BlogSharp.Core.Impl.csproj">
       <Project>{71467906-275B-46B0-97FD-4FAB644448B6}</Project>
       <Name>BlogSharp.Core.Impl</Name>
@@ -176,6 +194,10 @@
     <ProjectReference Include="..\BlogSharp.Core\BlogSharp.Core.csproj">
       <Project>{ABDABEBC-B92A-4F36-AC07-6874B4932C21}</Project>
       <Name>BlogSharp.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlogSharp.Db4o\BlogSharp.Db4o.csproj">
+      <Project>{CDEB5615-0DC9-4C81-A1B0-4E1A488A91BB}</Project>
+      <Name>BlogSharp.Db4o</Name>
     </ProjectReference>
     <ProjectReference Include="..\BlogSharp.Model.Impl\BlogSharp.Model.Impl.csproj">
       <Project>{388E212A-2592-4F2B-9BA2-8789F082732C}</Project>
@@ -215,6 +237,9 @@
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

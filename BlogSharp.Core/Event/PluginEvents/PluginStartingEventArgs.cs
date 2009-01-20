@@ -1,12 +1,14 @@
-﻿using BlogSharp.Core.Services.Plugin;
+﻿using System;
+using BlogSharp.Core.Services.Plugin;
 
 namespace BlogSharp.Core.Event.PluginEvents
 {
-	public class PluginStartingEventArgs : AbstractEventArgs, ICancellableEvent
+	public class PluginStartingEventArgs : AbstractEventArgs<IPluginService>, ICancellableEvent
 	{
-		public PluginStartingEventArgs(IPlugin plugin)
+		public PluginStartingEventArgs(IPluginService service,IPlugin plugin)
+			:base(service)
 		{
-
+			throw new NotImplementedException();
 		}
 
 		#region ICancellableEvent Members

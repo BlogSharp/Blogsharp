@@ -3,10 +3,11 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Event.PostEvents
 {
-	public class CommentAddingEventArgs : AbstractEventArgs, ICancellableEvent
+	public class CommentAddingEventArgs : AbstractEventArgs<IPostService>, ICancellableEvent
 	{
 
-		public CommentAddingEventArgs(IPostComment comment)
+		public CommentAddingEventArgs(IPostService postService,IPostComment comment)
+			: base(postService)
 		{
 			this.Comment = comment;
 		}

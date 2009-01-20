@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -68,6 +68,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BlogSharp.Core\BlogSharp.Core.csproj">
+      <Project>{ABDABEBC-B92A-4F36-AC07-6874B4932C21}</Project>
+      <Name>BlogSharp.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlogSharp.Web\BlogSharp.Web.csproj">
       <Project>{FD1F0595-EF35-4CFD-87E2-1E5F7E170026}</Project>
       <Name>BlogSharp.Web</Name>

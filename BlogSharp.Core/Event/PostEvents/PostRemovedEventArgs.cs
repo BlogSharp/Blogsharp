@@ -7,9 +7,10 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Event.PostEvents
 {
-	public class PostRemovedEventArgs:AbstractEventArgs
+	public class PostRemovedEventArgs:AbstractEventArgs<IPostService>
 	{
-		public PostRemovedEventArgs(IPost post)
+		public PostRemovedEventArgs(IPostService postService,IPost post)
+			:base(postService)
 		{
 			this.Post = post;
 		}

@@ -8,9 +8,10 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Event.MembershipEvents
 {
-	public class UserRegisteredEventArgs : AbstractEventArgs
+	public class UserRegisteredEventArgs : AbstractEventArgs<IMembershipService>
 	{
-		public UserRegisteredEventArgs(IUser user)
+		public UserRegisteredEventArgs(IMembershipService service,IUser user)
+			:base(service)
 		{
 			this.User = user;
 		}

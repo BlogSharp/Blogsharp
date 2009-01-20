@@ -1,13 +1,13 @@
 ﻿using System.Linq;
-using BlogSharp.Core.DataAccess;
+using BlogSharp.Core.Persistence.Repositories;
 using BlogSharp.Model;
 using Db4objects.Db4o;
 
-namespace BlogSharp.Core.Impl.DataAccess
+namespace BlogSharp.Db4o.Repositories
 {
     public class UserRepository : Db4oRepository, IUserRepository
     {
-        public UserRepository(IObjectContainer container)
+        public UserRepository(IObjectContainerManager container)
             : base(container)
         {
 
@@ -17,12 +17,12 @@ namespace BlogSharp.Core.Impl.DataAccess
 
         public IUser GetAuthorByUsername(string username)
         {
-            return container.Query<IUser>(x => x.Username == username).SingleOrDefault();
+            return container.GetContainer().Query<IUser>(x => x.Username == username).SingleOrDefault();
         }
 
         public IUser GetAuthorByEmail(string email)
         {
-            return container.Query<IUser>(x => x.Email == email).SingleOrDefault();
+			return container.GetContainer().Query<IUser>(x => x.Email == email).SingleOrDefault();
         }
 
         public void SaveUser(IUser user)
@@ -37,7 +37,7 @@ namespace BlogSharp.Core.Impl.DataAccess
 
     	public IUser GetById(int id)
     	{
-    		return container.Query<IUser>(x => x.Id == id).SingleOrDefault();
+			return container.GetContainer().Query<IUser>(x => x.Id == id).SingleOrDefault();
     	}
 
     	#endregion

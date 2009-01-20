@@ -3,11 +3,12 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Event.PostEvents
 {
-	public class PostAddingEventArgs : AbstractEventArgs, ICancellableEvent
+	public class PostAddingEventArgs : AbstractEventArgs<IPostService>, ICancellableEvent
 	{
 		private readonly IPost post;
 
-		public PostAddingEventArgs(IPost post)
+		public PostAddingEventArgs(IPostService postService,IPost post)
+			:base(postService)
 		{
 			this.post = post;
 		}

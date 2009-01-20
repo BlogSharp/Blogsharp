@@ -3,9 +3,10 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Event.PostEvents
 {
-	public class PostAddedEventArgs : AbstractEventArgs
+	public class PostAddedEventArgs : AbstractEventArgs<IPostService>
 	{
-		public PostAddedEventArgs(IPost post)
+		public PostAddedEventArgs(IPostService postService,IPost post)
+			:base(postService)
 		{
 			this.Post = post;
 		}

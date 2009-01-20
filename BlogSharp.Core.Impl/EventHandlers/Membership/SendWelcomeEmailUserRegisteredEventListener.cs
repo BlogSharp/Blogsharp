@@ -13,7 +13,7 @@ using BlogSharp.Model;
 
 namespace BlogSharp.Core.Impl.EventHandlers.Membership
 {
-	public class SendWelcomeEmailUserRegisteredEventListener:IEventListener<IMembershipService,UserRegisteredEventArgs>
+	public class SendWelcomeEmailUserRegisteredEventListener:IEventListener<UserRegisteredEventArgs>
 	{
 		public SendWelcomeEmailUserRegisteredEventListener(IMailService mailService,
 											ITemplateEngine templateEngine,ITemplateSource templateSource)
@@ -29,7 +29,7 @@ namespace BlogSharp.Core.Impl.EventHandlers.Membership
 		#region IEventListener<UserRegisteredEventArgs> Members
 
 		//TODO: Localization is necessary
-		public void Handle(IMembershipService membershipService,UserRegisteredEventArgs eventArgs)
+		public void Handle(UserRegisteredEventArgs eventArgs)
 		{
 			IUser user = eventArgs.User;
 			ITemplate template = templateSource.GetTemplateWithKey("membership_welcome");

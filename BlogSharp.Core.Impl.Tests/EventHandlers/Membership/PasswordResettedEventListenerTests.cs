@@ -36,7 +36,7 @@ namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 			var authorMock = MockRepository.GenerateMock<IUser>();
 			authorMock.Expect(x => x.Email).Return("blah@blah.com").Repeat.Any();
 			var membershipServiceMock = MockRepository.GenerateMock<IMembershipService>();
-			listener.Handle(membershipServiceMock, new PasswordResettedEventArgs(authorMock, "1234"));
+			listener.Handle(new PasswordResettedEventArgs(membershipServiceMock,authorMock, "1234"));
 			templateSourceMock.AssertWasCalled(x=>x.GetTemplateWithKey("membership_passwordreset"));
 			templateEngineMock.AssertWasCalled(x => x.Merge(Arg<ITemplate>.Is.Anything, Arg<IDictionary<string,object>>.Is.Anything));
 			mailServiceMock.AssertWasCalled(x => x.Send(
