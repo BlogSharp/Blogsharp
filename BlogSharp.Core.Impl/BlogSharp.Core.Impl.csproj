@@ -55,10 +55,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Ionic.Utils.Zip.dll</HintPath>
     </Reference>
-    <Reference Include="Kennedy.TxFiles, Version=1.0.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\Kennedy.TxFiles.dll</HintPath>
-    </Reference>
     <Reference Include="NVelocity, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\NVelocity.dll</HintPath>
@@ -89,7 +85,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FileSystem\Directory.cs" />
     <Compile Include="Services\FileSystem\File.cs" />
-    <Compile Include="Services\FileSystem\FileService.cs" />
+    <Compile Include="Services\FileSystem\Native\NativeFileEnums.cs" />
+    <Compile Include="Services\FileSystem\Native\NativeMethods.cs" />
+    <Compile Include="Services\FileSystem\Native\NativeKtmMethods.cs" />
+    <Compile Include="Services\FileSystem\TransactionalFileService.cs" />
     <Compile Include="Services\FileSystem\FileSystemInfoBase.cs" />
     <Compile Include="Services\Mail\MailService.cs" />
     <Compile Include="Services\Membership\MembershipService.cs" />

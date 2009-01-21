@@ -10,6 +10,7 @@ namespace BlogSharp.Core.Services.FileSystem
 	{ 
 		Stream OpenRead();
 		Stream OpenWrite();
+		Stream Open(FileMode fileMode,FileAccess fileAccess);
 		long Length { get; }
 		FileAttributes Attributes { get; }
 	}

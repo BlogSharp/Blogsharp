@@ -7,7 +7,7 @@ using BlogSharp.Core.Services.FileSystem;
 
 namespace BlogSharp.Core.Impl.Services.FileSystem
 {
-	public class FileService:IFileService
+	public class TransactionalFileService:IFileService
 	{
 		#region IFileService Members
 
@@ -19,6 +19,14 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 		public bool DirectoryExists(string path)
 		{
 			return System.IO.Directory.Exists(path);
+		}
+		public void DeleteFile(string path)
+		{
+			System.IO.File.Delete(path);
+		}
+		public void DeleteFile(IFile file)
+		{
+			this.DeleteFile(file.Path);
 		}
 
 		public IFile GetFile(string file)

@@ -15,6 +15,8 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 		}
 
 		#region IFile Members
+
+
 		private FileInfo FileInfo
 		{
 			get
@@ -22,6 +24,14 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 				return this.FileSystemInfo as FileInfo;
 			}
 		}
+
+
+		public Stream Open(FileMode fileMode,FileAccess fileAccess)
+		{
+			return FileInfo.Open(fileMode, fileAccess);
+		}
+
+
 		public Stream OpenRead()
 		{
 			return FileInfo.OpenRead();
@@ -47,5 +57,6 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 		{
 			get { return new Directory(FileInfo.Directory); }
 		}
+
 	}
 }

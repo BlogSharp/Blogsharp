@@ -84,5 +84,66 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 			Assert.Equal("blah2", data);
 		}
 
+		[Fact]
+		public void Open_with_append_write_returns_stream()
+		{
+			string data;
+			using (var fileStream = file.Open(FileMode.Append,FileAccess.Write))
+			{
+				using (var sr = new StreamWriter(fileStream))
+				{
+					sr.Write("blah2");
+					sr.Close();
+				}
+				fileStream.Close();
+			}
+			using (var fileStream = file.OpenRead())
+			{
+				using (var sr = new StreamReader(fileStream))
+				{
+					data = sr.ReadLine();
+				}
+			}
+			Assert.Equal("blahblah2", data);
+		}
+		[Fact]
+		public void Open_with_truncate_write_returns_stream()
+		{
+			string data;
+			using (var fileStream = file.Open(FileMode.Truncate, FileAccess.Write))
+			{
+				using (var sr = new StreamWriter(fileStream))
+				{
+					sr.Write("blah2");
+					sr.Close();
+				}
+				fileStream.Close();
+			}
+			using (var fileStream = file.OpenRead())
+			{
+				using (var sr = new StreamReader(fileStream))
+				{
+					data = sr.ReadLine();
+				}
+			}
+			Assert.Equal("blah2", data);
+		}
+		[Fact]
+		public void Open_with_truncate_read_throws_exception()
+		{
+			string data;
+			Assert.Throws<ArgumentException>(delegate
+			              	{
+			              		using (var fileStream = file.Open(FileMode.Truncate, FileAccess.Read))
+			              		{
+			              			using (var sr = new StreamWriter(fileStream))
+			              			{
+			              				sr.Write("blah2");
+			              				sr.Close();
+			              			}
+			              			fileStream.Close();
+			              		}
+			              	});
+		}
 	}
 }

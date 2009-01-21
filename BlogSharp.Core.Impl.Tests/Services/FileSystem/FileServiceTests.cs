@@ -13,7 +13,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 	{
 		public FileServiceTests()
 		{
-			this.fileService = new FileService();
+			this.fileService = new TransactionalFileService();
 			this.assemblyFile = this.GetType().Assembly.Location;
 			this.assemblyDirectory = new FileInfo(this.assemblyFile).DirectoryName;
 			this.fileName = new FileInfo(this.assemblyFile).Name;

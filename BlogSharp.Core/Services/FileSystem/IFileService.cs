@@ -10,7 +10,10 @@ namespace BlogSharp.Core.Services.FileSystem
 	{
 		bool FileExists(string file);
 		bool DirectoryExists(string file);
+		void DeleteFile(IFile file);
+		void DeleteFile(string file);
 		IFile GetFile(string file);
 		IDirectory GetDirectory(string directory);
+
 	}
 }

@@ -30,6 +30,10 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			tag2.Id = 2;
 			tag2.Name = "mytag2";
 			var tags = new[] { tag1, tag2 };
+			objectContainer.Store(author);
+			objectContainer.Store(blog);
+			objectContainer.Store(tag1);
+			objectContainer.Store(tag2);
 			for (int i = 0; i < 20; i++)
 			{
 				var post = GetEntityFactory<IPost>().Create();
@@ -53,10 +57,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 				objectContainer.Store(comment2);
 				objectContainer.Store(post);
 			}
-			objectContainer.Store(author);
-			objectContainer.Store(blog);
-			objectContainer.Store(tag1);
-			objectContainer.Store(tag2);
+
 			objectContainer.Commit();
 		}
 
