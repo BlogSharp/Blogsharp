@@ -29,7 +29,7 @@ namespace BlogSharp.Core.Impl.Services.Template
 		public ITemplate GetTemplateFromFile(string file)
 		{
 			string output;
-			using (var stream = this.fileServices.GetFile(file).OpenRead())
+			using (var stream = this.fileServices.OpenFileForRead(file))
 			{
 				using (var reader = new StreamReader(stream))
 				{

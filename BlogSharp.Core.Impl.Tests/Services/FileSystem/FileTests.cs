@@ -11,139 +11,16 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 {
 	public class FileTests:IDisposable
 	{
-		public FileTests()
-		{
-			string folderPath = this.GetType().Assembly.Location;
-			var directory = new FileInfo(folderPath).DirectoryName;
-			testFilePath=Path.Combine(directory, "test.txt");
-			System.IO.File.Delete(this.testFilePath);
-			FileInfo fileInfo = new FileInfo(testFilePath);
-			using(var s=fileInfo.OpenWrite())
-			{
-				using(var sw=new StreamWriter(s))
-				{
-					sw.Write("blah");
-					sw.Close();
-				}
-				s.Close();
-			}
-			this.file = new File(fileInfo);
-			
-		}
+
 
 
 		#region IDisposable Members
 
 		public void Dispose()
 		{
-			System.IO.File.Delete(this.testFilePath);
+			throw new NotImplementedException();
 		}
 
 		#endregion
-
-
-
-		private string testFilePath;
-		private IFile file;
-
-
-		[Fact]
-		public void Open_read_can_return_stream_with_file_content()
-		{
-			string data;
-			using(var fileStream=file.OpenRead())
-			{
-				using(var sr=new StreamReader(fileStream))
-				{
-					data=sr.ReadLine();
-				}
-			}
-			Assert.Equal("blah", data);
-		}
-
-		[Fact]
-		public void Open_write_returns_stream_to_be_written()
-		{
-			string data;
-			using(var fileStream=file.OpenWrite())
-			{
-				using(var sr=new StreamWriter(fileStream))
-				{
-					sr.Write("blah2");
-					sr.Close();
-				}
-				fileStream.Close();
-			}
-			using (var fileStream = file.OpenRead())
-			{
-				using (var sr = new StreamReader(fileStream))
-				{
-					data = sr.ReadLine();
-				}
-			}
-			Assert.Equal("blah2", data);
-		}
-
-		[Fact]
-		public void Open_with_append_write_returns_stream()
-		{
-			string data;
-			using (var fileStream = file.Open(FileMode.Append,FileAccess.Write))
-			{
-				using (var sr = new StreamWriter(fileStream))
-				{
-					sr.Write("blah2");
-					sr.Close();
-				}
-				fileStream.Close();
-			}
-			using (var fileStream = file.OpenRead())
-			{
-				using (var sr = new StreamReader(fileStream))
-				{
-					data = sr.ReadLine();
-				}
-			}
-			Assert.Equal("blahblah2", data);
-		}
-		[Fact]
-		public void Open_with_truncate_write_returns_stream()
-		{
-			string data;
-			using (var fileStream = file.Open(FileMode.Truncate, FileAccess.Write))
-			{
-				using (var sr = new StreamWriter(fileStream))
-				{
-					sr.Write("blah2");
-					sr.Close();
-				}
-				fileStream.Close();
-			}
-			using (var fileStream = file.OpenRead())
-			{
-				using (var sr = new StreamReader(fileStream))
-				{
-					data = sr.ReadLine();
-				}
-			}
-			Assert.Equal("blah2", data);
-		}
-		[Fact]
-		public void Open_with_truncate_read_throws_exception()
-		{
-			string data;
-			Assert.Throws<ArgumentException>(delegate
-			              	{
-			              		using (var fileStream = file.Open(FileMode.Truncate, FileAccess.Read))
-			              		{
-			              			using (var sr = new StreamWriter(fileStream))
-			              			{
-			              				sr.Write("blah2");
-			              				sr.Close();
-			              			}
-			              			fileStream.Close();
-			              		}
-			              	});
-		}
 	}
 }

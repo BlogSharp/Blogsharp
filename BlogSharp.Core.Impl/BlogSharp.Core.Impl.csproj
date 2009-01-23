@@ -83,8 +83,12 @@
     <Compile Include="EventHandlers\Membership\SendWelcomeEmailUserRegisteredEventListener.cs" />
     <Compile Include="Installers\DefaultComponentInstallers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FileSystem\Castle\CastleDirectoryInterceptor.cs" />
+    <Compile Include="Services\FileSystem\Castle\CastleFileInterceptor.cs" />
+    <Compile Include="Services\FileSystem\Castle\CastleProxyFactory.cs" />
     <Compile Include="Services\FileSystem\Directory.cs" />
     <Compile Include="Services\FileSystem\File.cs" />
+    <Compile Include="Services\FileSystem\IProxyFactory.cs" />
     <Compile Include="Services\FileSystem\Native\NativeFileEnums.cs" />
     <Compile Include="Services\FileSystem\Native\NativeMethods.cs" />
     <Compile Include="Services\FileSystem\Native\NativeKtmMethods.cs" />

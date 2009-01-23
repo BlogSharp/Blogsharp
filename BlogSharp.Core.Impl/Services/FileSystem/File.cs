@@ -3,60 +3,33 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using BlogSharp.Core.Impl.Services.FileSystem.Native;
 using BlogSharp.Core.Services.FileSystem;
+using Microsoft.Win32.SafeHandles;
 
 namespace BlogSharp.Core.Impl.Services.FileSystem
 {
 	public class File:FileSystemInfoBase,IFile
 	{
-		public File(FileInfo fileInfo):base(fileInfo)
+		internal File(string fileName,NativeMethods.WIN32_FIND_DATA fileData)
+			: base(fileName)
 		{
-			
+			this.findData = fileData;
 		}
 
+		private readonly NativeMethods.WIN32_FIND_DATA findData;
 		#region IFile Members
-
-
-		private FileInfo FileInfo
-		{
-			get
-			{
-				return this.FileSystemInfo as FileInfo;
-			}
-		}
-
-
-		public Stream Open(FileMode fileMode,FileAccess fileAccess)
-		{
-			return FileInfo.Open(fileMode, fileAccess);
-		}
-
-
-		public Stream OpenRead()
-		{
-			return FileInfo.OpenRead();
-		}
-
-		public Stream OpenWrite()
-		{
-			return FileInfo.OpenWrite();
-		}
 
 		public long Length
 		{
-			get { return FileInfo.Length; }
+			get { return findData.nFileSizeHigh; }
 		}
 
 		public FileAttributes Attributes
 		{
-			get { return FileInfo.Attributes; }
+			get { return (FileAttributes)findData.dwFileAttributes; }
 		}
+
 		#endregion
-
-		public override IDirectory Parent
-		{
-			get { return new Directory(FileInfo.Directory); }
-		}
-
 	}
 }

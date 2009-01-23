@@ -101,7 +101,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 		}
 
 		[Flags]
-		internal enum MoveFileFlags : uint
+		public enum MoveFileFlags : uint
 		{
 			MOVEFILE_REPLACE_EXISTING = 0x00000001,
 			MOVEFILE_COPY_ALLOWED = 0x00000002,
@@ -111,12 +111,12 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 			MOVEFILE_FAIL_IF_NOT_TRACKABLE = 0x00000020
 		}
 
-		internal enum FINDEX_INFO_LEVELS
+		public enum FINDEX_INFO_LEVELS
 		{
 			FindExInfoStandard,
 			FindExInfoMaxInfoLevel
 		}
-		internal enum FINDEX_SEARCH_OPS
+		public enum FINDEX_SEARCH_OPS
 		{
 			FindExSearchNameMatch,
 			FindExSearchLimitToDirectories,
@@ -124,7 +124,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 			FindExSearchMaxSearchOp
 		}
 #pragma warning disable 0649
-		internal struct FILETIME
+		public struct FILETIME
 		{
 			public uint DateTimeLow;
 			public uint DateTimeHigh;
@@ -132,7 +132,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 #pragma warning restore 0649
 
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-		internal struct WIN32_FIND_DATA
+		public struct WIN32_FIND_DATA
 		{
 			public int dwFileAttributes;
 			public NativeMethods.FILETIME ftCreationTime;
@@ -149,7 +149,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 		}
 
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-		internal struct TXFS_START_RM_INFORMATION
+		public struct TXFS_START_RM_INFORMATION
 		{
 			public UInt32 Flags;
 
@@ -175,7 +175,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 		//
 
 		[DllImport(KERNEL32, CharSet = CharSet.Unicode, SetLastError = true)]
-		internal static extern SafeFileHandle CreateFile(
+		public static extern SafeFileHandle CreateFile(
 			[In] string lpFileName,
 			[In] NativeMethods.FileAccess dwDesiredAccess,
 			[In] NativeMethods.FileShare dwShareMode,
@@ -186,16 +186,19 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 
 		[DllImport(KERNEL32, CharSet = CharSet.Unicode, SetLastError = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
-		internal static extern bool FindNextFile(
+		public static extern bool FindNextFile(
 			[In] SafeFileHandle hFindFile,
 			[Out] out WIN32_FIND_DATA lpFindFileData);
+
+
 
 		//
 		// Transacted file operations
 		//
 
+		#region transactional operations
 		[DllImport(KERNEL32, EntryPoint = "CreateFileTransacted", CharSet = CharSet.Unicode, SetLastError = true)]
-		internal static extern SafeFileHandle CreateFileTransacted(
+		public static extern SafeFileHandle CreateFileTransacted(
 			[In] string lpFileName,
 			[In] NativeMethods.FileAccess dwDesiredAccess,
 			[In] NativeMethods.FileShare dwShareMode,
@@ -243,7 +246,21 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 			[In] IntPtr lpData,
 			[In] MoveFileFlags dwFlags,
 			[In] KtmTransactionHandle hTransaction);
+		#endregion
+		#region nontransactional operations
+		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+		public static extern bool DeleteFile(string path);
 
+		[DllImport("kernel32.dll", SetLastError = true)]
+		public static extern int GetFileSize(SafeFileHandle hFile, out int highSize);
+
+		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+		internal static extern SafeFileHandle FindFirstFile(string fileName, [In, Out] WIN32_FIND_DATA data);
+
+		[DllImport("kernel32.dll")]
+		internal static extern int GetFileType(SafeFileHandle handle);
+
+		#endregion
 		[DllImport(KERNEL32, EntryPoint = "DeviceIoControl", CharSet = CharSet.Unicode, SetLastError = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
 		internal static extern bool DeviceIoControl(

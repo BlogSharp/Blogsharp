@@ -47,14 +47,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Db4objects.Db4o, Version=7.2.54.11278, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\Db4objects.Db4o.dll</HintPath>
-    </Reference>
-    <Reference Include="Db4objects.Db4o.Linq, Version=7.2.54.11278, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\Db4objects.Db4o.Linq.dll</HintPath>
-    </Reference>
     <Reference Include="NVelocity, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\NVelocity.dll</HintPath>
@@ -67,6 +59,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -90,6 +83,7 @@
     <Compile Include="Services\FileSystem\DirectoryTests.cs" />
     <Compile Include="Services\FileSystem\FileServiceTests.cs" />
     <Compile Include="Services\FileSystem\FileTests.cs" />
+    <Compile Include="Services\FileSystem\TransactionalFileServiceTests.cs" />
     <Compile Include="Services\Membership\MembershipServiceTests.cs" />
     <Compile Include="Services\Post\PostServiceTests.cs" />
     <Compile Include="Services\Template\TemplateEngineRegistryTests.cs" />

@@ -171,7 +171,6 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			Assert.Equal(10, foundPosts.Count);
 
 			foundPosts = postRepository.GetByTag(1, 2, 1, 10);
-			Assert.NotEmpty(foundPosts);
 			Assert.Equal(9, foundPosts.Count);
 
 			foundPosts = postRepository.GetByTag(1, 1, 15, 10);

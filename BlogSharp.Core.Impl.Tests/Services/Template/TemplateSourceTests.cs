@@ -35,10 +35,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Template
 			fileStream.Position = 0;
 
 			string fileName = "blah";
-			IFile fileMock = MockRepository.GenerateMock<IFile>();
-			fileMock.Expect(x => x.OpenRead()).Return(fileStream);
-			fileService.Expect(x => x.GetFile(fileName)).Return(fileMock);
-			
+			fileService.Expect(x => x.OpenFileForRead(fileName)).Return(fileStream);
 			ITemplate template = this.templateSource.GetTemplateFromFile("blah");
 			templateEngineRegistry.AssertWasCalled(x=>x.GetTemplateEngine("spark"));
 			Assert.Equal("yet another team",template.GetContent());
@@ -65,9 +62,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Template
 			fileStream.Position = 0;
 
 			string fileName = "blah";
-			IFile fileMock = MockRepository.GenerateMock<IFile>();
-			fileMock.Expect(x => x.OpenRead()).Return(fileStream);
-			fileService.Expect(x => x.GetFile(fileName)).Return(fileMock);
+			fileService.Expect(x => x.OpenFileForRead(fileName)).Return(fileStream);
 
 
 			this.templateSource.RegisterTemplateWithFile("mail", "blah");
