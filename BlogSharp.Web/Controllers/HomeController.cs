@@ -11,17 +11,15 @@ namespace BlogSharp.Web.Controllers
 	[HandleError]
 	public class HomeController : Controller
 	{
-		public HomeController(IPostService postService)
+		public HomeController()
 		{
-			this.postService = postService;
+			
 		}
 
-		private readonly IPostService postService;
 		public ActionResult Index()
 		{
 			ViewData["Title"] = "Home Page";
 			ViewData["Message"] = "Welcome to ASP.NET MVC!";
-			var post=postService.GetPostById(1);
 			return View();
 		}
 

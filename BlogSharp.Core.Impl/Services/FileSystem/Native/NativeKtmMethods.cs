@@ -35,6 +35,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 		public static KtmTransactionHandle CreateKtmTransactionHandle(Transaction managedTransaction)
 		{
 			IDtcTransaction dtcTransaction = TransactionInterop.GetDtcTransaction(managedTransaction);
+			
 			IKernelTransaction ktmInterface = (IKernelTransaction)dtcTransaction;
 
 			IntPtr ktmTxHandle;

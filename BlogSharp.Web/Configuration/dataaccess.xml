@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <castle>
 	<facilities>
-		<facility id="db4oFacility" type="BlogSharp.Db4o.Db4oFacility, BlogSharp.Db4o">
+		<facility id="db4oFacility" store="BlogSharp.Db4o.WebObjectContainerStore, BlogSharp.Db4o" type="BlogSharp.Db4o.Db4oFacility, BlogSharp.Db4o">
 			<objectContainer id="defaultContainer" Mode="EmbeddedServer" path="c:\mydb.yap"/>
 		</facility>
 	</facilities>

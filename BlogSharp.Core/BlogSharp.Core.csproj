@@ -74,7 +74,6 @@
   <ItemGroup>
     <Compile Include="Persistence\Repositories\IBlogRepository.cs" />
     <Compile Include="Persistence\Repositories\IPostRepository.cs" />
-    <Compile Include="Persistence\Repositories\IRepository.cs" />
     <Compile Include="Persistence\Repositories\IUserRepository.cs" />
     <Compile Include="DI.cs" />
     <Compile Include="EntityFactory.cs" />

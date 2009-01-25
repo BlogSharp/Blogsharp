@@ -42,6 +42,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="MvcContrib, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\MvcContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib.FluentHtml, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\MvcContrib.FluentHtml.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
@@ -112,20 +120,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Home\About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Home\About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Home\Index.aspx.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Home\Index.aspx.designer.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Shared\Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
