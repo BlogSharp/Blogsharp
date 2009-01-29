@@ -5,15 +5,15 @@ namespace BlogSharp.Core.Event.PostEvents
 {
 	public class PostAddingEventArgs : AbstractEventArgs<IPostService>, ICancellableEvent
 	{
-		private readonly IPost post;
+		private readonly Post post;
 
-		public PostAddingEventArgs(IPostService postService,IPost post)
+		public PostAddingEventArgs(IPostService postService,Post post)
 			:base(postService)
 		{
 			this.post = post;
 		}
 
-		public IPost Post
+		public Post Post
 		{
 			get { return post; }
 		}

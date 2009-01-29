@@ -9,6 +9,7 @@ using BlogSharp.Db4o.Tests;
 using BlogSharp.Model;
 using Db4objects.Db4o;
 using Xunit;
+using User=BlogSharp.Model.User;
 
 namespace BlogSharp.Db4o.Tests.Repositories
 {
@@ -24,7 +25,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_store_an_user()
 		{
-			var user = GetEntityFactory<IUser>().Create();
+			var user = new User();
 			userRepository.SaveUser(user);
 			var id = objectContainer.GetID(user);
 			Assert.True(id>0);
@@ -33,7 +34,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_delete_an_user()
 		{
-			var user = GetEntityFactory<IUser>().Create();
+			var user = new User();
 			user.Id = 1;
 			userRepository.SaveUser(user);
 			userRepository.RemoveUser(user);
@@ -44,7 +45,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_get_by_username()
 		{
-			var user = GetEntityFactory<IUser>().Create();
+			var user = new User();
 			user.Id = 1;
 			user.Username = "TestUser";
 			objectContainer.Store(user);
@@ -58,7 +59,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_get_by_email()
 		{
-			var user = GetEntityFactory<IUser>().Create();
+			var user = new User();
 			user.Id = 1;
 			user.Email = "TestUserEmail";
 			userRepository.SaveUser(user);

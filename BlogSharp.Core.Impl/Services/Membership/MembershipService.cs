@@ -26,12 +26,9 @@ namespace BlogSharp.Core.Impl.Services.Membership
 		private readonly IUserRepository userRepository;
 		private readonly IEncryptionService encryptionService;
 
-		public IUser CreateNewUser(string username, string password, string email)
+		public User CreateNewUser(string username, string password, string email)
 		{
-			var author = EntityFactory<IUser>.Instance.Create();
-			author.Username = username;
-			author.Password = password;
-			author.Email = email;
+			var author = new User {Username = username, Password = password, Email = email};
 			userRepository.SaveUser(author);
 			var userRegistered = new UserRegisteredEventArgs(this,author);
 			this.UserRegistered.Raise(userRegistered);
@@ -44,12 +41,12 @@ namespace BlogSharp.Core.Impl.Services.Membership
 			DeleteUser(user);
 		}
 
-		public void DeleteUser(IUser user)
+		public void DeleteUser(User user)
 		{
 			this.userRepository.RemoveUser(user);
 		}
 
-		public IUser GetAuthorInfoByName(string author)
+		public User GetAuthorInfoByName(string author)
 		{
 			var aut = this.userRepository.GetAuthorByUsername(author);
 			return aut;

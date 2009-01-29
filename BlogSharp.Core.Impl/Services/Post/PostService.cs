@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
 using BlogSharp.Core.Event.PostEvents;
@@ -18,7 +19,7 @@ namespace BlogSharp.Core.Impl.Services.Post
 		private readonly IPostRepository postRepository;
 		#region IPostService Members
 
-		public void AddPost(IPost post)
+		public void AddPost(Model.Post post)
 		{
 			var postAdding = new PostAddingEventArgs(this,post);
 			this.PostAdding.Raise(postAdding);
@@ -29,7 +30,7 @@ namespace BlogSharp.Core.Impl.Services.Post
 			this.PostAdded.Raise(postAdded);
 		}
 
-		public void AddComment(IPostComment comment)
+		public void AddComment(PostComment comment)
 		{
 			var commentAdding = new CommentAddingEventArgs(this,comment);
 			this.CommentAdding.Raise(commentAdding);
@@ -40,12 +41,12 @@ namespace BlogSharp.Core.Impl.Services.Post
 			this.CommentAdded.Raise(commentAdded);
 		}
 
-		public void RemoveComment(IPostComment comment)
+		public void RemoveComment(PostComment comment)
 		{
 			postRepository.DeleteComment(comment);
 		}
 
-		public void RemovePost(IPost post)
+		public void RemovePost(Model.Post post)
 		{
 			var postRemoving = new PostRemovingEventArgs(this,post);
 			this.PostRemoving.Raise(postRemoving);
@@ -56,16 +57,20 @@ namespace BlogSharp.Core.Impl.Services.Post
 			this.PostRemoved.Raise(postRemoved);
 		}
 
-		public IPost GetPostById(int id)
+		public Model.Post GetPostById(int id)
 		{
 			return postRepository.GetPostById(id);
 		}
 
-		public IPost GetPostByFriendlyTitle(string friendlyTitle)
+		public Model.Post GetPostByFriendlyTitle(string friendlyTitle)
 		{
 			return postRepository.GetByTitle(friendlyTitle);
 		}
 
+		public IList<Model.Post> GetPostsByBlog(Blog blog)
+		{
+			return postRepository.GetByBlog(blog.Id, 0, 10);
+		}
 		#endregion
 
 		#region IPostService Members
@@ -77,6 +82,17 @@ namespace BlogSharp.Core.Impl.Services.Post
 		public event EventHandler<PostRemovedEventArgs> PostRemoved = delegate { };
 		public event EventHandler<CommentAddingEventArgs> CommentAdding = delegate { };
 		public event EventHandler<CommentAddedEventArgs> CommentAdded = delegate { };
+		#endregion
+
+
+		#region IPostService Members
+
+
+		public IList<Model.Post> GetPostsByBlogPaged(Blog blog, int skip, int take)
+		{
+			return postRepository.GetByBlog(blog.Id, skip, take);
+		}
+
 		#endregion
 	}
 }

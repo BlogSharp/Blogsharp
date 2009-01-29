@@ -16,29 +16,28 @@ namespace BlogSharp.Db4o.Repositories
 
         #region Implementation of IBlogRepository
 
-        /// <summary>
-        /// Get the Blog of the Founder User
-        /// </summary>
-        /// <param name="authorId"></param>
-        /// <returns></returns>
-        public IBlog GeyByFounder(int authorId)
-        {
-        	return container.GetContainer().Query<IBlog>(x => x.Founder.Id == authorId).FirstOrDefault();
-        }
 
-        public IList<IBlog> GetAllBlogs()
-        {
-			return container.GetContainer().Query<IBlog>();
-        }
 
-		public void SaveBlog(IBlog blog)
+		public void SaveBlog(Blog blog)
 		{
 			SaveObject(blog);
+			container.GetContainer().Commit();
 		}
 
-		public void DeleteBlog(IBlog blog)
+		public void DeleteBlog(Blog blog)
 		{
 			RemoveObject(blog);
+		}
+
+		#endregion
+
+		#region IBlogRepository Members
+
+		public Blog GetBlog()
+		{
+			return this.container.GetContainer()
+									.Query<Model.Blog>()
+									.SingleOrDefault();
 		}
 
 		#endregion

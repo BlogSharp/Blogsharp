@@ -27,8 +27,7 @@ namespace BlogSharp.MvcExtensions.Handlers
 			var controller = factory.CreateController(RequestContext, (Type)RequestContext.RouteData.Values["controller"]);
 			try
 			{
-				ControllerContext controllerContext = new ControllerContext(RequestContext, (ControllerBase)controller);
-				controller.Execute(controllerContext);
+				controller.Execute(RequestContext);
 			}
 			finally
 			{

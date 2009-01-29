@@ -27,7 +27,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		[Fact]
 		public void AddPost_calls_underlying_repository_to_save()
 		{
-			var post = GetEntityFactory<IPost>().Create();
+			var post = new Model.Post();
 			postService.AddPost(post);
 			postRepository.AssertWasCalled(x=>x.SavePost(post));
 		}
@@ -35,7 +35,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		[Fact]
 		public void AddComment_calls_underlying_repository()
 		{
-			var postComment = GetEntityFactory<IPostComment>().Create();
+			var postComment = new PostComment();
 			postService.AddComment(postComment);
 			postRepository.AssertWasCalled(x => x.SaveComment(postComment));
 
@@ -44,7 +44,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		[Fact]
 		public void RemovePost_calls_underlyting_repository_to_delete()
 		{
-			var post = GetEntityFactory<IPost>().Create();
+			var post = new Model.Post();
 			postService.RemovePost(post);
 			postRepository.AssertWasCalled(x => x.DeletePost(post));
 		}
@@ -52,7 +52,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		[Fact]
 		public void RemoveComment_calls_underlyting_repository_to_delete()
 		{
-			var comment = GetEntityFactory<IPostComment>().Create();
+			var comment = new PostComment();
 			postService.RemoveComment(comment);
 			postRepository.AssertWasCalled(x => x.DeleteComment(comment));
 
@@ -61,8 +61,8 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		[Fact]
 		public void Events_raised_for_comment_and_post_actions()
 		{
-			var post = MockRepository.GenerateStub<IPost>();
-			var postComment = MockRepository.GenerateStub<IPostComment>();
+			var post = MockRepository.GenerateStub<Model.Post>();
+			var postComment = MockRepository.GenerateStub<PostComment>();
 			bool p1 = false, p2 = false, p3 = false, p4 = false;
 			bool c1 = false, c2 = false;
 			postService.CommentAdded += delegate(CommentAddedEventArgs eventArgs)
@@ -113,8 +113,8 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		[Fact]
 		public void Repository_is_not_called_if_event_is_cancelled()
 		{
-			var post = MockRepository.GenerateStub<IPost>();
-			var postComment = MockRepository.GenerateStub<IPostComment>();
+			var post = MockRepository.GenerateStub<Model.Post>();
+			var postComment = MockRepository.GenerateStub<PostComment>();
 
 			postService.CommentAdded += delegate
 			                            	{

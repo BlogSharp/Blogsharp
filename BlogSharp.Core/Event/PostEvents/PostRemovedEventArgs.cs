@@ -9,12 +9,12 @@ namespace BlogSharp.Core.Event.PostEvents
 {
 	public class PostRemovedEventArgs:AbstractEventArgs<IPostService>
 	{
-		public PostRemovedEventArgs(IPostService postService,IPost post)
+		public PostRemovedEventArgs(IPostService postService,Post post)
 			:base(postService)
 		{
 			this.Post = post;
 		}
 
-		public IPost Post { get; private set; }
+		public Post Post { get; private set; }
 	}
 }

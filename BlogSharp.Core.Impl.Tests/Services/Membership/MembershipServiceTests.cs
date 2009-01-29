@@ -10,7 +10,6 @@ using BlogSharp.Core.Services.Encryption;
 using BlogSharp.Core.Services.Mail;
 using BlogSharp.Core.Services.Membership;
 using BlogSharp.Model;
-using BlogSharp.Model.Impl;
 using Castle.Windsor;
 using Rhino.Mocks;
 using Xunit;
@@ -24,9 +23,6 @@ namespace BlogSharp.Core.Impl.Tests.Services.Membership
 			this.userRepository = MockRepository.GenerateMock<IUserRepository>();
 			this.membershipService = new MembershipService(userRepository,MockRepository.GenerateMock<IEncryptionService>());
 			var container = MockRepository.GenerateMock<IWindsorContainer>();
-			var entityFactory= MockRepository.GenerateMock<IEntityFactory<IUser>>();
-			entityFactory.Expect(x => x.Create()).Return(new Author()).Repeat.Any();
-			container.Expect(x => x.Resolve<IEntityFactory<IUser>>()).Return(entityFactory).Repeat.Any();
 			DI.SetContainer(container);
 		}
 
@@ -40,7 +36,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Membership
 			membershipService.CreateNewUser("username", "password", "email");
 			this.userRepository.AssertWasCalled(
 				x =>
-				x.SaveUser(Arg<IUser>.Matches(a => a.Username == "username" &&
+				x.SaveUser(Arg<User>.Matches(a => a.Username == "username" &&
 				                                     a.Password == "password" &&
 				                                     a.Email == "email")));
 		}
@@ -48,7 +44,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Membership
 		[Fact]
 		public void Can_reset_password()
 		{
-			var author = new Author {Email = "blah@email.com",Password = "1234"};
+			var author = new User {Email = "blah@email.com",Password = "1234"};
 			userRepository.Expect(x => x.GetAuthorByEmail("blah@email.com"))
 				.Return(author);
 			membershipService.ResetPassword("blah@email.com");

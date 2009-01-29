@@ -15,29 +15,29 @@ namespace BlogSharp.Db4o.Repositories
 
         #region Implementation of IUserRepository
 
-        public IUser GetAuthorByUsername(string username)
+		public Model.User GetAuthorByUsername(string username)
         {
-            return container.GetContainer().Query<IUser>(x => x.Username == username).SingleOrDefault();
+			return container.GetContainer().Query<Model.User>(x => x.Username == username).SingleOrDefault();
         }
 
-        public IUser GetAuthorByEmail(string email)
+		public Model.User GetAuthorByEmail(string email)
         {
-			return container.GetContainer().Query<IUser>(x => x.Email == email).SingleOrDefault();
+			return container.GetContainer().Query<Model.User>(x => x.Email == email).SingleOrDefault();
         }
 
-        public void SaveUser(IUser user)
+		public void SaveUser(Model.User user)
         {
             SaveObject(user);
         }
 
-        public void RemoveUser(IUser user)
+		public void RemoveUser(Model.User user)
         {
             RemoveObject(user);
         }
 
-    	public IUser GetById(int id)
+		public Model.User GetById(int id)
     	{
-			return container.GetContainer().Query<IUser>(x => x.Id == id).SingleOrDefault();
+			return container.GetContainer().Query<Model.User>(x => x.Id == id).SingleOrDefault();
     	}
 
     	#endregion

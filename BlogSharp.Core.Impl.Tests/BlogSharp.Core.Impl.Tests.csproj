@@ -76,9 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="EntityFactoryTests.cs" />
     <Compile Include="EventHandlers\Membership\PasswordResettedEventListenerTests.cs" />
     <Compile Include="EventHandlers\Membership\UserRegisteredEventListenerTests.cs" />
+    <Compile Include="Installers\DefaultStartupInstallerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FileSystem\DirectoryTests.cs" />
     <Compile Include="Services\FileSystem\FileServiceTests.cs" />
@@ -99,10 +99,6 @@
     <ProjectReference Include="..\BlogSharp.Core\BlogSharp.Core.csproj">
       <Project>{ABDABEBC-B92A-4F36-AC07-6874B4932C21}</Project>
       <Name>BlogSharp.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BlogSharp.Model.Impl\BlogSharp.Model.Impl.csproj">
-      <Project>{388E212A-2592-4F2B-9BA2-8789F082732C}</Project>
-      <Name>BlogSharp.Model.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\BlogSharp.Model\BlogSharp.Model.csproj">
       <Project>{ACD93612-B2E7-4D51-9127-C306EF1F386C}</Project>

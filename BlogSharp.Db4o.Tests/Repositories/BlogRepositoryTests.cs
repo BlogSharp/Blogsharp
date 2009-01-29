@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using BlogSharp.Core.Persistence.Repositories;
 using BlogSharp.Db4o.Repositories;
+using BlogSharp.Model;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Ext;
 using Rhino.Mocks;
@@ -26,7 +27,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_store_a_blog()
 		{
-			Model.IBlog blog = this.GetEntityFactory<Model.IBlog>().Create();
+			Model.Blog blog = new Blog();
 			blogRepository.SaveBlog(blog);
 			long id = this.objectContainer.GetID(blog);
 			Assert.True(id > 0);
@@ -36,7 +37,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_delete_the_entity()
 		{
-			Model.IBlog blog = this.GetEntityFactory<Model.IBlog>().Create();
+			Model.Blog blog = new Blog();
 			blogRepository.DeleteBlog(blog);
 			long id = this.objectContainer.GetID(blog);
 			Assert.True(id ==0 );

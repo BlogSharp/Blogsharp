@@ -7,9 +7,12 @@ using BlogSharp.Core.Event;
 using BlogSharp.Core.Event.MembershipEvents;
 using BlogSharp.Core.Impl.Services.Mail;
 using BlogSharp.Core.Impl.Services.Post;
+using BlogSharp.Core.Impl.Structure;
 using BlogSharp.Core.Services.Mail;
 using BlogSharp.Core.Services.Membership;
 using BlogSharp.Core.Services.Post;
+using BlogSharp.Core.Structure;
+using BlogSharp.Model;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 
@@ -21,8 +24,11 @@ namespace BlogSharp.Core.Impl.Installers
 
 		public void Install(IWindsorContainer container, Castle.MicroKernel.IConfigurationStore store)
 		{
+
 			container.Register(Component.For<IPostService>().ImplementedBy<PostService>());
 			container.Register(Component.For<IMailService>().ImplementedBy<MailService>());
+			container.Register(Component.For<IFriendlyUrlGenerator>().ImplementedBy<FriendlyUrlGenerator>());
+			DI.SetContainer(container);
 		}
 
 		#endregion

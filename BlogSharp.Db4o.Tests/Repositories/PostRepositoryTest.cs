@@ -18,17 +18,12 @@ namespace BlogSharp.Db4o.Tests.Repositories
 
 			postRepository = new PostRepository(this.objectContainerManager);
 
-			var blog = GetEntityFactory<IBlog>().Create();
+			var blog = new Blog();
 			blog.Id = 1;
-			var author = GetEntityFactory<IUser>().Create();
-			author.Id = 1;
-			var tag1 = GetEntityFactory<ITag>().Create();
-			tag1.Id = 1;
-			tag1.Name = "mytag";
+			var author = new BlogSharp.Model.User {Id = 1};
+			var tag1 = new Tag {Id = 1, Name = "mytag"};
 
-			var tag2 = GetEntityFactory<ITag>().Create();
-			tag2.Id = 2;
-			tag2.Name = "mytag2";
+			var tag2 = new Tag {Id = 2, Name = "mytag2"};
 			var tags = new[] { tag1, tag2 };
 			objectContainer.Store(author);
 			objectContainer.Store(blog);
@@ -36,17 +31,17 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			objectContainer.Store(tag2);
 			for (int i = 0; i < 20; i++)
 			{
-				var post = GetEntityFactory<IPost>().Create();
+				var post = new Post();
 				post.User = author;
 				post.Blog = blog;
 				post.Id = i;
 				post.DatePublished = new DateTime(2009, 11, 11).AddMinutes(i);
 				post.Title = string.Format("Test Post - {0}", i);
-				post.Comments = new List<IPostComment>();
+				post.Comments = new List<PostComment>();
 				post.Tags.Add(tags[i % tags.Length]);
 				tags[i%tags.Length].Posts.Add(post);
-				var comment1 = GetEntityFactory<IPostComment>().Create();
-				var comment2 = GetEntityFactory<IPostComment>().Create();
+				var comment1 = new PostComment();
+				var comment2 = new PostComment();
 				comment1.Comment = "naber";
 				comment2.Comment = "iyidir";
 				comment1.Post = post;
@@ -64,7 +59,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_store_an_post()
 		{
-			var post = GetEntityFactory<IPost>().Create();
+			var post = new Post();
 			postRepository.SavePost(post);
 		}
 
@@ -80,8 +75,8 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_store_an_comment()
 		{
-			var post = GetEntityFactory<IPost>().Create();
-			var comment = GetEntityFactory<IPostComment>().Create();
+			var post = new Post();
+			var comment = new PostComment();
 			comment.Post = post;
 			postRepository.SaveComment(comment);
 		}
@@ -110,7 +105,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_get_by_post_title()
 		{
-			var post = GetEntityFactory<IPost>().Create();
+			var post = new Post();
 			post.Id = 1;
 			post.Title = "Test Post";
 			post.FriendlyTitle = "test-post";

@@ -120,10 +120,6 @@
       <Project>{CDEB5615-0DC9-4C81-A1B0-4E1A488A91BB}</Project>
       <Name>BlogSharp.Db4o</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlogSharp.Model.Impl\BlogSharp.Model.Impl.csproj">
-      <Project>{388E212A-2592-4F2B-9BA2-8789F082732C}</Project>
-      <Name>BlogSharp.Model.Impl</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BlogSharp.Model\BlogSharp.Model.csproj">
       <Project>{ACD93612-B2E7-4D51-9127-C306EF1F386C}</Project>
       <Name>BlogSharp.Model</Name>

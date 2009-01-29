@@ -69,8 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionResults\RedirectToRefererResult.cs" />
-    <Compile Include="Areas\AreaRouteHelper.cs" />
-    <Compile Include="Areas\AreaViewEngine.cs" />
     <Compile Include="ControllerFactories\WindsorControllerFactory.cs" />
     <Compile Include="Filters\AntiGoogleWebAcceleratorFilter.cs" />
     <Compile Include="Filters\CompressionFilter.cs" />

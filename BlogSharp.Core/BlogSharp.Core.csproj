@@ -62,6 +62,7 @@
       <HintPath>..\SharedLibs\System.Web.Routing.dll</HintPath>
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -72,11 +73,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Persistence\IDataInitializer.cs" />
     <Compile Include="Persistence\Repositories\IBlogRepository.cs" />
     <Compile Include="Persistence\Repositories\IPostRepository.cs" />
     <Compile Include="Persistence\Repositories\IUserRepository.cs" />
     <Compile Include="DI.cs" />
-    <Compile Include="EntityFactory.cs" />
     <Compile Include="EventHandler.cs" />
     <Compile Include="Event\AbstractEventArgs.cs" />
     <Compile Include="Event\ApplicationEvents\ApplicationStartedEvent.cs" />
@@ -99,7 +100,6 @@
     <Compile Include="Event\PostEvents\PostRemovedEventArgs.cs" />
     <Compile Include="Event\PostEvents\PostRemovingEventArgs.cs" />
     <Compile Include="IApplication.cs" />
-    <Compile Include="IEntityFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Compression\IArchiveFile.cs" />
     <Compile Include="Services\Compression\IArchiveItem.cs" />
@@ -129,6 +129,11 @@
     <Compile Include="Services\Template\ITemplateEngineRegistry.cs" />
     <Compile Include="Services\Template\ITemplateSource.cs" />
     <Compile Include="Structure\IFriendlyUrlGenerator.cs" />
+    <Compile Include="Web\BlogContext.cs" />
+    <Compile Include="Web\HttpApplicationEventWrapper.cs" />
+    <Compile Include="Web\Modules\BlogContextModule.cs" />
+    <Compile Include="Web\Modules\BlogInitializedModule.cs" />
+    <Compile Include="Web\Modules\IBlogSharpHttpModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlogSharp.Model\BlogSharp.Model.csproj">

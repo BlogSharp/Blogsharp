@@ -31,7 +31,7 @@ namespace BlogSharp.Core.Impl.EventHandlers.Membership
 		//TODO: Localization is necessary
 		public void Handle(UserRegisteredEventArgs eventArgs)
 		{
-			IUser user = eventArgs.User;
+			User user = eventArgs.User;
 			ITemplate template = templateSource.GetTemplateWithKey("membership_welcome");
 			var context = new Dictionary<string,object>();
 			context["user"] = user;

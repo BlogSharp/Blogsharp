@@ -30,6 +30,8 @@ namespace BlogSharp.CastleExtensions.DependencyResolvers
 							   ComponentModel model,
 							   DependencyModel dependency)
 		{
+			if (dependency.IsOptional)
+				return false;
 			bool result = dependency.TargetType != null &&
 						  dependency.TargetType.GetGenericArguments().Length != 0 &&
 						  typeof(IList<>).MakeGenericType(dependency.TargetType.GetGenericArguments()[0]).IsAssignableFrom(

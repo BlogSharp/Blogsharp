@@ -10,12 +10,12 @@ namespace BlogSharp.Core.Event.MembershipEvents
 {
 	public class UserRegisteredEventArgs : AbstractEventArgs<IMembershipService>
 	{
-		public UserRegisteredEventArgs(IMembershipService service,IUser user)
+		public UserRegisteredEventArgs(IMembershipService service,User user)
 			:base(service)
 		{
 			this.User = user;
 		}
 
-		public IUser User { get; private set; }
+		public User User { get; private set; }
 	}
 }

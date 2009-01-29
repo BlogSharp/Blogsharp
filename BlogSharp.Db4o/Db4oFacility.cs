@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -107,6 +108,7 @@ namespace BlogSharp.Db4o
 				case Db4oMode.EmbeddedServer:
 					{ 
 						string path = config.Attributes["path"];
+						path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
 						string serverName = string.Format("db4oserver_{0}", alias);
 						var objectServer = Db4oFactory.OpenServer(path, 0).Ext();
 						disposeAction += () => objectServer.Ext().Close();

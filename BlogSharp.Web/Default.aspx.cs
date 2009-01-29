@@ -1,6 +1,7 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using Castle.Windsor;
 
 namespace BlogSharp.Web
 {
@@ -8,7 +9,7 @@ namespace BlogSharp.Web
 	{
 		public void Page_Load(object sender, System.EventArgs e)
 		{
-			HttpContext.Current.RewritePath(Request.ApplicationPath);
+			HttpContext.Current.RewritePath(Request.ApplicationPath, false);
 			IHttpHandler httpHandler = new MvcHttpHandler();
 			httpHandler.ProcessRequest(HttpContext.Current);
 		}

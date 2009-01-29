@@ -9,13 +9,13 @@ namespace BlogSharp.Core.Event.PostEvents
 {
 	public class PostRemovingEventArgs:AbstractEventArgs<IPostService>,ICancellableEvent
 	{
-		public PostRemovingEventArgs(IPostService postService,IPost post)
+		public PostRemovingEventArgs(IPostService postService,Post post)
 			:base(postService)
 		{
 		    this.Post = post;	
 		}
 
-		public IPost Post { get; private set; }
+		public Post Post { get; private set; }
 
 		#region ICancellableEvent Members
 

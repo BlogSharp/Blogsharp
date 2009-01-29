@@ -10,7 +10,8 @@ namespace BlogSharp.Db4o
 {
 	public class Db4oHttpModule
 	{
-		public Db4oHttpModule(HttpApplication application,IDictionary<string,IObjectContainerProvider> providers)
+		public Db4oHttpModule(HttpApplication application,
+			IDictionary<string,IObjectContainerProvider> providers)
 		{
 			this.providers = providers;
 			this.application = application;

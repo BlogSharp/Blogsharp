@@ -9,14 +9,14 @@ namespace BlogSharp.Core.Event.MembershipEvents
 {
 	public class PasswordResettedEventArgs:AbstractEventArgs<IMembershipService>
 	{
-		public PasswordResettedEventArgs(IMembershipService service,IUser user, string newPassword)
+		public PasswordResettedEventArgs(IMembershipService service,User user, string newPassword)
 			:base(service)
 		{
 			this.User = user;
 			this.NewPassword = newPassword;
 		}
 
-		public IUser User { get; private set; }
+		public User User { get; private set; }
         public string NewPassword { get; private set; }
 	}
 }

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<castle>
+	<components>
+		<component id="transaction" 
+							 service="Castle.Services.Transaction.ITransactionManager, Castle.Services.Transaction" 
+							 type="Castle.Services.Transaction.DefaultTransactionManager, Castle.Services.Transaction"/>
+	</components>
+</castle>

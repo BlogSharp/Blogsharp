@@ -6,12 +6,12 @@ namespace BlogSharp.Core.Event.MembershipEvents
 {
 	public class UserValidatedEventArgs : AbstractEventArgs<IMembershipService>
 	{
-		public UserValidatedEventArgs(IMembershipService membershipService,IUser user)
+		public UserValidatedEventArgs(IMembershipService membershipService,User user)
 			: base(membershipService)
 		{
             this.User = user;
 		}
 
-	    public IUser User { get; set; }
+	    public User User { get; set; }
 	}
 }
