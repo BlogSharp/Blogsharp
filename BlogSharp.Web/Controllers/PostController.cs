@@ -19,6 +19,12 @@ namespace BlogSharp.Web.Controllers
 		}
 
 		private readonly IPostService postService;
+
+		public ActionResult Index()
+		{
+			var posts = postService.GetPostsByBlog(BlogContext.Current.Blog);
+			return View("List", posts);
+		}
 		public ActionResult List(int page)
 		{
 			var posts = postService.GetPostsByBlog(BlogContext.Current.Blog);
