@@ -77,7 +77,6 @@
     <Compile Include="Persistence\Repositories\IBlogRepository.cs" />
     <Compile Include="Persistence\Repositories\IPostRepository.cs" />
     <Compile Include="Persistence\Repositories\IUserRepository.cs" />
-    <Compile Include="DI.cs" />
     <Compile Include="EventHandler.cs" />
     <Compile Include="Event\AbstractEventArgs.cs" />
     <Compile Include="Event\ApplicationEvents\ApplicationStartedEvent.cs" />

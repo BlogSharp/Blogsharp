@@ -107,6 +107,10 @@
     <Compile Include="Structure\FriendlyUrlGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BlogSharp.CastleExtensions\BlogSharp.CastleExtensions.csproj">
+      <Project>{3310EA27-977F-4ED8-81F8-9484AC8EB757}</Project>
+      <Name>BlogSharp.CastleExtensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlogSharp.Core\BlogSharp.Core.csproj">
       <Project>{ABDABEBC-B92A-4F36-AC07-6874B4932C21}</Project>
       <Name>BlogSharp.Core</Name>
@@ -114,6 +118,10 @@
     <ProjectReference Include="..\BlogSharp.Model\BlogSharp.Model.csproj">
       <Project>{ACD93612-B2E7-4D51-9127-C306EF1F386C}</Project>
       <Name>BlogSharp.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlogSharp.MvcExtensions\BlogSharp.MvcExtensions.csproj">
+      <Project>{2925BBF2-86E3-4231-B0C9-AF4E4D02317E}</Project>
+      <Name>BlogSharp.MvcExtensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,6 @@ namespace BlogSharp.Core.Impl.Tests
 		public BaseTest()
 		{
 			this.container = new WindsorContainer();
-			DI.SetContainer(this.container);
 		}
 		private readonly IWindsorContainer container;
 

@@ -26,7 +26,6 @@ namespace BlogSharp.Db4o.Tests
 		{
 			File.Delete(DB4O_FILE_NAME);
 			this.container = new WindsorContainer();
-			DI.SetContainer(this.container);
 			IConfiguration configuration = Db4oFactory.NewConfiguration();
 			this.objectContainer = Db4oFactory.OpenFile(configuration, DB4O_FILE_NAME).Ext();
 			this.objectContainerManager = new TestObjectContainerManager(this.objectContainer);

@@ -23,7 +23,6 @@ namespace BlogSharp.Core.Impl.Tests.Services.Membership
 			this.userRepository = MockRepository.GenerateMock<IUserRepository>();
 			this.membershipService = new MembershipService(userRepository,MockRepository.GenerateMock<IEncryptionService>());
 			var container = MockRepository.GenerateMock<IWindsorContainer>();
-			DI.SetContainer(container);
 		}
 
 		private readonly IUserRepository userRepository;

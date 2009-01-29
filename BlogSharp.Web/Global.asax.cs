@@ -67,20 +67,8 @@ namespace BlogSharp.Web
 			container = new WindsorContainer("Configuration/castle.xml");
 			container.Kernel.Resolver.AddSubResolver(new ListResolver(container.Kernel));
 			container
-				.AddFacility<ControllerRegisterFacility>()
-				.Register(Component.For<HttpApplicationEventWrapper>(),
-				          AllTypes.Of<IBlogSharpHttpModule>()
-				          	.FromAssemblyNamed("BlogSharp.Core").WithService.FirstInterface())
-				.Register(AllTypes.Of<IController>()
-				          	.FromAssemblyNamed("BlogSharp.Web"))
-				.Register(Component.For<IExtendedControllerFactory>()
-				          	.ImplementedBy<WindsorControllerFactory>())
-				.Register(AllTypes.Of<IStartupInstaller>()
-							.FromAssemblyNamed("BlogSharp.Core.Impl")
-							.WithService.FirstInterface())
 				.Install(new DefaultComponentInstallers());
 			ControllerBuilder.Current.SetControllerFactory(container.Resolve<IExtendedControllerFactory>());
-
 			var installer = container.Resolve<IStartupInstaller>();
 			installer.Execute();
 		}
