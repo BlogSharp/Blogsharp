@@ -7,8 +7,8 @@ namespace BlogSharp.Core.Event.PostEvents
 	{
 		private readonly Post post;
 
-		public PostAddingEventArgs(IPostService postService,Post post)
-			:base(postService)
+		public PostAddingEventArgs(IPostService postService, Post post)
+			: base(postService)
 		{
 			this.post = post;
 		}

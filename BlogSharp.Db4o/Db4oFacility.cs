@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Web;
 using BlogSharp.Db4o.Impl;
 using Castle.Core.Configuration;
-using Castle.MicroKernel;
 using Castle.MicroKernel.Facilities;
 using Castle.MicroKernel.Registration;
 using Db4objects.Db4o;
@@ -21,9 +17,10 @@ namespace BlogSharp.Db4o
 		protected override void Init()
 		{
 			Kernel.Register(Component.For<IObjectContainerWrapper>()
-			                	.ImplementedBy<CastleObjectContainerWrapper>());
-			Kernel.Register(Component.For<IObjectServerConfigurationBuilder>()
-			                	.ImplementedBy<DefaultConfigurationBuilder>());
+			                	.ImplementedBy<CastleObjectContainerWrapper>())
+				.Register(Component.For<IObjectServerConfigurationBuilder>()
+				          	.ImplementedBy<DefaultConfigurationBuilder>())
+				.Register(Component.For<IHttpModule>().ImplementedBy<Db4oHttpModule>());
 			ConfigureFacility();
 		}
 
@@ -32,6 +29,7 @@ namespace BlogSharp.Db4o
 			if (string.IsNullOrEmpty(configVal))
 				throw new ArgumentNullException(paramName, message);
 		}
+
 		protected virtual void ConfigureFacility()
 		{
 			bool firstFactory = true;
@@ -50,6 +48,7 @@ namespace BlogSharp.Db4o
 				firstFactory = false;
 			}
 		}
+
 		protected virtual void ConfigureObjectServers(IConfiguration config, bool firstServer)
 		{
 			var providerProvider = Kernel.Resolve<IObjectContainerProviderProvider>();
@@ -65,30 +64,33 @@ namespace BlogSharp.Db4o
 			if (!string.IsNullOrEmpty(configBuilder))
 			{
 				Type t = Type.GetType(configBuilder);
-				this.Kernel.Register(Component.For(typeof(IObjectServerConfigurationBuilder)).ImplementedBy(t).Named(string.Format("{0}.configBuilder", id)));
-				configurationBuilder = this.Kernel.Resolve<IObjectServerConfigurationBuilder>(string.Format("{0}.configBuilder", id));
+				Kernel.Register(
+					Component.For(typeof (IObjectServerConfigurationBuilder)).ImplementedBy(t).Named(string.Format(
+					                                                                                 	"{0}.configBuilder", id)));
+				configurationBuilder = Kernel.Resolve<IObjectServerConfigurationBuilder>(string.Format("{0}.configBuilder", id));
 			}
 			else
-				configurationBuilder = this.Kernel.Resolve<IObjectServerConfigurationBuilder>();
+				configurationBuilder = Kernel.Resolve<IObjectServerConfigurationBuilder>();
 
-			AssertNullOrEmpty(id, "id", @"You must provide a valid 'id' attribute for the 'objectContainer' node. 
+			AssertNullOrEmpty(id, "id",
+			                  @"You must provide a valid 'id' attribute for the 'objectContainer' node. 
 										This id is used as key for the ISessionFactory component registered on the container");
-			AssertNullOrEmpty(alias, "alias", @"You must provide a valid 'alias' attribute for the 'objectContainer' node. 
+			AssertNullOrEmpty(alias, "alias",
+			                  @"You must provide a valid 'alias' attribute for the 'objectContainer' node. 
 													This id is used to obtain the ISession implementation from the SessionManager");
 			AssertNullOrEmpty(mode, "mode", "You must set a ObjectContainer mode");
 
 			Db4oMode modeEnum;
 			try
 			{
-				modeEnum = (Db4oMode)Enum.Parse(typeof(Db4oMode), mode);
+				modeEnum = (Db4oMode) Enum.Parse(typeof (Db4oMode), mode);
 			}
 			finally
 			{
-
 			}
 			Db4objects.Db4o.Config.IConfiguration cfg = configurationBuilder.GetConfiguration(config);
 			Kernel.AddComponentInstance(String.Format("{0}.cfg", id), cfg);
-			string providerName = string.Format("db4oprovider_{0}",id);
+			string providerName = string.Format("db4oprovider_{0}", id);
 			switch (modeEnum)
 			{
 				case Db4oMode.RemoteServer:
@@ -98,28 +100,27 @@ namespace BlogSharp.Db4o
 						string host = config.Attributes["host"];
 						int port = int.Parse(config.Attributes["port"]);
 						Kernel.Register(Component.For<IObjectContainerProvider>()
-											.Named(providerName)
+						                	.Named(providerName)
 						                	.ImplementedBy<RemoteServerContainerProvider>()
-						                	.DependsOn(new {host = host, username = username, password = password, port = port}));
-
+						                	.DependsOn(new {host, username, password, port}));
 					}
 					break;
 
 				case Db4oMode.EmbeddedServer:
-					{ 
+					{
 						string path = config.Attributes["path"];
 						path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
 						string serverName = string.Format("db4oserver_{0}", alias);
 						var objectServer = Db4oFactory.OpenServer(path, 0).Ext();
 						disposeAction += () => objectServer.Ext().Close();
 						Kernel.Register(Component.For<IExtObjectServer>()
-											.Forward<IObjectServer>()
-											.Named(serverName)
+						                	.Forward<IObjectServer>()
+						                	.Named(serverName)
 						                	.Instance(objectServer))
 							.Register(Component.For<IObjectContainerProvider>()
-										.Named(providerName)
+							          	.Named(providerName)
 							          	.ImplementedBy<EmbeddedServerContainerProvider>()
-							          	.DependsOn(new {objectServer = objectServer}));
+							          	.DependsOn(new {objectServer}));
 					}
 					break;
 			}

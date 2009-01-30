@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Ext;
 
 namespace BlogSharp.Db4o
 {
-	public class Db4oWrapper:IExtObjectContainer,IObjectContainer
+	public class Db4oWrapper : IExtObjectContainer, IObjectContainer
 	{
+		internal readonly IExtObjectContainer inner;
+
 		public Db4oWrapper(IExtObjectContainer inner)
 		{
 			this.inner = inner;
 		}
 
-		internal readonly IExtObjectContainer inner;
 		#region IExtObjectContainer Members
 
 		public void Activate(object obj)
@@ -29,7 +28,7 @@ namespace BlogSharp.Db4o
 
 		public void Bind(object obj, long id)
 		{
-			inner.Bind(obj,id);
+			inner.Bind(obj, id);
 		}
 
 		public Db4objects.Db4o.Types.IDb4oCollections Collections()
@@ -134,7 +133,7 @@ namespace BlogSharp.Db4o
 
 		public void Refresh(object obj, int depth)
 		{
-			inner.Refresh(obj,depth);
+			inner.Refresh(obj, depth);
 		}
 
 		public void ReleaseSemaphore(string name)
@@ -142,14 +141,16 @@ namespace BlogSharp.Db4o
 			inner.ReleaseSemaphore(name);
 		}
 
-		public Db4objects.Db4o.Replication.IReplicationProcess ReplicationBegin(Db4objects.Db4o.IObjectContainer peerB, Db4objects.Db4o.Replication.IReplicationConflictHandler conflictHandler)
+		public Db4objects.Db4o.Replication.IReplicationProcess ReplicationBegin(Db4objects.Db4o.IObjectContainer peerB,
+		                                                                        Db4objects.Db4o.Replication.
+		                                                                        	IReplicationConflictHandler conflictHandler)
 		{
 			return inner.ReplicationBegin(peerB, conflictHandler);
 		}
 
 		public void Set(object obj, int depth)
 		{
-			inner.Set(obj,depth);
+			inner.Set(obj, depth);
 		}
 
 		public bool SetSemaphore(string name, int waitForAvailability)
@@ -159,7 +160,7 @@ namespace BlogSharp.Db4o
 
 		public void Store(object obj, int depth)
 		{
-			inner.Store(obj,depth);
+			inner.Store(obj, depth);
 		}
 
 		public IStoredClass StoredClass(object clazz)
@@ -182,13 +183,9 @@ namespace BlogSharp.Db4o
 			return inner.Version();
 		}
 
-		#endregion
-
-		#region IObjectContainer Members
-
 		public void Activate(object obj, int depth)
 		{
-			inner.Activate(obj,depth);
+			inner.Activate(obj, depth);
 		}
 
 		public bool Close()
@@ -203,7 +200,7 @@ namespace BlogSharp.Db4o
 
 		public void Deactivate(object obj, int depth)
 		{
-			inner.Deactivate(obj,depth);
+			inner.Deactivate(obj, depth);
 		}
 
 		public void Delete(object obj)
@@ -223,7 +220,7 @@ namespace BlogSharp.Db4o
 
 		public IList<Extent> Query<Extent>(IComparer<Extent> comparer)
 		{
-			return inner.Query<Extent>(comparer);
+			return inner.Query(comparer);
 		}
 
 		public IList<Extent> Query<Extent>()
@@ -238,26 +235,28 @@ namespace BlogSharp.Db4o
 
 		public IList<Extent> Query<Extent>(Predicate<Extent> match, Comparison<Extent> comparison)
 		{
-			return inner.Query<Extent>(match, comparison);
+			return inner.Query(match, comparison);
 		}
 
 		public IList<Extent> Query<Extent>(Predicate<Extent> match, IComparer<Extent> comparer)
 		{
-			return inner.Query<Extent>(match, comparer);
+			return inner.Query(match, comparer);
 		}
 
 		public IList<Extent> Query<Extent>(Predicate<Extent> match)
 		{
-			return inner.Query<Extent>(match);
+			return inner.Query(match);
 		}
 
-		public Db4objects.Db4o.IObjectSet Query(Db4objects.Db4o.Query.Predicate predicate, System.Collections.IComparer comparer)
+		public Db4objects.Db4o.IObjectSet Query(Db4objects.Db4o.Query.Predicate predicate,
+		                                        System.Collections.IComparer comparer)
 		{
 			return inner.Query(predicate, comparer);
 		}
 
 
-		public Db4objects.Db4o.IObjectSet Query(Db4objects.Db4o.Query.Predicate predicate, Db4objects.Db4o.Query.IQueryComparator comparator)
+		public Db4objects.Db4o.IObjectSet Query(Db4objects.Db4o.Query.Predicate predicate,
+		                                        Db4objects.Db4o.Query.IQueryComparator comparator)
 		{
 			return inner.Query(predicate, comparator);
 		}
@@ -296,10 +295,6 @@ namespace BlogSharp.Db4o
 		{
 			inner.Store(obj);
 		}
-
-		#endregion
-
-		#region IDisposable Members
 
 		public void Dispose()
 		{

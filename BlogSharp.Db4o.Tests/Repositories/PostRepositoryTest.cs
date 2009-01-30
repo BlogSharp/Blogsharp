@@ -1,30 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using BlogSharp.Core.Persistence.Repositories;
 using BlogSharp.Db4o.Repositories;
 using BlogSharp.Model;
-using Db4objects.Db4o;
 using Xunit;
 
 namespace BlogSharp.Db4o.Tests.Repositories
 {
 	public class PostRepositoryTest : BaseTest
 	{
+		private readonly Blog blog;
 		private readonly IPostRepository postRepository;
 
 		public PostRepositoryTest()
 		{
+			postRepository = new PostRepository(objectContainerManager);
 
-			postRepository = new PostRepository(this.objectContainerManager);
-
-			var blog = new Blog();
+			blog = new Blog();
 			blog.Id = 1;
 			var author = new BlogSharp.Model.User {Id = 1};
 			var tag1 = new Tag {Id = 1, Name = "mytag"};
 
 			var tag2 = new Tag {Id = 2, Name = "mytag2"};
-			var tags = new[] { tag1, tag2 };
+			var tags = new[] {tag1, tag2};
 			objectContainer.Store(author);
 			objectContainer.Store(blog);
 			objectContainer.Store(tag1);
@@ -38,7 +36,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 				post.DatePublished = new DateTime(2009, 11, 11).AddMinutes(i);
 				post.Title = string.Format("Test Post - {0}", i);
 				post.Comments = new List<PostComment>();
-				post.Tags.Add(tags[i % tags.Length]);
+				post.Tags.Add(tags[i%tags.Length]);
 				tags[i%tags.Length].Posts.Add(post);
 				var comment1 = new PostComment();
 				var comment2 = new PostComment();
@@ -66,9 +64,9 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_delete_a_post()
 		{
-			var post = postRepository.GetPostById(9);
+			var post = postRepository.GetPostById(blog, 9);
 			postRepository.DeletePost(post);
-			var foundPost = postRepository.GetPostById(9);
+			var foundPost = postRepository.GetPostById(blog, 9);
 			Assert.Null(foundPost);
 		}
 
@@ -84,19 +82,17 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_delete_a_comment()
 		{
-
-			var post = postRepository.GetPostById(1);
+			var post = postRepository.GetPostById(blog, 1);
 			var comment = post.Comments[0];
 			postRepository.DeleteComment(comment);
-			post = postRepository.GetPostById(1);
+			post = postRepository.GetPostById(blog, 1);
 			Assert.Equal(1, post.Comments.Count);
 		}
 
 		[Fact]
 		public void Can_get_by_post_id()
 		{
-
-			var foundPost = postRepository.GetPostById(2);
+			var foundPost = postRepository.GetPostById(blog, 2);
 			Assert.NotNull(foundPost);
 			Assert.Equal(2, foundPost.Id);
 			Assert.Equal("Test Post - 2", foundPost.Title);
@@ -111,7 +107,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			post.FriendlyTitle = "test-post";
 			postRepository.SavePost(post);
 
-			var foundPost = postRepository.GetByTitle("test-post");
+			var foundPost = postRepository.GetByTitle(blog, "test-post");
 			Assert.NotNull(foundPost);
 			Assert.Equal(1, foundPost.Id);
 			Assert.Equal("Test Post", foundPost.Title);
@@ -120,7 +116,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_get_by_blog()
 		{
-			var foundPosts = postRepository.GetByBlog(1);
+			var foundPosts = postRepository.GetByBlog(blog);
 			Assert.NotEmpty(foundPosts);
 			Assert.Equal(20, foundPosts.Count);
 			Assert.Equal(19, foundPosts[0].Id);
@@ -130,15 +126,15 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_get_by_blog_paging()
 		{
-			var foundPosts = postRepository.GetByBlog(1, 0, 10);
+			var foundPosts = postRepository.GetByBlog(blog, 0, 10);
 			Assert.NotEmpty(foundPosts);
 			Assert.Equal(10, foundPosts.Count);
 
-			foundPosts = postRepository.GetByBlog(1, 10, 10);
+			foundPosts = postRepository.GetByBlog(blog, 10, 10);
 			Assert.NotEmpty(foundPosts);
 			Assert.Equal(10, foundPosts.Count);
 
-			foundPosts = postRepository.GetByBlog(1, 15, 10);
+			foundPosts = postRepository.GetByBlog(blog, 15, 10);
 			Assert.NotEmpty(foundPosts);
 			Assert.Equal(5, foundPosts.Count);
 		}
@@ -146,15 +142,15 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_get_by_author()
 		{
-			var foundPosts = postRepository.GetByAuthor(1, 1, 0, 10);
+			var foundPosts = postRepository.GetByAuthor(blog, 1, 0, 10);
 			Assert.NotEmpty(foundPosts);
 			Assert.Equal(10, foundPosts.Count);
 
-			foundPosts = postRepository.GetByAuthor(1, 1, 10, 10);
+			foundPosts = postRepository.GetByAuthor(blog, 1, 10, 10);
 			Assert.NotEmpty(foundPosts);
 			Assert.Equal(10, foundPosts.Count);
 
-			foundPosts = postRepository.GetByAuthor(1, 1, 15, 10);
+			foundPosts = postRepository.GetByAuthor(blog, 1, 15, 10);
 			Assert.NotEmpty(foundPosts);
 			Assert.Equal(5, foundPosts.Count);
 		}
@@ -162,20 +158,20 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Fact]
 		public void Can_get_by_tag()
 		{
-			var foundPosts = postRepository.GetByTag(1, 1, 0, 10);
+			var foundPosts = postRepository.GetByTag(blog, 1, 0, 10);
 			Assert.Equal(10, foundPosts.Count);
 
-			foundPosts = postRepository.GetByTag(1, 2, 1, 10);
+			foundPosts = postRepository.GetByTag(blog, 2, 1, 10);
 			Assert.Equal(9, foundPosts.Count);
 
-			foundPosts = postRepository.GetByTag(1, 1, 15, 10);
+			foundPosts = postRepository.GetByTag(blog, 1, 15, 10);
 			Assert.Empty(foundPosts);
 		}
 
 		[Fact]
 		public void Can_get_by_date()
 		{
-			var foundPosts = postRepository.GetByDate(1, new DateTime(2009, 11, 11), 0, 5);
+			var foundPosts = postRepository.GetByDate(blog, new DateTime(2009, 11, 11), 0, 5);
 			Assert.Equal(5, foundPosts.Count);
 		}
 	}

@@ -2,7 +2,7 @@
     <viewdata model="BlogSharp.Model.Post"/>
     <var post="ViewData.Model"/>
 	<div class="post">
-		<h2 class="title">{post.Title}</h2>
+		<h2 class="title">${post.Title}</h2>
 		<p class="byline"><small>Posted by ${post.User.Username}</small></p>
 		<div class="entry">
 			${post.Content}

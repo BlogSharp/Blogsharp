@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Mail;
 using System.Runtime.Remoting.Messaging;
-using System.Text;
 using BlogSharp.Db4o.Impl;
 using Castle.Core.Resource;
-using Castle.Facilities.AutomaticTransactionManagement;
 using Castle.Services.Transaction;
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
@@ -17,21 +13,30 @@ using Xunit;
 
 namespace BlogSharp.Db4o.Tests.TransactionIntegration
 {
-	public class Db4oFacilityTests:IDisposable
+	public class Db4oFacilityTests : IDisposable
 	{
+		private const string CONFIGFILE = @"BlogSharp.Db4o.Tests/TransactionIntegration/CastleConfiguration.xml";
+
 		public Db4oFacilityTests()
 		{
 			File.Delete("mydb.yap");
-			CallContext.SetData(ThreadContextObjectContainerStore.CONTEXTKEY,null);
+			CallContext.SetData(ThreadContextObjectContainerStore.CONTEXTKEY, null);
 		}
 
-		private const string CONFIGFILE=@"BlogSharp.Db4o.Tests/TransactionIntegration/CastleConfiguration.xml";
+		#region IDisposable Members
+
+		public void Dispose()
+		{
+			File.Delete("mydb.yap");
+		}
+
+		#endregion
+
 		[Fact]
 		public void Can_configure_facility_without_exception()
 		{
 			using (var container = new WindsorContainer(new XmlInterpreter(new AssemblyResource(CONFIGFILE))))
 			{
-
 			}
 		}
 
@@ -40,8 +45,6 @@ namespace BlogSharp.Db4o.Tests.TransactionIntegration
 		{
 			using (var windsorContainer = new WindsorContainer(new XmlInterpreter(new AssemblyResource(CONFIGFILE))))
 			{
-
-
 				var types = new[]
 				            	{
 				            		typeof (IObjectServerConfigurationBuilder),
@@ -61,7 +64,6 @@ namespace BlogSharp.Db4o.Tests.TransactionIntegration
 		{
 			using (var windsorContainer = new WindsorContainer(new XmlInterpreter(new AssemblyResource(CONFIGFILE))))
 			{
-
 			}
 		}
 
@@ -75,12 +77,12 @@ namespace BlogSharp.Db4o.Tests.TransactionIntegration
 				var db4oContainerManager = windsorContainer.Resolve<IObjectContainerManager>();
 				var transactionManager = windsorContainer.Resolve<ITransactionManager>();
 				ITransaction transaction = transactionManager.CreateTransaction(TransactionMode.RequiresNew,
-																				IsolationMode.ReadCommitted);
+				                                                                IsolationMode.ReadCommitted);
 				transaction.Begin();
 				IExtObjectContainer objectContainer = db4oContainerManager.GetContainer().Ext();
 				objectContainer.Store(new MailAddress("mymail@mymail.ccc", "Tuna Toksoz"));
 				objectContainer.Dispose();
-				Assert.False(objectContainer.IsClosed(),"Database shouldn't be closed");
+				Assert.False(objectContainer.IsClosed(), "Database shouldn't be closed");
 				transaction.Rollback();
 				transactionManager.Dispose(transaction);
 			}
@@ -95,10 +97,11 @@ namespace BlogSharp.Db4o.Tests.TransactionIntegration
 			{
 				var db4oContainerManager = windsorContainer.Resolve<IObjectContainerManager>();
 				var transactionManager = windsorContainer.Resolve<ITransactionManager>();
-				
+
 				var tran = transactionManager.CurrentTransaction;
-				ITransaction transaction = transactionManager.CreateTransaction(TransactionMode.RequiresNew,IsolationMode.ReadCommitted);
-				
+				ITransaction transaction = transactionManager.CreateTransaction(TransactionMode.RequiresNew,
+				                                                                IsolationMode.ReadCommitted);
+
 				transaction.Begin();
 				IObjectServer server = windsorContainer.Resolve<IObjectServer>();
 				IExtObjectContainer objectContainer = db4oContainerManager.GetContainer().Ext();
@@ -109,14 +112,5 @@ namespace BlogSharp.Db4o.Tests.TransactionIntegration
 				//Assert.True(secondaryContainer.Query<MailAddress>().Count == 1);
 			}
 		}
-
-		#region IDisposable Members
-
-		public void Dispose()
-		{
-			File.Delete("mydb.yap");
-		}
-
-		#endregion
 	}
 }

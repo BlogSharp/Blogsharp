@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Castle.Core;
 using Castle.MicroKernel;
 
@@ -19,23 +17,23 @@ namespace BlogSharp.CastleExtensions.DependencyResolvers
 		#region ISubDependencyResolver Members
 
 		public object Resolve(CreationContext context, ISubDependencyResolver parentResolver,
-							  ComponentModel model,
-							  DependencyModel dependency)
+		                      ComponentModel model,
+		                      DependencyModel dependency)
 		{
 			Type t = dependency.TargetType.GetGenericArguments()[0];
 			return kernel.ResolveAll(t, null);
 		}
 
 		public bool CanResolve(CreationContext context, ISubDependencyResolver parentResolver,
-							   ComponentModel model,
-							   DependencyModel dependency)
+		                       ComponentModel model,
+		                       DependencyModel dependency)
 		{
 			if (dependency.IsOptional)
 				return false;
 			bool result = dependency.TargetType != null &&
-						  dependency.TargetType.GetGenericArguments().Length != 0 &&
-						  typeof(IList<>).MakeGenericType(dependency.TargetType.GetGenericArguments()[0]).IsAssignableFrom(
-							dependency.TargetType);
+			              dependency.TargetType.GetGenericArguments().Length != 0 &&
+			              typeof (IList<>).MakeGenericType(dependency.TargetType.GetGenericArguments()[0]).IsAssignableFrom(
+			              	dependency.TargetType);
 			return result;
 		}
 

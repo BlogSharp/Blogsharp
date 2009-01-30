@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -12,21 +9,21 @@ using Xunit;
 
 namespace BlogSharp.MvcExtensions.Tests.Handlers
 {
-	public class DummyController:ControllerBase
+	public class DummyController : ControllerBase
 	{
+		public bool WasCalled { get; set; }
+
 		protected override void Execute(RequestContext requestContext)
 		{
 			WasCalled = true;
 			base.Execute(requestContext);
 		}
 
-		public bool WasCalled { get; set; }
-
 		protected override void ExecuteCore()
 		{
-			
 		}
 	}
+
 	public class DummyController2 : ControllerBase
 	{
 		protected override void Execute(RequestContext requestContext)
@@ -38,11 +35,16 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 
 		protected override void ExecuteCore()
 		{
-
 		}
 	}
+
 	public class BlogMvcHandlerTests
 	{
+		private readonly RequestContext context;
+		private readonly IExtendedControllerFactory dummyFactory;
+		private readonly MvcHandler handler;
+		private readonly MethodInfo methodInfo;
+
 		public BlogMvcHandlerTests()
 		{
 			context = TestsHelper.PrepareRequestContext();
@@ -53,13 +55,8 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 				           new[] {typeof (HttpContextBase)}, null);
 			dummyFactory = MockRepository.GenerateStub<IExtendedControllerFactory>();
 			ControllerBuilder.Current.SetControllerFactory(dummyFactory);
-
 		}
 
-		private MethodInfo methodInfo;
-		private MvcHandler handler;
-		private IExtendedControllerFactory dummyFactory;
-		private RequestContext context;
 		[Fact]
 		public void Factory_should_resolve_given_controller_with_its_type()
 		{
@@ -69,10 +66,12 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 				.Return(dummyController)
 				.Repeat.Any();
 
-			methodInfo.Invoke(handler, new object[]{context.HttpContext});
-			dummyFactory.AssertWasCalled(x => x.CreateController(Arg<RequestContext>.Is.Anything, Arg<Type>.Is.Equal(typeof(Controller))));
+			methodInfo.Invoke(handler, new object[] {context.HttpContext});
+			dummyFactory.AssertWasCalled(
+				x => x.CreateController(Arg<RequestContext>.Is.Anything, Arg<Type>.Is.Equal(typeof (Controller))));
 			Assert.True(dummyController.WasCalled);
 		}
+
 		[Fact]
 		public void Can_release_when_exception_occurs()
 		{
@@ -88,9 +87,9 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 			}
 			catch
 			{
-				
 			}
-			dummyFactory.AssertWasCalled(x => x.CreateController(Arg<RequestContext>.Is.Anything, Arg<Type>.Is.Equal(typeof(Controller))));
+			dummyFactory.AssertWasCalled(
+				x => x.CreateController(Arg<RequestContext>.Is.Anything, Arg<Type>.Is.Equal(typeof (Controller))));
 			dummyFactory.AssertWasCalled(x => x.ReleaseController(dummyController2));
 		}
 	}

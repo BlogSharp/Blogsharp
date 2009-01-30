@@ -9,44 +9,48 @@ namespace BlogSharp.Core.Persistence.Repositories
 		/// <summary>
 		/// Get the Post list of the Blog
 		/// </summary>
-		/// <param name="blogId"></param>
+		/// <param name="blog"></param>
 		/// <returns></returns>
-		IList<Model.Post> GetByBlog(int blogId);
+		IList<Model.Post> GetByBlog(Blog blog);
+
 		/// <summary>
 		/// Get the Post List of the Blog, with paging support.
 		/// </summary>
-		/// <param name="blogId"></param>
+		/// <param name="blog"></param>
 		/// <param name="skip"></param>
 		/// <param name="take"></param>
 		/// <returns></returns>
-		IList<Model.Post> GetByBlog(int blogId, int skip, int take);
+		IList<Model.Post> GetByBlog(Blog blog, int skip, int take);
+
 		/// <summary>
 		/// Get the Post list via selected date on the calander.
 		/// </summary>
-		/// <param name="blogId"></param>
+		/// <param name="blog"></param>
 		/// <param name="date"></param>
 		/// <param name="skip"></param>
 		/// <param name="take"></param>
 		/// <returns></returns>
-		IList<Model.Post> GetByDate(int blogId, DateTime date, int skip, int take);
+		IList<Model.Post> GetByDate(Blog blog, DateTime date, int skip, int take);
+
 		/// <summary>
 		/// Get the Post list of the User.
 		/// </summary>
-		/// <param name="blogId"></param>
+		/// <param name="blog"></param>
 		/// <param name="authorId"></param>
 		/// <param name="skip"></param>
 		/// <param name="take"></param>
 		/// <returns></returns>
-		IList<Model.Post> GetByAuthor(int blogId, int authorId, int skip, int take);
+		IList<Model.Post> GetByAuthor(Blog blog, int authorId, int skip, int take);
+
 		/// <summary>
 		/// Get the Post list via Tag.
 		/// </summary>
-		/// <param name="blogId"></param>
+		/// <param name="blog"></param>
 		/// <param name="tagId"></param>
 		/// <param name="skip"></param>
 		/// <param name="take"></param>
 		/// <returns></returns>
-		IList<Model.Post> GetByTag(int blogId, int tagId, int skip, int take);
+		IList<Model.Post> GetByTag(Blog blog, int tagId, int skip, int take);
 
 		/// <summary>
 		/// Saves the post
@@ -75,10 +79,13 @@ namespace BlogSharp.Core.Persistence.Repositories
 		/// <summary>
 		/// Get the post via SEO friendly title in url-rewrite.
 		/// </summary>
+		/// <param name="blog"></param>
 		/// <param name="friendlyTitle"></param>
 		/// <returns></returns>
-		Post GetByTitle(string friendlyTitle);
+		Post GetByTitle(Blog blog, string friendlyTitle);
 
-		Post GetPostById(int id);
+		/// <param name="blog"></param>
+		/// <param name="id"></param>
+		Post GetPostById(Blog blog, int id);
 	}
 }

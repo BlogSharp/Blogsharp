@@ -9,6 +9,5 @@ namespace BlogSharp.Core.Persistence.Repositories
 		void SaveUser(User user);
 		void RemoveUser(User user);
 		User GetById(int id);
-		
 	}
 }

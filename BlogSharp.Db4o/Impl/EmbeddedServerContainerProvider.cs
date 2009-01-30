@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Db4objects.Db4o.Config;
+﻿using Db4objects.Db4o.Config;
 using Db4objects.Db4o.Ext;
 
 namespace BlogSharp.Db4o.Impl
 {
-	public class EmbeddedServerContainerProvider:IObjectContainerProvider
+	public class EmbeddedServerContainerProvider : IObjectContainerProvider
 	{
+		private readonly IExtObjectServer objectServer;
+
 		public EmbeddedServerContainerProvider(IExtObjectServer objectServer)
 		{
 			this.objectServer = objectServer;
 		}
-
-		private readonly IExtObjectServer objectServer;
 
 		#region IObjectContainerProvider Members
 

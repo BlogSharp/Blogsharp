@@ -4,7 +4,8 @@
 	{
 		object Source { get; }
 	}
-	public interface IEventArgs<TSource>:IEventArgs
+
+	public interface IEventArgs<TSource> : IEventArgs
 	{
 		/// <summary>
 		/// The source that the event is raised from

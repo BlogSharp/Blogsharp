@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BlogSharp.Core.Event.MembershipEvents;
+﻿using BlogSharp.Core.Event.MembershipEvents;
 using BlogSharp.Model;
 
 namespace BlogSharp.Core.Services.Membership
@@ -16,6 +12,5 @@ namespace BlogSharp.Core.Services.Membership
 		void ResetPassword(string email);
 		event EventHandler<UserRegisteredEventArgs> UserRegistered;
 		event EventHandler<PasswordResettedEventArgs> PasswordResetted;
-
 	}
 }

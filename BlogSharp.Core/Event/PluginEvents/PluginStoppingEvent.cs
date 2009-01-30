@@ -6,7 +6,7 @@ namespace BlogSharp.Core.Event.PluginEvents
 	public class PluginStoppingEvent : AbstractEventArgs<IPluginService>, ICancellableEvent
 	{
 		public PluginStoppingEvent(IPluginService pluginService, IPlugin plugin)
-			:base(pluginService)
+			: base(pluginService)
 		{
 			throw new NotImplementedException();
 		}

@@ -2,7 +2,7 @@
 {
 	public class ApplicationStartingEventArgs : AbstractEventArgs, ICancellableEvent
 	{
-		public ApplicationStartingEventArgs():base(null)
+		public ApplicationStartingEventArgs() : base(null)
 		{
 		}
 

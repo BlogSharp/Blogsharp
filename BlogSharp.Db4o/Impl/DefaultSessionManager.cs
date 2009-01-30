@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Transactions;
 using Castle.Services.Transaction;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Ext;
@@ -13,40 +9,30 @@ namespace BlogSharp.Db4o.Impl
 	/// This piece has been taken from Castle Project (http://castleproject.org)
 	public class DefaultSessionManager : IObjectContainerManager
 	{
+		private const string ContainerContextKey = "containers";
+		private readonly IObjectContainerProviderProvider provider;
+		private readonly IObjectContainerStore store;
+		private readonly ITransactionManager transactionManager;
+
 		public DefaultSessionManager(IObjectContainerStore store, ITransactionManager transactionManager,
-			IObjectContainerProviderProvider provider, IObjectContainerWrapper wrapper)
+		                             IObjectContainerProviderProvider provider, IObjectContainerWrapper wrapper)
 		{
 			this.provider = provider;
-			this.Wrapper = wrapper;
+			Wrapper = wrapper;
 			this.transactionManager = transactionManager;
 			this.store = store;
 		}
 
-		private const string ContainerContextKey = "containers";
-		private readonly IObjectContainerStore store;
-		private readonly IObjectContainerProviderProvider provider;
-		private readonly ITransactionManager transactionManager;
+		protected IObjectContainerWrapper Wrapper { get; private set; }
+
 		#region IObjectContainerManager Members
-
-
-		protected virtual IExtObjectContainer WrapSession(bool hasTransaction, IExtObjectContainer container)
-		{
-			IExtObjectContainer wrapped = Wrapper.Wrap(container, null, null);
-			return wrapped;
-		}
-
-		protected IObjectContainerWrapper Wrapper
-		{
-			get;
-			private set;
-		}
 
 		public IObjectContainer GetContainer(string alias)
 		{
 			if (alias == null)
 				throw new ArgumentNullException("alias");
 
-			ITransaction transaction = this.transactionManager.CurrentTransaction;
+			ITransaction transaction = transactionManager.CurrentTransaction;
 
 			bool weAreSessionOwner = false;
 
@@ -60,7 +46,7 @@ namespace BlogSharp.Db4o.Impl
 
 				wrapped = WrapSession(transaction != null, session);
 				EnlistIfNecessary(weAreSessionOwner, transaction, wrapped);
-				this.store[alias] = wrapped;
+				store[alias] = wrapped;
 			}
 			else
 			{
@@ -71,24 +57,34 @@ namespace BlogSharp.Db4o.Impl
 
 			return wrapped;
 		}
+
 		public virtual IObjectContainer GetContainer()
 		{
-			return this.GetContainer(Constants.DefaultAlias);
+			return GetContainer(Constants.DefaultAlias);
+		}
+
+		#endregion
+
+		protected virtual IExtObjectContainer WrapSession(bool hasTransaction, IExtObjectContainer container)
+		{
+			IExtObjectContainer wrapped = Wrapper.Wrap(container, null, null);
+			return wrapped;
 		}
 
 		protected virtual IExtObjectContainer CreateObjectContainer(string alias)
 		{
-			IObjectContainerProvider containerProvider = this.provider.GetFactory(alias);
+			IObjectContainerProvider containerProvider = provider.GetFactory(alias);
 			return containerProvider.GetContainer();
 		}
 
 
-		protected virtual bool EnlistIfNecessary(bool weAreSessionOwner, ITransaction transaction, IExtObjectContainer container)
+		protected virtual bool EnlistIfNecessary(bool weAreSessionOwner, ITransaction transaction,
+		                                         IExtObjectContainer container)
 		{
 			if (transaction == null)
 				return false;
 
-			IList<IExtObjectContainer> list = (IList<IExtObjectContainer>)transaction.Context[ContainerContextKey];
+			IList<IExtObjectContainer> list = (IList<IExtObjectContainer>) transaction.Context[ContainerContextKey];
 
 			bool shouldEnlist;
 
@@ -129,7 +125,5 @@ namespace BlogSharp.Db4o.Impl
 
 			return true;
 		}
-
-		#endregion
 	}
 }

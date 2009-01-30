@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Castle.Services.Transaction;
+﻿using Castle.Services.Transaction;
 using Db4objects.Db4o;
 
 namespace BlogSharp.Db4o
@@ -15,6 +11,8 @@ namespace BlogSharp.Db4o
 		{
 			this.objectContainer = objectContainer;
 		}
+
+		#region IResource Members
 
 		public void Start()
 		{
@@ -29,5 +27,7 @@ namespace BlogSharp.Db4o
 		{
 			objectContainer.Rollback();
 		}
+
+		#endregion
 	}
 }

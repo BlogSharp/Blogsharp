@@ -128,10 +128,6 @@
     <Compile Include="Services\Template\ITemplateEngineRegistry.cs" />
     <Compile Include="Services\Template\ITemplateSource.cs" />
     <Compile Include="Structure\IFriendlyUrlGenerator.cs" />
-    <Compile Include="Web\BlogContext.cs" />
-    <Compile Include="Web\HttpApplicationEventWrapper.cs" />
-    <Compile Include="Web\Modules\BlogContextModule.cs" />
-    <Compile Include="Web\Modules\BlogInitializedModule.cs" />
     <Compile Include="Web\Modules\IBlogSharpHttpModule.cs" />
   </ItemGroup>
   <ItemGroup>

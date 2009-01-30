@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Db4objects.Db4o;
-
-namespace BlogSharp.Db4o.Impl
+﻿namespace BlogSharp.Db4o.Impl
 {
-	public class DefaultConfigurationBuilder:IObjectServerConfigurationBuilder
+	public class DefaultConfigurationBuilder : IObjectServerConfigurationBuilder
 	{
 		#region IObjectServerConfigurationBuilder Members
 

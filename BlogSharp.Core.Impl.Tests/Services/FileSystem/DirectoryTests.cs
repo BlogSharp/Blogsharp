@@ -1,39 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Transactions;
 using BlogSharp.Core.Impl.Services.FileSystem;
 using BlogSharp.Core.Impl.Services.FileSystem.Castle;
 using BlogSharp.Core.Services.FileSystem;
 using Xunit;
-using Directory=BlogSharp.Core.Impl.Services.FileSystem.Directory;
 
 namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 {
-	public class DirectoryTests:IDisposable
+	public class DirectoryTests : IDisposable
 	{
+		private readonly IFileService fileService;
+		private readonly string root;
+
 		public DirectoryTests()
 		{
-			DirectoryInfo dirInfo=System.IO.Directory.CreateDirectory("root");
+			DirectoryInfo dirInfo = System.IO.Directory.CreateDirectory("root");
 			root = dirInfo.FullName;
 			DirectoryInfo dirInfo1 = dirInfo.CreateSubdirectory("sub1");
 			DirectoryInfo dirInfo2 = dirInfo.CreateSubdirectory("sub2");
 			dirInfo1.CreateSubdirectory("sub11");
 			dirInfo2.CreateSubdirectory("sub21");
-			this.fileService = new TransactionalFileService(new CastleProxyFactory());
+			fileService = new TransactionalFileService(new CastleProxyFactory());
 		}
 
-		private string root;
+		#region IDisposable Members
+
 		public void Dispose()
 		{
-			System.IO.Directory.Delete("root",true);
+			System.IO.Directory.Delete("root", true);
 		}
 
+		#endregion
 
-		private readonly IFileService fileService;
 		[Fact]
 		public void Parent_returns_the_correct_directory()
 		{
@@ -47,6 +46,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 				Assert.Equal(dir.Parent.Parent.Name, dirInfo.Parent.Parent.Name);
 			}
 		}
+
 		[Fact]
 		public void Children_returns_children()
 		{
@@ -59,10 +59,8 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 				foreach (var info in children)
 				{
 					Assert.Equal(Path.Combine(root, pathList[i++]), info.Path);
-
 				}
 			}
 		}
-
 	}
 }

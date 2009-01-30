@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace BlogSharp.MvcExtensions.Filters
 {
+
 	#region castle license
+
 	// Copyright 2004-2008 Castle Project - http://www.castleproject.org/
 	// 
 	// Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +18,9 @@ namespace BlogSharp.MvcExtensions.Filters
 	// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 	// See the License for the specific language governing permissions and
 	// limitations under the License.
+
 	#endregion
+
 	public class AntiGoogleWebAcceleratorFilter : ActionFilterAttribute
 	{
 		/// <summary>
@@ -28,7 +28,6 @@ namespace BlogSharp.MvcExtensions.Filters
 		/// return <c>true</c> if the action should be processed.
 		/// Modified from castle/monorail project for Mvc
 		/// </summary>
-
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
 			if (filterContext.HttpContext.Request.Headers["HTTP_X_MOZ"].Equals("prefetch"))

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using BlogSharp.Core.Services.FileSystem;
 
 namespace BlogSharp.Core.Services.Compression

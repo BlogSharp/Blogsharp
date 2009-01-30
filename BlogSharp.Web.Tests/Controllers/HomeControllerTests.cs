@@ -1,12 +1,7 @@
-using System.Web.Mvc;
-using Xunit;
-using BlogSharp.Web.Controllers;
-
 namespace BlogSharp.Web.Tests.Controllers
 {
 	public class HomeControllerTests
 	{
-		
 		//public class Index
 		//{
 		//    [Fact]

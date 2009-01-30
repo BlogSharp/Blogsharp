@@ -1,34 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net.Mail;
-using System.Text;
-using BlogSharp.Core.Event;
 using BlogSharp.Core.Event.MembershipEvents;
-using BlogSharp.Core.Impl.Services.Template;
 using BlogSharp.Core.Services.Mail;
-using BlogSharp.Core.Services.Membership;
 using BlogSharp.Core.Services.Template;
-using BlogSharp.Model;
 
 namespace BlogSharp.Core.Impl.EventHandlers.Membership
 {
-	public class SendMailPasswordResettedEventListener:IEventListener<PasswordResettedEventArgs>
+	public class SendMailPasswordResettedEventListener : IEventListener<PasswordResettedEventArgs>
 	{
-		public SendMailPasswordResettedEventListener(IMailService mailService,ITemplateEngine engine,ITemplateSource templateSource)
-		{
-			this.mailService = mailService;
-			this.templateEngine = engine;
-			this.templateSource = templateSource;
-		}
-		private readonly ITemplateSource templateSource;
 		private readonly IMailService mailService;
 		private readonly ITemplateEngine templateEngine;
+		private readonly ITemplateSource templateSource;
+
+		public SendMailPasswordResettedEventListener(IMailService mailService, ITemplateEngine engine,
+		                                             ITemplateSource templateSource)
+		{
+			this.mailService = mailService;
+			templateEngine = engine;
+			this.templateSource = templateSource;
+		}
+
 		#region IEventListener<PasswordResettedEventArgs> Members
 
 		public void Handle(PasswordResettedEventArgs eventArgs)
 		{
-
 			var user = eventArgs.User;
 			var dictionary = new Dictionary<string, object>();
 			dictionary.Add("user", user);

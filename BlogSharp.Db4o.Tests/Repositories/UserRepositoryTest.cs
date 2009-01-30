@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using BlogSharp.Core.Persistence.Repositories;
+﻿using BlogSharp.Core.Persistence.Repositories;
 using BlogSharp.Db4o.Repositories;
-using BlogSharp.Db4o.Tests;
 using BlogSharp.Model;
-using Db4objects.Db4o;
 using Xunit;
-using User=BlogSharp.Model.User;
 
 namespace BlogSharp.Db4o.Tests.Repositories
 {
@@ -19,7 +11,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 
 		public UserRepositoryTest()
 		{
-			this.userRepository = new UserRepository(this.objectContainerManager);
+			userRepository = new UserRepository(objectContainerManager);
 		}
 
 		[Fact]
@@ -28,7 +20,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			var user = new User();
 			userRepository.SaveUser(user);
 			var id = objectContainer.GetID(user);
-			Assert.True(id>0);
+			Assert.True(id > 0);
 		}
 
 		[Fact]
@@ -39,7 +31,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			userRepository.SaveUser(user);
 			userRepository.RemoveUser(user);
 			var id = objectContainer.GetID(user);
-			Assert.True(id==0);
+			Assert.True(id == 0);
 		}
 
 		[Fact]
@@ -69,6 +61,5 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			Assert.Equal(1, foundUser.Id);
 			Assert.Equal("TestUserEmail", foundUser.Email);
 		}
-
 	}
 }

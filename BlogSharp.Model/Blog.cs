@@ -1,63 +1,30 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BlogSharp.Model
 {
-	public class Blog:IEntity
+	public class Blog : IEntity
 	{
 		public Blog()
 		{
-			this.Authors=new List<User>();
-			this.Posts=new List<Post>();
-		}
-		#region Blog Members
-
-		public string Name
-		{
-			get; set;
+			Authors = new List<User>();
+			Posts = new List<Post>();
 		}
 
-		public User Founder
-		{
-			get; set;
-		}
+		public BlogConfiguration Configuration { get; set; }
 
-		public IList<User> Authors
-		{
-			get; set;
-		}
+		public string Name { get; set; }
 
-		public IList<Post> Posts
-		{
-			get; set;
-		}
-		public string Title
-		{
-			get; set;
-		}
+		public User Founder { get; set; }
 
-		public string Host
-		{
-			get; set;
-		}
+		public IList<User> Authors { get; set; }
 
-		public bool IsInitialized
-		{
-			get; set;
-		}
-		#endregion
+		public IList<Post> Posts { get; set; }
+		public string Title { get; set; }
 
-		#region IIdentifiable<int> Members
+		public string Host { get; set; }
 
-		public int Id
-		{
-			get; set;
-		}
+		public bool IsInitialized { get; set; }
 
-		#endregion
-
-
+		public int Id { get; set; }
 	}
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using BlogSharp.Core.Event;
+﻿using System.Net.Mail;
 using BlogSharp.Core.Event.MembershipEvents;
 using BlogSharp.Core.Impl.EventHandlers.Membership;
 using BlogSharp.Core.Services.Mail;
@@ -15,21 +10,20 @@ using Xunit;
 
 namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 {
-	public class UserRegisteredEventListenerTests:BaseTest
+	public class UserRegisteredEventListenerTests : BaseTest
 	{
-		public UserRegisteredEventListenerTests()
-		{
-			this.mailServiceMock = MockRepository.GenerateMock<IMailService>();
-			this.templateEngineMock = MockRepository.GenerateMock<ITemplateEngine>();
-			this.templateSourceMock = MockRepository.GenerateMock<ITemplateSource>();
-			this.listener = new SendWelcomeEmailUserRegisteredEventListener(mailServiceMock, templateEngineMock,templateSourceMock);
-
-		}
-
-		private readonly ITemplateSource templateSourceMock;
+		private readonly SendWelcomeEmailUserRegisteredEventListener listener;
 		private readonly IMailService mailServiceMock;
 		private readonly ITemplateEngine templateEngineMock;
-        private readonly SendWelcomeEmailUserRegisteredEventListener listener;
+		private readonly ITemplateSource templateSourceMock;
+
+		public UserRegisteredEventListenerTests()
+		{
+			mailServiceMock = MockRepository.GenerateMock<IMailService>();
+			templateEngineMock = MockRepository.GenerateMock<ITemplateEngine>();
+			templateSourceMock = MockRepository.GenerateMock<ITemplateSource>();
+			listener = new SendWelcomeEmailUserRegisteredEventListener(mailServiceMock, templateEngineMock, templateSourceMock);
+		}
 
 		[Fact]
 		public void Calls_templateEngine_and_templateSource_then_sends_email()

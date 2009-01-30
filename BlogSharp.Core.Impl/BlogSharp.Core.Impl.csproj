@@ -64,6 +64,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\System.Web.Mvc.dll</HintPath>
@@ -105,6 +106,9 @@
     <Compile Include="Services\Template\NVelocity\NVelocityTemplateEngine.cs" />
     <Compile Include="Services\Template\TemplateEngineRegistry.cs" />
     <Compile Include="Structure\FriendlyUrlGenerator.cs" />
+    <Compile Include="Web\BlogContext.cs" />
+    <Compile Include="Web\Modules\BlogContextModule.cs" />
+    <Compile Include="Web\Modules\StartUpInstallerModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlogSharp.CastleExtensions\BlogSharp.CastleExtensions.csproj">

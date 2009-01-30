@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 
 namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 {
@@ -37,7 +33,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 		public static NativeMethods.FileShare TranslateFileShare(FileShare share)
 		{
 			// Complete 1:1 mapping
-			return (NativeMethods.FileShare)(int)share;
+			return (NativeMethods.FileShare) (int) share;
 		}
 	}
 }

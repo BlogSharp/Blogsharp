@@ -1,31 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using Castle.Core.Interceptor;
+﻿using System.Reflection;
 using Db4objects.Db4o;
 
 namespace BlogSharp.Db4o.Impl
 {
 	public delegate void ObjectContainerCloseDelegate(IObjectContainer container);
+
 	public delegate void ObjectContainerDisposeDelegate(IObjectContainer container);
+
 	public abstract class TransactionProtectionInterceptor
 	{
+		protected static readonly object InvokeImplementation = new object();
+		protected readonly ObjectContainerCloseDelegate closeDelegate;
+		protected readonly IObjectContainer container;
+		protected readonly ObjectContainerDisposeDelegate disposeDelegate;
+
 		public TransactionProtectionInterceptor(
 			IObjectContainer container,
-			ObjectContainerCloseDelegate close, 
+			ObjectContainerCloseDelegate close,
 			ObjectContainerDisposeDelegate dispose)
 		{
-			this.closeDelegate = close;
-			this.disposeDelegate = dispose;
+			closeDelegate = close;
+			disposeDelegate = dispose;
 			this.container = container;
 		}
-		protected readonly static object InvokeImplementation=new object();
-		protected readonly IObjectContainer container;
-		protected readonly ObjectContainerCloseDelegate closeDelegate;
-		protected readonly ObjectContainerDisposeDelegate disposeDelegate;
-		public virtual object Invoke(MethodBase methodInfo,object[] args,out bool proceed)
+
+		public virtual object Invoke(MethodBase methodInfo, object[] args, out bool proceed)
 		{
 			string methodName = methodInfo.Name;
 			if (methodName.Equals("get_InvocationHandler"))
@@ -33,30 +32,30 @@ namespace BlogSharp.Db4o.Impl
 				proceed = false;
 				return this;
 			}
-			else if(methodName.Equals("get_InnerContainer"))
+			else if (methodName.Equals("get_InnerContainer"))
 			{
 				proceed = false;
-				return this.container;
+				return container;
 			}
 			else if (methodName.Equals("Ext"))
 			{
 				proceed = false;
-				return this.container;
-			}	
+				return container;
+			}
 			else if (methodName.Equals("Close"))
 			{
 				proceed = false;
 				if (closeDelegate != null)
-					closeDelegate(this.container);
+					closeDelegate(container);
 				return false;
 			}
 			else if (methodName.Equals("Dispose"))
 			{
 				proceed = false;
 				if (closeDelegate != null)
-					closeDelegate(this.container);
+					closeDelegate(container);
 				if (disposeDelegate != null)
-					disposeDelegate(this.container);
+					disposeDelegate(container);
 				return null;
 			}
 			else

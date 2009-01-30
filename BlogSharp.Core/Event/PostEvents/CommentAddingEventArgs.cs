@@ -5,17 +5,13 @@ namespace BlogSharp.Core.Event.PostEvents
 {
 	public class CommentAddingEventArgs : AbstractEventArgs<IPostService>, ICancellableEvent
 	{
-
-		public CommentAddingEventArgs(IPostService postService,PostComment comment)
+		public CommentAddingEventArgs(IPostService postService, PostComment comment)
 			: base(postService)
 		{
-			this.Comment = comment;
+			Comment = comment;
 		}
 
-        public PostComment Comment
-        {
-            get; private set;
-        }
+		public PostComment Comment { get; private set; }
 
 		#region ICancellableEvent Members
 

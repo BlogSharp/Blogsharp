@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using BlogSharp.Core.Event.PostEvents;
 using BlogSharp.Model;
-using System;
+
 namespace BlogSharp.Core.Services.Post
 {
 	public interface IPostService
@@ -10,8 +10,8 @@ namespace BlogSharp.Core.Services.Post
 		void AddComment(PostComment comment);
 		void RemoveComment(PostComment comment);
 		void RemovePost(Model.Post post);
-		Model.Post GetPostById(int id);
-		Model.Post GetPostByFriendlyTitle(string friendlyTitle);
+		Model.Post GetPostById(Blog blog, int id);
+		Model.Post GetPostByFriendlyTitle(Blog blog, string friendlyTitle);
 		IList<Model.Post> GetPostsByBlog(Blog blog);
 		IList<Model.Post> GetPostsByBlogPaged(Blog blog, int skip, int take);
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BlogSharp.CastleExtensions.DependencyResolvers;
+﻿using BlogSharp.CastleExtensions.DependencyResolvers;
 using Castle.MicroKernel.Handlers;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -14,37 +10,44 @@ namespace BlogSharp.CastleExtensions.Tests.DependencyResolvers
 	{
 		public SampleService1(string serviceId)
 		{
-			this.ServiceId = serviceId;
+			ServiceId = serviceId;
 		}
+
 		public string ServiceId { get; set; }
 	}
+
 	public class SampleService2
 	{
 		public SampleService2(string serviceId)
 		{
-			this.ServiceId = serviceId;
+			ServiceId = serviceId;
 		}
+
 		public string ServiceId { get; set; }
 	}
+
 	public class SampleService3
 	{
 		public SampleService3(int serviceId)
 		{
-			this.ServiceId = serviceId;
+			ServiceId = serviceId;
 		}
+
 		public int ServiceId { get; set; }
 	}
+
 	public class ServiceIdResolverTests
 	{
+		private readonly IWindsorContainer container;
+
 		public ServiceIdResolverTests()
 		{
-			this.container = new WindsorContainer();
-			this.container.Kernel.Resolver.AddSubResolver(new ServiceIdResolver());
-			this.container.Register(Component.For<SampleService1>().Named("service1"))
+			container = new WindsorContainer();
+			container.Kernel.Resolver.AddSubResolver(new ServiceIdResolver());
+			container.Register(Component.For<SampleService1>().Named("service1"))
 				.Register(Component.For<SampleService2>().Named("service2"))
 				.Register(Component.For<SampleService3>().Named("service3"));
 		}
-		private readonly IWindsorContainer container;
 
 		[Fact]
 		public void CanResolveDependencyWithServiceId()

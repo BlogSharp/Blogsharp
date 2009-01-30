@@ -1,22 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using BlogSharp.Core.Persistence.Repositories;
 using BlogSharp.Model;
-using Db4objects.Db4o;
 
 namespace BlogSharp.Db4o.Repositories
 {
-    public class BlogRepository : Db4oRepository, IBlogRepository
-    {
-        public BlogRepository(IObjectContainerManager containerManager)
+	public class BlogRepository : Db4oRepository, IBlogRepository
+	{
+		public BlogRepository(IObjectContainerManager containerManager)
 			: base(containerManager)
-        {
+		{
+		}
 
-        }
-
-        #region Implementation of IBlogRepository
-
-
+		#region Implementation of IBlogRepository
 
 		public void SaveBlog(Blog blog)
 		{
@@ -35,9 +30,9 @@ namespace BlogSharp.Db4o.Repositories
 
 		public Blog GetBlog()
 		{
-			return this.container.GetContainer()
-									.Query<Model.Blog>()
-									.SingleOrDefault();
+			return container.GetContainer()
+				.Query<Model.Blog>()
+				.SingleOrDefault();
 		}
 
 		#endregion

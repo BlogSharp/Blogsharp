@@ -4,12 +4,12 @@ namespace BlogSharp.Core.Event.PluginEvents
 {
 	public class PluginStoppedEventArgs : AbstractEventArgs<IPluginService>
 	{
-		public PluginStoppedEventArgs(IPluginService service,IPlugin plugin)
-			:base(service)
+		public PluginStoppedEventArgs(IPluginService service, IPlugin plugin)
+			: base(service)
 		{
-		    this.Plugin = plugin;
+			Plugin = plugin;
 		}
 
-	    public IPlugin Plugin { get; set; }
+		public IPlugin Plugin { get; set; }
 	}
 }

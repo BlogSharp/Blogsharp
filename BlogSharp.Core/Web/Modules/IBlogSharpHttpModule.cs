@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Web;
 
 namespace BlogSharp.Core.Web.Modules
 {
-	public interface IBlogSharpHttpModule
+	public interface IBlogSharpHttpModule : IHttpModule
 	{
-		void Start();
-		void Stop();
 	}
 }

@@ -1,35 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace BlogSharp.Db4o.Impl
 {
-	public class DefaultContainerProviderProvider:IObjectContainerProviderProvider
+	public class DefaultContainerProviderProvider : IObjectContainerProviderProvider
 	{
-		public DefaultContainerProviderProvider()
-		{
-			this.providers = new Dictionary<string, IObjectContainerProvider>();
-		}
-
 		private readonly IDictionary<string, IObjectContainerProvider> providers;
 
-		public void AddProvider(string alias,IObjectContainerProvider provider)
+		public DefaultContainerProviderProvider()
 		{
-			this.providers[alias] = provider;
-		}
-
-		public void RemoveProvider(string alias)
-		{
-			this.providers.Remove(alias);
+			providers = new Dictionary<string, IObjectContainerProvider>();
 		}
 
 		#region IObjectContainerProviderProvider Members
 
+		public void AddProvider(string alias, IObjectContainerProvider provider)
+		{
+			providers[alias] = provider;
+		}
+
+		public void RemoveProvider(string alias)
+		{
+			providers.Remove(alias);
+		}
+
 		public IObjectContainerProvider GetFactory(string alias)
 		{
 			IObjectContainerProvider provider;
-			this.providers.TryGetValue(alias, out provider);
+			providers.TryGetValue(alias, out provider);
 			return provider;
 		}
 

@@ -153,8 +153,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Views\Post\List.spark" />
-    <None Include="Views\Post\Read.spark" />
+    <Content Include="Content\javascript\jquery-1.2.6.js" />
+    <Content Include="Content\javascript\jquery.livequery.js" />
+    <None Include="Views\Post\CommentWrite.spark" />
+    <Content Include="Views\Post\_CommentList.spark" />
+    <Content Include="Views\Post\List.spark" />
+    <Content Include="Views\Post\Read.spark" />
     <None Include="Views\Shared\application.spark" />
   </ItemGroup>
   <ItemGroup>

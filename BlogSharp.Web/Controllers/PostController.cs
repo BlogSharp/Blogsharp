@@ -1,30 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
+using BlogSharp.Core.Impl.Web;
 using BlogSharp.Core.Services.Post;
-using BlogSharp.Core.Web;
-using BlogSharp.Model;
+using Spark.Web.Mvc;
 
 namespace BlogSharp.Web.Controllers
 {
 	[HandleError]
 	public class PostController : Controller
 	{
+		private readonly IPostService postService;
+
 		public PostController(IPostService postService)
 		{
 			this.postService = postService;
 		}
 
-		private readonly IPostService postService;
-
 		public ActionResult Index()
 		{
-			var posts = postService.GetPostsByBlog(BlogContext.Current.Blog);
-			return View("List", posts);
+			return RedirectToAction("List", "Post", new {page = 0});
 		}
+
 		public ActionResult List(int page)
 		{
 			var posts = postService.GetPostsByBlog(BlogContext.Current.Blog);
@@ -33,8 +28,13 @@ namespace BlogSharp.Web.Controllers
 
 		public ActionResult Read(string friendlyTitle)
 		{
-			var post = postService.GetPostByFriendlyTitle(friendlyTitle);
+			var post = postService.GetPostByFriendlyTitle(BlogContext.Current.Blog, friendlyTitle);
 			return View(post);
+		}
+
+		public ActionResult ShowCart()
+		{
+			return new JavascriptViewResult {ViewName = "_CommentList"};
 		}
 	}
 }

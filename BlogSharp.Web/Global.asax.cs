@@ -1,62 +1,44 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using BlogSharp.CastleExtensions.DependencyResolvers;
-using BlogSharp.CastleExtensions.Facilities;
-using BlogSharp.Core;
 using BlogSharp.Core.Impl.Installers;
-using BlogSharp.Core.Persistence;
-using BlogSharp.Core.Web;
 using BlogSharp.Core.Web.Modules;
 using BlogSharp.MvcExtensions;
-using BlogSharp.MvcExtensions.ControllerFactories;
 using BlogSharp.Web.Controllers;
-using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Spark.Web.Mvc;
 using MvcContrib.Routing;
+using Spark.Web.Mvc;
 
 namespace BlogSharp.Web
 {
-	public class MvcApplication : System.Web.HttpApplication,IContainerAccessor
+	public class MvcApplication : HttpApplication, IContainerAccessor
 	{
+		private static IWindsorContainer container;
+
+		#region IContainerAccessor Members
+
+		public IWindsorContainer Container
+		{
+			get { return container; }
+		}
+
+		#endregion
+
 		public static void RegisterRoutes(RouteCollection routes)
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-
-			routes.MapRoute("PostList", "post/list/{page}", new
-			{
-				controller = "Post",
-				action = "List",
-				page = 0
-			});
-
-			routes.MapRoute(
-				"Default",
-				"{controller}/{action}",
-				new { controller = "Post", action = "Index" }  // Parameter defaults
-			);
+			MvcRoute.MappUrl("post/list/{page}")
+				.ToDefaultAction<PostController>(x => x.List(0))
+				.AddWithName("PostList", routes);
+			MvcRoute.MappUrl("post/read/{friendlyTitle}")
+				.ToDefaultAction<PostController>(x => x.Read("friendlyTitle"))
+				.AddWithName("PostRead", routes);
+			MvcRoute.MappUrl("{controller}/{action}")
+				.ToDefaultAction<PostController>(x => x.Index())
+				.AddWithName("Default", routes);
 		}
 
-		private static bool isInitialized = false;
-		public override void Init()
-		{
-			if(isInitialized==false)
-			{
-				container.Register(Component.For<HttpApplication>().Instance(this));
-				var modules = container.ResolveAll<IBlogSharpHttpModule>();
-				foreach (var module in modules)
-				{
-					module.Start();
-				}
-				isInitialized = true;
-			}
-
-		}
 
 		protected void Application_Start()
 		{
@@ -66,22 +48,17 @@ namespace BlogSharp.Web
 
 			container = new WindsorContainer("Configuration/castle.xml");
 			container.Kernel.Resolver.AddSubResolver(new ListResolver(container.Kernel));
-			container
-				.Install(new DefaultComponentInstallers());
+			container.Install(new DefaultComponentInstallers());
 			ControllerBuilder.Current.SetControllerFactory(container.Resolve<IExtendedControllerFactory>());
-			var installer = container.Resolve<IStartupInstaller>();
-			installer.Execute();
 		}
 
-
-		#region IContainerAccessor Members
-
-		public IWindsorContainer Container
+		public override void Init()
 		{
-			get { return container; }
+			var modules = container.ResolveAll<IBlogSharpHttpModule>();
+			foreach (var module in modules)
+			{
+				module.Init(this);
+			}
 		}
-
-		private static IWindsorContainer container;
-		#endregion
 	}
 }

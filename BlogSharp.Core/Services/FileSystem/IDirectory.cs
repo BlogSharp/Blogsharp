@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace BlogSharp.Core.Services.FileSystem
 {
-	public interface IDirectory:IFileSystemInfo
+	public interface IDirectory : IFileSystemInfo
 	{
-		IEnumerable<IFileSystemInfo> Children{ get; }
+		IEnumerable<IFileSystemInfo> Children { get; }
 	}
 }

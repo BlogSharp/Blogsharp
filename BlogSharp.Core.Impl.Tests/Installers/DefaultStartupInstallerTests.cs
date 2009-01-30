@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BlogSharp.Core.Impl.Installers;
+﻿using BlogSharp.Core.Impl.Installers;
 using BlogSharp.Core.Persistence.Repositories;
+using BlogSharp.Core.Structure;
 using BlogSharp.Model;
 using Rhino.Mocks;
 using Xunit;
 
 namespace BlogSharp.Core.Impl.Tests.Installers
 {
-	
-	public class DefaultStartupInstallerTests:BaseTest
+	public class DefaultStartupInstallerTests : BaseTest
 	{
 		[Fact]
 		public void Executes_installer_if_there_is_no_blog()
@@ -19,8 +15,9 @@ namespace BlogSharp.Core.Impl.Tests.Installers
 			var blogRP = MockRepository.GenerateMock<IBlogRepository>();
 			var postRP = MockRepository.GenerateMock<IPostRepository>();
 			var userRP = MockRepository.GenerateMock<IUserRepository>();
+			var friendlyUrlGen = MockRepository.GenerateMock<IFriendlyUrlGenerator>();
 			blogRP.Expect(x => x.GetBlog()).Return(null);
-			var installer = new DefaultStartupInstaller(blogRP,postRP,userRP);
+			var installer = new DefaultStartupInstaller(blogRP, postRP, userRP, friendlyUrlGen);
 			installer.Execute();
 			blogRP.AssertWasCalled(x => x.SaveBlog(Arg<Blog>.Is.NotNull));
 			userRP.AssertWasCalled(x => x.SaveUser(Arg<User>.Is.NotNull));

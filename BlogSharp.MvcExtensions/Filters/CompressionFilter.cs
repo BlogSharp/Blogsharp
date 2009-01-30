@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.IO.Compression;
 using System.Web;
-using System.IO.Compression;
 using System.Web.Mvc;
 
 namespace BlogSharp.MvcExtensions.Filters
@@ -15,7 +11,7 @@ namespace BlogSharp.MvcExtensions.Filters
 		{
 			HttpRequestBase request = filterContext.HttpContext.Request;
 			string acceptEncoding = request.Headers["Accept-Encoding"];
-			if (string.IsNullOrEmpty(acceptEncoding)) 
+			if (string.IsNullOrEmpty(acceptEncoding))
 				return;
 			acceptEncoding = acceptEncoding.ToUpperInvariant();
 

@@ -2,43 +2,45 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Transactions;
 using BlogSharp.Core.Impl.Services.FileSystem;
 using BlogSharp.Core.Impl.Services.FileSystem.Castle;
-using BlogSharp.Core.Impl.Services.FileSystem.Native;
 using BlogSharp.Core.Services.FileSystem;
-using Microsoft.Win32.SafeHandles;
 using Xunit;
-using File=BlogSharp.Core.Impl.Services.FileSystem.File;
 using SIO = System.IO;
+
 namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 {
-	public class TransactionalFileServiceTests:IDisposable
+	public class TransactionalFileServiceTests : IDisposable
 	{
+		private readonly string assemblyDirectory;
+		private readonly string assemblyFile;
+		private readonly string assemblyFileName;
+		private readonly IFileService fileService;
+		private readonly string textfile;
+
 		public TransactionalFileServiceTests()
 		{
-			this.fileService = new TransactionalFileService(new CastleProxyFactory());
-			this.assemblyFile = this.GetType().Assembly.Location;
-			this.assemblyDirectory = new FileInfo(this.assemblyFile).DirectoryName;
-			this.assemblyFileName = new FileInfo(this.assemblyFile).Name;
-			this.textfile = "mytextfile.txt";
-			SIO.File.Delete(this.textfile);
-			using (StreamWriter sw = SIO.File.CreateText(this.textfile))
+			fileService = new TransactionalFileService(new CastleProxyFactory());
+			assemblyFile = GetType().Assembly.Location;
+			assemblyDirectory = new FileInfo(assemblyFile).DirectoryName;
+			assemblyFileName = new FileInfo(assemblyFile).Name;
+			textfile = "mytextfile.txt";
+			SIO.File.Delete(textfile);
+			using (StreamWriter sw = SIO.File.CreateText(textfile))
 			{
 				sw.Write("blah");
 			}
 		}
 
+		#region IDisposable Members
+
 		public void Dispose()
 		{
-			SIO.File.Delete(this.textfile);
+			SIO.File.Delete(textfile);
 		}
-		private readonly IFileService fileService;
-		private readonly string assemblyFile;
-		private readonly string assemblyFileName;
-		private readonly string assemblyDirectory;
-		private readonly string textfile;
+
+		#endregion
 
 		[Fact]
 		public void Throws_exception_outside_of_the_transaction()
@@ -49,13 +51,13 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 		[Fact]
 		public void Can_see_if_file_exists()
 		{
-			using(TransactionScope scope=new TransactionScope())
+			using (TransactionScope scope = new TransactionScope())
 			{
 				Assert.True(fileService.FileExists(assemblyFile));
 				Assert.False(fileService.FileExists("asdasdasd"));
 			}
-			
 		}
+
 		[Fact]
 		public void Can_see_if_directory_exists()
 		{
@@ -69,17 +71,17 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 		[Fact]
 		public void Returns_correct_file_if_found()
 		{
-			using(TransactionScope scope=new TransactionScope())
+			using (TransactionScope scope = new TransactionScope())
 			{
-				IFile file = fileService.GetFile(this.assemblyFile);
-				Assert.Equal(this.assemblyFileName, file.Name);
+				IFile file = fileService.GetFile(assemblyFile);
+				Assert.Equal(assemblyFileName, file.Name);
 			}
 		}
 
 		[Fact]
 		public void Throws_exception_if_file_not_found()
 		{
-			using(TransactionScope scope=new TransactionScope())
+			using (TransactionScope scope = new TransactionScope())
 			{
 				Assert.Throws<FileNotFoundException>(() => fileService.GetFile("asdadsdas"));
 			}
@@ -94,7 +96,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 
 			using (var scope = new TransactionScope())
 			{
-				IFile file=fileService.CreateFile(fileName);
+				IFile file = fileService.CreateFile(fileName);
 				Assert.NotNull(file);
 				Assert.True(fileService.FileExists(fileName));
 				Assert.True(fileService.FileExists(currentlyExistingFile));
@@ -120,13 +122,13 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 			}
 			Assert.True(SIO.File.Exists(fileName), "The file should exist since the scope is completed");
 		}
-		
+
 		[Fact]
 		public void Can_create_transactional_file()
 		{
 			string fileName = "newFile.file";
 			SIO.File.Delete(fileName);
-			using(var scope=new TransactionScope())
+			using (var scope = new TransactionScope())
 			{
 				var file = fileService.CreateFile(fileName);
 				Assert.True(fileService.FileExists(fileName));
@@ -160,6 +162,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 			}
 			Assert.False(SIO.File.Exists(fileName));
 		}
+
 		[Fact]
 		public void Can_move_file_in_transaction()
 		{
@@ -180,6 +183,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 			SIO.File.Delete(fileName);
 			SIO.File.Delete(destination);
 		}
+
 		[Fact]
 		public void Can_copy_file_in_transaction()
 		{
@@ -206,9 +210,9 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 		private string GetFileContentTransactional(string fileName)
 		{
 			string data;
-			using (var fileStream = fileService.OpenFileForRead(this.textfile))
-				using (var sr = new StreamReader(fileStream))
-					data = sr.ReadLine();
+			using (var fileStream = fileService.OpenFileForRead(textfile))
+			using (var sr = new StreamReader(fileStream))
+				data = sr.ReadLine();
 			return data;
 		}
 
@@ -224,11 +228,10 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 		[Fact]
 		public void Open_read_can_return_stream_with_file_content()
 		{
-			
 			using (var scope = new TransactionScope())
 			{
 				string data;
-				using (var fileStream = fileService.OpenFileForRead(this.textfile))
+				using (var fileStream = fileService.OpenFileForRead(textfile))
 				{
 					Assert.True(fileStream.CanRead);
 					Assert.False(fileStream.CanWrite);
@@ -245,19 +248,18 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 			string data;
 			using (TransactionScope scope = new TransactionScope())
 			{
-				
-				using (var fileStream = fileService.OpenFileForWrite(this.textfile))
+				using (var fileStream = fileService.OpenFileForWrite(textfile))
 				{
 					Assert.True(fileStream.CanWrite);
 					Assert.False(fileStream.CanRead);
 					Assert.True(fileStream.CanWrite);
 					fileStream.Write(new byte[] {126}, 0, 1);
 				}
-				data = GetFileContentTransactional(this.textfile);
+				data = GetFileContentTransactional(textfile);
 				Assert.Equal("~lah", data);
 			}
-			data = GetFileContentNonTransactional(this.textfile);
-			Assert.Equal("blah",data);
+			data = GetFileContentNonTransactional(textfile);
+			Assert.Equal("blah", data);
 		}
 
 		[Fact]
@@ -266,47 +268,48 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 			string data;
 			using (TransactionScope scope = new TransactionScope())
 			{
-				using (var fileStream = fileService.OpenFile(this.textfile, FileMode.Append, FileAccess.Write, FileShare.None))
+				using (var fileStream = fileService.OpenFile(textfile, FileMode.Append, FileAccess.Write, FileShare.None))
 				{
 					Assert.Equal(fileStream.Position, fileStream.Length);
 					Assert.True(fileStream.CanWrite);
 					Assert.False(fileStream.CanRead);
-					fileStream.Write(new byte[] { 126 }, 0, 1);
+					fileStream.Write(new byte[] {126}, 0, 1);
 				}
 
-				data= GetFileContentTransactional(this.textfile);
+				data = GetFileContentTransactional(textfile);
 				Assert.Equal("blah~", data);
 			}
-			data = GetFileContentNonTransactional(this.textfile);
+			data = GetFileContentNonTransactional(textfile);
 			Assert.Equal("blah", data);
-
 		}
+
 		[Fact]
 		public void Open_with_truncate_write_returns_stream()
 		{
 			string data;
 			using (TransactionScope tran = new TransactionScope())
 			{
-				using (var fileStream = fileService.OpenFile(this.textfile, FileMode.Truncate, FileAccess.Write, FileShare.None))
+				using (var fileStream = fileService.OpenFile(textfile, FileMode.Truncate, FileAccess.Write, FileShare.None))
 				{
-					Assert.Equal(fileStream.Position,0);
+					Assert.Equal(fileStream.Position, 0);
 					Assert.True(fileStream.CanWrite);
 					Assert.False(fileStream.CanRead);
-					fileStream.Write(new byte[] {126}, 0, 1); 
+					fileStream.Write(new byte[] {126}, 0, 1);
 				}
-				data = GetFileContentTransactional(this.textfile);
+				data = GetFileContentTransactional(textfile);
 				Assert.Equal("~", data);
 			}
-			data = GetFileContentNonTransactional(this.textfile);
-			Assert.Equal("blah",data);
+			data = GetFileContentNonTransactional(textfile);
+			Assert.Equal("blah", data);
 		}
+
 		[Fact]
 		public void Open_with_truncate_returns_stream_with_write_only()
 		{
 			using (TransactionScope tran = new TransactionScope())
 			{
-				using (var fileStream = fileService.OpenFile(this.textfile, FileMode.Truncate,
-													  FileAccess.Write, FileShare.ReadWrite))
+				using (var fileStream = fileService.OpenFile(textfile, FileMode.Truncate,
+				                                             FileAccess.Write, FileShare.ReadWrite))
 				{
 					Assert.False(fileStream.CanRead);
 					Assert.True(fileStream.CanWrite);
@@ -318,7 +321,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 		[Fact]
 		public void Search_recursive_should_search_recursive()
 		{
-			if(SIO.Directory.Exists("r"))
+			if (SIO.Directory.Exists("r"))
 				SIO.Directory.Delete("r", true);
 			DirectoryInfo dirInfo = System.IO.Directory.CreateDirectory("r");
 			DirectoryInfo sub1 = dirInfo.CreateSubdirectory("sub1");
@@ -330,23 +333,22 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 			{
 				IEnumerable<IFileSystemInfo> files = fileService.SearchDirectory(dirInfo.FullName, "*.*", SearchOptions.File,
 				                                                                 SearchLocation.Recursive);
-				Assert.Equal(2,files.Count());
-				EnumerablePathEquals(files, dirInfo.FullName, new string[]
+				Assert.Equal(2, files.Count());
+				EnumerablePathEquals(files, dirInfo.FullName, new[]
 				                                              	{
 				                                              		"sub1" + seperator + "b.txt",
 				                                              		"sub2" + seperator + "a.txt",
-
 				                                              	});
 				Transaction.Current.Rollback();
 			}
 		}
 
-		private void EnumerablePathEquals(IEnumerable<IFileSystemInfo> files, string root,string[] toBeCompared)
+		private void EnumerablePathEquals(IEnumerable<IFileSystemInfo> files, string root, string[] toBeCompared)
 		{
 			int i = 0;
 			string seperator = Path.DirectorySeparatorChar.ToString();
 			foreach (var s in files)
-				Assert.Equal(root + seperator + toBeCompared[i++],s.Path);
+				Assert.Equal(root + seperator + toBeCompared[i++], s.Path);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿<content name="MainContent">
     <viewdata model="IEnumerable[[BlogSharp.Model.Post]]"/>
 	<div class="post" each="var post in ViewData.Model">
-		<h2 class="title"><a href="${post.FriendlyTitle}">${post.Title}</a></h2>
+		<h2 class="title">${Html.ActionLink<PostController>(x => x.Read(post.FriendlyTitle),post.Title)}</h2>
 		<p class="byline"><small>Posted by ${post.User.Username}</small></p>
 		<div class="entry">
 			${post.Content}

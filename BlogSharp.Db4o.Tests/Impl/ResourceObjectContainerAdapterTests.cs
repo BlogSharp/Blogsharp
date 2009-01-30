@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Db4objects.Db4o.Ext;
+﻿using Db4objects.Db4o.Ext;
 using Rhino.Mocks;
 using Xunit;
 
@@ -10,27 +6,27 @@ namespace BlogSharp.Db4o.Tests.Impl
 {
 	public class ResourceObjectContainerAdapterTests
 	{
+		private readonly ResourceObjectContainerAdapter adapter;
+		private readonly IExtObjectContainer container;
+
 		public ResourceObjectContainerAdapterTests()
 		{
-			this.container = MockRepository.GenerateMock<IExtObjectContainer>();
-			this.adapter = new ResourceObjectContainerAdapter(container);
+			container = MockRepository.GenerateMock<IExtObjectContainer>();
+			adapter = new ResourceObjectContainerAdapter(container);
 		}
 
-		private readonly IExtObjectContainer container;
-		private readonly ResourceObjectContainerAdapter adapter;
-		
 		[Fact]
 		public void Commit_calls_commit_on_container()
 		{
-			this.adapter.Commit();
-			this.container.AssertWasCalled(x=>x.Commit());
+			adapter.Commit();
+			container.AssertWasCalled(x => x.Commit());
 		}
 
 		[Fact]
 		public void Rollback_calls_rollback_on_container()
 		{
-			this.adapter.Rollback();
-			this.container.Expect(x => x.Rollback());
+			adapter.Rollback();
+			container.Expect(x => x.Rollback());
 		}
 	}
 }

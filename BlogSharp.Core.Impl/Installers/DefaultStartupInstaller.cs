@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using BlogSharp.Core.Persistence.Repositories;
+using BlogSharp.Core.Structure;
 using BlogSharp.Model;
 
 namespace BlogSharp.Core.Impl.Installers
@@ -10,17 +9,22 @@ namespace BlogSharp.Core.Impl.Installers
 	public class DefaultStartupInstaller : IStartupInstaller
 	{
 		private readonly IBlogRepository blogRepository;
+		private readonly IFriendlyUrlGenerator generator;
 		private readonly IPostRepository postRepository;
 		private readonly IUserRepository userRepository;
 
 		public DefaultStartupInstaller(IBlogRepository blogRepository,
-										IPostRepository postRepository,
-										IUserRepository userRepository)
+		                               IPostRepository postRepository,
+		                               IUserRepository userRepository,
+		                               IFriendlyUrlGenerator generator)
 		{
 			this.blogRepository = blogRepository;
 			this.postRepository = postRepository;
 			this.userRepository = userRepository;
+			this.generator = generator;
 		}
+
+		#region IStartupInstaller Members
 
 		public void Execute()
 		{
@@ -44,15 +48,16 @@ namespace BlogSharp.Core.Impl.Installers
 			       	};
 
 			var tag = new Tag {Id = 1, Name = "Welcome"};
-
+			string title = "Welcome to Blogsharp!";
 			var post = new Post
 			           	{
 			           		Id = 1,
 			           		Blog = blog,
 			           		User = user,
 			           		Tags = new List<Tag> {tag},
-			           		Title = "Welcome to Blogsharp!",
+			           		Title = title,
 			           		Content = "Great blog post is here you are.",
+			           		FriendlyTitle = generator.GenerateUrl("{0}", title),
 			           		DateCreated = DateTime.Now,
 			           		DatePublished = DateTime.Now
 			           	};
@@ -61,5 +66,7 @@ namespace BlogSharp.Core.Impl.Installers
 			blogRepository.SaveBlog(blog);
 			postRepository.SavePost(post);
 		}
+
+		#endregion
 	}
 }

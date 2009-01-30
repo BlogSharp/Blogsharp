@@ -1,5 +1,4 @@
-﻿using System.IO;
-namespace BlogSharp.Core.Services.Template
+﻿namespace BlogSharp.Core.Services.Template
 {
 	public interface ITemplateSource
 	{

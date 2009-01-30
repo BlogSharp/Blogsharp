@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using BlogSharp.Model;
+﻿using BlogSharp.Model;
 
 namespace BlogSharp.Core.Persistence.Repositories
 {

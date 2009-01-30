@@ -1,27 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using BlogSharp.Core.Persistence.Repositories;
 using BlogSharp.Db4o.Repositories;
 using BlogSharp.Model;
-using Db4objects.Db4o;
-using Db4objects.Db4o.Ext;
-using Rhino.Mocks;
 using Xunit;
-using Model = BlogSharp.Model;
+
 namespace BlogSharp.Db4o.Tests.Repositories
 {
-	public class BlogRepositoryTests:BaseTest
+	public class BlogRepositoryTests : BaseTest
 	{
+		private readonly IBlogRepository blogRepository;
+
 		public BlogRepositoryTests()
 		{
-			this.blogRepository = new BlogRepository(this.objectContainerManager);
+			blogRepository = new BlogRepository(objectContainerManager);
 		}
-
-		private readonly IBlogRepository blogRepository;
 
 
 		[Fact]
@@ -29,7 +20,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		{
 			Model.Blog blog = new Blog();
 			blogRepository.SaveBlog(blog);
-			long id = this.objectContainer.GetID(blog);
+			long id = objectContainer.GetID(blog);
 			Assert.True(id > 0);
 		}
 
@@ -39,8 +30,8 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		{
 			Model.Blog blog = new Blog();
 			blogRepository.DeleteBlog(blog);
-			long id = this.objectContainer.GetID(blog);
-			Assert.True(id ==0 );
+			long id = objectContainer.GetID(blog);
+			Assert.True(id == 0);
 		}
 	}
 }

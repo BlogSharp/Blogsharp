@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Web;
-using Db4objects.Db4o;
 using Db4objects.Db4o.Ext;
 
 namespace BlogSharp.Db4o.Impl
 {
-	public class WebObjectContainerStore:IObjectContainerStore
+	public class WebObjectContainerStore : IObjectContainerStore
 	{
 		public const string CONTEXTKEY = "objectcontainers";
+
+		#region IObjectContainerStore Members
+
 		public virtual IDictionary<string, IExtObjectContainer> Dictionary
 		{
 			get
@@ -21,21 +20,15 @@ namespace BlogSharp.Db4o.Impl
 			}
 		}
 
-		#region IObjectContainerStore Members
-
 		public IExtObjectContainer this[string alias]
 		{
 			get
 			{
 				IExtObjectContainer container;
-				this.Dictionary.TryGetValue(alias, out container);
+				Dictionary.TryGetValue(alias, out container);
 				return container;
 			}
-			set
-			{
-				this.Dictionary[alias] = value;
-			}
-
+			set { Dictionary[alias] = value; }
 		}
 
 		#endregion

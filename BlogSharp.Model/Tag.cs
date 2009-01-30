@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BlogSharp.Model
 {
@@ -9,44 +6,15 @@ namespace BlogSharp.Model
 	{
 		public Tag()
 		{
-			this.Posts=new List<Post>();
+			Posts = new List<Post>();
 		}
 
-		#region ITag Members
+		public string Name { get; set; }
 
-		public string Name
-		{
-			get;
-			set;
-		}
+		public Blog Blog { get; set; }
 
-		public Blog Blog
-		{
-			get;
-			set;
-		}
-		#endregion
+		public int Id { get; set; }
 
-		#region IIdentifiable<int> Members
-
-		public int Id
-		{
-			get;
-			set;
-		}
-
-		#endregion
-
-
-		#region ITag Members
-
-
-		public IList<Post> Posts
-		{
-			get; 
-			set;
-		}
-
-		#endregion
+		public IList<Post> Posts { get; set; }
 	}
 }

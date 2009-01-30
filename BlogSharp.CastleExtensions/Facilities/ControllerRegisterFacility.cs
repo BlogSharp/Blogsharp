@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Castle.Core;
 using Castle.MicroKernel.Facilities;
-using Castle.MicroKernel.Registration;
 
 namespace BlogSharp.CastleExtensions.Facilities
 {
@@ -15,10 +10,10 @@ namespace BlogSharp.CastleExtensions.Facilities
 		{
 			Kernel.ComponentModelCreated +=
 				delegate(ComponentModel model)
-				{
-					if (typeof(IController).IsAssignableFrom(model.Implementation))
-						model.LifestyleType = LifestyleType.Transient;
-				};
+					{
+						if (typeof (IController).IsAssignableFrom(model.Implementation))
+							model.LifestyleType = LifestyleType.Transient;
+					};
 		}
 	}
 }

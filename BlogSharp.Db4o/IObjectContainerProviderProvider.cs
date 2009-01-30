@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BlogSharp.Db4o.Impl;
+﻿using BlogSharp.Db4o.Impl;
 
 namespace BlogSharp.Db4o
 {

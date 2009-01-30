@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BlogSharp.Db4o.Impl;
+﻿using BlogSharp.Db4o.Impl;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Ext;
 using Rhino.Mocks;
@@ -12,12 +8,12 @@ namespace BlogSharp.Db4o.Tests.Impl
 {
 	public class CastleObjectContainerWrapperTests
 	{
+		private readonly CastleObjectContainerWrapper wrapper;
+
 		public CastleObjectContainerWrapperTests()
 		{
-			this.wrapper=new CastleObjectContainerWrapper();
+			wrapper = new CastleObjectContainerWrapper();
 		}
-
-		private readonly CastleObjectContainerWrapper wrapper;
 
 		[Fact]
 		public void Can_wrap_ObjectContainer()
@@ -34,8 +30,8 @@ namespace BlogSharp.Db4o.Tests.Impl
 		public void InvocationHandler_returns_the_interceptor()
 		{
 			var mock = MockRepository.GenerateMock<IExtObjectContainer>();
-			var wrapped = (IObjectContainerProxy)wrapper.Wrap(mock, null, null);
-			var interceptor = wrapped.InvocationHandler as TransactionProtectionInterceptor;
+			var wrapped = (IObjectContainerProxy) wrapper.Wrap(mock, null, null);
+			var interceptor = wrapped.InvocationHandler;
 			Assert.NotNull(interceptor);
 		}
 
@@ -45,7 +41,7 @@ namespace BlogSharp.Db4o.Tests.Impl
 			var mock = MockRepository.GenerateMock<IExtObjectContainer>();
 			var wrapped = wrapper.Wrap(mock, null, null);
 			var unwrapped = wrapper.UnWrap(wrapped);
-			Assert.Equal(mock,unwrapped);
+			Assert.Equal(mock, unwrapped);
 		}
 
 		[Fact]
@@ -54,17 +50,17 @@ namespace BlogSharp.Db4o.Tests.Impl
 			IExtObjectContainer container = MockRepository.GenerateMock<IExtObjectContainer>();
 			IObjectContainerWrapper wrapper = new CastleObjectContainerWrapper();
 			bool closeCalled = false, disposeCalled = false;
-			IExtObjectContainer wrapped= wrapper.Wrap(container,
-						  delegate(IObjectContainer c)
-						  {
-							  Assert.Equal(container, c);
-							  closeCalled = true;
-						  },
-						  delegate(IObjectContainer c)
-						  {
-							  Assert.Equal(container, c);
-							  disposeCalled = true;
-						  });
+			IExtObjectContainer wrapped = wrapper.Wrap(container,
+			                                           delegate(IObjectContainer c)
+			                                           	{
+			                                           		Assert.Equal(container, c);
+			                                           		closeCalled = true;
+			                                           	},
+			                                           delegate(IObjectContainer c)
+			                                           	{
+			                                           		Assert.Equal(container, c);
+			                                           		disposeCalled = true;
+			                                           	});
 			wrapped.Close();
 			Assert.True(closeCalled);
 			Assert.False(disposeCalled);
@@ -77,16 +73,16 @@ namespace BlogSharp.Db4o.Tests.Impl
 			IObjectContainerWrapper wrapper = new CastleObjectContainerWrapper();
 			bool closeCalled = false, disposeCalled = false;
 			IExtObjectContainer wrapped = wrapper.Wrap(container,
-									  delegate(IObjectContainer c)
-									  {
-										  Assert.Equal(container, c);
-										  closeCalled = true;
-									  },
-									  delegate(IObjectContainer c)
-									  {
-										  Assert.Equal(container, c);
-										  disposeCalled = true;
-									  });
+			                                           delegate(IObjectContainer c)
+			                                           	{
+			                                           		Assert.Equal(container, c);
+			                                           		closeCalled = true;
+			                                           	},
+			                                           delegate(IObjectContainer c)
+			                                           	{
+			                                           		Assert.Equal(container, c);
+			                                           		disposeCalled = true;
+			                                           	});
 			wrapped.Dispose();
 			Assert.True(closeCalled);
 			Assert.True(disposeCalled);

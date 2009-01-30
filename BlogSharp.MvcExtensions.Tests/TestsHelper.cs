@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Specialized;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using BlogSharp.MvcExtensions.ActionResults;
 using Rhino.Mocks;
 
 namespace BlogSharp.MvcExtensions.Tests
@@ -20,6 +15,7 @@ namespace BlogSharp.MvcExtensions.Tests
 			var controllerContext = new ControllerContext(requestContext, controllerBase);
 			return controllerContext;
 		}
+
 		public static RequestContext PrepareRequestContext()
 		{
 			var httpResponse = MockRepository.GenerateStub<HttpResponseBase>();
@@ -28,7 +24,8 @@ namespace BlogSharp.MvcExtensions.Tests
 			httpRequest.Expect(x => x.ServerVariables).Return(serverVariables).Repeat.Any();
 			var httpContext = MockRepository.GenerateStub<HttpContextBase>();
 			httpContext.Expect(x => x.Response).Return(httpResponse).Repeat.Any();
-			httpContext.Expect(x => x.Request).Return(httpRequest).Repeat.Any(); ;
+			httpContext.Expect(x => x.Request).Return(httpRequest).Repeat.Any();
+			;
 			var requestContext = MockRepository.GenerateStub<RequestContext>(httpContext, new RouteData());
 			return requestContext;
 		}

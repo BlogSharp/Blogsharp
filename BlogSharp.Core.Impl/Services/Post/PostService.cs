@@ -1,44 +1,42 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Transactions;
 using BlogSharp.Core.Event.PostEvents;
 using BlogSharp.Core.Persistence.Repositories;
 using BlogSharp.Core.Services.Post;
 using BlogSharp.Model;
-using Castle.Services.Transaction;
 
 namespace BlogSharp.Core.Impl.Services.Post
 {
 	public class PostService : IPostService
 	{
+		private readonly IPostRepository postRepository;
+
 		public PostService(IPostRepository postRepository)
 		{
 			this.postRepository = postRepository;
 		}
-		private readonly IPostRepository postRepository;
+
 		#region IPostService Members
 
 		public void AddPost(Model.Post post)
 		{
-			var postAdding = new PostAddingEventArgs(this,post);
-			this.PostAdding.Raise(postAdding);
+			var postAdding = new PostAddingEventArgs(this, post);
+			PostAdding.Raise(postAdding);
 			if (postAdding.Cancel)
 				return;
-			this.postRepository.SavePost(post);
-			var postAdded = new PostAddedEventArgs(this,post);
-			this.PostAdded.Raise(postAdded);
+			postRepository.SavePost(post);
+			var postAdded = new PostAddedEventArgs(this, post);
+			PostAdded.Raise(postAdded);
 		}
 
 		public void AddComment(PostComment comment)
 		{
-			var commentAdding = new CommentAddingEventArgs(this,comment);
-			this.CommentAdding.Raise(commentAdding);
+			var commentAdding = new CommentAddingEventArgs(this, comment);
+			CommentAdding.Raise(commentAdding);
 			if (commentAdding.Cancel)
 				return;
-			this.postRepository.SaveComment(comment);
-			var commentAdded = new CommentAddedEventArgs(this,comment);
-			this.CommentAdded.Raise(commentAdded);
+			postRepository.SaveComment(comment);
+			var commentAdded = new CommentAddedEventArgs(this, comment);
+			CommentAdded.Raise(commentAdded);
 		}
 
 		public void RemoveComment(PostComment comment)
@@ -48,33 +46,29 @@ namespace BlogSharp.Core.Impl.Services.Post
 
 		public void RemovePost(Model.Post post)
 		{
-			var postRemoving = new PostRemovingEventArgs(this,post);
-			this.PostRemoving.Raise(postRemoving);
+			var postRemoving = new PostRemovingEventArgs(this, post);
+			PostRemoving.Raise(postRemoving);
 			if (postRemoving.Cancel)
 				return;
 			postRepository.DeletePost(post);
-			var postRemoved = new PostRemovedEventArgs(this,post);
-			this.PostRemoved.Raise(postRemoved);
+			var postRemoved = new PostRemovedEventArgs(this, post);
+			PostRemoved.Raise(postRemoved);
 		}
 
-		public Model.Post GetPostById(int id)
+		public Model.Post GetPostById(Blog blog, int id)
 		{
-			return postRepository.GetPostById(id);
+			return postRepository.GetPostById(blog, id);
 		}
 
-		public Model.Post GetPostByFriendlyTitle(string friendlyTitle)
+		public Model.Post GetPostByFriendlyTitle(Blog blog, string friendlyTitle)
 		{
-			return postRepository.GetByTitle(friendlyTitle);
+			return postRepository.GetByTitle(blog, friendlyTitle);
 		}
 
 		public IList<Model.Post> GetPostsByBlog(Blog blog)
 		{
-			return postRepository.GetByBlog(blog.Id, 0, 10);
+			return postRepository.GetByBlog(blog, 0, 10);
 		}
-		#endregion
-
-		#region IPostService Members
-
 
 		public event EventHandler<PostAddingEventArgs> PostAdding = delegate { };
 		public event EventHandler<PostAddedEventArgs> PostAdded = delegate { };
@@ -82,15 +76,10 @@ namespace BlogSharp.Core.Impl.Services.Post
 		public event EventHandler<PostRemovedEventArgs> PostRemoved = delegate { };
 		public event EventHandler<CommentAddingEventArgs> CommentAdding = delegate { };
 		public event EventHandler<CommentAddedEventArgs> CommentAdded = delegate { };
-		#endregion
-
-
-		#region IPostService Members
-
 
 		public IList<Model.Post> GetPostsByBlogPaged(Blog blog, int skip, int take)
 		{
-			return postRepository.GetByBlog(blog.Id, skip, take);
+			return postRepository.GetByBlog(blog, skip, take);
 		}
 
 		#endregion
