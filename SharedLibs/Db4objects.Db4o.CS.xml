@@ -1,0 +1,540 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Db4objects.Db4o.CS</name>
+    </assembly>
+    <members>
+        <member name="T:Db4objects.Db4o.CS.Config.IClientConfiguration">
+            <summary>Configuration interface for db4o clients.</summary>
+            <remarks>Configuration interface for db4o clients.</remarks>
+            <since>7.5</since>
+        </member>
+        <member name="T:Db4objects.Db4o.CS.Config.INetworkingConfigurationProvider">
+            <summary>
+            A configuration provider that provides access to the
+            networking configuration methods.
+            </summary>
+            <remarks>
+            A configuration provider that provides access to the
+            networking configuration methods.
+            </remarks>
+            <since>7.5</since>
+        </member>
+        <member name="P:Db4objects.Db4o.CS.Config.INetworkingConfigurationProvider.Networking">
+            <summary>Access to the networking configuration methods.</summary>
+            <remarks>Access to the networking configuration methods.</remarks>
+        </member>
+        <member name="P:Db4objects.Db4o.CS.Config.IClientConfiguration.PrefetchIDCount">
+            <summary>
+            Sets the number of IDs to be pre-allocated in the database for new
+            objects created on the client.
+            </summary>
+            <remarks>
+            Sets the number of IDs to be pre-allocated in the database for new
+            objects created on the client.
+            This setting should be used on the client side. In embedded mode this setting
+            has no effect.
+            </remarks>
+            <param name="prefetchIDCount">The number of IDs to be prefetched</param>
+        </member>
+        <member name="P:Db4objects.Db4o.CS.Config.IClientConfiguration.PrefetchObjectCount">
+            <summary>Sets the number of objects to be prefetched for an ObjectSet in C/S mode.
+            	</summary>
+            <remarks>
+            Sets the number of objects to be prefetched for an ObjectSet in C/S mode.
+            This setting should be used on the server side. In embedded mode this setting
+            has no effect.
+            </remarks>
+            <param name="prefetchObjectCount">The number of objects to be prefetched</param>
+        </member>
+        <member name="P:Db4objects.Db4o.CS.Config.IClientConfiguration.MessageSender">
+            <summary>returns the MessageSender for this Configuration context.</summary>
+            <remarks>
+            returns the MessageSender for this Configuration context.
+            This setting should be used on the client side.
+            </remarks>
+            <returns>MessageSender</returns>
+        </member>
+        <member name="T:Db4objects.Db4o.CS.Config.INetworkingConfiguration">
+            <summary>Configuration interface for networking configuration settings.</summary>
+            <remarks>Configuration interface for networking configuration settings.</remarks>
+            <since>7.5</since>
+        </member>
+        <member name="P:Db4objects.Db4o.CS.Config.INetworkingConfiguration.TimeoutClientSocket">
+            <summary>
+            configures the time a client waits for a message response
+            from the server.
+            </summary>
+            <remarks>
+            configures the time a client waits for a message response
+            from the server. <br/>
+            <br/>
+            Default value: 600000ms (10 minutes)<br/>
+            <br/>
+            It is recommended to use the same values for
+            <see cref="P:Db4objects.Db4o.CS.Config.INetworkingConfiguration.TimeoutClientSocket">Db4objects.Db4o.CS.Config.INetworkingConfiguration.TimeoutClientSocket</see>
+            and
+            <see cref="P:Db4objects.Db4o.CS.Config.INetworkingConfiguration.TimeoutServerSocket">Db4objects.Db4o.CS.Config.INetworkingConfiguration.TimeoutServerSocket</see>
+            .
+            <br/>
+            This setting can be used on both client and server.<br/><br/>
+            </remarks>
+            <param name="milliseconds">time in milliseconds</param>
+        </member>
+        <member name="P:Db4objects.Db4o.CS.Config.INetworkingConfiguration.TimeoutServerSocket">
+            <summary>configures the timeout of the serverside socket.</summary>
+            <remarks>
+            configures the timeout of the serverside socket. <br/>
+            <br/>
+            The serverside handler waits for messages to arrive from the client.
+            If no more messages arrive for the duration configured in this
+            setting, the client will be disconnected.
+            <br/>
+            Clients send PING messages to the server at an interval of
+            Math.min(timeoutClientSocket(), timeoutServerSocket()) / 2
+            and the server will respond to keep connections alive.
+            <br/>
+            Decrease this setting if you want clients to disconnect faster.
+            <br/>
+            Increase this setting if you have a large number of clients and long
+            running queries and you are getting disconnected clients that you
+            would like to wait even longer for a response from the server.
+            <br/>
+            Default value: 600000ms (10 minutes)<br/>
+            <br/>
+            It is recommended to use the same values for
+            <see cref="P:Db4objects.Db4o.CS.Config.INetworkingConfiguration.TimeoutClientSocket">Db4objects.Db4o.CS.Config.INetworkingConfiguration.TimeoutClientSocket</see>
+            and
+            <see cref="P:Db4objects.Db4o.CS.Config.INetworkingConfiguration.TimeoutServerSocket">Db4objects.Db4o.CS.Config.INetworkingConfiguration.TimeoutServerSocket</see>
+            .
+            <br/>
+            This setting can be used on both client and server.<br/><br/>
+            </remarks>
+            <param name="milliseconds">time in milliseconds</param>
+        </member>
+        <member name="P:Db4objects.Db4o.CS.Config.INetworkingConfiguration.SingleThreadedClient">
+            <summary>
+            configures the client messaging system to be single threaded
+            or multithreaded.
+            </summary>
+            <remarks>
+            configures the client messaging system to be single threaded
+            or multithreaded.
+            <br /><br />Recommended settings:<br />
+            - <code>true</code> for low resource systems.<br />
+            - <code>false</code> for best asynchronous performance and fast
+            GUI response.
+            <br /><br />Default value:<br />
+            - .NET Compactframework: <code>true</code><br />
+            - all other platforms: <code>false</code><br /><br />
+            This setting can be used on both client and server.<br /><br />
+            </remarks>
+            <param name="flag">the desired setting</param>
+        </member>
+        <member name="P:Db4objects.Db4o.CS.Config.INetworkingConfiguration.BatchMessages">
+            <summary>Configures to batch messages between client and server.</summary>
+            <remarks>
+            Configures to batch messages between client and server. By default, batch
+            mode is enabled.<br /><br />
+            This setting can be used on both client and server.<br /><br />
+            </remarks>
+            <param name="flag">false, to turn message batching off.</param>
+        </member>
+        <member name="P:Db4objects.Db4o.CS.Config.INetworkingConfiguration.MaxBatchQueueSize">
+            <summary>Configures the maximum memory buffer size for batched message.</summary>
+            <remarks>
+            Configures the maximum memory buffer size for batched message. If the
+            size of batched messages is greater than <code>maxSize</code>, batched
+            messages will be sent to server.<br /><br />
+            This setting can be used on both client and server.<br /><br />
+            </remarks>
+            <param name="maxSize"></param>
+        </member>
+        <member name="P:Db4objects.Db4o.CS.Config.INetworkingConfiguration.MessageRecipient">
+            <summary>sets the MessageRecipient to receive Client Server messages.</summary>
+            <remarks>
+            sets the MessageRecipient to receive Client Server messages. <br />
+            <br />
+            This setting can be used on both client and server.<br /><br />
+            </remarks>
+            <param name="messageRecipient">the MessageRecipient to be used</param>
+        </member>
+        <member name="T:Db4objects.Db4o.CS.Config.IServerConfiguration">
+            <summary>Configuration interface for db4o servers.</summary>
+            <remarks>Configuration interface for db4o servers.</remarks>
+            <since>7.5</since>
+        </member>
+        <member name="T:Db4objects.Db4o.CS.Db4oClientServer">
+            <summary>
+            Factory class to open db4o servers and to connect db4o clients
+            to them.
+            </summary>
+            <remarks>
+            Factory class to open db4o servers and to connect db4o clients
+            to them.
+            <br /><br />
+            <b>Note:<br />
+            This class is made available in db4o-X.x-cs-java.jar / Db4objects.Db4o.CS.dll</b>
+            </remarks>
+            <since>7.5</since>
+        </member>
+        <member name="M:Db4objects.Db4o.CS.Db4oClientServer.NewServerConfiguration">
+            <summary>
+            creates a new
+            <see cref="T:Db4objects.Db4o.CS.Config.IServerConfiguration">Db4objects.Db4o.CS.Config.IServerConfiguration
+            	</see>
+            </summary>
+        </member>
+        <member name="M:Db4objects.Db4o.CS.Db4oClientServer.OpenServer(Db4objects.Db4o.CS.Config.IServerConfiguration,System.String,System.Int32)">
+            <summary>
+            opens a db4o server with the specified configuration on
+            the specified database file and provides access through
+            the specified port.
+            </summary>
+            <remarks>
+            opens a db4o server with the specified configuration on
+            the specified database file and provides access through
+            the specified port.
+            </remarks>
+        </member>
+        <member name="M:Db4objects.Db4o.CS.Db4oClientServer.OpenClient(Db4objects.Db4o.CS.Config.IClientConfiguration,System.String,System.Int32,System.String,System.String)">
+            <summary>opens a db4o client instance with the specified configuration.</summary>
+            <remarks>opens a db4o client instance with the specified configuration.</remarks>
+            <param name="config">the configuration to be used</param>
+            <param name="host">the host name of the server that is to be connected to</param>
+            <param name="port">the server port to connect to</param>
+            <param name="user">the username for authentication</param>
+            <param name="password">the password for authentication</param>
+            <seealso cref="M:Db4objects.Db4o.CS.Db4oClientServer.OpenServer(Db4objects.Db4o.CS.Config.IServerConfiguration,System.String,System.Int32)">Db4objects.Db4o.CS.Db4oClientServer.OpenServer
+            	</seealso>
+            <seealso cref="M:Db4objects.Db4o.IObjectServer.GrantAccess(System.String,System.String)">Db4objects.Db4o.IObjectServer.GrantAccess
+            	</seealso>
+        </member>
+        <member name="M:Db4objects.Db4o.CS.Db4oClientServer.NewClientConfiguration">
+            <summary>
+            creates a new
+            <see cref="T:Db4objects.Db4o.CS.Config.IClientConfiguration">Db4objects.Db4o.CS.Config.IClientConfiguration
+            	</see>
+            
+            </summary>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.ISocket4.Close">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.ISocket4.Flush">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.ISocket4.Read">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.ISocket4.Read(System.Byte[],System.Int32,System.Int32)">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.ISocket4.Write(System.Byte[])">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.ISocket4.Write(System.Byte[],System.Int32,System.Int32)">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.ISocket4.Write(System.Int32)">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.ISocket4.OpenParalellSocket">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.NetworkSocket.#ctor(Db4objects.Db4o.Config.INativeSocketFactory,System.String,System.Int32)">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.NetworkSocket.#ctor(Db4objects.Db4o.Config.INativeSocketFactory,Sharpen.Net.Socket)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.NetworkSocket.InitSocket(Sharpen.Net.Socket)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.NetworkSocket.Close">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.NetworkSocket.Flush">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.NetworkSocket.Read">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.NetworkSocket.Read(System.Byte[],System.Int32,System.Int32)">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.NetworkSocket.Write(System.Byte[])">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.NetworkSocket.Write(System.Byte[],System.Int32,System.Int32)">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.NetworkSocket.Write(System.Int32)">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.NetworkSocket.OpenParalellSocket">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.ServerSocket4.#ctor(Db4objects.Db4o.Config.INativeSocketFactory,System.Int32)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.ServerSocket4.Accept">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Foundation.Network.ServerSocket4.Close">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.ClientAsynchronousMessageProcessor">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.ClientHeartbeat">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.IClientMessageDispatcher">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.IMessageDispatcher">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.ClientObjectContainer">
+            <exclude></exclude>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.ClientObjectContainer.Backup(System.String)">
+            <exception cref="T:System.NotSupportedException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.ClientObjectContainer.CreateParalellSocket">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.ClientObjectContainer.GetResponse">
+            <summary>may return null, if no message is returned.</summary>
+            <remarks>
+            may return null, if no message is returned. Error handling is weak and
+            should ideally be able to trigger some sort of state listener (connection
+            dead) on the client.
+            </remarks>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.ClientObjectContainer.LoginToServer(Db4objects.Db4o.Foundation.Network.ISocket4)">
+            <exception cref="T:Db4objects.Db4o.Ext.InvalidPasswordException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.ClientObjectContainer.WriteBlobTo(Db4objects.Db4o.Internal.Transaction,Db4objects.Db4o.Internal.BlobImpl,Sharpen.IO.File)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.ClientObjectContainer.ReadBlobFrom(Db4objects.Db4o.Internal.Transaction,Db4objects.Db4o.Internal.BlobImpl,Sharpen.IO.File)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.ClientQueryResult">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.ClientQueryResultIterator">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.ClientServerPlatform">
+            <summary>Platform specific defaults.</summary>
+            <remarks>Platform specific defaults.</remarks>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.ClientServerPlatform.CreateClientQueryResultIterator(Db4objects.Db4o.Internal.Query.Result.AbstractQueryResult)">
+            <summary>
+            The default
+            <see cref="T:Db4objects.Db4o.Internal.CS.ClientQueryResultIterator">Db4objects.Db4o.Internal.CS.ClientQueryResultIterator
+            	</see>
+            for this platform.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Config.ClientServerFactoryImpl">
+            <exclude></exclude>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.Config.ClientServerFactoryImpl.OpenClient(Db4objects.Db4o.Config.IConfiguration,System.String,System.Int32,System.String,System.String,Db4objects.Db4o.Config.INativeSocketFactory)">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+            <exception cref="T:Db4objects.Db4o.Ext.OldFormatException"></exception>
+            <exception cref="T:Db4objects.Db4o.Ext.InvalidPasswordException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.Config.ClientServerFactoryImpl.OpenServer(Db4objects.Db4o.Config.IConfiguration,System.String,System.Int32,Db4objects.Db4o.Config.INativeSocketFactory)">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+            <exception cref="T:Db4objects.Db4o.Ext.IncompatibleFileFormatException"></exception>
+            <exception cref="T:Db4objects.Db4o.Ext.OldFormatException"></exception>
+            <exception cref="T:Db4objects.Db4o.Ext.DatabaseFileLockedException"></exception>
+            <exception cref="T:Db4objects.Db4o.Ext.DatabaseReadOnlyException"></exception>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Config.DotNetSupportClientServer">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.DebugCS">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.IPrefetchingStrategy">
+            <summary>Defines a strategy on how to prefetch objects from the server.</summary>
+            <remarks>Defines a strategy on how to prefetch objects from the server.</remarks>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.IServerMessageDispatcher">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.LazyClientIdIterator">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.LazyClientObjectSetStub">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.LazyClientQueryResult">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.IClientSideMessage">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.IServerSideMessage">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MClassID">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MsgD">
+            <summary>Messages with Data for Client/Server Communication</summary>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.Msg">
+            <summary>Messages for Client/Server Communication</summary>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.Messages.Msg.GetByteLoad">
+            <summary>
+            dummy method to allow clean override handling
+            without casting
+            </summary>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.Messages.Msg.ReadMessageBuffer(Db4objects.Db4o.Internal.Transaction,Db4objects.Db4o.Foundation.Network.ISocket4)">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.Messages.Msg.ReadMessageBuffer(Db4objects.Db4o.Internal.Transaction,Db4objects.Db4o.Foundation.Network.ISocket4,System.Int32)">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.Messages.Msg.ReadMessage(Db4objects.Db4o.Internal.CS.Messages.IMessageDispatcher,Db4objects.Db4o.Internal.Transaction,Db4objects.Db4o.Foundation.Network.ISocket4)">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.Messages.Msg.ReadPayLoad(Db4objects.Db4o.Internal.CS.Messages.IMessageDispatcher,Db4objects.Db4o.Internal.Transaction,Db4objects.Db4o.Foundation.Network.ISocket4,Db4objects.Db4o.Internal.ByteArrayBuffer)">
+            <param name="sock"></param>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MClassMetadataIdForName">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MClassNameForID">
+            <summary>get the classname for an internal ID</summary>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MClose">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MCloseSocket">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MCommitSystemTransaction">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MCommittedInfo">
+            <exclude></exclude>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.Messages.MCommittedInfo.WriteByteArray(Sharpen.IO.ByteArrayOutputStream,System.Byte[])">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.Messages.MsgBlob.ProcessClient(Db4objects.Db4o.Foundation.Network.ISocket4)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.Messages.MsgBlob.Copy(Db4objects.Db4o.Foundation.Network.ISocket4,Sharpen.IO.IOutputStream,System.Int32,System.Boolean)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.Messages.MsgBlob.Copy(Sharpen.IO.IInputStream,Db4objects.Db4o.Foundation.Network.ISocket4,System.Boolean)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.Messages.MDeleteBlobFile.ProcessClient(Db4objects.Db4o.Foundation.Network.ISocket4)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MError">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MFailed">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MGetThreadID">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MIDList">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MIdentity">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MIsAlive">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MLength">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MLogin">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MLoginOK">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MNull">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MOK">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MObjectSet">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MObjectSetFetch">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MObjectSetFinalized">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MObjectSetGetId">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MObjectSetIndexOf">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MObjectSetReset">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MPing">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MPong">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MRaiseVersion">
+            <exclude></exclude>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.Messages.MReadBlob.ProcessClient(Db4objects.Db4o.Foundation.Network.ISocket4)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MSuccess">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MSwitchToFile">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MSwitchToMainFile">
+            <exclude></exclude>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.Messages.MVersion">
+            <exclude></exclude>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.Messages.MWriteBlob.ProcessClient(Db4objects.Db4o.Foundation.Network.ISocket4)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.ObjectServerImpl.Backup(System.String)">
+            <exception cref="T:System.IO.IOException"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.ServerMessageDispatcherImpl.#ctor(Db4objects.Db4o.Internal.CS.ObjectServerImpl,Db4objects.Db4o.Internal.CS.ClientTransactionHandle,Db4objects.Db4o.Foundation.Network.ISocket4,System.Int32,System.Boolean,System.Object)">
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:Db4objects.Db4o.Internal.CS.ServerMessageDispatcherImpl.MessageProcessor">
+            <exception cref="T:Db4objects.Db4o.Ext.Db4oIOException"></exception>
+        </member>
+        <member name="T:Db4objects.Db4o.Internal.CS.SingleMessagePrefetchingStrategy">
+            <summary>Prefetchs multiples objects at once (in a single message).</summary>
+            <remarks>Prefetchs multiples objects at once (in a single message).</remarks>
+            <exclude></exclude>
+        </member>
+    </members>
+</doc>

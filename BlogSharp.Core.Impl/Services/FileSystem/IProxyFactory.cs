@@ -1,4 +1,8 @@
-﻿using BlogSharp.Core.Impl.Services.FileSystem.Native;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using BlogSharp.Core.Impl.Services.FileSystem.Native;
 using BlogSharp.Core.Services.FileSystem;
 
 namespace BlogSharp.Core.Impl.Services.FileSystem

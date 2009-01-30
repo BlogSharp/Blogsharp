@@ -5,12 +5,8 @@
     </assembly>
     <members>
         <member name="T:Db4objects.Db4o.Instrumentation.Api.IFieldRef">
-            <summary>A reference to a field.</summary>
-            <remarks>
-            A reference to a field. See
-            <see cref="!:ReferenceProvider#forField">ReferenceProvider#forField</see>
-            .
-            </remarks>
+            <summary>A reference to a field..</summary>
+            <remarks>A reference to a field..</remarks>
         </member>
         <member name="T:Db4objects.Db4o.Instrumentation.Api.IMethodBuilder">
             <summary>Cross platform interface for bytecode emission.</summary>

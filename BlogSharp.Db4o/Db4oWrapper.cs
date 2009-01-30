@@ -105,12 +105,6 @@ namespace BlogSharp.Db4o
 		{
 			return inner.Lock();
 		}
-
-		public void MigrateFrom(Db4objects.Db4o.IObjectContainer objectContainer)
-		{
-			inner.MigrateFrom(objectContainer);
-		}
-
 		public object PeekPersisted(object @object, int depth, bool committed)
 		{
 			return inner.PeekPersisted(@object, depth, committed);

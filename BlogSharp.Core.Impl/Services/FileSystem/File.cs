@@ -1,19 +1,23 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 using BlogSharp.Core.Impl.Services.FileSystem.Native;
 using BlogSharp.Core.Services.FileSystem;
+using Microsoft.Win32.SafeHandles;
 
 namespace BlogSharp.Core.Impl.Services.FileSystem
 {
-	public class File : FileSystemInfoBase, IFile
+	public class File:FileSystemInfoBase,IFile
 	{
-		private readonly NativeMethods.WIN32_FIND_DATA findData;
-
-		internal File(string fileName, NativeMethods.WIN32_FIND_DATA fileData)
+		internal File(string fileName,NativeMethods.WIN32_FIND_DATA fileData)
 			: base(fileName)
 		{
-			findData = fileData;
+			this.findData = fileData;
 		}
 
+		private readonly NativeMethods.WIN32_FIND_DATA findData;
 		#region IFile Members
 
 		public long Length
@@ -23,7 +27,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 
 		public FileAttributes Attributes
 		{
-			get { return (FileAttributes) findData.dwFileAttributes; }
+			get { return (FileAttributes)findData.dwFileAttributes; }
 		}
 
 		#endregion

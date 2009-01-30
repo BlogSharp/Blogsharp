@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Transactions;
+
 using Microsoft.Win32.SafeHandles;
 
 namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 {
+
 	[Guid("79427A2B-F895-40e0-BE79-B57DC82ED231"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 	public interface IKernelTransaction
 	{
@@ -33,8 +35,8 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 		public static KtmTransactionHandle CreateKtmTransactionHandle(Transaction managedTransaction)
 		{
 			IDtcTransaction dtcTransaction = TransactionInterop.GetDtcTransaction(managedTransaction);
-
-			IKernelTransaction ktmInterface = (IKernelTransaction) dtcTransaction;
+			
+			IKernelTransaction ktmInterface = (IKernelTransaction)dtcTransaction;
 
 			IntPtr ktmTxHandle;
 			int hr = ktmInterface.GetHandle(out ktmTxHandle);
@@ -45,7 +47,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 
 		protected override bool ReleaseHandle()
 		{
-			return NativeMethods.CloseHandle(handle);
+			return NativeMethods.CloseHandle(this.handle);
 		}
 
 		private static void HandleError(int error)
