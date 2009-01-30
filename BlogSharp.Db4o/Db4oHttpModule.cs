@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web;
+using BlogSharp.Core.Web.Modules;
 using BlogSharp.Db4o.Impl;
 using Db4objects.Db4o.Ext;
 
 namespace BlogSharp.Db4o
 {
-	public class Db4oHttpModule : IHttpModule
+	public class Db4oHttpModule : IBlogSharpHttpModule
 	{
 		#region IHttpModule Members
 
@@ -16,7 +17,7 @@ namespace BlogSharp.Db4o
 
 		public void Init(HttpApplication context)
 		{
-			context.BeginRequest += HandleEndRequest;
+			context.EndRequest += HandleEndRequest;
 		}
 
 		#endregion

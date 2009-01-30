@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Web;
+using BlogSharp.Core.Web.Modules;
 using BlogSharp.Db4o.Impl;
 using Castle.Core.Configuration;
 using Castle.MicroKernel.Facilities;
@@ -20,7 +21,7 @@ namespace BlogSharp.Db4o
 			                	.ImplementedBy<CastleObjectContainerWrapper>())
 				.Register(Component.For<IObjectServerConfigurationBuilder>()
 				          	.ImplementedBy<DefaultConfigurationBuilder>())
-				.Register(Component.For<IHttpModule>().ImplementedBy<Db4oHttpModule>());
+				.Register(Component.For<IBlogSharpHttpModule>().ImplementedBy<Db4oHttpModule>());
 			ConfigureFacility();
 		}
 
@@ -33,6 +34,7 @@ namespace BlogSharp.Db4o
 		protected virtual void ConfigureFacility()
 		{
 			bool firstFactory = true;
+
 			Kernel.Register(Component.For<IObjectContainerManager>().ImplementedBy<DefaultSessionManager>());
 			Kernel.Register(Component.For<IObjectContainerProviderProvider>().ImplementedBy<DefaultContainerProviderProvider>());
 			string store = FacilityConfig.Attributes["store"];
