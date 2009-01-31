@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using BlogSharp.Model;
 
 namespace BlogSharp.Core.Impl.Web
@@ -7,11 +8,15 @@ namespace BlogSharp.Core.Impl.Web
 	{
 		public const string BLOG_CONTEXTKEY = "blogcontext";
 
+		
 		public static BlogContext Current
 		{
-			get { return (BlogContext) HttpContext.Current.Items[BLOG_CONTEXTKEY]; }
-			set { HttpContext.Current.Items[BLOG_CONTEXTKEY] = value; }
+			get { return current; }
+			set { current = value; }
 		}
+
+		[ThreadStatic]
+		private static BlogContext current;
 
 		public Blog Blog { get; set; }
 	}

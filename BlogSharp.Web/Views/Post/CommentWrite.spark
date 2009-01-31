@@ -1,1 +1,29 @@
-﻿
+﻿<Rounded extraPadding="10">
+<form action="" method="post">
+	<table>
+		<tr if='ViewData.ContainsKey("ErrorMessage")'>
+			<td colspan="2">
+				<em class="error">${ViewData["ErrorMessage"]}</em>
+			</td>
+		</tr>
+		<tr>
+			<td>Name:</td>
+			<td><%= Html.TextBox("Name") %></td>
+		</tr>
+		<tr>
+			<td>E-Mail:</td>
+			<td><%= Html.TextBox("Name") %></td>
+		</tr>
+		<tr>
+			<td>Web:</td>
+			<td><%= Html.TextBox("Web") %></td>
+		</tr>
+		<tr>
+			<td valign="top">Comment:</td>
+			<td><%= Html.TextArea("Comment","",10,50,null) %></td>
+		</tr>
+	</table>
+	<p></p>
+	<input type="submit" value="Save" />
+</form>
+</Rounded>

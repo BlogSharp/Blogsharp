@@ -15,14 +15,9 @@ namespace BlogSharp.Web.Controllers
 			this.postService = postService;
 		}
 
-		public ActionResult Index()
-		{
-			return RedirectToAction("List", "Post", new {page = 0});
-		}
-
 		public ActionResult List(int page)
 		{
-			var posts = postService.GetPostsByBlog(BlogContext.Current.Blog);
+			var posts = postService.GetPostsByBlogPaged(BlogContext.Current.Blog,0,0);
 			return View(posts);
 		}
 
@@ -30,11 +25,6 @@ namespace BlogSharp.Web.Controllers
 		{
 			var post = postService.GetPostByFriendlyTitle(BlogContext.Current.Blog, friendlyTitle);
 			return View(post);
-		}
-
-		public ActionResult ShowCart()
-		{
-			return new JavascriptViewResult {ViewName = "_CommentList"};
 		}
 	}
 }

@@ -8,4 +8,6 @@
 			${post.Content}
 		</div>
 	</div>
+	
+	# Html.RenderPartial("CommentWrite");
 </content>

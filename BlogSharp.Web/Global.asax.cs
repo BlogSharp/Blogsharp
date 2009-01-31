@@ -30,6 +30,7 @@ namespace BlogSharp.Web
 		public static void RegisterRoutes(RouteCollection routes)
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+			routes.IgnoreRoute("{resource}.ico");
 			MvcRoute.MappUrl("post/list/{page}")
 				.ToDefaultAction<PostController>(x => x.List(0))
 				.AddWithName("PostList", routes);
@@ -37,7 +38,7 @@ namespace BlogSharp.Web
 				.ToDefaultAction<PostController>(x => x.Read("friendlyTitle"))
 				.AddWithName("PostRead", routes);
 			MvcRoute.MappUrl("{controller}/{action}")
-				.ToDefaultAction<PostController>(x => x.Index())
+				.ToDefaultAction<PostController>(x => x.List(0))
 				.AddWithName("Default", routes);
 		}
 
