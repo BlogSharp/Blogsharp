@@ -4,16 +4,18 @@ using System.Transactions;
 using BlogSharp.Core.Impl.Services.FileSystem;
 using BlogSharp.Core.Impl.Services.FileSystem.Castle;
 using BlogSharp.Core.Services.FileSystem;
-using Xunit;
+using NUnit.Framework;
 
 namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 {
-	public class DirectoryTests : IDisposable
+	[TestFixture]
+	public class DirectoryTests
 	{
-		private readonly IFileService fileService;
-		private readonly string root;
+		private IFileService fileService;
+		private string root;
 
-		public DirectoryTests()
+		[SetUp]
+		public void SetUp()
 		{
 			DirectoryInfo dirInfo = System.IO.Directory.CreateDirectory("root");
 			root = dirInfo.FullName;
@@ -24,16 +26,13 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 			fileService = new TransactionalFileService(new CastleProxyFactory());
 		}
 
-		#region IDisposable Members
-
-		public void Dispose()
+		[TearDown]
+		public void TearDown()
 		{
 			System.IO.Directory.Delete("root", true);
 		}
 
-		#endregion
-
-		[Fact]
+		[Test]
 		public void Parent_returns_the_correct_directory()
 		{
 			using (TransactionScope scope = new TransactionScope())
@@ -41,13 +40,13 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 				var dirInfo = new DirectoryInfo(root);
 				IDirectory dir = fileService.GetDirectory(root);
 				Assert.NotNull(dir.Parent);
-				Assert.Equal(dir.Name, dirInfo.Name);
-				Assert.Equal(dir.Parent.Name, dirInfo.Parent.Name);
-				Assert.Equal(dir.Parent.Parent.Name, dirInfo.Parent.Parent.Name);
+				Assert.That(dirInfo.Name,Is.EqualTo(dir.Name));
+				Assert.That(dirInfo.Parent.Name, Is.EqualTo(dir.Parent.Name));
+				Assert.That(dirInfo.Parent.Parent.Name,Is.EqualTo(dir.Parent.Parent.Name));
 			}
 		}
 
-		[Fact]
+		[Test]
 		public void Children_returns_children()
 		{
 			using (TransactionScope scope = new TransactionScope())
@@ -58,7 +57,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 				int i = 0;
 				foreach (var info in children)
 				{
-					Assert.Equal(Path.Combine(root, pathList[i++]), info.Path);
+					Assert.That(info.Path,Is.EqualTo(Path.Combine(root, pathList[i++])));
 				}
 			}
 		}

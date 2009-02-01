@@ -6,19 +6,21 @@ using BlogSharp.Core.Services.Mail;
 using BlogSharp.Core.Services.Membership;
 using BlogSharp.Core.Services.Template;
 using BlogSharp.Model;
+using NUnit.Framework;
 using Rhino.Mocks;
-using Xunit;
 
 namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 {
-	public class PasswordResettedEventListenerTests : BaseTest
+	[TestFixture]
+	public class PasswordResettedEventListenerTests
 	{
-		private readonly SendMailPasswordResettedEventListener listener;
-		private readonly IMailService mailServiceMock;
-		private readonly ITemplateEngine templateEngineMock;
-		private readonly ITemplateSource templateSourceMock;
+		private SendMailPasswordResettedEventListener listener;
+		private IMailService mailServiceMock;
+		private ITemplateEngine templateEngineMock;
+		private ITemplateSource templateSourceMock;
 
-		public PasswordResettedEventListenerTests()
+		[SetUp]
+		public void SetUp()
 		{
 			mailServiceMock = MockRepository.GenerateMock<IMailService>();
 			templateEngineMock = MockRepository.GenerateMock<ITemplateEngine>();
@@ -26,7 +28,7 @@ namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 			listener = new SendMailPasswordResettedEventListener(mailServiceMock, templateEngineMock, templateSourceMock);
 		}
 
-		[Fact]
+		[Test]
 		public void Calls_template_engine_and_template_source_then_sends_email()
 		{
 			var author = new User {Email = "blah@blah.com"};

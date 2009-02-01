@@ -2,7 +2,8 @@
 using Castle.MicroKernel.Handlers;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Xunit;
+using NUnit.Framework;
+
 
 namespace BlogSharp.CastleExtensions.Tests.DependencyResolvers
 {
@@ -35,12 +36,13 @@ namespace BlogSharp.CastleExtensions.Tests.DependencyResolvers
 
 		public int ServiceId { get; set; }
 	}
-
+	[TestFixture]
 	public class ServiceIdResolverTests
 	{
-		private readonly IWindsorContainer container;
+		private IWindsorContainer container;
 
-		public ServiceIdResolverTests()
+		[SetUp]
+		public void SetUp()
 		{
 			container = new WindsorContainer();
 			container.Kernel.Resolver.AddSubResolver(new ServiceIdResolver());
@@ -49,13 +51,13 @@ namespace BlogSharp.CastleExtensions.Tests.DependencyResolvers
 				.Register(Component.For<SampleService3>().Named("service3"));
 		}
 
-		[Fact]
+		[Test]
 		public void CanResolveDependencyWithServiceId()
 		{
 			var s1 = container.Resolve<SampleService1>();
 			var s2 = container.Resolve<SampleService2>();
-			Assert.Equal("service1", s1.ServiceId);
-			Assert.Equal("service2", s2.ServiceId);
+			Assert.That("service1", Is.EqualTo(s1.ServiceId));
+			Assert.That("service2", Is.EqualTo(s2.ServiceId));
 			Assert.Throws<HandlerException>(() => container.Resolve<SampleService3>());
 		}
 	}

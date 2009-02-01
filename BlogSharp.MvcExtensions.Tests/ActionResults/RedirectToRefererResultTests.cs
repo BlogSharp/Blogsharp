@@ -1,12 +1,14 @@
 ﻿using BlogSharp.MvcExtensions.ActionResults;
+using NUnit.Framework;
 using Rhino.Mocks;
-using Xunit;
+
 
 namespace BlogSharp.MvcExtensions.Tests.ActionResults
 {
+	[TestFixture]
 	public class RedirectToRefererResultTests
 	{
-		[Fact]
+		[Test]
 		public void Redirects_to_referer_using_HTTP_REFERER_Variable()
 		{
 			var result = new RedirectToRefererResult();

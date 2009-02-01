@@ -2,14 +2,15 @@
 using BlogSharp.Core.Persistence.Repositories;
 using BlogSharp.Core.Structure;
 using BlogSharp.Model;
+using NUnit.Framework;
 using Rhino.Mocks;
-using Xunit;
 
 namespace BlogSharp.Core.Impl.Tests.Installers
 {
-	public class DefaultStartupInstallerTests : BaseTest
+	[TestFixture]
+	public class DefaultStartupInstallerTests
 	{
-		[Fact]
+		[Test]
 		public void Executes_installer_if_there_is_no_blog()
 		{
 			var blogRP = MockRepository.GenerateMock<IBlogRepository>();

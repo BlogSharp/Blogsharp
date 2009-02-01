@@ -1,32 +1,33 @@
 ﻿using BlogSharp.Db4o.Impl;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Ext;
+using NUnit.Framework;
 using Rhino.Mocks;
-using Xunit;
 
 namespace BlogSharp.Db4o.Tests.Impl
 {
+	[TestFixture]
 	public class CastleObjectContainerWrapperTests
 	{
-		private readonly CastleObjectContainerWrapper wrapper;
+		private CastleObjectContainerWrapper wrapper;
 
-		public CastleObjectContainerWrapperTests()
+		[SetUp]
+		public void SetUp()
 		{
 			wrapper = new CastleObjectContainerWrapper();
 		}
 
-		[Fact]
+		[Test]
 		public void Can_wrap_ObjectContainer()
 		{
 			var mock = MockRepository.GenerateMock<IExtObjectContainer>();
 			var wrapped = wrapper.Wrap(mock, null, null);
 			Assert.NotNull(wrapped);
-			Assert.IsAssignableFrom(typeof (IObjectContainer), wrapped);
-			Assert.IsAssignableFrom(typeof (IExtObjectContainer), wrapped);
-			Assert.IsAssignableFrom(typeof (IObjectContainerProxy), wrapped);
+			Assert.That(wrapped as IExtObjectContainer != null);
+			Assert.That(wrapped  as IObjectContainerProxy!=null);
 		}
 
-		[Fact]
+		[Test]
 		public void InvocationHandler_returns_the_interceptor()
 		{
 			var mock = MockRepository.GenerateMock<IExtObjectContainer>();
@@ -35,16 +36,16 @@ namespace BlogSharp.Db4o.Tests.Impl
 			Assert.NotNull(interceptor);
 		}
 
-		[Fact]
+		[Test]
 		public void Can_unwrap_ObjectContainer()
 		{
 			var mock = MockRepository.GenerateMock<IExtObjectContainer>();
 			var wrapped = wrapper.Wrap(mock, null, null);
 			var unwrapped = wrapper.UnWrap(wrapped);
-			Assert.Equal(mock, unwrapped);
+			Assert.AreEqual(mock, unwrapped);
 		}
 
-		[Fact]
+		[Test]
 		public void Calls_close_delegate_when_Close_is_called()
 		{
 			IExtObjectContainer container = MockRepository.GenerateMock<IExtObjectContainer>();
@@ -53,12 +54,12 @@ namespace BlogSharp.Db4o.Tests.Impl
 			IExtObjectContainer wrapped = wrapper.Wrap(container,
 			                                           delegate(IObjectContainer c)
 			                                           	{
-			                                           		Assert.Equal(container, c);
+															Assert.AreEqual(container, c);
 			                                           		closeCalled = true;
 			                                           	},
 			                                           delegate(IObjectContainer c)
 			                                           	{
-			                                           		Assert.Equal(container, c);
+			                                           		Assert.AreEqual(container, c);
 			                                           		disposeCalled = true;
 			                                           	});
 			wrapped.Close();
@@ -66,7 +67,7 @@ namespace BlogSharp.Db4o.Tests.Impl
 			Assert.False(disposeCalled);
 		}
 
-		[Fact]
+		[Test]
 		public void Calls_dispose_delegate_when_Dispose_is_called()
 		{
 			IExtObjectContainer container = MockRepository.GenerateMock<IExtObjectContainer>();
@@ -75,12 +76,12 @@ namespace BlogSharp.Db4o.Tests.Impl
 			IExtObjectContainer wrapped = wrapper.Wrap(container,
 			                                           delegate(IObjectContainer c)
 			                                           	{
-			                                           		Assert.Equal(container, c);
+															Assert.AreEqual(container, c);
 			                                           		closeCalled = true;
 			                                           	},
 			                                           delegate(IObjectContainer c)
 			                                           	{
-			                                           		Assert.Equal(container, c);
+															Assert.AreEqual(container, c);
 			                                           		disposeCalled = true;
 			                                           	});
 			wrapped.Dispose();

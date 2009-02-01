@@ -9,30 +9,30 @@ using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Ext;
-using Xunit;
+using NUnit.Framework;
 
 namespace BlogSharp.Db4o.Tests.TransactionIntegration
 {
-	public class Db4oFacilityTests : IDisposable
+	[TestFixture]
+	public class Db4oFacilityTests
 	{
 		private const string CONFIGFILE = @"BlogSharp.Db4o.Tests/TransactionIntegration/CastleConfiguration.xml";
 
-		public Db4oFacilityTests()
+		[SetUp]
+		public void SetUp()
 		{
 			File.Delete("mydb.yap");
 			CallContext.SetData(ThreadContextObjectContainerStore.CONTEXTKEY, null);
 		}
 
-		#region IDisposable Members
-
-		public void Dispose()
+		[TearDown]
+		public void TearDown()
 		{
 			File.Delete("mydb.yap");
 		}
 
-		#endregion
 
-		[Fact]
+		[Test]
 		public void Can_configure_facility_without_exception()
 		{
 			using (var container = new WindsorContainer(new XmlInterpreter(new AssemblyResource(CONFIGFILE))))
@@ -40,7 +40,7 @@ namespace BlogSharp.Db4o.Tests.TransactionIntegration
 			}
 		}
 
-		[Fact]
+		[Test]
 		public void Registers_default_components()
 		{
 			using (var windsorContainer = new WindsorContainer(new XmlInterpreter(new AssemblyResource(CONFIGFILE))))
@@ -59,7 +59,7 @@ namespace BlogSharp.Db4o.Tests.TransactionIntegration
 			}
 		}
 
-		[Fact]
+		[Test]
 		public void Register_appropriate_provider()
 		{
 			using (var windsorContainer = new WindsorContainer(new XmlInterpreter(new AssemblyResource(CONFIGFILE))))
@@ -67,7 +67,7 @@ namespace BlogSharp.Db4o.Tests.TransactionIntegration
 			}
 		}
 
-		[Fact]
+		[Test]
 		public void Does_not_dispose_when_in_transaction()
 		{
 			using (var windsorContainer = new WindsorContainer(
@@ -88,7 +88,7 @@ namespace BlogSharp.Db4o.Tests.TransactionIntegration
 			}
 		}
 
-		[Fact]
+		[Test]
 		public void Does_commit_when_not_in_transaction()
 		{
 			using (var windsorContainer = new WindsorContainer(

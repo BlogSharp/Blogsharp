@@ -2,13 +2,14 @@
 using BlogSharp.CastleExtensions.DependencyResolvers;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Xunit;
+using NUnit.Framework;
 
 namespace BlogSharp.CastleExtensions.Tests.DependencyResolvers
 {
+	[TestFixture]
 	public class EnumerableDependencyResolverTests
 	{
-		[Fact]
+		[Test]
 		public void Can_resolve_IList_with_all_services()
 		{
 			IWindsorContainer x = new WindsorContainer();
@@ -17,7 +18,7 @@ namespace BlogSharp.CastleExtensions.Tests.DependencyResolvers
 			x.Register(Component.For<ISample>().ImplementedBy<SampleImpl2>());
 			x.Register(Component.For<SimpleServiceRequiringClass>());
 			var item = x.Resolve<SimpleServiceRequiringClass>();
-			Assert.Equal(2, item.Samples.Count);
+			Assert.That(2, Is.EqualTo(item.Samples.Count));
 		}
 	}
 

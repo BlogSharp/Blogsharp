@@ -5,23 +5,25 @@ using BlogSharp.Core.Services.Membership;
 using BlogSharp.Model;
 using Castle.Windsor;
 using Rhino.Mocks;
-using Xunit;
+using NUnit.Framework;
 
 namespace BlogSharp.Core.Impl.Tests.Services.Membership
 {
-	public class MembershipServiceTests : BaseTest
+	[TestFixture]
+	public class MembershipServiceTests
 	{
-		private readonly IMembershipService membershipService;
-		private readonly IUserRepository userRepository;
+		private IMembershipService membershipService;
+		private IUserRepository userRepository;
 
-		public MembershipServiceTests()
+		[SetUp]
+		public void SetUp()
 		{
 			userRepository = MockRepository.GenerateMock<IUserRepository>();
 			membershipService = new MembershipService(userRepository, MockRepository.GenerateMock<IEncryptionService>());
 			var container = MockRepository.GenerateMock<IWindsorContainer>();
 		}
 
-		[Fact]
+		[Test]
 		public void Can_create_new_user_with_password_and_username()
 		{
 			membershipService.CreateNewUser("username", "password", "email");
@@ -32,7 +34,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Membership
 				                                  a.Email == "email")));
 		}
 
-		[Fact]
+		[Test]
 		public void Can_reset_password()
 		{
 			var author = new User {Email = "blah@email.com", Password = "1234"};
@@ -40,7 +42,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Membership
 				.Return(author);
 			membershipService.ResetPassword("blah@email.com");
 			userRepository.AssertWasCalled(x => x.SaveUser(author));
-			Assert.NotEqual(author.Password, "1234");
+			Assert.AreNotEqual(author.Password, "1234");
 		}
 	}
 }

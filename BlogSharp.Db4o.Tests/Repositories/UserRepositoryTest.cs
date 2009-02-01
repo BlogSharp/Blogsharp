@@ -1,20 +1,24 @@
 ﻿using BlogSharp.Core.Persistence.Repositories;
 using BlogSharp.Db4o.Repositories;
 using BlogSharp.Model;
-using Xunit;
+using NUnit.Framework;
+
 
 namespace BlogSharp.Db4o.Tests.Repositories
 {
+	[TestFixture]
 	public class UserRepositoryTest : BaseTest
 	{
-		private readonly IUserRepository userRepository;
+		private IUserRepository userRepository;
 
-		public UserRepositoryTest()
+		[SetUp]
+		public override void SetUp()
 		{
+			base.SetUp();
 			userRepository = new UserRepository(objectContainerManager);
 		}
 
-		[Fact]
+		[Test]
 		public void Can_store_an_user()
 		{
 			var user = new User();
@@ -23,7 +27,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			Assert.True(id > 0);
 		}
 
-		[Fact]
+		[Test]
 		public void Can_delete_an_user()
 		{
 			var user = new User();
@@ -34,7 +38,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			Assert.True(id == 0);
 		}
 
-		[Fact]
+		[Test]
 		public void Can_get_by_username()
 		{
 			var user = new User();
@@ -44,11 +48,11 @@ namespace BlogSharp.Db4o.Tests.Repositories
 
 			var foundUser = userRepository.GetAuthorByUsername("TestUser");
 			Assert.NotNull(foundUser);
-			Assert.Equal(1, foundUser.Id);
-			Assert.Equal("TestUser", foundUser.Username);
+			Assert.AreEqual(1, foundUser.Id);
+			Assert.AreEqual("TestUser", foundUser.Username);
 		}
 
-		[Fact]
+		[Test]
 		public void Can_get_by_email()
 		{
 			var user = new User();
@@ -58,8 +62,8 @@ namespace BlogSharp.Db4o.Tests.Repositories
 
 			var foundUser = userRepository.GetAuthorByEmail("TestUserEmail");
 			Assert.NotNull(foundUser);
-			Assert.Equal(1, foundUser.Id);
-			Assert.Equal("TestUserEmail", foundUser.Email);
+			Assert.AreEqual(1, foundUser.Id);
+			Assert.AreEqual("TestUserEmail", foundUser.Email);
 		}
 	}
 }

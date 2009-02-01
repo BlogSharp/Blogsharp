@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using BlogSharp.MvcExtensions.Handlers;
 using Rhino.Mocks;
-using Xunit;
+using NUnit.Framework;
 
 namespace BlogSharp.MvcExtensions.Tests.Handlers
 {
@@ -38,14 +38,16 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 		}
 	}
 
+	[TestFixture]
 	public class BlogMvcHandlerTests
 	{
-		private readonly RequestContext context;
-		private readonly IExtendedControllerFactory dummyFactory;
-		private readonly MvcHandler handler;
-		private readonly MethodInfo methodInfo;
+		private RequestContext context;
+		private IExtendedControllerFactory dummyFactory;
+		private MvcHandler handler;
+		private MethodInfo methodInfo;
 
-		public BlogMvcHandlerTests()
+		[SetUp]
+		public void SetUp()
 		{
 			context = TestsHelper.PrepareRequestContext();
 			handler = new BlogMvcHandler(context);
@@ -57,7 +59,7 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 			ControllerBuilder.Current.SetControllerFactory(dummyFactory);
 		}
 
-		[Fact]
+		[Test]
 		public void Factory_should_resolve_given_controller_with_its_type()
 		{
 			var dummyController = new DummyController();
@@ -72,7 +74,7 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 			Assert.True(dummyController.WasCalled);
 		}
 
-		[Fact]
+		[Test]
 		public void Can_release_when_exception_occurs()
 		{
 			var dummyController2 = new DummyController2();

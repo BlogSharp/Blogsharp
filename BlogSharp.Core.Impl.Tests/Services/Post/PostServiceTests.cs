@@ -3,23 +3,24 @@ using BlogSharp.Core.Impl.Services.Post;
 using BlogSharp.Core.Persistence.Repositories;
 using BlogSharp.Core.Services.Post;
 using BlogSharp.Model;
+using NUnit.Framework;
 using Rhino.Mocks;
-using Xunit;
 
 namespace BlogSharp.Core.Impl.Tests.Services.Post
 {
-	public class PostServiceTests : BaseTest
+	[TestFixture]
+	public class PostServiceTests
 	{
-		private readonly IPostRepository postRepository;
-		private readonly IPostService postService;
-
-		public PostServiceTests()
+		private IPostRepository postRepository;
+		private IPostService postService;
+		[SetUp]
+		public void SetUp()
 		{
 			postRepository = MockRepository.GenerateMock<IPostRepository>();
 			postService = new PostService(postRepository);
 		}
 
-		[Fact]
+		[Test]
 		public void AddPost_calls_underlying_repository_to_save()
 		{
 			var post = new Model.Post();
@@ -27,7 +28,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 			postRepository.AssertWasCalled(x => x.SavePost(post));
 		}
 
-		[Fact]
+		[Test]
 		public void AddComment_calls_underlying_repository()
 		{
 			var postComment = new PostComment();
@@ -35,7 +36,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 			postRepository.AssertWasCalled(x => x.SaveComment(postComment));
 		}
 
-		[Fact]
+		[Test]
 		public void RemovePost_calls_underlyting_repository_to_delete()
 		{
 			var post = new Model.Post();
@@ -43,7 +44,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 			postRepository.AssertWasCalled(x => x.DeletePost(post));
 		}
 
-		[Fact]
+		[Test]
 		public void RemoveComment_calls_underlyting_repository_to_delete()
 		{
 			var comment = new PostComment();
@@ -51,7 +52,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 			postRepository.AssertWasCalled(x => x.DeleteComment(comment));
 		}
 
-		[Fact]
+		[Test]
 		public void Events_raised_for_comment_and_post_actions()
 		{
 			var post = MockRepository.GenerateStub<Model.Post>();
@@ -61,32 +62,32 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 			postService.CommentAdded += delegate(CommentAddedEventArgs eventArgs)
 			                            	{
 			                            		c1 = true;
-			                            		Assert.Equal(postComment, eventArgs.Comment);
+			                            		Assert.AreEqual(postComment, eventArgs.Comment);
 			                            	};
 			postService.CommentAdding += delegate(CommentAddingEventArgs eventArgs)
 			                             	{
 			                             		c2 = true;
-			                             		Assert.Equal(postComment, eventArgs.Comment);
+												Assert.AreEqual(postComment, eventArgs.Comment);
 			                             	};
 			postService.PostAdding += delegate(PostAddingEventArgs eventArgs)
 			                          	{
 			                          		p1 = true;
-			                          		Assert.Equal(post, eventArgs.Post);
+											Assert.AreEqual(post, eventArgs.Post);
 			                          	};
 			postService.PostAdded += delegate(PostAddedEventArgs eventArgs)
 			                         	{
 			                         		p2 = true;
-			                         		Assert.Equal(post, eventArgs.Post);
+											Assert.AreEqual(post, eventArgs.Post);
 			                         	};
 			postService.PostRemoved += delegate(PostRemovedEventArgs eventArgs)
 			                           	{
 			                           		p3 = true;
-			                           		Assert.Equal(post, eventArgs.Post);
+											Assert.AreEqual(post, eventArgs.Post);
 			                           	};
 			postService.PostRemoving += delegate(PostRemovingEventArgs eventArgs)
 			                            	{
 			                            		p4 = true;
-			                            		Assert.Equal(post, eventArgs.Post);
+												Assert.AreEqual(post, eventArgs.Post);
 			                            	};
 			postService.AddComment(postComment);
 			postRepository.AssertWasCalled(x => x.SaveComment(postComment));
@@ -103,17 +104,17 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 			Assert.True(c2);
 		}
 
-		[Fact]
+		[Test]
 		public void Repository_is_not_called_if_event_is_cancelled()
 		{
 			var post = MockRepository.GenerateStub<Model.Post>();
 			var postComment = MockRepository.GenerateStub<PostComment>();
 
-			postService.CommentAdded += delegate { throw new Xunit.Sdk.AssertException("Shouldn't be called"); };
+			postService.CommentAdded += delegate { throw new AssertionException("Shouldn't be called"); };
 			postService.CommentAdding += x => x.Cancel = true;
 			postService.PostAdding += x => x.Cancel = true;
-			postService.PostAdded += delegate { throw new Xunit.Sdk.AssertException("Shouldn't be called"); };
-			postService.PostRemoved += delegate { throw new Xunit.Sdk.AssertException("Shouldn't be called"); };
+			postService.PostAdded += delegate { throw new AssertionException("Shouldn't be called"); };
+			postService.PostRemoved += delegate { throw new AssertionException("Shouldn't be called"); };
 			postService.PostRemoving += x => x.Cancel = true;
 			postService.AddComment(postComment);
 			postRepository.AssertWasNotCalled(x => x.SaveComment(postComment));

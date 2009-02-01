@@ -4,20 +4,22 @@ using BlogSharp.Core.Impl.Services.Template.NVelocity;
 using BlogSharp.Core.Services.Template;
 using NVelocity.App;
 using Rhino.Mocks;
-using Xunit;
+using NUnit.Framework;
 
 namespace BlogSharp.Core.Impl.Tests.Services.Template
 {
+	[TestFixture]
 	public class VelocityTemplateEngineTests
 	{
-		private readonly ITemplateEngine velocityEngine;
+		private ITemplateEngine velocityEngine;
 
-		public VelocityTemplateEngineTests()
+		[SetUp]
+		public void SetUp()
 		{
 			velocityEngine = new NVelocityTemplateEngine(new VelocityEngine());
 		}
 
-		[Fact]
+		[Test]
 		public void NVelocity_can_merge_template_with_context()
 		{
 			ITemplate template = MockRepository.GenerateStub<ITemplate>();
@@ -26,7 +28,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Template
 			context["person"] = new {Name = "Mahmut"};
 			StringWriter sw = new StringWriter();
 			velocityEngine.Merge(template, context, sw);
-			Assert.Equal("Mahmut", sw.GetStringBuilder().ToString());
+			Assert.AreEqual("Mahmut", sw.GetStringBuilder().ToString());
 		}
 	}
 }

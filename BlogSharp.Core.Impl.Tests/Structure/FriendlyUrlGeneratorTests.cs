@@ -1,9 +1,10 @@
 ﻿using BlogSharp.Core.Impl.Structure;
 using BlogSharp.Core.Structure;
-using Xunit;
+using NUnit.Framework;
 
 namespace BlogSharp.Core.Impl.Tests.Structure
 {
+	[TestFixture]
 	public class FriendlyUrlGeneratorTests
 	{
 		private readonly IFriendlyUrlGenerator generator;
@@ -13,12 +14,12 @@ namespace BlogSharp.Core.Impl.Tests.Structure
 			generator = new FriendlyUrlGenerator();
 		}
 
-		[Fact]
+		[Test]
 		public void Can_ignore_non_alphanumeric_characters()
 		{
 			string str = generator
 				.GenerateUrl("blah.aspx?title={0}", "this is a sample title with 1 numbers in it");
-			Assert.Equal("blah.aspx?title=this-is-a-sample-title-with-1-numbers-in-it", str);
+			Assert.That(str, Is.EqualTo("blah.aspx?title=this-is-a-sample-title-with-1-numbers-in-it"));
 		}
 	}
 }

@@ -1,32 +1,35 @@
 ﻿using BlogSharp.Db4o.Impl;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Ext;
+using NUnit.Framework;
 using Rhino.Mocks;
-using Xunit;
+
 
 namespace BlogSharp.Db4o.Tests.Impl
 {
+	[TestFixture]
 	public class EmbeddedServerContainerProviderTests
 	{
 		private const string DATABASEFILE = "database.yap";
 
-		private readonly IObjectContainerProvider objectContainerProvider;
-		private readonly IExtObjectServer objectServer;
+		private IObjectContainerProvider objectContainerProvider;
+		private IExtObjectServer objectServer;
 
-		public EmbeddedServerContainerProviderTests()
+		[SetUp]
+		public void SetUp()
 		{
 			objectServer = MockRepository.GenerateMock<IExtObjectServer>();
 			objectContainerProvider = new EmbeddedServerContainerProvider(objectServer);
 		}
 
-		[Fact]
+		[Test]
 		public void Can_open_client_without_configuration()
 		{
 			objectContainerProvider.GetContainer();
 			objectServer.AssertWasCalled(x => x.OpenClient());
 		}
 
-		[Fact]
+		[Test]
 		public void Can_open_client_with_configuration()
 		{
 			var configuration = Db4oFactory.NewConfiguration();

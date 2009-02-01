@@ -5,19 +5,22 @@ using BlogSharp.Core.Services.Mail;
 using BlogSharp.Core.Services.Membership;
 using BlogSharp.Core.Services.Template;
 using BlogSharp.Model;
+using NUnit.Framework;
 using Rhino.Mocks;
-using Xunit;
+
 
 namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 {
-	public class UserRegisteredEventListenerTests : BaseTest
+	[TestFixture]
+	public class UserRegisteredEventListenerTests
 	{
-		private readonly SendWelcomeEmailUserRegisteredEventListener listener;
-		private readonly IMailService mailServiceMock;
-		private readonly ITemplateEngine templateEngineMock;
-		private readonly ITemplateSource templateSourceMock;
+		private SendWelcomeEmailUserRegisteredEventListener listener;
+		private IMailService mailServiceMock;
+		private ITemplateEngine templateEngineMock;
+		private ITemplateSource templateSourceMock;
 
-		public UserRegisteredEventListenerTests()
+		[SetUp]
+		public void SetUp()
 		{
 			mailServiceMock = MockRepository.GenerateMock<IMailService>();
 			templateEngineMock = MockRepository.GenerateMock<ITemplateEngine>();
@@ -25,7 +28,7 @@ namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 			listener = new SendWelcomeEmailUserRegisteredEventListener(mailServiceMock, templateEngineMock, templateSourceMock);
 		}
 
-		[Fact]
+		[Test]
 		public void Calls_templateEngine_and_templateSource_then_sends_email()
 		{
 			var author = new User {Email = "blah@blah.com"};

@@ -1,21 +1,25 @@
 using BlogSharp.Core.Persistence.Repositories;
 using BlogSharp.Db4o.Repositories;
 using BlogSharp.Model;
-using Xunit;
+using NUnit.Framework;
 
 namespace BlogSharp.Db4o.Tests.Repositories
 {
+	[TestFixture]
 	public class BlogRepositoryTests : BaseTest
 	{
-		private readonly IBlogRepository blogRepository;
+		private  IBlogRepository blogRepository;
 
-		public BlogRepositoryTests()
+		[SetUp]
+		public override void SetUp()
 		{
+			base.SetUp();
 			blogRepository = new BlogRepository(objectContainerManager);
 		}
 
 
-		[Fact]
+
+		[Test]
 		public void Can_store_a_blog()
 		{
 			Model.Blog blog = new Blog();
@@ -25,7 +29,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		}
 
 
-		[Fact]
+		[Test]
 		public void Can_delete_the_entity()
 		{
 			Model.Blog blog = new Blog();

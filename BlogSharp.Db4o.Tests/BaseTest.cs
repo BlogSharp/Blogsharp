@@ -4,18 +4,19 @@ using Castle.Windsor;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Config;
 using Db4objects.Db4o.Ext;
-
+using NUnit.Framework;
 namespace BlogSharp.Db4o.Tests
 {
-	public class BaseTest : IDisposable
+	public class BaseTest
 	{
 		protected const string DB4O_FILE_NAME = "db4o.yap";
 
-		private readonly IWindsorContainer container;
-		protected readonly IExtObjectContainer objectContainer;
-		protected readonly TestObjectContainerManager objectContainerManager;
+		private IWindsorContainer container;
+		protected IExtObjectContainer objectContainer;
+		protected TestObjectContainerManager objectContainerManager;
 
-		public BaseTest()
+		[SetUp]
+		public virtual void SetUp()
 		{
 			File.Delete(DB4O_FILE_NAME);
 			container = new WindsorContainer();
@@ -25,8 +26,8 @@ namespace BlogSharp.Db4o.Tests
 		}
 
 		#region IDisposable Members
-
-		public void Dispose()
+		[TearDown]
+		public virtual void TearDown()
 		{
 			OnTearDown();
 			objectContainer.Close();

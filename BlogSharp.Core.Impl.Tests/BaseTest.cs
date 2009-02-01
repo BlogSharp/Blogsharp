@@ -1,20 +1,21 @@
 using System;
 using Castle.Windsor;
-
+using NUnit.Framework;
 namespace BlogSharp.Core.Impl.Tests
 {
-	public class BaseTest : IDisposable
+	public class BaseTest
 	{
-		private readonly IWindsorContainer container;
+		private IWindsorContainer container;
 
-		public BaseTest()
+		[SetUp]
+		public virtual void SetUp()
 		{
 			container = new WindsorContainer();
 		}
 
 		#region IDisposable Members
-
-		public void Dispose()
+		[TearDown]
+		public void TearDown()
 		{
 			OnTearDown();
 		}

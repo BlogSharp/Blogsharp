@@ -1,29 +1,31 @@
 ﻿using BlogSharp.Core.Impl.Services.Template;
 using BlogSharp.Core.Services.Template;
+using NUnit.Framework;
 using Rhino.Mocks;
-using Xunit;
 
 namespace BlogSharp.Core.Impl.Tests.Services.Template
 {
+	[TestFixture]
 	public class TemplateEngineRegistryTests
 	{
-		private readonly ITemplateEngineRegistry templateEngineRegistry;
+		private ITemplateEngineRegistry templateEngineRegistry;
 
-		public TemplateEngineRegistryTests()
+		[SetUp]
+		public void SetUp()
 		{
 			templateEngineRegistry = new TemplateEngineRegistry();
 		}
 
 
-		[Fact]
+		[Test]
 		public void Can_register_key_using_key()
 		{
 			var mock = MockRepository.GenerateMock<ITemplateEngine>();
 			templateEngineRegistry.RegisterTemplateEngine("blah", mock);
-			Assert.Equal(mock, templateEngineRegistry.GetTemplateEngine("blah"));
+			Assert.That(templateEngineRegistry.GetTemplateEngine("blah"),Is.EqualTo(mock));
 		}
 
-		[Fact]
+		[Test]
 		public void Can_unregister_using_key()
 		{
 			var mock = MockRepository.GenerateMock<ITemplateEngine>();

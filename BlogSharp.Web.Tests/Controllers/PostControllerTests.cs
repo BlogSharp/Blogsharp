@@ -8,20 +8,23 @@ using BlogSharp.Core.Services.Post;
 using BlogSharp.Model;
 using BlogSharp.Web.Controllers;
 using Rhino.Mocks;
-using Xunit;
+using NUnit.Framework;
 
 namespace BlogSharp.Web.Tests.Controllers
 {
-	public class PostControllerTests:IDisposable
+	[TestFixture]
+	public class PostControllerTests
 	{
-		public PostControllerTests()
+		[SetUp]
+		public void SetUp()
 		{
 			this.postService = MockRepository.GenerateMock<IPostService>();
 			this.blogContext=new BlogContext{Blog= new Blog()};
 			BlogContext.Current = blogContext;
 		}
 
-		public void Dispose()
+		[TearDown]
+		public void TearDown()
 		{
 			BlogContext.Current = null;
 		}
@@ -29,7 +32,7 @@ namespace BlogSharp.Web.Tests.Controllers
 		private BlogContext blogContext;
 		private IPostService postService;
 
-		[Fact]
+		[Test]
 		public void Can_read_the_post_with_friendly_title()
 		{
 			string friendlyTitle = "my-friendly-title";
@@ -43,7 +46,7 @@ namespace BlogSharp.Web.Tests.Controllers
 			Assert.NotNull(view.ViewData.Model);
 		}
 
-		[Fact]
+		[Test]
 		public void Can_list_the_posts_paged()
 		{
 			string friendlyTitle = "my-friendly-title";
@@ -61,7 +64,7 @@ namespace BlogSharp.Web.Tests.Controllers
 				                                            Arg<int>.Is.Anything, 
 															Arg<int>.Is.Anything));
 			Assert.NotNull(view.ViewData.Model);
-			Assert.IsAssignableFrom(typeof (IList<Post>), view.ViewData.Model);
+			Assert.That(view.ViewData.Model as IList<Post>!=null);
 		}
 	}
 }

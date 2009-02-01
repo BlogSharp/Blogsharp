@@ -2,17 +2,19 @@
 using Db4objects.Db4o;
 using Db4objects.Db4o.Ext;
 using Rhino.Mocks;
-using Xunit;
+using NUnit.Framework;
 
 namespace BlogSharp.Db4o.Tests
 {
+	[TestFixture]
 	public class EmbeddedServerContainerProviderTests
 	{
-		private readonly IObjectContainer objectContainer;
-		private readonly IExtObjectServer objectServer;
-		private readonly IObjectContainerProvider provider;
+		private IObjectContainer objectContainer;
+		private IExtObjectServer objectServer;
+		private IObjectContainerProvider provider;
 
-		public EmbeddedServerContainerProviderTests()
+		[SetUp]
+		public void SetUp()
 		{
 			objectServer = MockRepository.GenerateMock<IExtObjectServer>();
 			objectContainer = MockRepository.GenerateMock<IExtObjectContainer>();
@@ -20,10 +22,10 @@ namespace BlogSharp.Db4o.Tests
 			provider = new EmbeddedServerContainerProvider(objectServer);
 		}
 
-		[Fact]
+		[Test]
 		public void Should_return_client_instance()
 		{
-			Assert.Equal(objectContainer, objectServer.OpenClient());
+			Assert.AreEqual(objectContainer, objectServer.OpenClient());
 		}
 	}
 }
