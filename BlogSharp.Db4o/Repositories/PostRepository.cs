@@ -90,6 +90,8 @@ namespace BlogSharp.Db4o.Repositories
 		public void SavePost(Post post)
 		{
 			SaveObject(post);
+			SaveObject(post.Comments);
+			SaveObject(post.Tags);
 		}
 
 		/// <summary>
@@ -107,6 +109,9 @@ namespace BlogSharp.Db4o.Repositories
 		/// <param name="comment"></param>
 		public void SaveComment(PostComment comment)
 		{
+			if(!comment.Post.Comments.Contains(comment))
+				comment.Post.AddComment(comment);
+			SaveObject(comment.Post.Comments);
 			SaveObject(comment);
 		}
 
@@ -117,8 +122,9 @@ namespace BlogSharp.Db4o.Repositories
 		public void DeleteComment(PostComment comment)
 		{
 			comment.Post.Comments.Remove(comment);
+			SaveObject(comment.Post.Comments);
 			RemoveObject(comment);
-			SaveObject(comment.Post);
+			
 		}
 
 		/// <summary>

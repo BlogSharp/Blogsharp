@@ -29,6 +29,12 @@ namespace BlogSharp.Model
 
 		public IList<PostComment> Comments { get; set; }
 
+		public void AddComment(PostComment comment)
+		{
+			this.Comments.Add(comment);
+			comment.Post = this;
+		}
+
 		public int Id { get; set; }
 	}
 }

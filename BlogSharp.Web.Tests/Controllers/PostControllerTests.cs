@@ -19,7 +19,7 @@ namespace BlogSharp.Web.Tests.Controllers
 		public void SetUp()
 		{
 			this.postService = MockRepository.GenerateMock<IPostService>();
-			this.blogContext=new BlogContext{Blog= new Blog()};
+			this.blogContext=new BlogContext{Blog= new Blog{Configuration=new BlogConfiguration{PageSize = 10}}};
 			BlogContext.Current = blogContext;
 		}
 
@@ -62,9 +62,18 @@ namespace BlogSharp.Web.Tests.Controllers
 			this.postService
 				.AssertWasCalled(x => x.GetPostsByBlogPaged(Arg<Blog>.Is.Equal(blogContext.Blog),
 				                                            Arg<int>.Is.Anything, 
-															Arg<int>.Is.Anything));
+															Arg<int>.Is.NotEqual(0)));
 			Assert.NotNull(view.ViewData.Model);
 			Assert.That(view.ViewData.Model as IList<Post>!=null);
+		}
+
+		[Test]
+		public void Can_insert_post_comment()
+		{
+			var postComment = new PostComment();
+			var controller = new PostController(postService);
+			controller.AddComment(1,postComment);
+			postService.AssertWasCalled(x => x.AddComment(postComment));
 		}
 	}
 }

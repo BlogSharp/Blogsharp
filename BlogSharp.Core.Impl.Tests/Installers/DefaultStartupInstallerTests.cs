@@ -7,6 +7,8 @@ using Rhino.Mocks;
 
 namespace BlogSharp.Core.Impl.Tests.Installers
 {
+	//TODO: Check if blog has the post and post has the blog.
+
 	[TestFixture]
 	public class DefaultStartupInstallerTests
 	{

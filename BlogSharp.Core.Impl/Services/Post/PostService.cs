@@ -67,7 +67,7 @@ namespace BlogSharp.Core.Impl.Services.Post
 
 		public IList<Model.Post> GetPostsByBlog(Blog blog)
 		{
-			return postRepository.GetByBlog(blog, 0, 10);
+			return postRepository.GetByBlog(blog);
 		}
 
 		public event EventHandler<PostAddingEventArgs> PostAdding = delegate { };

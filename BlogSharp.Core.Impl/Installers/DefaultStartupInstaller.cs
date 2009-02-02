@@ -61,7 +61,9 @@ namespace BlogSharp.Core.Impl.Installers
 			           		DateCreated = DateTime.Now,
 			           		DatePublished = DateTime.Now
 			           	};
-
+			tag.Posts.Add(post);
+			blog.Configuration = new BlogConfiguration {PageSize = 10};
+			blog.Posts.Add(post);
 			userRepository.SaveUser(user);
 			blogRepository.SaveBlog(blog);
 			postRepository.SavePost(post);

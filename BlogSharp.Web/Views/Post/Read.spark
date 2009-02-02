@@ -8,6 +8,6 @@
 			${post.Content}
 		</div>
 	</div>
-	
-	# Html.RenderPartial("CommentWrite");
+	# Html.RenderPartial("CommentList", post.Comments);
+	# Html.RenderPartial("CommentWrite", post);
 </content>

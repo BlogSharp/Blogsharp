@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace BlogSharp.Model
 {
@@ -35,6 +38,34 @@ namespace BlogSharp.Model
 		public void SetValue<T>(string key, T value)
 		{
 			innerDict[key] = value;
+		}
+
+		public int PageSize
+		{
+			get
+			{
+				return Get(x => x.PageSize);
+			}
+			set
+			{
+				Set(x => x.PageSize, value);
+			}
+		}
+
+		public void Set<U>(Expression<Func<BlogConfiguration, U>> exp, U value)
+		{
+			innerDict[GetKey(exp)] = value;
+		}
+
+		public U Get<U>(Expression<Func<BlogConfiguration, U>> exp)
+		{
+			return (U)(innerDict[GetKey(exp)] ?? default(U));
+		}
+
+		private string GetKey<U>(Expression<Func<BlogConfiguration, U>> exp)
+		{
+			PropertyInfo info = ((MemberExpression) exp.Body).Member as PropertyInfo;
+			return info.Name;
 		}
 	}
 }

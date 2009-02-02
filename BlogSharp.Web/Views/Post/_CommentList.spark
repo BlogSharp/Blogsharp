@@ -1,6 +1,0 @@
-﻿<viewdata cart="IList[[PostComment]]"/>
-<div class="post" each="var postComment in ViewData.Model">
-	<div class="entry">
-		${postComment.Comment}
-	</div>
-</div>

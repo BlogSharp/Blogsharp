@@ -1,0 +1,4 @@
+﻿<viewdata model="IEnumerable[[BlogSharp.Model.PostComment]]"/>
+<div class="comment" each="var comment in ViewData.Model">
+	${comment.Comment}
+</div>

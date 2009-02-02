@@ -97,6 +97,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BlogSharpController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -159,8 +160,8 @@
   <ItemGroup>
     <Content Include="Content\javascript\jquery-1.2.6.js" />
     <Content Include="Content\javascript\jquery.livequery.js" />
+    <None Include="Views\Post\CommentList.spark" />
     <None Include="Views\Post\CommentWrite.spark" />
-    <Content Include="Views\Post\_CommentList.spark" />
     <Content Include="Views\Post\List.spark" />
     <Content Include="Views\Post\Read.spark" />
     <None Include="Views\Shared\application.spark" />
