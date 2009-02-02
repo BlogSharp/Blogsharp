@@ -72,8 +72,12 @@ namespace BlogSharp.Web.Tests.Controllers
 		{
 			var postComment = new PostComment();
 			var controller = new PostController(postService);
-			controller.AddComment(1,postComment);
+			postService.Expect(x => x.GetPostById(Arg<Blog>.Is.Anything,
+			                                      Arg<int>.Is.Equal(1))).Return(new Post{FriendlyTitle="m"});
+			var actionResult=controller.AddComment(1,postComment) as RedirectToRouteResult;
+			actionResult.RouteValues["friendlyTitle"] = "m";
 			postService.AssertWasCalled(x => x.AddComment(postComment));
+
 		}
 	}
 }
