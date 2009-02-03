@@ -3,7 +3,7 @@ using BlogSharp.Core.Impl.Web;
 using BlogSharp.Core.Services.Post;
 using BlogSharp.Model;
 using Spark.Web.Mvc;
-
+using Microsoft.Web.Mvc;
 namespace BlogSharp.Web.Controllers
 {
 	[HandleError]
@@ -32,7 +32,7 @@ namespace BlogSharp.Web.Controllers
 		public ActionResult AddComment(int postId,PostComment comment)
 		{
 			var post = postService.GetPostById(CurrentBlog,postId);
-			post.AddComment(comment);
+			comment.Post = post;
 			postService.AddComment(comment);
 			return RedirectToAction("Read", new {post.FriendlyTitle});
 		}

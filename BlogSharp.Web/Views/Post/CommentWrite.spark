@@ -1,7 +1,7 @@
 ﻿<viewdata model="BlogSharp.Model.Post"/>
 <var post="ViewData.Model"/>
 <Rounded extraPadding="10">
-<form action="/post/AddComment" method="post">
+<%using(Html.BeginForm<PostController>(x=>x.AddComment(1,null))){%>
 	<table>
 		<tr if='ViewData.ContainsKey("ErrorMessage")'>
 			<td colspan="2">
@@ -28,5 +28,5 @@
 	</table>
 	<p></p>
 	<input type="submit" value="Save" />
-</form>
+<%}%>
 </Rounded>

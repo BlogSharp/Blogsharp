@@ -37,9 +37,13 @@ namespace BlogSharp.Web
 			MvcRoute.MappUrl("post/read/{friendlyTitle}")
 				.ToDefaultAction<PostController>(x => x.Read("friendlyTitle"))
 				.AddWithName("PostRead", routes);
+			MvcRoute.MappUrl("post/addcomment")
+				.ToDefaultAction<PostController>(x => x.AddComment(0,null))
+				.AddWithName("PostCommentAdd", routes);
 			MvcRoute.MappUrl("{controller}/{action}")
 				.ToDefaultAction<PostController>(x => x.List(0))
 				.AddWithName("Default", routes);
+			
 		}
 
 
