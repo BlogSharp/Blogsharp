@@ -1,6 +1,6 @@
 ﻿<viewdata model="BlogSharp.Model.Post"/>
 <var post="ViewData.Model"/>
-<content name="MainContent">
+<content name="head">
 	<title>${post.Title}</title>
 </content>
 <content name="MainContent">
