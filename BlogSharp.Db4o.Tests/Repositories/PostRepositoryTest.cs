@@ -21,9 +21,9 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			blog = new Blog();
 			blog.Id = 1;
 			var author = new BlogSharp.Model.User { Id = 1 };
-			var tag1 = new Tag { Id = 1, Name = "mytag" };
+			var tag1 = new Tag { Id = 1, Name = "mytag", FriendlyName="mytag" };
 
-			var tag2 = new Tag { Id = 2, Name = "mytag2" };
+            var tag2 = new Tag { Id = 2, Name = "mytag2", FriendlyName = "mytag2" };
 			var tags = new[] { tag1, tag2 };
 			objectContainer.Store(author);
 			objectContainer.Store(blog);
@@ -161,13 +161,13 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		[Test]
 		public void Can_get_by_tag()
 		{
-			var foundPosts = postRepository.GetByTag(blog, 1, 0, 10);
+			var foundPosts = postRepository.GetByTag(blog, "mytag", 0, 10);
 			Assert.AreEqual(10, foundPosts.Count);
 
-			foundPosts = postRepository.GetByTag(blog, 2, 1, 10);
+			foundPosts = postRepository.GetByTag(blog, "mytag", 1, 10);
 			Assert.AreEqual(9, foundPosts.Count);
 
-			foundPosts = postRepository.GetByTag(blog, 1, 15, 10);
+			foundPosts = postRepository.GetByTag(blog, "mytag", 15, 10);
 			Assert.AreEqual(0, foundPosts.Count);
 		}
 

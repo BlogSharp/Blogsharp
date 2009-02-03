@@ -14,6 +14,7 @@ namespace BlogSharp.Core.Services.Post
 		Model.Post GetPostByFriendlyTitle(Blog blog, string friendlyTitle);
 		IList<Model.Post> GetPostsByBlog(Blog blog);
 		IList<Model.Post> GetPostsByBlogPaged(Blog blog, int skip, int take);
+	    IList<Model.Post> GetPostsByTagPaged(Blog blog, string friendlyTagName, int skip, int take);
 
 		event EventHandler<PostAddingEventArgs> PostAdding;
 		event EventHandler<PostAddedEventArgs> PostAdded;

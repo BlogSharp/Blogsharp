@@ -73,13 +73,13 @@ namespace BlogSharp.Db4o.Repositories
 		/// Get the Post list via Tag.
 		/// </summary>
 		/// <param name="blog"></param>
-		/// <param name="tagId"></param>
+		/// <param name="friendlyTagName"></param>
 		/// <param name="skip"></param>
 		/// <param name="take"></param>
 		/// <returns></returns>
-		public IList<Post> GetByTag(Blog blog, int tagId, int skip, int take)
+		public IList<Post> GetByTag(Blog blog, string friendlyTagName, int skip, int take)
 		{
-			var tag = container.GetContainer().Query<Tag>(x => x.Id == tagId).SingleOrDefault();
+			var tag = container.GetContainer().Query<Tag>(x => x.FriendlyName == friendlyTagName).SingleOrDefault();
 			return tag.Posts.Skip(skip).Take(take).ToList();
 		}
 

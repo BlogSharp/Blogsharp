@@ -11,6 +11,8 @@ namespace BlogSharp.Model
 
 		public string Name { get; set; }
 
+	    public string FriendlyName { get; set; }
+
 		public Blog Blog { get; set; }
 
 		public int Id { get; set; }

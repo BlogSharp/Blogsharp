@@ -46,11 +46,11 @@ namespace BlogSharp.Core.Persistence.Repositories
 		/// Get the Post list via Tag.
 		/// </summary>
 		/// <param name="blog"></param>
-		/// <param name="tagId"></param>
+		/// <param name="friendlyTagName"></param>
 		/// <param name="skip"></param>
 		/// <param name="take"></param>
 		/// <returns></returns>
-		IList<Model.Post> GetByTag(Blog blog, int tagId, int skip, int take);
+		IList<Model.Post> GetByTag(Blog blog, string friendlyTagName, int skip, int take);
 
 		/// <summary>
 		/// Saves the post
