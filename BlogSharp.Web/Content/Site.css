@@ -259,3 +259,28 @@ a img {
 
 #footer a {
 	color: #FFFFFF;
+}
+
+h3 {
+	font: 130% Georgia, serif;
+	margin-top: 0;
+}
+
+ol#comments li p {
+	font-size: 100%;
+}
+
+#commentlist li ul {
+	border-left: 1px solid #ddd;
+	font-size: 110%;
+	list-style-type: none;
+}
+div.commentbody {
+	margin: 10px 60px 10px 30px;
+	padding: 25px 0 0 10px;
+	background: #eee url(/Content/Images/comment-top.png) no-repeat;
+}
+div.commentbody div{
+	padding: 0 5px 5px 0;
+	background: #eee url(/Content/Images/comment-bottom.png) bottom right no-repeat;
+}

@@ -1,4 +1,18 @@
-﻿<viewdata model="IEnumerable[[BlogSharp.Model.PostComment]]"/>
-<div class="comment" each="var comment in ViewData.Model">
-	${comment.Comment}
-</div>
+﻿<viewdata model="BlogSharp.Model.Post"/>
+<var post="ViewData.Model"/>
+<h3 id="comments">Responses to ${post.Title}</h3>
+
+<ol class="commentlist">
+	<li class="alt" id="comment" each="var comment in post.Comments">
+		<cite><a href="${comment.Web}" rel="external nofollow">${comment.Name}</a></cite> says:
+		<br />
+		<small class="commentmetadata">
+			<a href="#comment" title="">${comment.Date}</a>
+		</small>
+		<div class="commentbody">
+        			<div><p>${comment.Comment}</p></div>
+	    </div>
+	</li>
+</ol>
+
+<h3 id="respond">Leave a Reply</h3>

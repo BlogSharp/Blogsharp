@@ -1,3 +1,4 @@
+using System;
 namespace BlogSharp.Model
 {
 	public class PostComment : IEntity
@@ -8,6 +9,7 @@ namespace BlogSharp.Model
 		public string Email { get; set; }
 		public string Name { get; set; }
 		public string Web { get; set; }
+		public DateTime Date { get; set; }
 		public int Id { get; set; }
 	}
 }

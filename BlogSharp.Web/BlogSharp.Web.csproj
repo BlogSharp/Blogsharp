@@ -158,6 +158,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\comment-bottom.png" />
+    <Content Include="Content\Images\comment-top.png" />
     <Content Include="Content\javascript\jquery-1.2.6.js" />
     <Content Include="Content\javascript\jquery.livequery.js" />
     <None Include="Views\Post\CommentList.spark" />

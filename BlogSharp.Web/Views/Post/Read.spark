@@ -1,6 +1,10 @@
-﻿<content name="MainContent">
-    <viewdata model="BlogSharp.Model.Post"/>
-    <var post="ViewData.Model"/>
+﻿<viewdata model="BlogSharp.Model.Post"/>
+<var post="ViewData.Model"/>
+<content name="MainContent">
+	<title>${post.Title}</title>
+</content>
+<content name="MainContent">
+
 	<div class="post">
 		<h2 class="title">${post.Title}</h2>
 		<p class="byline"><small>Posted by ${post.User.Username}</small></p>
@@ -8,6 +12,6 @@
 			${post.Content}
 		</div>
 	</div>
-	# Html.RenderPartial("CommentList", post.Comments);
+	# Html.RenderPartial("CommentList", post);
 	# Html.RenderPartial("CommentWrite", post);
 </content>

@@ -3,6 +3,7 @@ using BlogSharp.Core.Impl.Web;
 using BlogSharp.Core.Services.Post;
 using BlogSharp.Model;
 using Spark.Web.Mvc;
+using System;
 using Microsoft.Web.Mvc;
 namespace BlogSharp.Web.Controllers
 {
@@ -33,6 +34,7 @@ namespace BlogSharp.Web.Controllers
 		{
 			var post = postService.GetPostById(CurrentBlog,postId);
 			comment.Post = post;
+			comment.Date = DateTime.Now;
 			postService.AddComment(comment);
 			return RedirectToAction("Read", new {post.FriendlyTitle});
 		}
