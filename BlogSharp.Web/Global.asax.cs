@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using BlogSharp.CastleExtensions.DependencyResolvers;
@@ -32,7 +33,7 @@ namespace BlogSharp.Web
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 			routes.IgnoreRoute("{resource}.ico");
 			MvcRoute.MappUrl("post/list/{page}")
-				.ToDefaultAction<PostController>(x => x.List(0))
+				.ToDefaultAction<PostController>(x => x.List(1))
 				.AddWithName("PostList", routes);
 			MvcRoute.MappUrl("post/read/{friendlyTitle}")
 				.ToDefaultAction<PostController>(x => x.Read("friendlyTitle"))
@@ -40,8 +41,11 @@ namespace BlogSharp.Web
 			MvcRoute.MappUrl("post/addcomment")
 				.ToDefaultAction<PostController>(x => x.AddComment(0,null))
 				.AddWithName("PostCommentAdd", routes);
+			MvcRoute.MappUrl("tag/{tagName}")
+				.ToDefaultAction<PostController>(x => x.ListByTag("",1))
+				.AddWithName("PostListByTag", routes);
 			MvcRoute.MappUrl("{controller}/{action}")
-				.ToDefaultAction<PostController>(x => x.List(0))
+				.ToDefaultAction<PostController>(x => x.List(1))
 				.AddWithName("Default", routes);
 			
 		}
@@ -50,8 +54,17 @@ namespace BlogSharp.Web
 		protected void Application_Start()
 		{
 			RegisterRoutes(RouteTable.Routes);
-			var engine = new SparkViewFactory();
-			ViewEngines.Engines.Add(engine);
+			try
+			{
+				var engine = new SparkViewFactory();
+				ViewEngines.Engines.Add(engine);
+			}
+			catch(Exception ex)
+			{
+				
+			}
+
+
 
 			container = new WindsorContainer("Configuration/castle.xml");
 			container.Kernel.Resolver.AddSubResolver(new ListResolver(container.Kernel));

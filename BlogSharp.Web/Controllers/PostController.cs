@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Web.Mvc;
 using BlogSharp.Core.Impl.Web;
 using BlogSharp.Core.Services.Post;
@@ -10,6 +11,8 @@ namespace BlogSharp.Web.Controllers
 	[HandleError]
 	public class PostController : BlogSharpController
 	{
+
+
 		private readonly IPostService postService;
 
 		public PostController(IPostService postService)
@@ -21,6 +24,13 @@ namespace BlogSharp.Web.Controllers
 		{
 			var posts = postService.GetPostsByBlogPaged(CurrentBlog, 0,CurrentBlog.Configuration.PageSize);
 			return View(posts);
+		}
+
+		public ActionResult ListByTag(string tagName,int page)
+		{
+			var tag = tagName;
+			var posts = postService.GetPostsByTagPaged(CurrentBlog, tagName, 0, CurrentBlog.Configuration.PageSize);
+			return View("PostByTagList", new {tag = tag, posts = posts});
 		}
 
 		public ActionResult Read(string friendlyTitle)

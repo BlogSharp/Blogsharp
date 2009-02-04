@@ -1,0 +1,6 @@
+﻿<content name="MainContent">
+	Posts that are tagged with <b>${#tag}</b><br/><br/>
+	<if condition='#posts!=null'>
+	#Html.RenderPartial("List", #posts);
+	</if>
+</content>

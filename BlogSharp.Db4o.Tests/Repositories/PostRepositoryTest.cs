@@ -18,17 +18,15 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			base.SetUp();
 			postRepository = new PostRepository(objectContainerManager);
 
-			blog = new Blog();
-			blog.Id = 1;
-			var author = new BlogSharp.Model.User { Id = 1 };
-			var tag1 = new Tag { Id = 1, Name = "mytag", FriendlyName="mytag" };
+			blog = new Blog {Id = 1};
+			var author = new User { Id = 1 };
+			var tag1 = new Tag { Id = 1, Name = "mytag", FriendlyName="mytag" ,Blog=blog};
 
             var tag2 = new Tag { Id = 2, Name = "mytag2", FriendlyName = "mytag2" };
 			var tags = new[] { tag1, tag2 };
 			objectContainer.Store(author);
 			objectContainer.Store(blog);
-			objectContainer.Store(tag1);
-			objectContainer.Store(tag2);
+
 			for (int i = 0; i < 20; i++)
 			{
 				var post = new Post();
@@ -51,8 +49,11 @@ namespace BlogSharp.Db4o.Tests.Repositories
 				objectContainer.Store(comment1);
 				objectContainer.Store(comment2);
 				objectContainer.Store(post);
+				objectContainer.Store(post.Comments);
+				objectContainer.Store(post.Tags);
 			}
-
+			objectContainer.Store(tag1.Posts);
+			objectContainer.Store(tag1.Posts);
 			objectContainer.Commit();
 		}
 

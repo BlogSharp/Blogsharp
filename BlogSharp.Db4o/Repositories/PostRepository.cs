@@ -79,7 +79,10 @@ namespace BlogSharp.Db4o.Repositories
 		/// <returns></returns>
 		public IList<Post> GetByTag(Blog blog, string friendlyTagName, int skip, int take)
 		{
-			var tag = container.GetContainer().Query<Tag>(x => x.FriendlyName == friendlyTagName).SingleOrDefault();
+			var tag = container.GetContainer().Query<Tag>(x => x.FriendlyName == friendlyTagName&&x.Blog==blog).SingleOrDefault();
+			if (tag == null)
+				return null;
+			container.GetContainer().Activate(tag,3);
 			return tag.Posts.Skip(skip).Take(take).ToList();
 		}
 

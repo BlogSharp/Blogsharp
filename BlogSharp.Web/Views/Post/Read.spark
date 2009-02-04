@@ -11,6 +11,10 @@
 		<div class="entry">
 			${post.Content}
 		</div>
+		<div class="meta">
+			<p class="tags"> Tagged under: <a href="#" class="tags" each="var tag in post.Tags"> ${tag.Name} </a></p>
+			<p class="links">Comments (${post.Comments.Count})</p>
+		</div>
 	</div>
 	# Html.RenderPartial("CommentList", post);
 	# Html.RenderPartial("CommentWrite", post);

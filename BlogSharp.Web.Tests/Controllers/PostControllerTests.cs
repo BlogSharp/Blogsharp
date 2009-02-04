@@ -77,7 +77,17 @@ namespace BlogSharp.Web.Tests.Controllers
 			var actionResult=controller.AddComment(1,postComment) as RedirectToRouteResult;
 			actionResult.RouteValues["friendlyTitle"] = "m";
 			postService.AssertWasCalled(x => x.AddComment(postComment));
+		}
 
+		[Test]
+		public void Can_list_posts_with_certain_tag()
+		{
+			var controller = new PostController(postService);
+			var postList = new List<Post>();
+			postService.Expect(x => x.GetPostsByTagPaged(this.blogContext.Blog,"myTag", 0, 10)).Return(postList);
+			var result = controller.ListByTag("myTag", 1) as ViewResult;
+			var data = result.ViewData.Model;
+			Assert.That(data,Is.Not.Null);;
 		}
 	}
 }

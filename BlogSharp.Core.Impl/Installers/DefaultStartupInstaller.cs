@@ -47,7 +47,7 @@ namespace BlogSharp.Core.Impl.Installers
 			       		Founder = user
 			       	};
 
-			var tag = new Tag {Id = 1, Name = "Welcome"};
+			var tag = new Tag { Id = 1, Name = "Welcome", FriendlyName = "welcome", Blog=blog};
 			string title = "Welcome to Blogsharp!";
 			var post = new Post
 			           	{

@@ -166,6 +166,7 @@
     <None Include="Views\Post\CommentWrite.spark" />
     <Content Include="Views\Post\List.spark" />
     <Content Include="Views\Post\Read.spark" />
+    <None Include="Views\Post\PostByTagList.spark" />
     <None Include="Views\Shared\application.spark" />
   </ItemGroup>
   <ItemGroup>
