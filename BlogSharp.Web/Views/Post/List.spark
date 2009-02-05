@@ -7,8 +7,8 @@
 			${post.Content}
 		</div>
 		<div class="meta">
-			<p class="tags"> Tagged under: <a href="#" class="tags" each="var tag in post.Tags"> ${tag.Name} </a></p>
-			<p class="links"><a href="#" class="comments">Comments (${post.Comments.Count})</a> &nbsp;&bull;&nbsp;&nbsp; <a href="#" class="more">Read full post &raquo;</a></p>
+			<p class="tags"> Tagged under: <x class="tags" each="var tag in post.Tags">${Html.ActionLink<PostController>(x => x.ListByTag(tag.FriendlyName,1),tag.Name)}</x></p>
+			<p class="links">${Html.ActionLink<PostController>(x => x.Read(post.FriendlyTitle),"Comments ("+post.Comments.Count.ToString()+")",new {class="comments"})} &nbsp;&bull;&nbsp;&nbsp; ${Html.ActionLink<PostController>(x => x.Read(post.FriendlyTitle),"Read More",new {class="more"})}</p>
 		</div>
 	</div>
 </content>

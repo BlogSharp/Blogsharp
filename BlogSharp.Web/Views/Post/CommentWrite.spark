@@ -1,6 +1,7 @@
 ﻿<viewdata model="BlogSharp.Model.Post"/>
 <var post="ViewData.Model"/>
 <Rounded extraPadding="10">
+
 <%using(Html.BeginForm<PostController>(x=>x.AddComment(1,null))){%>
 	<table>
 		<tr if='ViewData.ContainsKey("ErrorMessage")'>

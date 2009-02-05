@@ -7,10 +7,10 @@
 		<cite><a href="${comment.Web}" rel="external nofollow">${comment.Name}</a></cite> says:
 		<br />
 		<small class="commentmetadata">
-			<a href="#comment" title="">${comment.Date}</a>
+			${comment.Date}
 		</small>
 		<div class="commentbody">
-        			<div><p>${comment.Comment}</p></div>
+        	<div><p>${comment.Comment}</p></div>
 	    </div>
 	</li>
 </ol>
