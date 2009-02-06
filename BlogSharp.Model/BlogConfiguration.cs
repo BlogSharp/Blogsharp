@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace BlogSharp.Model
 {
+	[Serializable]
 	public class BlogConfiguration : IEntity
 	{
 		private readonly IDictionary<string, object> innerDict;
