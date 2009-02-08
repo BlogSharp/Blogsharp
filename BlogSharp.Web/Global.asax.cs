@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using BlogSharp.CastleExtensions.DependencyResolvers;
 using BlogSharp.Core.Impl.Installers;
+using BlogSharp.Core.Impl.Web;
 using BlogSharp.Core.Web.Modules;
 using BlogSharp.Db4o;
 using BlogSharp.MvcExtensions;
@@ -30,8 +31,10 @@ namespace BlogSharp.Web
 
 		public static void RegisterRoutes(RouteCollection routes)
 		{
+			routes.RouteExistingFiles = false;
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 			routes.IgnoreRoute("{resource}.ico");
+
 			MvcRoute.MappUrl("post/list/{page}")
 				.ToDefaultAction<PostController>(x => x.List(1))
 				.AddWithName("PostList", routes);
@@ -57,19 +60,17 @@ namespace BlogSharp.Web
 			try
 			{
 				var engine = new SparkViewFactory();
+				container = new WindsorContainer("Configuration/castle.xml");
 				ViewEngines.Engines.Add(engine);
 			}
 			catch(Exception ex)
 			{
 				
 			}
-
-
-
-			container = new WindsorContainer("Configuration/castle.xml");
 			container.Kernel.Resolver.AddSubResolver(new ListResolver(container.Kernel));
 			container.Install(new DefaultComponentInstallers());
 			ControllerBuilder.Current.SetControllerFactory(container.Resolve<IExtendedControllerFactory>());
+			BlogContextProvider.Current = container.Resolve<BlogContextProvider>();
 		}
 
 		public override void Init()

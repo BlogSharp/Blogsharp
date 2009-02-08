@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BlogSharp.Core.Persistence.Repositories;
-using BlogSharp.Db4o.Repositories;
+using BlogSharp.Db4o.Blog.Repositories;
 using BlogSharp.Model;
 using NUnit.Framework;
 
@@ -10,7 +10,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 	[TestFixture]
 	public class PostRepositoryTest : BaseTest
 	{
-		private Blog blog;
+		private BlogSharp.Model.Blog blog;
 		private IPostRepository postRepository;
 		[SetUp]
 		public override void SetUp()
@@ -18,7 +18,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			base.SetUp();
 			postRepository = new PostRepository(objectContainerManager);
 
-			blog = new Blog {Id = 1};
+			blog = new BlogSharp.Model.Blog { Id = 1 };
 			var author = new User { Id = 1 };
 			var tag1 = new Tag { Id = 1, Name = "mytag", FriendlyName="mytag" ,Blog=blog};
 

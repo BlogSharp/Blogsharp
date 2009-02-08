@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using BlogSharp.Db4o.Blog;
+using Castle.MicroKernel;
 using Castle.Services.Transaction;
+using Castle.Windsor;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Ext;
 
@@ -10,15 +13,21 @@ namespace BlogSharp.Db4o.Impl
 	public class DefaultSessionManager : IObjectContainerManager
 	{
 		private const string ContainerContextKey = "containers";
+		private readonly IKernel container;
 		private readonly IObjectContainerProviderProvider provider;
 		private readonly IObjectContainerStore store;
 		private readonly ITransactionManager transactionManager;
 
-		public DefaultSessionManager(IObjectContainerStore store, ITransactionManager transactionManager,
-		                             IObjectContainerProviderProvider provider, IObjectContainerWrapper wrapper)
+		public DefaultSessionManager(
+									 IKernel container,
+									 IObjectContainerStore store,
+									 ITransactionManager transactionManager,
+									 IObjectContainerProviderProvider provider,
+			IObjectContainerWrapper wrapper)
 		{
+			this.container = container;
 			this.provider = provider;
-			Wrapper = wrapper;
+			this.Wrapper = wrapper;
 			this.transactionManager = transactionManager;
 			this.store = store;
 		}
@@ -41,10 +50,15 @@ namespace BlogSharp.Db4o.Impl
 
 			if (wrapped == null)
 			{
+				var initializers = this.container.ResolveAll<IDb4oInitializationHandler>();
 				session = CreateObjectContainer(alias);
+				foreach (var handler in initializers)
+				{
+					handler.HandleObjectContainerCreated(session);
+				}
 				weAreSessionOwner = true;
-
 				wrapped = WrapSession(transaction != null, session);
+
 				EnlistIfNecessary(weAreSessionOwner, transaction, wrapped);
 				store[alias] = wrapped;
 			}
@@ -79,12 +93,12 @@ namespace BlogSharp.Db4o.Impl
 
 
 		protected virtual bool EnlistIfNecessary(bool weAreSessionOwner, ITransaction transaction,
-		                                         IExtObjectContainer container)
+												 IExtObjectContainer container)
 		{
 			if (transaction == null)
 				return false;
 
-			IList<IExtObjectContainer> list = (IList<IExtObjectContainer>) transaction.Context[ContainerContextKey];
+			IList<IExtObjectContainer> list = (IList<IExtObjectContainer>)transaction.Context[ContainerContextKey];
 
 			bool shouldEnlist;
 

@@ -10,10 +10,14 @@ namespace BlogSharp.Web.Controllers
 {
 	public abstract class BlogSharpController:Controller
 	{
-		public virtual Blog CurrentBlog
+		protected virtual Blog CurrentBlog
 		{
-			get { return BlogContext.Current.Blog; }
-
+			get { return CurrentBlogContext.Blog; }
 		}
+		protected virtual BlogContext CurrentBlogContext
+		{
+			get { return BlogContextProvider.Current.GetCurrentBlogContext(); }
+		}
+
 	}
 }

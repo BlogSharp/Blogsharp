@@ -77,15 +77,7 @@
       <HintPath>..\SharedLibs\System.Web.Abstractions.dll</HintPath>
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
@@ -104,10 +96,6 @@
     <Compile Include="TransactionIntegration\Db4oFacilityTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlogSharp.Core.Impl\BlogSharp.Core.Impl.csproj">
-      <Project>{71467906-275B-46B0-97FD-4FAB644448B6}</Project>
-      <Name>BlogSharp.Core.Impl</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BlogSharp.Core\BlogSharp.Core.csproj">
       <Project>{ABDABEBC-B92A-4F36-AC07-6874B4932C21}</Project>
       <Name>BlogSharp.Core</Name>

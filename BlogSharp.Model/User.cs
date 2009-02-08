@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace BlogSharp.Model
 {
@@ -17,13 +16,10 @@ namespace BlogSharp.Model
 
 		public IList<Blog> Blogs { get; set; }
 
-		[Required]
 		public string Username { get; set; }
 
-		[Required]
 		public string Password { get; set; }
 
-		[Required]
 		public string Email { get; set; }
 
 		public int Id { get; set; }

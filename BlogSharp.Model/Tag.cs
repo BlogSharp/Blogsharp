@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace BlogSharp.Model
 {
@@ -12,13 +11,10 @@ namespace BlogSharp.Model
 			Posts = new List<Post>();
 		}
 
-		[Required]
 		public string Name { get; set; }
 
-		[Required]
 	    public string FriendlyName { get; set; }
 
-		[Required]
 		public Blog Blog { get; set; }
 
 		public int Id { get; set; }

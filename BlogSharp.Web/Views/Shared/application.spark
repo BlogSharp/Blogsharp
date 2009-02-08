@@ -15,6 +15,9 @@ Released   : 20081230
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="/Content/site.css" media="screen" />
+<script type="text/javascript" src="/Content/javascript/jquery-1.2.6.js")"></script>
+<script type="text/javascript" src="/Content/javascript/jquery.validate.js"></script>
+<script type="text/javascript" src="/Content/javascript/xVal.jquery.validate.js"></script>
 <use:head/>
 </head>
 <body>

@@ -19,17 +19,25 @@ namespace BlogSharp.Web.Tests.Controllers
 		public void SetUp()
 		{
 			this.postService = MockRepository.GenerateMock<IPostService>();
-			this.blogContext=new BlogContext{Blog= new Blog{Configuration=new BlogConfiguration{PageSize = 10}}};
-			BlogContext.Current = blogContext;
+			this.blogContextProvider = MockRepository.GenerateMock<BlogContextProvider>();
+			this.blog = new Blog
+			            	{
+			            		Configuration =
+			            			new BlogConfiguration {PageSize = 10}
+			            	};
+			this.blogContextProvider.Expect(x => x.GetCurrentBlogContext())
+				.Return(new BlogContext{Blog =blog}).Repeat.Any();
+			BlogContextProvider.Current = this.blogContextProvider;
 		}
 
 		[TearDown]
 		public void TearDown()
 		{
-			BlogContext.Current = null;
+			BlogContextProvider.Current = null;
 		}
 
-		private BlogContext blogContext;
+		private Blog blog;
+		private BlogContextProvider blogContextProvider;
 		private IPostService postService;
 
 		[Test]
@@ -38,11 +46,11 @@ namespace BlogSharp.Web.Tests.Controllers
 			string friendlyTitle = "my-friendly-title";
 			var controller = new PostController(this.postService);
 			postService
-				.Expect(x => x.GetPostByFriendlyTitle(this.blogContext.Blog, friendlyTitle))
+				.Expect(x => x.GetPostByFriendlyTitle(blog, friendlyTitle))
 				.Return(new Post {Title = "osman"});
 			ViewResult view = controller.Read(friendlyTitle) as ViewResult;
 			this.postService
-				.AssertWasCalled(x => x.GetPostByFriendlyTitle(blogContext.Blog, "my-friendly-title"));
+				.AssertWasCalled(x => x.GetPostByFriendlyTitle(blog, "my-friendly-title"));
 			Assert.NotNull(view.ViewData.Model);
 		}
 
@@ -53,14 +61,14 @@ namespace BlogSharp.Web.Tests.Controllers
 			var controller = new PostController(this.postService);
 			postService
 				.Expect(x => x.GetPostsByBlogPaged
-					(Arg<Blog>.Is.Equal(this.blogContext.Blog),
+					(Arg<Blog>.Is.Equal(blog),
 					Arg<int>.Is.Anything,
 					Arg<int>.Is.Anything))
 				.Return(new List<Post>());
 			
 			ViewResult view = controller.List(0) as ViewResult;
 			this.postService
-				.AssertWasCalled(x => x.GetPostsByBlogPaged(Arg<Blog>.Is.Equal(blogContext.Blog),
+				.AssertWasCalled(x => x.GetPostsByBlogPaged(Arg<Blog>.Is.Equal(blog),
 				                                            Arg<int>.Is.Anything, 
 															Arg<int>.Is.NotEqual(0)));
 			Assert.NotNull(view.ViewData.Model);
@@ -72,10 +80,9 @@ namespace BlogSharp.Web.Tests.Controllers
 		{
 			var postComment = new PostComment();
 			var controller = new PostController(postService);
-			postService.Expect(x => x.GetPostById(this.blogContext.Blog,
+			postService.Expect(x => x.GetPostById(blog,
 			                                      1)).Return(new Post {FriendlyTitle = "m"});
 			var actionResult=controller.AddComment(1,postComment) as RedirectToRouteResult;
-			actionResult.RouteValues["friendlyTitle"] = "m";
 			postService.AssertWasCalled(x => x.AddComment(postComment));
 		}
 
@@ -84,7 +91,7 @@ namespace BlogSharp.Web.Tests.Controllers
 		{
 			var controller = new PostController(postService);
 			var postList = new List<Post>();
-			postService.Expect(x => x.GetPostsByTagPaged(this.blogContext.Blog,"myTag", 0, 10)).Return(postList);
+			postService.Expect(x => x.GetPostsByTagPaged(blog, "myTag", 0, 10)).Return(postList);
 			var result = controller.ListByTag("myTag", 1) as ViewResult;
 			var data = result.ViewData.Model;
 			Assert.That(data,Is.Not.Null);;

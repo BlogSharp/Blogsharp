@@ -47,6 +47,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Castle.Services.Transaction.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Windsor, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="Db4objects.Db4o, Version=7.2.54.11278, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Db4objects.Db4o.dll</HintPath>
@@ -55,27 +59,27 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Db4objects.Db4o.CS.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blog\ValidationWiringDb4oInitializationHandler.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Db4oFacility.cs" />
     <Compile Include="Db4oHttpModule.cs" />
     <Compile Include="Db4oMode.cs" />
     <Compile Include="Db4oWrapper.cs" />
+    <Compile Include="IDb4oInitializationHandler.cs" />
     <Compile Include="Impl\CastleObjectContainerInterceptor.cs" />
     <Compile Include="Impl\CastleObjectContainerWrapper.cs" />
     <Compile Include="Impl\DefaultConfigurationBuilder.cs" />
@@ -94,10 +98,10 @@
     <Compile Include="IObjectContainerStore.cs" />
     <Compile Include="ObjectContainerComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\BlogRepository.cs" />
-    <Compile Include="Repositories\Db4oRepository.cs" />
-    <Compile Include="Repositories\PostRepository.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Blog\Repositories\BlogRepository.cs" />
+    <Compile Include="Blog\Repositories\Db4oRepository.cs" />
+    <Compile Include="Blog\Repositories\PostRepository.cs" />
+    <Compile Include="Blog\Repositories\UserRepository.cs" />
     <Compile Include="ResourceObjectContainerAdapter.cs" />
   </ItemGroup>
   <ItemGroup>

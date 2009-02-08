@@ -58,14 +58,6 @@
       <HintPath>..\SharedLibs\System.Web.Routing.dll</HintPath>
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionResults\RedirectToRefererResult.cs" />
@@ -76,6 +68,12 @@
     <Compile Include="Handlers\BlogMvcRouteHandler.cs" />
     <Compile Include="IExtendedControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlogSharp.Model\BlogSharp.Model.csproj">
+      <Project>{ACD93612-B2E7-4D51-9127-C306EF1F386C}</Project>
+      <Name>BlogSharp.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

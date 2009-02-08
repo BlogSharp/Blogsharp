@@ -14,14 +14,13 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
     {
         private IPostRepository postRepository;
         private IPostService postService;
-
+    	private Blog currentBlog;
         [SetUp]
         public void SetUp()
         {
             postRepository = MockRepository.GenerateMock<IPostRepository>();
             postService = new PostService(postRepository);
-            var blogContext = new BlogContext { Blog = new Blog { Configuration = new BlogConfiguration { PageSize = 10 } } };
-            BlogContext.Current = blogContext;
+        	currentBlog =new Blog {Configuration = new BlogConfiguration {PageSize = 10}};
         }
 
         [Test]
@@ -131,36 +130,36 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
         [Test]
         public void Can_get_post_by_id()
         {
-            postService.GetPostById(BlogContext.Current.Blog, 1);
-            postRepository.AssertWasCalled(x => x.GetPostById(BlogContext.Current.Blog, 1));
+			postService.GetPostById(currentBlog, 1);
+			postRepository.AssertWasCalled(x => x.GetPostById(currentBlog, 1));
         }
 
         [Test]
         public void Can_get_post_by_friendlyTitle()
         {
-            postService.GetPostByFriendlyTitle(BlogContext.Current.Blog, "friendlyTitle");
-            postRepository.AssertWasCalled(x => x.GetByTitle(BlogContext.Current.Blog, "friendlyTitle"));
+			postService.GetPostByFriendlyTitle(currentBlog, "friendlyTitle");
+			postRepository.AssertWasCalled(x => x.GetByTitle(currentBlog, "friendlyTitle"));
         }
 
         [Test]
         public void Can_get_posts_by_blog()
         {
-            postService.GetPostsByBlog(BlogContext.Current.Blog);
-            postRepository.AssertWasCalled(x => x.GetByBlog(BlogContext.Current.Blog));
+			postService.GetPostsByBlog(currentBlog);
+			postRepository.AssertWasCalled(x => x.GetByBlog(currentBlog));
         }
 
         [Test]
         public void Can_get_posts_by_blog_paged()
         {
-            postService.GetPostsByBlogPaged(BlogContext.Current.Blog, 0, 10);
-            postRepository.AssertWasCalled(x => x.GetByBlog(BlogContext.Current.Blog, 0, 10));
+			postService.GetPostsByBlogPaged(currentBlog, 0, 10);
+			postRepository.AssertWasCalled(x => x.GetByBlog(currentBlog, 0, 10));
         }
 
         [Test]
         public void Can_get_posts_by_tag()
         {
-            postService.GetPostsByTagPaged(BlogContext.Current.Blog, "friendlyTagName", 0, 10);
-            postRepository.AssertWasCalled(x => x.GetByTag(BlogContext.Current.Blog, "friendlyTagName", 0, 10));
+			postService.GetPostsByTagPaged(currentBlog, "friendlyTagName", 0, 10);
+			postRepository.AssertWasCalled(x => x.GetByTag(currentBlog, "friendlyTagName", 0, 10));
         }
     }
 }

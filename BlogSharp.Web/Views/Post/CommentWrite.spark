@@ -11,23 +11,24 @@
 		</tr>
 		<tr>
 			<td>Name:</td>
-			<td><%= Html.TextBox("comment.Name") %></td>
+			<td><%= Html.TextBox("comment.Name") %> <%= Html.ValidationMessage("comment.Name") %></td>
 		</tr>
 		<tr>
 			<td>E-Mail:</td>
-			<td><%= Html.TextBox("comment.Email") %></td>
+			<td><%= Html.TextBox("comment.Email") %> <%= Html.ValidationMessage("comment.Email") %></td>
 		</tr>
 		<tr>
 			<td>Web:</td>
-			<td><%= Html.TextBox("comment.Web") %></td>
+			<td><%= Html.TextBox("comment.Web") %> <%= Html.ValidationMessage("comment.Web") %></td>
 		</tr>
 		<tr>
 			<td valign="top">Comment:</td>
-			<td><%= Html.TextArea("comment.Comment","",10,50,null) %></td>
+			<td><%= Html.TextArea("comment.Comment","",10,50,null) %> <%= Html.ValidationMessage("comment.Comment") %></td>
 		</tr>
 		<%=Html.Hidden("postId",post.Id)%>
 	</table>
 	<p></p>
 	<input type="submit" value="Save" />
 <%}%>
+ <%= Html.ClientSideValidation<PostComment>("comment") %>
 </Rounded>

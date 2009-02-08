@@ -1,5 +1,5 @@
 ﻿using BlogSharp.Core.Persistence.Repositories;
-using BlogSharp.Db4o.Repositories;
+using BlogSharp.Db4o.Blog.Repositories;
 using BlogSharp.Model;
 using NUnit.Framework;
 

@@ -4,13 +4,16 @@ using BlogSharp.CastleExtensions.Facilities;
 using BlogSharp.Core.Impl.Services.Mail;
 using BlogSharp.Core.Impl.Services.Post;
 using BlogSharp.Core.Impl.Structure;
+using BlogSharp.Core.Impl.Web;
 using BlogSharp.Core.Services.Mail;
 using BlogSharp.Core.Services.Post;
 using BlogSharp.Core.Structure;
+using BlogSharp.Model.Validation;
 using BlogSharp.MvcExtensions;
 using BlogSharp.MvcExtensions.ControllerFactories;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using FluentValidation;
 
 namespace BlogSharp.Core.Impl.Installers
 {
@@ -21,9 +24,15 @@ namespace BlogSharp.Core.Impl.Installers
 		public void Install(IWindsorContainer container, Castle.MicroKernel.IConfigurationStore store)
 		{
 			container
-				.Register(Component.For<IPostService>().ImplementedBy<PostService>())
-				.Register(Component.For<IMailService>().ImplementedBy<MailService>())
-				.Register(Component.For<IFriendlyUrlGenerator>().ImplementedBy<FriendlyUrlGenerator>())
+				.Register(Component.For<IPostService>()
+				          	.ImplementedBy<PostService>())
+				.Register(Component.For<IMailService>()
+				          	.ImplementedBy<MailService>())
+				.Register(Component.For<IFriendlyUrlGenerator>()
+				          	.ImplementedBy<FriendlyUrlGenerator>())
+				.Register(AllTypes.Of(typeof (IValidatorBase<>))
+				          	.FromAssemblyNamed("BlogSharp.Model")
+							.WithService.FromInterface(typeof(IValidatorBase<>)))
 				.AddFacility<ControllerRegisterFacility>()
 				.Register(AllTypes.Of<IController>()
 				          	.FromAssemblyNamed("BlogSharp.Web").Configure(x => x.LifeStyle.Transient))
@@ -32,7 +41,10 @@ namespace BlogSharp.Core.Impl.Installers
 				.Register(AllTypes.Of<IStartupInstaller>()
 				          	.FromAssemblyNamed("BlogSharp.Core.Impl")
 				          	.WithService.FirstInterface())
-				.Register(AllTypes.Of<IHttpModule>().FromAssemblyNamed("BlogSharp.Core.Impl"));
+				.Register(AllTypes.Of<IHttpModule>()
+							.FromAssemblyNamed("BlogSharp.Core.Impl"))
+				.Register(Component.For<BlogContextProvider>()
+							.ImplementedBy<WebBlogContextProvider>());
 		}
 
 		#endregion

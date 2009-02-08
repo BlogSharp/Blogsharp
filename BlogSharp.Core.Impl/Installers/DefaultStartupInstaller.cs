@@ -12,7 +12,7 @@ namespace BlogSharp.Core.Impl.Installers
 		private readonly IFriendlyUrlGenerator generator;
 		private readonly IPostRepository postRepository;
 		private readonly IUserRepository userRepository;
-
+		private bool isInitialized = false;
 		public DefaultStartupInstaller(IBlogRepository blogRepository,
 		                               IPostRepository postRepository,
 		                               IUserRepository userRepository,
@@ -28,8 +28,15 @@ namespace BlogSharp.Core.Impl.Installers
 
 		public void Execute()
 		{
+			if (isInitialized)
+				return;
+
 			var blog = blogRepository.GetBlog();
-			if (blog != null) return;
+			if (blog != null)
+			{
+				isInitialized = true;
+				return;
+			}
 
 			var user = new User
 			           	{
@@ -67,6 +74,7 @@ namespace BlogSharp.Core.Impl.Installers
 			userRepository.SaveUser(user);
 			blogRepository.SaveBlog(blog);
 			postRepository.SavePost(post);
+			isInitialized = true;
 		}
 
 		#endregion

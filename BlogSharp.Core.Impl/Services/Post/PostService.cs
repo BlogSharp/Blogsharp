@@ -28,18 +28,18 @@ namespace BlogSharp.Core.Impl.Services.Post
             PostAdded.Raise(postAdded);
         }
 
-        public void AddComment(PostComment comment)
-        {
-            var commentAdding = new CommentAddingEventArgs(this, comment);
-            CommentAdding.Raise(commentAdding);
-            if (commentAdding.Cancel)
-                return;
-            postRepository.SaveComment(comment);
-            var commentAdded = new CommentAddedEventArgs(this, comment);
-            CommentAdded.Raise(commentAdded);
-        }
+		public void AddComment(PostComment comment)
+		{
+			var commentAdding = new CommentAddingEventArgs(this, comment);
+			CommentAdding.Raise(commentAdding);
+			if (commentAdding.Cancel)
+				return;
+			postRepository.SaveComment(comment);
+			var commentAdded = new CommentAddedEventArgs(this, comment);
+			CommentAdded.Raise(commentAdded);
+		}
 
-        public void RemoveComment(PostComment comment)
+    	public void RemoveComment(PostComment comment)
         {
             postRepository.DeleteComment(comment);
         }

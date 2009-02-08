@@ -284,3 +284,20 @@ div.commentbody div{
 	padding: 0 5px 5px 0;
 	background: #eee url(/Content/Images/comment-bottom.png) bottom right no-repeat;
 }
+
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}

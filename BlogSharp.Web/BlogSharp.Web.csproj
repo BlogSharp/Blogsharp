@@ -50,6 +50,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Db4objects.Db4o.CS.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\SharedLibs\Microsoft.Web.Mvc.dll</HintPath>
@@ -71,11 +75,9 @@
       <HintPath>..\SharedLibs\Spark.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -98,8 +100,13 @@
     </Reference>
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Web.Mobile" />
+    <Reference Include="xVal, Version=0.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\xVal.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\ValidationExtensions.cs" />
     <Compile Include="Controllers\BlogSharpController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Default.aspx.cs">
@@ -162,10 +169,15 @@
   <ItemGroup>
     <Content Include="Content\Images\comment-bottom.png" />
     <Content Include="Content\Images\comment-top.png" />
+    <Content Include="Content\javascript\additional-methods.js" />
     <Content Include="Content\javascript\jquery-1.2.6.js" />
+    <Content Include="Content\javascript\jquery.form.js" />
     <Content Include="Content\javascript\jquery.livequery.js" />
     <None Include="Views\Post\CommentList.spark" />
     <None Include="Views\Post\CommentWrite.spark" />
+    <Content Include="Content\javascript\jquery.metadata.js" />
+    <Content Include="Content\javascript\jquery.validate.js" />
+    <Content Include="Content\javascript\xVal.jquery.validate.js" />
     <Content Include="Views\Post\List.spark" />
     <Content Include="Views\Post\Read.spark" />
     <None Include="Views\Post\PostByTagList.spark" />
