@@ -4,9 +4,9 @@
 
 <%using(Html.BeginForm<PostController>(x=>x.AddComment(1,null))){%>
 	<table>
-		<tr if='ViewData.ContainsKey("ErrorMessage")'>
+		<tr>
 			<td colspan="2">
-				<em class="error">${ViewData["ErrorMessage"]}</em>
+				<%= Html.ValidationSummary() %>
 			</td>
 		</tr>
 		<tr>
@@ -30,5 +30,5 @@
 	<p></p>
 	<input type="submit" value="Save" />
 <%}%>
- <%= Html.ClientSideValidation<PostComment>("comment") %>
+
 </Rounded>
