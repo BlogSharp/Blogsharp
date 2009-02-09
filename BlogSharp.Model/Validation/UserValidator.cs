@@ -10,13 +10,9 @@ namespace BlogSharp.Model.Validation
 	{
 		public UserValidator()
 		{
-			RuleFor(x => x.Email).EmailAddress();
-			RuleFor(x => x.Email).NotEmpty();
-			RuleFor(x => x.Email).NotNull();
-			RuleFor(x => x.Password).NotNull();
-			RuleFor(x => x.Password).NotEmpty();
-			RuleFor(x => x.Username).NotNull();
-			RuleFor(x => x.Username).NotEmpty();
+			RuleFor(x => x.Email).NotEmpty().And().NotNull().And().EmailAddress();
+			RuleFor(x => x.Password).NotNull().And().NotEmpty();
+			RuleFor(x => x.Username).NotEmpty().And().NotNull();
 		}
 	}
 }

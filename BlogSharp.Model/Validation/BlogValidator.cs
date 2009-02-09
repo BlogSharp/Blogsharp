@@ -12,10 +12,8 @@ namespace BlogSharp.Model.Validation
 		{
 			RuleFor(x => x.Configuration).NotNull();
 			RuleFor(x => x.Founder).NotNull();
-			RuleFor(x => x.Host).NotNull();
-			RuleFor(x => x.Host).NotEmpty();
-			RuleFor(x => x.Name).NotNull();
-			RuleFor(x => x.Name).NotEmpty();
+			RuleFor(x => x.Host).NotNull().And().NotEmpty();
+			RuleFor(x => x.Name).NotNull().And().NotEmpty();
 			RuleFor(x => x.Title).NotEmpty();
 		}
 	}

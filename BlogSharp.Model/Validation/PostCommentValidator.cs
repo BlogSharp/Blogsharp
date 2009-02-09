@@ -12,8 +12,7 @@ namespace BlogSharp.Model.Validation
 		public PostCommentValidator()
 		{
 			RuleFor(x => x.Comment).NotEmpty();
-			RuleFor(x => x.Email).NotEmpty();
-			RuleFor(x => x.Email).EmailAddress();
+			RuleFor(x => x.Email).NotEmpty().And().EmailAddress();
 			RuleFor(x => x.Web).Url().When(x=>!string.IsNullOrEmpty(x.Web));
 		}
 	}
