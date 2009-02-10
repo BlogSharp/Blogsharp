@@ -26,6 +26,7 @@
 			<td><%= Html.TextArea("comment.Comment","",10,50,null) %> <%= Html.ValidationMessage("comment.Comment") %></td>
 		</tr>
 		<%=Html.Hidden("postId",post.Id)%>
+		<%=Html.AntiForgeryToken()%>
 	</table>
 	<p></p>
 	<input type="submit" value="Save" />

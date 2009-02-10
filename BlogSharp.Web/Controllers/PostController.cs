@@ -42,6 +42,7 @@ namespace BlogSharp.Web.Controllers
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
+		[ValidateAntiForgeryToken]
 		public ActionResult AddComment(int postId, PostComment comment)
 		{
 			var post = postService.GetPostById(CurrentBlog, postId);

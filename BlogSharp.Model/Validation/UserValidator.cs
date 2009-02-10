@@ -6,7 +6,7 @@ using FluentValidation;
 
 namespace BlogSharp.Model.Validation
 {
-	public class UserValidator:AbstractValidator<User>
+	public class UserValidator:ValidatorBase<User>
 	{
 		public UserValidator()
 		{

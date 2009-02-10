@@ -51,7 +51,10 @@ namespace BlogSharp.Core.Impl.Installers
 			       		Id = 1,
 			       		Title = "BlogSharp Blogs",
 			       		Authors = new List<User> {user},
-			       		Founder = user
+			       		Founder = user,
+			       		Configuration = new BlogConfiguration {PageSize = 10},
+						Host="localhost",
+						Name="BlogSharp",
 			       	};
 
 			var tag = new Tag { Id = 1, Name = "Welcome", FriendlyName = "welcome", Blog=blog};
