@@ -1,9 +1,9 @@
-﻿using Castle.Services.Transaction;
+﻿using System.Transactions;
 using Db4objects.Db4o;
 
 namespace BlogSharp.Db4o
 {
-	public class ResourceObjectContainerAdapter : IResource
+	public class ResourceObjectContainerAdapter : IEnlistmentNotification
 	{
 		private readonly IObjectContainer objectContainer;
 
@@ -12,20 +12,26 @@ namespace BlogSharp.Db4o
 			this.objectContainer = objectContainer;
 		}
 
-		#region IResource Members
+		#region IEnlistmentNotification Members
 
-		public void Start()
+		public void Commit(Enlistment enlistment)
 		{
+			this.objectContainer.Commit();
 		}
 
-		public void Commit()
+		public void InDoubt(Enlistment enlistment)
 		{
-			objectContainer.Commit();
+			
 		}
 
-		public void Rollback()
+		public void Prepare(PreparingEnlistment preparingEnlistment)
 		{
-			objectContainer.Rollback();
+			preparingEnlistment.Prepared();
+		}
+
+		public void Rollback(Enlistment enlistment)
+		{
+			this.objectContainer.Rollback();
 		}
 
 		#endregion

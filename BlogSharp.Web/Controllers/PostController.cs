@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.Transactions;
 using System.Web.Mvc;
 using BlogSharp.Core.Impl.Web;
 using BlogSharp.Core.Services.Post;
 using BlogSharp.Model;
 using BlogSharp.Model.Validation;
 using BlogSharp.Web.Code;
+using Castle.Services.Transaction;
 using FluentValidation;
 using Spark.Web.Mvc;
 using System;
@@ -48,15 +50,19 @@ namespace BlogSharp.Web.Controllers
 			var post = postService.GetPostById(CurrentBlog, postId);
 			comment.Post = post;
 			comment.Date = DateTime.Now;
-			try
+			using (var tranScope = new TransactionScope())
 			{
-				postService.AddComment(comment);
+				try
+				{
+					postService.AddComment(comment);
+					tranScope.Complete();
+				}
+				catch (ValidationException vex)
+				{
+					Transaction.Current.Rollback();
+					this.ModelState.AddValidationExceptionToModel("comment", vex);
+				}
 			}
-			catch(ValidationException vex)
-			{
-				this.ModelState.AddValidationExceptionToModel("comment",vex);
-			}
-			
 			return View("Read", post);
 		}
 	}

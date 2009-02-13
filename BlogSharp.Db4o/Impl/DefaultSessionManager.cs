@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using BlogSharp.Db4o.Blog;
 using Castle.MicroKernel;
-using Castle.Services.Transaction;
 using Castle.Windsor;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Ext;
+using System.Transactions;
 
 namespace BlogSharp.Db4o.Impl
 {
@@ -16,19 +16,16 @@ namespace BlogSharp.Db4o.Impl
 		private readonly IKernel container;
 		private readonly IObjectContainerProviderProvider provider;
 		private readonly IObjectContainerStore store;
-		private readonly ITransactionManager transactionManager;
 
 		public DefaultSessionManager(
 									 IKernel container,
 									 IObjectContainerStore store,
-									 ITransactionManager transactionManager,
 									 IObjectContainerProviderProvider provider,
 			IObjectContainerWrapper wrapper)
 		{
 			this.container = container;
 			this.provider = provider;
 			this.Wrapper = wrapper;
-			this.transactionManager = transactionManager;
 			this.store = store;
 		}
 
@@ -40,8 +37,6 @@ namespace BlogSharp.Db4o.Impl
 		{
 			if (alias == null)
 				throw new ArgumentNullException("alias");
-
-			ITransaction transaction = transactionManager.CurrentTransaction;
 
 			bool weAreSessionOwner = false;
 
@@ -57,14 +52,14 @@ namespace BlogSharp.Db4o.Impl
 					handler.HandleObjectContainerCreated(session);
 				}
 				weAreSessionOwner = true;
-				wrapped = WrapSession(transaction != null, session);
+				wrapped = WrapSession(Transaction.Current!=null, session);
 
-				EnlistIfNecessary(weAreSessionOwner, transaction, wrapped);
+				EnlistIfNecessary(weAreSessionOwner, wrapped);
 				store[alias] = wrapped;
 			}
 			else
 			{
-				EnlistIfNecessary(weAreSessionOwner, transaction, wrapped);
+				EnlistIfNecessary(weAreSessionOwner, wrapped);
 				IObjectContainerProxy proxy = wrapped as IObjectContainerProxy;
 				wrapped = WrapSession(true, Wrapper.UnWrap(wrapped));
 			}
@@ -92,50 +87,13 @@ namespace BlogSharp.Db4o.Impl
 		}
 
 
-		protected virtual bool EnlistIfNecessary(bool weAreSessionOwner, ITransaction transaction,
+		protected virtual bool EnlistIfNecessary(bool weAreSessionOwner, 
 												 IExtObjectContainer container)
 		{
-			if (transaction == null)
+			if (Transaction.Current == null)
 				return false;
-
-			IList<IExtObjectContainer> list = (IList<IExtObjectContainer>)transaction.Context[ContainerContextKey];
-
-			bool shouldEnlist;
-
-			if (list == null)
-			{
-				list = new List<IExtObjectContainer>();
-				shouldEnlist = true;
-			}
-			else
-			{
-				shouldEnlist = true;
-
-				foreach (IExtObjectContainer cont in list)
-				{
-					if (ObjectContainerComparer.AreEqual(cont, container))
-					{
-						shouldEnlist = false;
-						break;
-					}
-				}
-			}
-
-			if (shouldEnlist)
-			{
-				if (!transaction.DistributedTransaction)
-				{
-					transaction.Context[ContainerContextKey] = list;
-					transaction.Enlist(new ResourceObjectContainerAdapter(container));
-
-					list.Add(container);
-				}
-
-				if (weAreSessionOwner)
-				{
-					//transaction.RegisterSynchronization(new ContainerDisposeSynchronization(container));
-				}
-			}
+			var transaction = Transaction.Current;
+			transaction.EnlistVolatile(new ResourceObjectContainerAdapter(container),EnlistmentOptions.None);
 
 			return true;
 		}
