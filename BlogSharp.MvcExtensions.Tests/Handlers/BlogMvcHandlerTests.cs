@@ -21,6 +21,7 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 
 		protected override void ExecuteCore()
 		{
+
 		}
 	}
 
