@@ -79,7 +79,7 @@
     <Compile Include="Persistence\Repositories\IUserRepository.cs" />
     <Compile Include="EventHandler.cs" />
     <Compile Include="Event\AbstractEventArgs.cs" />
-    <Compile Include="Event\ApplicationEvents\ApplicationStartedEvent.cs" />
+    <Compile Include="Event\ApplicationEvents\ApplicationStartedEventArgs.cs" />
     <Compile Include="Event\ApplicationEvents\ApplicationStartingEventArgs.cs" />
     <Compile Include="Event\ICancellableEvent.cs" />
     <Compile Include="Event\IEventArgs.cs" />
@@ -88,10 +88,10 @@
     <Compile Include="Event\MembershipEvents\UserRegisteredEventArgs.cs" />
     <Compile Include="Event\MembershipEvents\UserValidatedEventArgs.cs" />
     <Compile Include="Event\MembershipEvents\UserValidatingEvent.cs" />
-    <Compile Include="Event\PluginEvents\PluginStartedEvent.cs" />
+    <Compile Include="Event\PluginEvents\PluginStartedEventArgs.cs" />
     <Compile Include="Event\PluginEvents\PluginStartingEventArgs.cs" />
     <Compile Include="Event\PluginEvents\PluginStoppedEventArgs.cs" />
-    <Compile Include="Event\PluginEvents\PluginStoppingEvent.cs" />
+    <Compile Include="Event\PluginEvents\PluginStoppingEventArgs.cs" />
     <Compile Include="Event\PostEvents\CommentAddedEventArgs.cs" />
     <Compile Include="Event\PostEvents\CommentAddingEventArgs.cs" />
     <Compile Include="Event\PostEvents\PostAddedEventArgs.cs" />
