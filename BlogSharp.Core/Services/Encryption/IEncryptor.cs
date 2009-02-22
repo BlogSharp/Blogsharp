@@ -1,7 +1,7 @@
-﻿using System.IO;
-
 namespace BlogSharp.Core.Services.Encryption
 {
+	using System.IO;
+
 	public interface IEncryptor
 	{
 		byte[] EncryptString(string s);

@@ -1,19 +1,13 @@
-using System.Collections.Generic;
-using System.Transactions;
-using System.Web.Mvc;
-using BlogSharp.Core.Impl.Web;
-using BlogSharp.Core.Services.Post;
-using BlogSharp.Model;
-using BlogSharp.Model.Validation;
-using BlogSharp.Web.Code;
-using Castle.Services.Transaction;
-using FluentValidation;
-using Spark.Web.Mvc;
-using System;
-using Microsoft.Web.Mvc;
-
 namespace BlogSharp.Web.Controllers
 {
+	using System;
+	using System.Transactions;
+	using System.Web.Mvc;
+	using Code;
+	using Core.Services.Post;
+	using Model;
+	using Model.Validation;
+
 	[HandleError]
 	public class PostController : BlogSharpController
 	{
@@ -26,17 +20,17 @@ namespace BlogSharp.Web.Controllers
 
 		public ActionResult List(int page)
 		{
-			var posts = postService.GetPostsByBlogPaged(CurrentBlog, 0,CurrentBlog.Configuration.PageSize);
+			var posts = postService.GetPostsByBlogPaged(CurrentBlog, 0, CurrentBlog.Configuration.PageSize);
 			return View(posts);
 		}
 
-		public ActionResult ListByTag(string tagName,int page)
+		public ActionResult ListByTag(string tagName, int page)
 		{
 			var tag = tagName;
 			var posts = postService.GetPostsByTagPaged(CurrentBlog, tagName, 0, CurrentBlog.Configuration.PageSize);
 			return View("PostByTagList", new {tag = tag, posts = posts});
 		}
-		
+
 		public ActionResult Read(string friendlyTitle)
 		{
 			var post = postService.GetPostByFriendlyTitle(CurrentBlog, friendlyTitle);
@@ -60,7 +54,7 @@ namespace BlogSharp.Web.Controllers
 				catch (ValidationException vex)
 				{
 					Transaction.Current.Rollback();
-					this.ModelState.AddValidationExceptionToModel("comment", vex);
+					ModelState.AddValidationExceptionToModel("comment", vex);
 				}
 			}
 			return View("Read", post);

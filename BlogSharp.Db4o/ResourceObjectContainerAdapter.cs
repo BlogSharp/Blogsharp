@@ -1,8 +1,8 @@
-﻿using System.Transactions;
-using Db4objects.Db4o;
-
 namespace BlogSharp.Db4o
 {
+	using System.Transactions;
+	using Db4objects.Db4o;
+
 	public class ResourceObjectContainerAdapter : IEnlistmentNotification
 	{
 		private readonly IObjectContainer objectContainer;
@@ -16,12 +16,11 @@ namespace BlogSharp.Db4o
 
 		public void Commit(Enlistment enlistment)
 		{
-			this.objectContainer.Commit();
+			objectContainer.Commit();
 		}
 
 		public void InDoubt(Enlistment enlistment)
 		{
-			
 		}
 
 		public void Prepare(PreparingEnlistment preparingEnlistment)
@@ -31,7 +30,7 @@ namespace BlogSharp.Db4o
 
 		public void Rollback(Enlistment enlistment)
 		{
-			this.objectContainer.Rollback();
+			objectContainer.Rollback();
 		}
 
 		#endregion

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Db4objects.Db4o;
-using Db4objects.Db4o.Ext;
-
-namespace BlogSharp.Db4o
+﻿namespace BlogSharp.Db4o
 {
+	using System;
+	using System.Collections.Generic;
+	using Db4objects.Db4o;
+	using Db4objects.Db4o.Ext;
+
 	public class Db4oWrapper : IExtObjectContainer, IObjectContainer
 	{
 		internal readonly IExtObjectContainer inner;
@@ -105,6 +105,7 @@ namespace BlogSharp.Db4o
 		{
 			return inner.Lock();
 		}
+
 		public object PeekPersisted(object @object, int depth, bool committed)
 		{
 			return inner.PeekPersisted(@object, depth, committed);
@@ -209,7 +210,7 @@ namespace BlogSharp.Db4o
 
 		public Db4objects.Db4o.IObjectSet Get(object template)
 		{
-			return inner.Get(template);
+			return inner.QueryByExample(template);
 		}
 
 		public IList<Extent> Query<Extent>(IComparer<Extent> comparer)
@@ -282,7 +283,7 @@ namespace BlogSharp.Db4o
 
 		public void Set(object obj)
 		{
-			inner.Set(obj);
+			inner.Store(obj);
 		}
 
 		public void Store(object obj)

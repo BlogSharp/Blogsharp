@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
-using Db4objects.Db4o.Ext;
-
 namespace BlogSharp.Db4o.Impl
 {
+	using System.Collections.Generic;
+	using System.Runtime.Remoting.Messaging;
+	using Db4objects.Db4o.Ext;
+
 	public class ThreadContextObjectContainerStore : IObjectContainerStore
 	{
 		public const string CONTEXTKEY = "objectcontainers";

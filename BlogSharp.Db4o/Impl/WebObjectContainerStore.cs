@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Web;
-using Db4objects.Db4o.Ext;
-
 namespace BlogSharp.Db4o.Impl
 {
+	using System.Collections.Generic;
+	using System.Web;
+	using Db4objects.Db4o.Ext;
+
 	public class WebObjectContainerStore : IObjectContainerStore
 	{
 		public const string CONTEXTKEY = "objectcontainers";

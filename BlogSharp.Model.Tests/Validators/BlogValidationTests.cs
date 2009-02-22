@@ -1,25 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BlogSharp.Model.Validation;
-using FluentValidation.TestHelper;
-using NUnit.Framework;
-
 namespace BlogSharp.Model.Tests.Validators
 {
+	using NUnit.Framework;
+	using Validation;
+
 	[TestFixture]
-	public class BlogValidationTests:ValidationTestBase<BlogValidator,Blog>
+	public class BlogValidationTests : ValidationTestBase<BlogValidator, Blog>
 	{
-
 		[Test]
-		public void Should_raise_error_when_name_is_not_specified()
-		{
-			ShouldHaveErrors(x => x.Name, null);
-			ShouldHaveErrors(x => x.Name, "");
-		}
-
-		[Test] 
 		public void Should_raise_error_when_configuration_is_null()
 		{
 			ShouldHaveErrors(x => x.Configuration, null);
@@ -36,6 +23,13 @@ namespace BlogSharp.Model.Tests.Validators
 		{
 			ShouldHaveErrors(x => x.Host, null);
 			ShouldHaveErrors(x => x.Host, "");
+		}
+
+		[Test]
+		public void Should_raise_error_when_name_is_not_specified()
+		{
+			ShouldHaveErrors(x => x.Name, null);
+			ShouldHaveErrors(x => x.Name, "");
 		}
 
 		[Test]

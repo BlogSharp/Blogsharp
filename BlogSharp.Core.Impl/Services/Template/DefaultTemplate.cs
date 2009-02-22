@@ -1,7 +1,7 @@
-﻿using BlogSharp.Core.Services.Template;
-
 namespace BlogSharp.Core.Impl.Services.Template
 {
+	using Core.Services.Template;
+
 	public class DefaultTemplate : ITemplate
 	{
 		private readonly string content;

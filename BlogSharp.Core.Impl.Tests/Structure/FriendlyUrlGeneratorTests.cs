@@ -1,9 +1,9 @@
-﻿using BlogSharp.Core.Impl.Structure;
-using BlogSharp.Core.Structure;
-using NUnit.Framework;
-
 namespace BlogSharp.Core.Impl.Tests.Structure
 {
+	using Core.Structure;
+	using Impl.Structure;
+	using NUnit.Framework;
+
 	[TestFixture]
 	public class FriendlyUrlGeneratorTests
 	{

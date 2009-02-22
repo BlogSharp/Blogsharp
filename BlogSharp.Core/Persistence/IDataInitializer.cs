@@ -1,7 +1,7 @@
-﻿using BlogSharp.Model;
-
 namespace BlogSharp.Core.Persistence
 {
+	using Model;
+
 	public interface IDataInitializer
 	{
 		bool ShouldRun(Blog blog);

@@ -1,7 +1,7 @@
-﻿using System.IO;
-
 namespace BlogSharp.Core.Services.Compression
 {
+	using System.IO;
+
 	public interface IArchiveItem
 	{
 		string Name { get; }

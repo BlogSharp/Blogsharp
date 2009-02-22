@@ -1,8 +1,8 @@
-﻿using BlogSharp.Core.Services.Membership;
-using BlogSharp.Model;
-
 namespace BlogSharp.Core.Event.MembershipEvents
 {
+	using Model;
+	using Services.Membership;
+
 	public class PasswordResettedEventArgs : AbstractEventArgs<IMembershipService>
 	{
 		public PasswordResettedEventArgs(IMembershipService service, User user, string newPassword)

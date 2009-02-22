@@ -1,8 +1,8 @@
-﻿using System.Reflection;
-using Db4objects.Db4o;
-
 namespace BlogSharp.Db4o.Impl
 {
+	using System.Reflection;
+	using Db4objects.Db4o;
+
 	public delegate void ObjectContainerCloseDelegate(IObjectContainer container);
 
 	public delegate void ObjectContainerDisposeDelegate(IObjectContainer container);

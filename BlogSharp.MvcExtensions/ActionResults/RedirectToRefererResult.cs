@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
-
 namespace BlogSharp.MvcExtensions.ActionResults
 {
+	using System.Web.Mvc;
+
 	public class RedirectToRefererResult : ActionResult
 	{
 		public override void ExecuteResult(ControllerContext context)

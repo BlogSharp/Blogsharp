@@ -1,7 +1,7 @@
-﻿using BlogSharp.Core.Event;
-
 namespace BlogSharp.Core
 {
+	using Event;
+
 	public delegate void EventHandler<TEventArgs>(TEventArgs eventArgs);
 
 	public interface IEventListener<TEventArgs> where TEventArgs : IEventArgs

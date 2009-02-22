@@ -1,9 +1,7 @@
-﻿
-
-using NUnit.Framework;
-
 namespace BlogSharp.Db4o.Tests.Impl
 {
+	using NUnit.Framework;
+
 	[TestFixture]
 	public class WebObjectContainerStoreTests
 	{

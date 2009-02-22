@@ -1,9 +1,9 @@
-﻿using System;
-using System.Web.Mvc;
-using Castle.MicroKernel;
-
 namespace BlogSharp.MvcExtensions.ControllerFactories
 {
+	using System;
+	using System.Web.Mvc;
+	using Castle.MicroKernel;
+
 	public class WindsorControllerFactory : DefaultControllerFactory, IExtendedControllerFactory
 	{
 		private readonly IKernel kernel;

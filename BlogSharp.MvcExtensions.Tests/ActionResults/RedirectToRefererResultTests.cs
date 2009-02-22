@@ -1,10 +1,9 @@
-﻿using BlogSharp.MvcExtensions.ActionResults;
-using NUnit.Framework;
-using Rhino.Mocks;
-
-
 namespace BlogSharp.MvcExtensions.Tests.ActionResults
 {
+	using MvcExtensions.ActionResults;
+	using NUnit.Framework;
+	using Rhino.Mocks;
+
 	[TestFixture]
 	public class RedirectToRefererResultTests
 	{

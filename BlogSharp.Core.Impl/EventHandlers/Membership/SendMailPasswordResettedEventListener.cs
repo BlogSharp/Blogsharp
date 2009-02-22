@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Net.Mail;
-using BlogSharp.Core.Event.MembershipEvents;
-using BlogSharp.Core.Services.Mail;
-using BlogSharp.Core.Services.Template;
-
 namespace BlogSharp.Core.Impl.EventHandlers.Membership
 {
+	using System.Collections.Generic;
+	using System.Net.Mail;
+	using Core.Services.Mail;
+	using Core.Services.Template;
+	using Event.MembershipEvents;
+
 	public class SendMailPasswordResettedEventListener : IEventListener<PasswordResettedEventArgs>
 	{
 		private readonly IMailService mailService;

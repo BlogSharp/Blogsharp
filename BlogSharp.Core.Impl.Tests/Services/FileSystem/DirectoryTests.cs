@@ -1,18 +1,16 @@
-﻿using System;
-using System.IO;
-using System.Transactions;
-using BlogSharp.Core.Impl.Services.FileSystem;
-using BlogSharp.Core.Impl.Services.FileSystem.Castle;
-using BlogSharp.Core.Services.FileSystem;
-using NUnit.Framework;
-
 namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 {
+	using System.IO;
+	using System.Transactions;
+	using Core.Services.FileSystem;
+	using Impl.Services.FileSystem;
+	using Impl.Services.FileSystem.Castle;
+	using NUnit.Framework;
+
 	[TestFixture]
 	public class DirectoryTests
 	{
-		private IFileService fileService;
-		private string root;
+		#region Setup/Teardown
 
 		[SetUp]
 		public void SetUp()
@@ -32,19 +30,10 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 			System.IO.Directory.Delete("root", true);
 		}
 
-		[Test]
-		public void Parent_returns_the_correct_directory()
-		{
-			using (TransactionScope scope = new TransactionScope())
-			{
-				var dirInfo = new DirectoryInfo(root);
-				IDirectory dir = fileService.GetDirectory(root);
-				Assert.NotNull(dir.Parent);
-				Assert.That(dirInfo.Name,Is.EqualTo(dir.Name));
-				Assert.That(dirInfo.Parent.Name, Is.EqualTo(dir.Parent.Name));
-				Assert.That(dirInfo.Parent.Parent.Name,Is.EqualTo(dir.Parent.Parent.Name));
-			}
-		}
+		#endregion
+
+		private IFileService fileService;
+		private string root;
 
 		[Test]
 		public void Children_returns_children()
@@ -57,8 +46,22 @@ namespace BlogSharp.Core.Impl.Tests.Services.FileSystem
 				int i = 0;
 				foreach (var info in children)
 				{
-					Assert.That(info.Path,Is.EqualTo(Path.Combine(root, pathList[i++])));
+					Assert.That(info.Path, Is.EqualTo(Path.Combine(root, pathList[i++])));
 				}
+			}
+		}
+
+		[Test]
+		public void Parent_returns_the_correct_directory()
+		{
+			using (TransactionScope scope = new TransactionScope())
+			{
+				var dirInfo = new DirectoryInfo(root);
+				IDirectory dir = fileService.GetDirectory(root);
+				Assert.NotNull(dir.Parent);
+				Assert.That(dirInfo.Name, Is.EqualTo(dir.Name));
+				Assert.That(dirInfo.Parent.Name, Is.EqualTo(dir.Parent.Name));
+				Assert.That(dirInfo.Parent.Parent.Name, Is.EqualTo(dir.Parent.Parent.Name));
 			}
 		}
 	}

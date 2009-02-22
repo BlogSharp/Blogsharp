@@ -1,23 +1,19 @@
-﻿using System.Net.Mail;
-using BlogSharp.Core.Event.MembershipEvents;
-using BlogSharp.Core.Impl.EventHandlers.Membership;
-using BlogSharp.Core.Services.Mail;
-using BlogSharp.Core.Services.Membership;
-using BlogSharp.Core.Services.Template;
-using BlogSharp.Model;
-using NUnit.Framework;
-using Rhino.Mocks;
-
-
 namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 {
+	using System.Net.Mail;
+	using Core.Services.Mail;
+	using Core.Services.Membership;
+	using Core.Services.Template;
+	using Event.MembershipEvents;
+	using Impl.EventHandlers.Membership;
+	using Model;
+	using NUnit.Framework;
+	using Rhino.Mocks;
+
 	[TestFixture]
 	public class UserRegisteredEventListenerTests
 	{
-		private SendWelcomeEmailUserRegisteredEventListener listener;
-		private IMailService mailServiceMock;
-		private ITemplateEngine templateEngineMock;
-		private ITemplateSource templateSourceMock;
+		#region Setup/Teardown
 
 		[SetUp]
 		public void SetUp()
@@ -27,6 +23,13 @@ namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 			templateSourceMock = MockRepository.GenerateMock<ITemplateSource>();
 			listener = new SendWelcomeEmailUserRegisteredEventListener(mailServiceMock, templateEngineMock, templateSourceMock);
 		}
+
+		#endregion
+
+		private SendWelcomeEmailUserRegisteredEventListener listener;
+		private IMailService mailServiceMock;
+		private ITemplateEngine templateEngineMock;
+		private ITemplateSource templateSourceMock;
 
 		[Test]
 		public void Calls_templateEngine_and_templateSource_then_sends_email()

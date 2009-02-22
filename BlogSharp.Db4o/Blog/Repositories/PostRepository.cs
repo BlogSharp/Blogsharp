@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BlogSharp.Core.Persistence.Repositories;
-using BlogSharp.Model;
-
 namespace BlogSharp.Db4o.Blog.Repositories
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using Core.Persistence.Repositories;
+	using Model;
+
 	public class PostRepository : Db4oRepository, IPostRepository
 	{
 		public PostRepository(IObjectContainerManager container)
@@ -66,7 +66,7 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		public IList<Post> GetByAuthor(BlogSharp.Model.Blog blog, int authorId, int skip, int take)
 		{
 			return container.GetContainer()
-				.Query<Post>(x => x.Blog == blog && 
+				.Query<Post>(x => x.Blog == blog &&
 				                  x.User.ID == authorId)
 				.Skip(skip).Take(take).ToList();
 		}
@@ -81,10 +81,11 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		/// <returns></returns>
 		public IList<Post> GetByTag(BlogSharp.Model.Blog blog, string friendlyTagName, int skip, int take)
 		{
-			var tag = container.GetContainer().Query<Tag>(x => x.FriendlyName == friendlyTagName&&x.Blog==blog).SingleOrDefault();
+			var tag =
+				container.GetContainer().Query<Tag>(x => x.FriendlyName == friendlyTagName && x.Blog == blog).SingleOrDefault();
 			if (tag == null)
 				return null;
-			container.GetContainer().Activate(tag,3);
+			container.GetContainer().Activate(tag, 3);
 			return tag.Posts.Skip(skip).Take(take).ToList();
 		}
 
@@ -114,7 +115,7 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		/// <param name="comment"></param>
 		public void SaveComment(PostComment comment)
 		{
-			if(!comment.Post.Comments.Contains(comment))
+			if (!comment.Post.Comments.Contains(comment))
 				comment.Post.AddComment(comment);
 			SaveObject(comment.Post.Comments);
 			SaveObject(comment);
@@ -129,7 +130,6 @@ namespace BlogSharp.Db4o.Blog.Repositories
 			comment.Post.Comments.Remove(comment);
 			SaveObject(comment.Post.Comments);
 			RemoveObject(comment);
-			
 		}
 
 		/// <summary>

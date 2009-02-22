@@ -1,10 +1,10 @@
-﻿using System;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-
 namespace BlogSharp.MvcExtensions.Handlers
 {
+	using System;
+	using System.Web;
+	using System.Web.Mvc;
+	using System.Web.Routing;
+
 	public class BlogMvcHandler : System.Web.Mvc.MvcHandler
 	{
 		public BlogMvcHandler(RequestContext requestContext)

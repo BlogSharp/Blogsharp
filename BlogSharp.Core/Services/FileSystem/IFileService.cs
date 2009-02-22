@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Security.AccessControl;
-
 namespace BlogSharp.Core.Services.FileSystem
 {
+	using System.Collections.Generic;
+	using System.IO;
+	using System.Security.AccessControl;
+
 	public interface IFileService
 	{
 		bool FileExists(string file);

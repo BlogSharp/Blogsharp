@@ -1,14 +1,14 @@
-﻿using BlogSharp.Core.Impl.Services.Template;
-using BlogSharp.Core.Services.Template;
-using NUnit.Framework;
-using Rhino.Mocks;
-
 namespace BlogSharp.Core.Impl.Tests.Services.Template
 {
+	using Core.Services.Template;
+	using Impl.Services.Template;
+	using NUnit.Framework;
+	using Rhino.Mocks;
+
 	[TestFixture]
 	public class TemplateEngineRegistryTests
 	{
-		private ITemplateEngineRegistry templateEngineRegistry;
+		#region Setup/Teardown
 
 		[SetUp]
 		public void SetUp()
@@ -16,13 +16,17 @@ namespace BlogSharp.Core.Impl.Tests.Services.Template
 			templateEngineRegistry = new TemplateEngineRegistry();
 		}
 
+		#endregion
+
+		private ITemplateEngineRegistry templateEngineRegistry;
+
 
 		[Test]
 		public void Can_register_key_using_key()
 		{
 			var mock = MockRepository.GenerateMock<ITemplateEngine>();
 			templateEngineRegistry.RegisterTemplateEngine("blah", mock);
-			Assert.That(templateEngineRegistry.GetTemplateEngine("blah"),Is.EqualTo(mock));
+			Assert.That(templateEngineRegistry.GetTemplateEngine("blah"), Is.EqualTo(mock));
 		}
 
 		[Test]

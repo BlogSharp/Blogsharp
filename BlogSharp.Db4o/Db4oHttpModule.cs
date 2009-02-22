@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web;
-using BlogSharp.Core.Web.Modules;
-using BlogSharp.Db4o.Impl;
-using Db4objects.Db4o.Ext;
-
 namespace BlogSharp.Db4o
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Web;
+	using Core.Web.Modules;
+	using Db4objects.Db4o.Ext;
+	using Impl;
+
 	public class Db4oHttpModule : IBlogSharpHttpModule
 	{
-		#region IHttpModule Members
+		#region IBlogSharpHttpModule Members
 
 		public void Dispose()
 		{

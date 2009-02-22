@@ -1,9 +1,9 @@
-﻿using System.Web.Mvc;
-using Castle.Core;
-using Castle.MicroKernel.Facilities;
-
 namespace BlogSharp.CastleExtensions.Facilities
 {
+	using System.Web.Mvc;
+	using Castle.Core;
+	using Castle.MicroKernel.Facilities;
+
 	public class ControllerRegisterFacility : AbstractFacility
 	{
 		protected override void Init()

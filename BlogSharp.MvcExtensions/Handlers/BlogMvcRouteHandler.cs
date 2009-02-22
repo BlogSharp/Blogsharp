@@ -1,7 +1,7 @@
-﻿using System.Web.Routing;
-
 namespace BlogSharp.MvcExtensions.Handlers
 {
+	using System.Web.Routing;
+
 	public class BlogMvcRouteHandler : System.Web.Mvc.MvcRouteHandler
 	{
 		protected override System.Web.IHttpHandler GetHttpHandler(RequestContext requestContext)

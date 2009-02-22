@@ -1,7 +1,7 @@
-﻿using System.IO;
-
 namespace BlogSharp.Core.Services.Encryption
 {
+	using System.IO;
+
 	public interface IHasher
 	{
 		byte[] HashStream(Stream s);

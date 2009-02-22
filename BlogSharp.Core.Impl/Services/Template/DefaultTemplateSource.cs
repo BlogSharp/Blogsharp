@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.RegularExpressions;
-using BlogSharp.Core.Services.FileSystem;
-using BlogSharp.Core.Services.Template;
-
 namespace BlogSharp.Core.Impl.Services.Template
 {
+	using System;
+	using System.Collections.Generic;
+	using System.IO;
+	using System.Text.RegularExpressions;
+	using Core.Services.FileSystem;
+	using Core.Services.Template;
+
 	//TODO: Very naive implementation! Be cautious.
 	public class DefaultTemplateSource : ITemplateSource
 	{

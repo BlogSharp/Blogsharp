@@ -1,7 +1,7 @@
-using Db4objects.Db4o.Events;
-
 namespace BlogSharp.Db4o.Blog.Repositories
 {
+	using Db4objects.Db4o.Events;
+
 	public class Db4oRepository
 	{
 		protected readonly IObjectContainerManager container;
@@ -17,7 +17,7 @@ namespace BlogSharp.Db4o.Blog.Repositories
 			{
 				container.GetContainer().Store(obj);
 			}
-			catch(EventException eventException)
+			catch (EventException eventException)
 			{
 				throw eventException.InnerException;
 			}

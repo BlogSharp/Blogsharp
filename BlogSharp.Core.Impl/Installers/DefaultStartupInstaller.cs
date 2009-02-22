@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using BlogSharp.Core.Persistence.Repositories;
-using BlogSharp.Core.Structure;
-using BlogSharp.Model;
-
 namespace BlogSharp.Core.Impl.Installers
 {
+	using System;
+	using System.Collections.Generic;
+	using Core.Structure;
+	using Model;
+	using Persistence.Repositories;
+
 	public class DefaultStartupInstaller : IStartupInstaller
 	{
 		private readonly IBlogRepository blogRepository;
@@ -13,6 +13,7 @@ namespace BlogSharp.Core.Impl.Installers
 		private readonly IPostRepository postRepository;
 		private readonly IUserRepository userRepository;
 		private bool isInitialized = false;
+
 		public DefaultStartupInstaller(IBlogRepository blogRepository,
 		                               IPostRepository postRepository,
 		                               IUserRepository userRepository,
@@ -53,11 +54,11 @@ namespace BlogSharp.Core.Impl.Installers
 			       		Authors = new List<User> {user},
 			       		Founder = user,
 			       		Configuration = new BlogConfiguration {PageSize = 10},
-						Host="localhost",
-						Name="BlogSharp",
+			       		Host = "localhost",
+			       		Name = "BlogSharp",
 			       	};
 
-			var tag = new Tag { ID = 1, Name = "Welcome", FriendlyName = "welcome", Blog=blog};
+			var tag = new Tag {ID = 1, Name = "Welcome", FriendlyName = "welcome", Blog = blog};
 			string title = "Welcome to Blogsharp!";
 			var post = new Post
 			           	{

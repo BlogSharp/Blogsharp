@@ -1,8 +1,8 @@
-﻿using Castle.Core;
-using Castle.MicroKernel;
-
 namespace BlogSharp.CastleExtensions.DependencyResolvers
 {
+	using Castle.Core;
+	using Castle.MicroKernel;
+
 	public class ServiceIdResolver : ISubDependencyResolver
 	{
 		#region ISubDependencyResolver Members

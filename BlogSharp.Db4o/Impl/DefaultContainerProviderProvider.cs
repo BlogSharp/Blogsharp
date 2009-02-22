@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
 namespace BlogSharp.Db4o.Impl
 {
+	using System.Collections.Generic;
+
 	public class DefaultContainerProviderProvider : IObjectContainerProviderProvider
 	{
 		private readonly IDictionary<string, IObjectContainerProvider> providers;

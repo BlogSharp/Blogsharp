@@ -1,14 +1,17 @@
-﻿using System.Transactions;
-using Db4objects.Db4o.Ext;
-using Rhino.Mocks;
-using NUnit.Framework;
 namespace BlogSharp.Db4o.Tests.Impl
 {
+	#region usings
+
+	using Db4objects.Db4o.Ext;
+	using NUnit.Framework;
+	using Rhino.Mocks;
+
+	#endregion
+
 	[TestFixture]
 	public class ResourceObjectContainerAdapterTests
 	{
-		private ResourceObjectContainerAdapter adapter;
-		private IExtObjectContainer container;
+		#region Setup/Teardown
 
 		[SetUp]
 		public void SetUp()
@@ -16,6 +19,11 @@ namespace BlogSharp.Db4o.Tests.Impl
 			container = MockRepository.GenerateMock<IExtObjectContainer>();
 			adapter = new ResourceObjectContainerAdapter(container);
 		}
+
+		#endregion
+
+		private ResourceObjectContainerAdapter adapter;
+		private IExtObjectContainer container;
 
 		[Test]
 		public void Commit_calls_commit_on_container()

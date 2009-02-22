@@ -1,7 +1,6 @@
-﻿using System.Web.Mvc;
-
 namespace BlogSharp.MvcExtensions.Filters
 {
+	using System.Web.Mvc;
 
 	#region castle license
 

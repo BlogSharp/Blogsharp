@@ -1,14 +1,13 @@
-using BlogSharp.Core.Persistence.Repositories;
-using BlogSharp.Db4o.Blog.Repositories;
-using BlogSharp.Model;
-using NUnit.Framework;
-
 namespace BlogSharp.Db4o.Tests.Repositories
 {
+	using Blog.Repositories;
+	using Core.Persistence.Repositories;
+	using NUnit.Framework;
+
 	[TestFixture]
 	public class BlogRepositoryTests : BaseTest
 	{
-		private  IBlogRepository blogRepository;
+		#region Setup/Teardown
 
 		[SetUp]
 		public override void SetUp()
@@ -17,16 +16,9 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			blogRepository = new BlogRepository(objectContainerManager);
 		}
 
+		#endregion
 
-
-		[Test]
-		public void Can_store_a_blog()
-		{
-			Model.Blog blog = new BlogSharp.Model.Blog();
-			blogRepository.SaveBlog(blog);
-			long id = objectContainer.GetID(blog);
-			Assert.True(id > 0);
-		}
+		private IBlogRepository blogRepository;
 
 
 		[Test]
@@ -36,6 +28,15 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			blogRepository.DeleteBlog(blog);
 			long id = objectContainer.GetID(blog);
 			Assert.True(id == 0);
+		}
+
+		[Test]
+		public void Can_store_a_blog()
+		{
+			Model.Blog blog = new BlogSharp.Model.Blog();
+			blogRepository.SaveBlog(blog);
+			long id = objectContainer.GetID(blog);
+			Assert.True(id > 0);
 		}
 	}
 }

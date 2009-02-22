@@ -1,12 +1,12 @@
-﻿using System;
-using BlogSharp.Core.Event.MembershipEvents;
-using BlogSharp.Core.Persistence.Repositories;
-using BlogSharp.Core.Services.Encryption;
-using BlogSharp.Core.Services.Membership;
-using BlogSharp.Model;
-
 namespace BlogSharp.Core.Impl.Services.Membership
 {
+	using System;
+	using Core.Services.Encryption;
+	using Core.Services.Membership;
+	using Event.MembershipEvents;
+	using Model;
+	using Persistence.Repositories;
+
 	public class MembershipService : IMembershipService
 	{
 		private readonly IEncryptionService encryptionService;
@@ -56,8 +56,8 @@ namespace BlogSharp.Core.Impl.Services.Membership
 			PasswordResetted.Raise(passwordResetEvent);
 		}
 
-		public event EventHandler<UserRegisteredEventArgs> UserRegistered = delegate { };
-		public event EventHandler<PasswordResettedEventArgs> PasswordResetted = delegate { };
+		public event Core.EventHandler<UserRegisteredEventArgs> UserRegistered = delegate { };
+		public event Core.EventHandler<PasswordResettedEventArgs> PasswordResetted = delegate { };
 
 		#endregion
 	}

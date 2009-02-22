@@ -1,7 +1,7 @@
-﻿using BlogSharp.Core.Services.Membership;
-
 namespace BlogSharp.Core.Event.MembershipEvents
 {
+	using Services.Membership;
+
 	public class UserValidatingEvent : AbstractEventArgs<IMembershipService>, ICancellableEvent
 	{
 		public UserValidatingEvent(IMembershipService service, string userName, string password)

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using BlogSharp.Db4o.Blog;
-using Castle.MicroKernel;
-using Castle.Windsor;
-using Db4objects.Db4o;
-using Db4objects.Db4o.Ext;
-using System.Transactions;
-
 namespace BlogSharp.Db4o.Impl
 {
+	using System;
+	using System.Transactions;
+	using Castle.MicroKernel;
+	using Db4objects.Db4o;
+	using Db4objects.Db4o.Ext;
+
 	/// This piece has been taken from Castle Project (http://castleproject.org)
 	public class DefaultSessionManager : IObjectContainerManager
 	{
@@ -18,14 +15,14 @@ namespace BlogSharp.Db4o.Impl
 		private readonly IObjectContainerStore store;
 
 		public DefaultSessionManager(
-									 IKernel container,
-									 IObjectContainerStore store,
-									 IObjectContainerProviderProvider provider,
+			IKernel container,
+			IObjectContainerStore store,
+			IObjectContainerProviderProvider provider,
 			IObjectContainerWrapper wrapper)
 		{
 			this.container = container;
 			this.provider = provider;
-			this.Wrapper = wrapper;
+			Wrapper = wrapper;
 			this.store = store;
 		}
 
@@ -45,14 +42,14 @@ namespace BlogSharp.Db4o.Impl
 
 			if (wrapped == null)
 			{
-				var initializers = this.container.ResolveAll<IDb4oInitializationHandler>();
+				var initializers = container.ResolveAll<IDb4oInitializationHandler>();
 				session = CreateObjectContainer(alias);
 				foreach (var handler in initializers)
 				{
 					handler.HandleObjectContainerCreated(session);
 				}
 				weAreSessionOwner = true;
-				wrapped = WrapSession(Transaction.Current!=null, session);
+				wrapped = WrapSession(Transaction.Current != null, session);
 
 				EnlistIfNecessary(weAreSessionOwner, wrapped);
 				store[alias] = wrapped;
@@ -87,13 +84,13 @@ namespace BlogSharp.Db4o.Impl
 		}
 
 
-		protected virtual bool EnlistIfNecessary(bool weAreSessionOwner, 
-												 IExtObjectContainer container)
+		protected virtual bool EnlistIfNecessary(bool weAreSessionOwner,
+		                                         IExtObjectContainer container)
 		{
 			if (Transaction.Current == null)
 				return false;
 			var transaction = Transaction.Current;
-			transaction.EnlistVolatile(new ResourceObjectContainerAdapter(container),EnlistmentOptions.None);
+			transaction.EnlistVolatile(new ResourceObjectContainerAdapter(container), EnlistmentOptions.None);
 
 			return true;
 		}

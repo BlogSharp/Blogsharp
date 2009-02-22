@@ -1,7 +1,7 @@
-﻿using Db4objects.Db4o;
-
 namespace BlogSharp.Db4o
 {
+	using Db4objects.Db4o;
+
 	public interface IObjectContainerManager
 	{
 		IObjectContainer GetContainer();

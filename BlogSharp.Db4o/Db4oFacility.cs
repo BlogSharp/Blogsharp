@@ -1,16 +1,15 @@
-﻿using System;
-using System.IO;
-using System.Web;
-using BlogSharp.Core.Web.Modules;
-using BlogSharp.Db4o.Impl;
-using Castle.Core.Configuration;
-using Castle.MicroKernel.Facilities;
-using Castle.MicroKernel.Registration;
-using Db4objects.Db4o;
-using Db4objects.Db4o.Ext;
-
 namespace BlogSharp.Db4o
 {
+	using System;
+	using System.IO;
+	using Castle.Core.Configuration;
+	using Castle.MicroKernel.Facilities;
+	using Castle.MicroKernel.Registration;
+	using Core.Web.Modules;
+	using Db4objects.Db4o;
+	using Db4objects.Db4o.Ext;
+	using Impl;
+
 	public class Db4oFacility : AbstractFacility
 	{
 		private Action disposeAction = delegate { };

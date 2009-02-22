@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BlogSharp.Model.Validation;
-using NUnit.Framework;
-
 namespace BlogSharp.Model.Tests.Validators
 {
+	using NUnit.Framework;
+	using Validation;
+
 	[TestFixture]
-	public class PostValidatorTests:ValidationTestBase<PostValidator,Post>
+	public class PostValidatorTests : ValidationTestBase<PostValidator, Post>
 	{
 		[Test]
 		public void Should_raise_error_when_Blog_is_null()
@@ -29,6 +25,7 @@ namespace BlogSharp.Model.Tests.Validators
 			ShouldHaveErrors(x => x.FriendlyTitle, null);
 			ShouldHaveErrors(x => x.FriendlyTitle, "");
 		}
+
 		[Test]
 		public void Should_raise_error_when_Title_is_null_or_empty()
 		{

@@ -1,19 +1,23 @@
-﻿using System;
-using System.IO;
-using BlogSharp.Db4o.Impl;
-using Db4objects.Db4o;
-using Db4objects.Db4o.Config;
-using Db4objects.Db4o.Ext;
-using NUnit.Framework;
-
 namespace BlogSharp.Db4o.Tests.Impl
 {
+	#region usings
+
+	using System.IO;
+	using Db4o.Impl;
+	using Db4objects.Db4o;
+	using Db4objects.Db4o.Config;
+	using Db4objects.Db4o.Ext;
+	using NUnit.Framework;
+
+	#endregion
+
 	[TestFixture]
 	public class RemoteServerContainerProviderTests
 	{
 		private const string DATABASEFILE = "database.yap";
 		private IObjectContainerProvider objectContainerProvider;
 		private IExtObjectServer objectServer;
+		#region Setup/Teardown
 
 		[SetUp]
 		public void SetUp()
@@ -30,13 +34,7 @@ namespace BlogSharp.Db4o.Tests.Impl
 			File.Delete(DATABASEFILE);
 		}
 
-
-		[Test]
-		public void Can_open_client_without_configuration()
-		{
-			IObjectContainer container = objectContainerProvider.GetContainer();
-			Assert.NotNull(container);
-		}
+		#endregion
 
 		[Test]
 		public void Can_open_client_with_configuration()
@@ -45,6 +43,13 @@ namespace BlogSharp.Db4o.Tests.Impl
 			IObjectContainer container = objectContainerProvider.GetContainer(config);
 			Assert.NotNull(container);
 			Assert.AreEqual(config, container.Ext().Configure());
+		}
+
+		[Test]
+		public void Can_open_client_without_configuration()
+		{
+			IObjectContainer container = objectContainerProvider.GetContainer();
+			Assert.NotNull(container);
 		}
 	}
 }

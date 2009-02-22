@@ -1,8 +1,8 @@
-using BlogSharp.Core.Services.Post;
-using BlogSharp.Model;
-
 namespace BlogSharp.Core.Event.PostEvents
 {
+	using Model;
+	using Services.Post;
+
 	public class PostRemovingEventArgs : AbstractEventArgs<IPostService>, ICancellableEvent
 	{
 		public PostRemovingEventArgs(IPostService postService, Post post)

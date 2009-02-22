@@ -1,19 +1,15 @@
-﻿using BlogSharp.Db4o.Impl;
-using Db4objects.Db4o;
-using Db4objects.Db4o.Ext;
-using NUnit.Framework;
-using Rhino.Mocks;
-
-
 namespace BlogSharp.Db4o.Tests.Impl
 {
+	using Db4o.Impl;
+	using Db4objects.Db4o;
+	using Db4objects.Db4o.Ext;
+	using NUnit.Framework;
+	using Rhino.Mocks;
+
 	[TestFixture]
 	public class EmbeddedServerContainerProviderTests
 	{
-		private const string DATABASEFILE = "database.yap";
-
-		private IObjectContainerProvider objectContainerProvider;
-		private IExtObjectServer objectServer;
+		#region Setup/Teardown
 
 		[SetUp]
 		public void SetUp()
@@ -22,12 +18,12 @@ namespace BlogSharp.Db4o.Tests.Impl
 			objectContainerProvider = new EmbeddedServerContainerProvider(objectServer);
 		}
 
-		[Test]
-		public void Can_open_client_without_configuration()
-		{
-			objectContainerProvider.GetContainer();
-			objectServer.AssertWasCalled(x => x.OpenClient());
-		}
+		#endregion
+
+		private const string DATABASEFILE = "database.yap";
+
+		private IObjectContainerProvider objectContainerProvider;
+		private IExtObjectServer objectServer;
 
 		[Test]
 		public void Can_open_client_with_configuration()
@@ -35,6 +31,13 @@ namespace BlogSharp.Db4o.Tests.Impl
 			var configuration = Db4oFactory.NewConfiguration();
 			objectContainerProvider.GetContainer(configuration);
 			objectServer.AssertWasCalled(x => x.OpenClient(configuration));
+		}
+
+		[Test]
+		public void Can_open_client_without_configuration()
+		{
+			objectContainerProvider.GetContainer();
+			objectServer.AssertWasCalled(x => x.OpenClient());
 		}
 	}
 }

@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using BlogSharp.Core.Impl.Services.FileSystem.Native;
-using BlogSharp.Core.Services.FileSystem;
-using Microsoft.Win32.SafeHandles;
-
 namespace BlogSharp.Core.Impl.Services.FileSystem
 {
-	public abstract class FileSystemInfoBase:IFileSystemInfo
+	using System;
+	using Core.Services.FileSystem;
+
+	public abstract class FileSystemInfoBase : IFileSystemInfo
 	{
+		protected readonly string fileName;
+
 		protected FileSystemInfoBase(string fileName)
 		{
 			this.fileName = fileName;
 			//this.parent = parent;
 		}
 
-		protected readonly string fileName;
-		private readonly IDirectory parent;
 		#region IFileSystemInfo Members
 
 		public string Name
 		{
-			get { return System.IO.Path.GetFileName(this.Path); }
+			get { return System.IO.Path.GetFileName(Path); }
 		}
 
 		public FileSystemType Type
@@ -31,20 +25,14 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 			get { return this is File ? FileSystemType.File : FileSystemType.Directory; }
 		}
 
-		public virtual IDirectory Parent 
+		public virtual IDirectory Parent
 		{
-			get{ return this.parent; }
+			get { return null; }
 		}
-
-		#endregion
-
-
-		#region IFileSystemInfo Members
-
 
 		public string Path
 		{
-			get { return this.fileName; }
+			get { return fileName; }
 		}
 
 		public string GetRelativePath(string root)
@@ -52,10 +40,11 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 			throw new NotImplementedException();
 		}
 
+		#endregion
+
 		public override string ToString()
 		{
-			return this.Path;
+			return Path;
 		}
-		#endregion
 	}
 }

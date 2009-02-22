@@ -1,7 +1,7 @@
-﻿using BlogSharp.Core.Services.Plugin;
-
 namespace BlogSharp.Core.Event.PluginEvents
 {
+	using Services.Plugin;
+
 	public class PluginStoppedEventArgs : AbstractEventArgs<IPluginService>
 	{
 		public PluginStoppedEventArgs(IPluginService service, IPlugin plugin)

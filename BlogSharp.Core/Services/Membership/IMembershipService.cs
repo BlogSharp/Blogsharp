@@ -1,8 +1,8 @@
-﻿using BlogSharp.Core.Event.MembershipEvents;
-using BlogSharp.Model;
-
 namespace BlogSharp.Core.Services.Membership
 {
+	using Event.MembershipEvents;
+	using Model;
+
 	public interface IMembershipService
 	{
 		User CreateNewUser(string username, string password, string email);

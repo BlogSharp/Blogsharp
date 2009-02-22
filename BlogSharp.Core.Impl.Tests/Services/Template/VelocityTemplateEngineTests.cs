@@ -1,23 +1,27 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using BlogSharp.Core.Impl.Services.Template.NVelocity;
-using BlogSharp.Core.Services.Template;
-using NVelocity.App;
-using Rhino.Mocks;
-using NUnit.Framework;
-
 namespace BlogSharp.Core.Impl.Tests.Services.Template
 {
+	using System.Collections.Generic;
+	using System.IO;
+	using Core.Services.Template;
+	using Impl.Services.Template.NVelocity;
+	using NUnit.Framework;
+	using NVelocity.App;
+	using Rhino.Mocks;
+
 	[TestFixture]
 	public class VelocityTemplateEngineTests
 	{
-		private ITemplateEngine velocityEngine;
+		#region Setup/Teardown
 
 		[SetUp]
 		public void SetUp()
 		{
 			velocityEngine = new NVelocityTemplateEngine(new VelocityEngine());
 		}
+
+		#endregion
+
+		private ITemplateEngine velocityEngine;
 
 		[Test]
 		public void NVelocity_can_merge_template_with_context()

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using BlogSharp.Core.Structure;
-
 namespace BlogSharp.Core.Impl.Structure
 {
+	using System.Collections.Generic;
+	using System.Text.RegularExpressions;
+	using Core.Structure;
+
 	public class FriendlyUrlGenerator : IFriendlyUrlGenerator
 	{
 		private readonly Regex regex = new Regex(@"\W+");

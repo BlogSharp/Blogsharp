@@ -1,11 +1,11 @@
-﻿using System;
-using System.Reflection;
-using Castle.Core.Interceptor;
-using Db4objects.Db4o;
-using Db4objects.Db4o.Ext;
-
 namespace BlogSharp.Db4o.Impl
 {
+	using System;
+	using System.Reflection;
+	using Castle.Core.Interceptor;
+	using Db4objects.Db4o;
+	using Db4objects.Db4o.Ext;
+
 	public class CastleObjectContainerInterceptor : TransactionProtectionInterceptor, IInterceptor
 	{
 		public CastleObjectContainerInterceptor(IObjectContainer container, ObjectContainerCloseDelegate closeDelegate,

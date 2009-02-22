@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using BlogSharp.Model;
-
 namespace BlogSharp.Core.Persistence.Repositories
 {
+	using System;
+	using System.Collections.Generic;
+	using Model;
+
 	public interface IPostRepository
 	{
 		/// <summary>

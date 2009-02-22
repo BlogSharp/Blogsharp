@@ -1,8 +1,8 @@
-﻿using Db4objects.Db4o.Config;
-using Db4objects.Db4o.Ext;
-
 namespace BlogSharp.Db4o.Impl
 {
+	using Db4objects.Db4o.Config;
+	using Db4objects.Db4o.Ext;
+
 	public class EmbeddedServerContainerProvider : IObjectContainerProvider
 	{
 		private readonly IExtObjectServer objectServer;

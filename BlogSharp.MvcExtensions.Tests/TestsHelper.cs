@@ -1,11 +1,11 @@
-﻿using System.Collections.Specialized;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-using Rhino.Mocks;
-
 namespace BlogSharp.MvcExtensions.Tests
 {
+	using System.Collections.Specialized;
+	using System.Web;
+	using System.Web.Mvc;
+	using System.Web.Routing;
+	using Rhino.Mocks;
+
 	internal class TestsHelper
 	{
 		public static ControllerContext PrepareControllerContext()

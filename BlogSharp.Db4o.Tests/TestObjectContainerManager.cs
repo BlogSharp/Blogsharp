@@ -1,7 +1,7 @@
-﻿using Db4objects.Db4o;
-
-namespace BlogSharp.Db4o.Tests
+﻿namespace BlogSharp.Db4o.Tests
 {
+	using Db4objects.Db4o;
+
 	public class TestObjectContainerManager : IObjectContainerManager
 	{
 		private readonly IObjectContainer objectContainer;

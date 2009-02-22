@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using Castle.Core;
-using Castle.MicroKernel;
-
-namespace BlogSharp.CastleExtensions.DependencyResolvers
+﻿namespace BlogSharp.CastleExtensions.DependencyResolvers
 {
+	using System;
+	using System.Collections.Generic;
+	using Castle.Core;
+	using Castle.MicroKernel;
+
+	/// <summary>
+	/// Resolves IList type dependencies
+	/// </summary>
 	public class ListResolver : ISubDependencyResolver
 	{
 		private readonly IKernel kernel;
@@ -32,8 +35,9 @@ namespace BlogSharp.CastleExtensions.DependencyResolvers
 				return false;
 			bool result = dependency.TargetType != null &&
 			              dependency.TargetType.GetGenericArguments().Length != 0 &&
-			              typeof (IList<>).MakeGenericType(dependency.TargetType.GetGenericArguments()[0]).IsAssignableFrom(
-			              	dependency.TargetType);
+			              typeof (IList<>)
+			              	.MakeGenericType(dependency.TargetType.GetGenericArguments()[0])
+			              	.IsAssignableFrom(dependency.TargetType);
 			return result;
 		}
 

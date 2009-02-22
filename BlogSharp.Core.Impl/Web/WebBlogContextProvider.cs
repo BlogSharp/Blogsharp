@@ -1,22 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using BlogSharp.Core.Persistence.Repositories;
-
 namespace BlogSharp.Core.Impl.Web
 {
-	public class WebBlogContextProvider:BlogContextProvider
+	using System.Web;
+	using Persistence.Repositories;
+
+	public class WebBlogContextProvider : BlogContextProvider
 	{
+		private const string BLOGCONTEXTKEY = "blogcontext";
+		private readonly IBlogRepository blogRepository;
+
 		public WebBlogContextProvider(IBlogRepository blogRepository)
 		{
 			this.blogRepository = blogRepository;
 		}
-
-		private readonly IBlogRepository blogRepository;
-		private const string BLOGCONTEXTKEY = "blogcontext";
-		#region IBlogContextProvider Members
 
 		public override BlogContext GetCurrentBlogContext()
 		{
@@ -27,11 +22,9 @@ namespace BlogSharp.Core.Impl.Web
 				blogContext.Blog = blogRepository.GetBlog();
 				items[BLOGCONTEXTKEY] = blogContext;
 			}
-				
+
 
 			return items[BLOGCONTEXTKEY] as BlogContext;
 		}
-
-		#endregion
 	}
 }

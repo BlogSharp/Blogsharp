@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Net.Mail;
-using BlogSharp.Core.Event.MembershipEvents;
-using BlogSharp.Core.Services.Mail;
-using BlogSharp.Core.Services.Template;
-using BlogSharp.Model;
-
 namespace BlogSharp.Core.Impl.EventHandlers.Membership
 {
+	using System.Collections.Generic;
+	using System.Net.Mail;
+	using Core.Services.Mail;
+	using Core.Services.Template;
+	using Event.MembershipEvents;
+	using Model;
+
 	public class SendWelcomeEmailUserRegisteredEventListener : IEventListener<UserRegisteredEventArgs>
 	{
 		private readonly IMailService mailService;

@@ -1,21 +1,18 @@
-﻿using System;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-using BlogSharp.CastleExtensions.DependencyResolvers;
-using BlogSharp.Core.Impl.Installers;
-using BlogSharp.Core.Impl.Web;
-using BlogSharp.Core.Web.Modules;
-using BlogSharp.Db4o;
-using BlogSharp.MvcExtensions;
-using BlogSharp.Web.Controllers;
-using Castle.MicroKernel.Registration;
-using Castle.Windsor;
-using MvcContrib.Routing;
-using Spark.Web.Mvc;
-
-namespace BlogSharp.Web
+﻿namespace BlogSharp.Web
 {
+	using System.Web;
+	using System.Web.Mvc;
+	using System.Web.Routing;
+	using Castle.Windsor;
+	using CastleExtensions.DependencyResolvers;
+	using Controllers;
+	using Core.Impl.Installers;
+	using Core.Impl.Web;
+	using Core.Web.Modules;
+	using MvcContrib.Routing;
+	using MvcExtensions;
+	using Spark.Web.Mvc;
+
 	public class MvcApplication : HttpApplication, IContainerAccessor
 	{
 		private static IWindsorContainer container;
@@ -42,15 +39,14 @@ namespace BlogSharp.Web
 				.ToDefaultAction<PostController>(x => x.Read("friendlyTitle"))
 				.AddWithName("PostRead", routes);
 			MvcRoute.MappUrl("post/addcomment")
-				.ToDefaultAction<PostController>(x => x.AddComment(0,null))
+				.ToDefaultAction<PostController>(x => x.AddComment(0, null))
 				.AddWithName("PostCommentAdd", routes);
 			MvcRoute.MappUrl("tag/{tagName}")
-				.ToDefaultAction<PostController>(x => x.ListByTag("",1))
+				.ToDefaultAction<PostController>(x => x.ListByTag("", 1))
 				.AddWithName("PostListByTag", routes);
 			MvcRoute.MappUrl("{controller}/{action}")
 				.ToDefaultAction<PostController>(x => x.List(1))
 				.AddWithName("Default", routes);
-			
 		}
 
 
@@ -63,9 +59,8 @@ namespace BlogSharp.Web
 				container = new WindsorContainer("Configuration/castle.xml");
 				ViewEngines.Engines.Add(engine);
 			}
-			catch(Exception ex)
+			catch
 			{
-				
 			}
 			container.Kernel.Resolver.AddSubResolver(new ListResolver(container.Kernel));
 			container.Install(new DefaultComponentInstallers());

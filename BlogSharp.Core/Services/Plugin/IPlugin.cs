@@ -1,7 +1,7 @@
-﻿using Castle.MicroKernel;
-
 namespace BlogSharp.Core.Services.Plugin
 {
+	using Castle.MicroKernel;
+
 	public interface IPlugin
 	{
 		IKernel PluginKernel { get; set; }

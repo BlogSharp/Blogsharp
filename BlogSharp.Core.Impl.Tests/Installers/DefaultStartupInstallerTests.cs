@@ -1,19 +1,20 @@
-﻿using System;
-using BlogSharp.Core.Impl.Installers;
-using BlogSharp.Core.Persistence.Repositories;
-using BlogSharp.Core.Structure;
-using BlogSharp.Model;
-using BlogSharp.Model.Validation;
-using NUnit.Framework;
-using Rhino.Mocks;
-
 namespace BlogSharp.Core.Impl.Tests.Installers
 {
+	using Core.Structure;
+	using Impl.Installers;
+	using Model;
+	using Model.Validation;
+	using NUnit.Framework;
+	using Persistence.Repositories;
+	using Rhino.Mocks;
+
 	//TODO: Check if blog has the post and post has the blog.
 
 	[TestFixture]
 	public class DefaultStartupInstallerTests
 	{
+		#region Setup/Teardown
+
 		[SetUp]
 		public void SetUp()
 		{
@@ -23,25 +24,20 @@ namespace BlogSharp.Core.Impl.Tests.Installers
 			friendlyUrlGen = MockRepository.GenerateMock<IFriendlyUrlGenerator>();
 		}
 
+		#endregion
+
 		private IBlogRepository blogRP;
 		private IPostRepository postRP;
 		private IUserRepository userRP;
 		private IFriendlyUrlGenerator friendlyUrlGen;
-		[Test]
-		public void Executes_installer_if_there_is_no_blog()
-		{
-			blogRP.Expect(x => x.GetBlog()).Return(null);
-			var installer = new DefaultStartupInstaller(blogRP, postRP, userRP, friendlyUrlGen);
-			installer.Execute();
-			blogRP.AssertWasCalled(x => x.SaveBlog(Arg<Blog>.Is.NotNull));
-			userRP.AssertWasCalled(x => x.SaveUser(Arg<User>.Is.NotNull));
-			postRP.AssertWasCalled(x => x.SavePost(Arg<Post>.Is.NotNull));
-		}
-		private delegate void  Expect<T>(T arg);
+
+		private delegate void Expect<T>(T arg);
+
 		[Test]
 		public void Adds_valid_entities_to_repositories()
 		{
-			friendlyUrlGen.Expect(x => x.GenerateUrl(Arg<string>.Is.Anything,Arg<string[]>.Is.Anything)).Return("aaaa").Repeat.Any();
+			friendlyUrlGen.Expect(x => x.GenerateUrl(Arg<string>.Is.Anything, Arg<string[]>.Is.Anything)).Return("aaaa").Repeat.
+				Any();
 			var blogValidator = new BlogValidator();
 			var postValidator = new PostValidator();
 			var userValidator = new UserValidator();
@@ -57,6 +53,17 @@ namespace BlogSharp.Core.Impl.Tests.Installers
 
 
 			installer.Execute();
+		}
+
+		[Test]
+		public void Executes_installer_if_there_is_no_blog()
+		{
+			blogRP.Expect(x => x.GetBlog()).Return(null);
+			var installer = new DefaultStartupInstaller(blogRP, postRP, userRP, friendlyUrlGen);
+			installer.Execute();
+			blogRP.AssertWasCalled(x => x.SaveBlog(Arg<Blog>.Is.NotNull));
+			userRP.AssertWasCalled(x => x.SaveUser(Arg<User>.Is.NotNull));
+			postRP.AssertWasCalled(x => x.SavePost(Arg<Post>.Is.NotNull));
 		}
 	}
 }

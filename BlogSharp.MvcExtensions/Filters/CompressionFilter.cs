@@ -1,9 +1,9 @@
-﻿using System.IO.Compression;
-using System.Web;
-using System.Web.Mvc;
-
 namespace BlogSharp.MvcExtensions.Filters
 {
+	using System.IO.Compression;
+	using System.Web;
+	using System.Web.Mvc;
+
 	//Taken from http://weblogs.asp.net/rashid/archive/2008/03/28/asp-net-mvc-action-filter-caching-and-compression.aspx
 	public class CompressFilter : ActionFilterAttribute
 	{

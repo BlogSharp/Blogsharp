@@ -1,7 +1,7 @@
-﻿using BlogSharp.Model;
-
 namespace BlogSharp.Core.Persistence.Repositories
 {
+	using Model;
+
 	public interface IUserRepository
 	{
 		User GetAuthorByUsername(string username);

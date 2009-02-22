@@ -1,7 +1,7 @@
-﻿using Castle.Core.Configuration;
-
 namespace BlogSharp.Db4o
 {
+	using Castle.Core.Configuration;
+
 	public interface IObjectServerConfigurationBuilder
 	{
 		/// <summary>

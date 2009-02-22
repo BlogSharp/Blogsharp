@@ -1,14 +1,14 @@
-﻿using System;
-using System.Reflection;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-using BlogSharp.MvcExtensions.Handlers;
-using Rhino.Mocks;
-using NUnit.Framework;
-
 namespace BlogSharp.MvcExtensions.Tests.Handlers
 {
+	using System;
+	using System.Reflection;
+	using System.Web;
+	using System.Web.Mvc;
+	using System.Web.Routing;
+	using MvcExtensions.Handlers;
+	using NUnit.Framework;
+	using Rhino.Mocks;
+
 	public class DummyController : ControllerBase
 	{
 		public bool WasCalled { get; set; }
@@ -21,7 +21,6 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 
 		protected override void ExecuteCore()
 		{
-
 		}
 	}
 
@@ -42,10 +41,7 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 	[TestFixture]
 	public class BlogMvcHandlerTests
 	{
-		private RequestContext context;
-		private IExtendedControllerFactory dummyFactory;
-		private MvcHandler handler;
-		private MethodInfo methodInfo;
+		#region Setup/Teardown
 
 		[SetUp]
 		public void SetUp()
@@ -60,20 +56,12 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 			ControllerBuilder.Current.SetControllerFactory(dummyFactory);
 		}
 
-		[Test]
-		public void Factory_should_resolve_given_controller_with_its_type()
-		{
-			var dummyController = new DummyController();
-			dummyFactory.Expect(x => x.CreateController(Arg<RequestContext>.Is.Anything,
-			                                            Arg<Type>.Is.Equal(typeof (Controller))))
-				.Return(dummyController)
-				.Repeat.Any();
+		#endregion
 
-			methodInfo.Invoke(handler, new object[] {context.HttpContext});
-			dummyFactory.AssertWasCalled(
-				x => x.CreateController(Arg<RequestContext>.Is.Anything, Arg<Type>.Is.Equal(typeof (Controller))));
-			Assert.True(dummyController.WasCalled);
-		}
+		private RequestContext context;
+		private IExtendedControllerFactory dummyFactory;
+		private MvcHandler handler;
+		private MethodInfo methodInfo;
 
 		[Test]
 		public void Can_release_when_exception_occurs()
@@ -94,6 +82,21 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 			dummyFactory.AssertWasCalled(
 				x => x.CreateController(Arg<RequestContext>.Is.Anything, Arg<Type>.Is.Equal(typeof (Controller))));
 			dummyFactory.AssertWasCalled(x => x.ReleaseController(dummyController2));
+		}
+
+		[Test]
+		public void Factory_should_resolve_given_controller_with_its_type()
+		{
+			var dummyController = new DummyController();
+			dummyFactory.Expect(x => x.CreateController(Arg<RequestContext>.Is.Anything,
+			                                            Arg<Type>.Is.Equal(typeof (Controller))))
+				.Return(dummyController)
+				.Repeat.Any();
+
+			methodInfo.Invoke(handler, new object[] {context.HttpContext});
+			dummyFactory.AssertWasCalled(
+				x => x.CreateController(Arg<RequestContext>.Is.Anything, Arg<Type>.Is.Equal(typeof (Controller))));
+			Assert.True(dummyController.WasCalled);
 		}
 	}
 }

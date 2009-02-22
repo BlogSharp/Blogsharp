@@ -1,7 +1,7 @@
-﻿using System;
-
 namespace BlogSharp.Core.Event
 {
+	using System;
+
 	public abstract class AbstractEventArgs : EventArgs, IEventArgs
 	{
 		private readonly object source;

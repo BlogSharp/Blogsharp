@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using BlogSharp.Core.Services.Template;
-
 namespace BlogSharp.Core.Impl.Services.Template
 {
+	using System.Collections.Generic;
+	using Core.Services.Template;
+
 	public class TemplateEngineRegistry : ITemplateEngineRegistry
 	{
 		private readonly IDictionary<string, ITemplateEngine> keyToTemplateEngine;

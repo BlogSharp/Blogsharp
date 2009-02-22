@@ -1,59 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BlogSharp.Model.Validation;
-using BlogSharp.Model.Validation.Interfaces;
-using Castle.MicroKernel;
-using Castle.Windsor;
-using Db4objects.Db4o.Events;
-using Db4objects.Db4o.Ext;
-using FluentValidation;
-
 namespace BlogSharp.Db4o.Blog
 {
-    public class ValidationWiringDb4oInitializationHandler : IDb4oInitializationHandler
-    {
-        public ValidationWiringDb4oInitializationHandler(IKernel container)
-        {
-            this.container = container;
-        }
+	using Castle.MicroKernel;
+	using Db4objects.Db4o.Events;
+	using Db4objects.Db4o.Ext;
+	using Model.Validation;
+	using Model.Validation.Interfaces;
 
-        private readonly IKernel container;
-        #region IDb4oInitializationHandler Members
+	public class ValidationWiringDb4oInitializationHandler : IDb4oInitializationHandler
+	{
+		private readonly IKernel container;
 
-        public void HandleObjectContainerCreated(IExtObjectContainer extObjectContainer)
-        {
-            var factory = EventRegistryFactory.ForObjectContainer(extObjectContainer);
-            factory.Creating += ValidationHandler;
-            factory.Updating += ValidationHandler;
-        }
+		public ValidationWiringDb4oInitializationHandler(IKernel container)
+		{
+			this.container = container;
+		}
 
-        protected void ValidationHandler(object sender, CancellableObjectEventArgs args)
-        {
-            try
-            {
-                ValidateObject(args.Object);
-            }
-            catch (ValidationException ex)
-            {
-                args.Cancel();
-                throw ex;
-            }
-        }
+		#region IDb4oInitializationHandler Members
 
-        protected virtual void ValidateObject<T>(T obj)
-        {
-            var type = obj.GetType();
-            var validatorType = typeof(IValidatorBase<>).MakeGenericType(type);
-            if (container.HasComponent(validatorType))
-            {
-                var validator = container.Resolve(validatorType) as IValidatorBase;
-                validator.ValidateAndThrowException(obj);
+		public void HandleObjectContainerCreated(IExtObjectContainer extObjectContainer)
+		{
+			var factory = EventRegistryFactory.ForObjectContainer(extObjectContainer);
+			factory.Creating += ValidationHandler;
+			factory.Updating += ValidationHandler;
+		}
 
-            }
-        }
+		#endregion
 
-        #endregion
-    }
+		protected void ValidationHandler(object sender, CancellableObjectEventArgs args)
+		{
+			try
+			{
+				ValidateObject(args.Object);
+			}
+			catch (ValidationException ex)
+			{
+				args.Cancel();
+				throw ex;
+			}
+		}
+
+		protected virtual void ValidateObject<T>(T obj)
+		{
+			var type = obj.GetType();
+			var validatorType = typeof (IValidatorBase<>).MakeGenericType(type);
+			if (container.HasComponent(validatorType))
+			{
+				var validator = container.Resolve(validatorType) as IValidatorBase;
+				validator.ValidateAndThrowException(obj);
+			}
+		}
+	}
 }

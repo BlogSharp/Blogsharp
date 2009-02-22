@@ -1,4 +1,4 @@
-﻿// <copyright file="IIdentifiable.cs" company="BlogSharp">
+// <copyright file="IIdentifiable.cs" company="BlogSharp">
 // Apache Licence 2.0 
 // </copyright>
 // <author>Gonzalo Brusella</author>
@@ -7,16 +7,16 @@
 
 namespace BlogSharp.Model.Interfaces
 {
-    /// <summary>
-    /// Represents an Identificable entity.
-    /// </summary>
-    /// <typeparam name="T">Type of the ID.</typeparam>
-    public interface IIdentifiable<T>
-    {
-        //TODO: Check if this is really Needed.
-        /// <summary>
-        /// Gets or sets ID.
-        /// </summary>
-        T ID { get; set; }
-    }
+	/// <summary>
+	/// Represents an Identificable entity.
+	/// </summary>
+	/// <typeparam name="T">Type of the ID.</typeparam>
+	public interface IIdentifiable<T>
+	{
+		//TODO: Check if this is really Needed.
+		/// <summary>
+		/// Gets or sets ID.
+		/// </summary>
+		T ID { get; set; }
+	}
 }

@@ -1,7 +1,7 @@
-﻿using System;
-
 namespace BlogSharp.Core.Services.FileSystem
 {
+	using System;
+
 	[Flags]
 	public enum SearchOptions
 	{

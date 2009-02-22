@@ -1,19 +1,18 @@
-﻿using BlogSharp.Core.Impl.Services.Membership;
-using BlogSharp.Core.Persistence.Repositories;
-using BlogSharp.Core.Services.Encryption;
-using BlogSharp.Core.Services.Membership;
-using BlogSharp.Model;
-using Castle.Windsor;
-using Rhino.Mocks;
-using NUnit.Framework;
-
 namespace BlogSharp.Core.Impl.Tests.Services.Membership
 {
+	using Castle.Windsor;
+	using Core.Services.Encryption;
+	using Core.Services.Membership;
+	using Impl.Services.Membership;
+	using Model;
+	using NUnit.Framework;
+	using Persistence.Repositories;
+	using Rhino.Mocks;
+
 	[TestFixture]
 	public class MembershipServiceTests
 	{
-		private IMembershipService membershipService;
-		private IUserRepository userRepository;
+		#region Setup/Teardown
 
 		[SetUp]
 		public void SetUp()
@@ -22,6 +21,11 @@ namespace BlogSharp.Core.Impl.Tests.Services.Membership
 			membershipService = new MembershipService(userRepository, MockRepository.GenerateMock<IEncryptionService>());
 			var container = MockRepository.GenerateMock<IWindsorContainer>();
 		}
+
+		#endregion
+
+		private IMembershipService membershipService;
+		private IUserRepository userRepository;
 
 		[Test]
 		public void Can_create_new_user_with_password_and_username()

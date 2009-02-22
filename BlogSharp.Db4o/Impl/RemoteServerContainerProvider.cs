@@ -1,9 +1,9 @@
-﻿using Db4objects.Db4o;
-using Db4objects.Db4o.Config;
-using Db4objects.Db4o.Ext;
-
 namespace BlogSharp.Db4o.Impl
 {
+	using Db4objects.Db4o;
+	using Db4objects.Db4o.Config;
+	using Db4objects.Db4o.Ext;
+
 	public class RemoteServerContainerProvider : IObjectContainerProvider
 	{
 		public RemoteServerContainerProvider(string host, int port, string username, string password)

@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using BlogSharp.Core.Services.Template;
-using NVelocity.App;
-
 namespace BlogSharp.Core.Impl.Services.Template.NVelocity
 {
+	using System.Collections.Generic;
+	using System.IO;
+	using Core.Services.Template;
+	using global::NVelocity.App;
+
 	public class NVelocityTemplateEngine : ITemplateEngine
 	{
 		private readonly VelocityEngine velocityEngine;

@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using BlogSharp.Core.Persistence.Repositories;
-using BlogSharp.Model;
 namespace BlogSharp.Db4o.Blog.Repositories
 {
+	using System.Linq;
+	using Core.Persistence.Repositories;
+
 	public class BlogRepository : Db4oRepository, IBlogRepository
 	{
 		public BlogRepository(IObjectContainerManager containerManager)

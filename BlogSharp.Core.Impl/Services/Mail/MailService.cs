@@ -1,8 +1,8 @@
-﻿using System.Net.Mail;
-using BlogSharp.Core.Services.Mail;
-
 namespace BlogSharp.Core.Impl.Services.Mail
 {
+	using System.Net.Mail;
+	using Core.Services.Mail;
+
 	public class MailService : IMailService
 	{
 		private readonly string defaultDisplayName;

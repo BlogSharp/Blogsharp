@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
 namespace BlogSharp.Core.Services.Template
 {
+	using System.Collections.Generic;
+
 	public interface ITemplateContext
 	{
 		void Put(string key, object value);

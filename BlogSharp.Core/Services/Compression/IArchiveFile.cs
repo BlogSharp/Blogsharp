@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using BlogSharp.Core.Services.FileSystem;
-
 namespace BlogSharp.Core.Services.Compression
 {
+	using System;
+	using System.Collections.Generic;
+	using FileSystem;
+
 	public interface IArchiveFile : IDisposable
 	{
 		string Name { get; }

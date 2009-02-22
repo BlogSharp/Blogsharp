@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using Microsoft.Win32.SafeHandles;
-
 namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 {
+	using System;
+	using System.Runtime.InteropServices;
+	using Microsoft.Win32.SafeHandles;
 
 	public static class NativeMethods
 	{
@@ -68,7 +64,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 
 		public enum FileAccess
 		{
-			GENERIC_READ = unchecked((int)0x80000000),
+			GENERIC_READ = unchecked((int) 0x80000000),
 			GENERIC_WRITE = 0x40000000
 		}
 
@@ -116,6 +112,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 			FindExInfoStandard,
 			FindExInfoMaxInfoLevel
 		}
+
 		public enum FINDEX_SEARCH_OPS
 		{
 			FindExSearchNameMatch,
@@ -126,8 +123,8 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 #pragma warning disable 0649
 		public struct FILETIME
 		{
-			public uint DateTimeLow;
 			public uint DateTimeHigh;
+			public uint DateTimeLow;
 		}
 #pragma warning restore 0649
 
@@ -142,10 +139,8 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 			public uint nFileSizeLow;
 			public uint dwReserved0;
 			public uint dwReserved1;
-			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
-			public string cFileName;
-			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 14)]
-			public string cAlternateFileName;
+			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)] public string cFileName;
+			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 14)] public string cAlternateFileName;
 		}
 
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
@@ -191,12 +186,12 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 			[Out] out WIN32_FIND_DATA lpFindFileData);
 
 
-
 		//
 		// Transacted file operations
 		//
 
 		#region transactional operations
+
 		[DllImport(KERNEL32, EntryPoint = "CreateFileTransacted", CharSet = CharSet.Unicode, SetLastError = true)]
 		public static extern SafeFileHandle CreateFileTransacted(
 			[In] string lpFileName,
@@ -246,8 +241,11 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 			[In] IntPtr lpData,
 			[In] MoveFileFlags dwFlags,
 			[In] KtmTransactionHandle hTransaction);
+
 		#endregion
+
 		#region nontransactional operations
+
 		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
 		public static extern bool DeleteFile(string path);
 
@@ -261,6 +259,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 		internal static extern int GetFileType(SafeFileHandle handle);
 
 		#endregion
+
 		[DllImport(KERNEL32, EntryPoint = "DeviceIoControl", CharSet = CharSet.Unicode, SetLastError = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
 		internal static extern bool DeviceIoControl(
@@ -281,6 +280,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 		[return: MarshalAs(UnmanagedType.Bool)]
 		internal static extern bool CloseHandle(
 			[In] IntPtr handle);
+
 		[DllImport(KERNEL32, CharSet = CharSet.Unicode, SetLastError = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
 		internal static extern bool FindClose(

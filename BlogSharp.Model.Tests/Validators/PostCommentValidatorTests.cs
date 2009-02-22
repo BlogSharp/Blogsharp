@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BlogSharp.Model.Validation;
-using FluentValidation.TestHelper;
-using NUnit.Framework;
-
 namespace BlogSharp.Model.Tests.Validators
 {
+	using NUnit.Framework;
+	using Validation;
+
 	[TestFixture]
-	public class PostCommentValidatorTests:ValidationTestBase<PostCommentValidator,PostComment>
+	public class PostCommentValidatorTests : ValidationTestBase<PostCommentValidator, PostComment>
 	{
 		[Test]
 		public void Should_raise_error_when_comment_is_not_specified()

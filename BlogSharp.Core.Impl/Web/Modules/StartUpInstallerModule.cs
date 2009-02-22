@@ -1,10 +1,10 @@
-﻿using System;
-using System.Web;
-using BlogSharp.Core.Impl.Installers;
-using BlogSharp.Core.Web.Modules;
-
 namespace BlogSharp.Core.Impl.Web.Modules
 {
+	using System;
+	using System.Web;
+	using Core.Web.Modules;
+	using Installers;
+
 	public class StartUpInstallerModule : IBlogSharpHttpModule
 	{
 		private readonly IStartupInstaller installer;

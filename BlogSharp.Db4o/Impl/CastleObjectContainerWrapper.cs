@@ -1,10 +1,10 @@
-﻿using Castle.Core.Interceptor;
-using Castle.DynamicProxy;
-using Db4objects.Db4o;
-using Db4objects.Db4o.Ext;
-
 namespace BlogSharp.Db4o.Impl
 {
+	using Castle.Core.Interceptor;
+	using Castle.DynamicProxy;
+	using Db4objects.Db4o;
+	using Db4objects.Db4o.Ext;
+
 	public class CastleObjectContainerWrapper : IObjectContainerWrapper
 	{
 		private readonly ProxyGenerator proxyGenerator = new ProxyGenerator();

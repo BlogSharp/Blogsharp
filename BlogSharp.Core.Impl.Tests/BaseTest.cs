@@ -1,8 +1,8 @@
-using System;
-using Castle.Windsor;
-using NUnit.Framework;
 namespace BlogSharp.Core.Impl.Tests
 {
+	using Castle.Windsor;
+	using NUnit.Framework;
+
 	public class BaseTest
 	{
 		private IWindsorContainer container;
@@ -13,14 +13,11 @@ namespace BlogSharp.Core.Impl.Tests
 			container = new WindsorContainer();
 		}
 
-		#region IDisposable Members
 		[TearDown]
 		public void TearDown()
 		{
 			OnTearDown();
 		}
-
-		#endregion
 
 		public virtual void OnTearDown()
 		{

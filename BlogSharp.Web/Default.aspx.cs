@@ -1,9 +1,9 @@
-using System.Web;
-using System.Web.Mvc;
-using System.Web.UI;
-
 namespace BlogSharp.Web
 {
+	using System.Web;
+	using System.Web.Mvc;
+	using System.Web.UI;
+
 	public class _Default : Page
 	{
 		public void Page_Load(object sender, System.EventArgs e)
