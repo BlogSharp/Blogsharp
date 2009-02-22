@@ -17,7 +17,7 @@ namespace BlogSharp.Db4o
 
 		public void Init(HttpApplication context)
 		{
-			context.EndRequest += HandleEndRequest;
+			context.EndRequest += this.HandleEndRequest;
 		}
 
 		#endregion

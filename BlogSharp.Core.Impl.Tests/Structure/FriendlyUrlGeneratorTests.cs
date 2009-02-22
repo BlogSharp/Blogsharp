@@ -11,13 +11,13 @@ namespace BlogSharp.Core.Impl.Tests.Structure
 
 		public FriendlyUrlGeneratorTests()
 		{
-			generator = new FriendlyUrlGenerator();
+			this.generator = new FriendlyUrlGenerator();
 		}
 
 		[Test]
 		public void Can_ignore_non_alphanumeric_characters()
 		{
-			string str = generator
+			string str = this.generator
 				.GenerateUrl("blah.aspx?title={0}", "this is a sample title with 1 numbers in it");
 			Assert.That(str, Is.EqualTo("blah.aspx?title=this-is-a-sample-title-with-1-numbers-in-it"));
 		}

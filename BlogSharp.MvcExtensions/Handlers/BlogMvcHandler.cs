@@ -21,10 +21,11 @@ namespace BlogSharp.MvcExtensions.Handlers
 		protected override void ProcessRequest(System.Web.HttpContextBase httpContext)
 		{
 			IExtendedControllerFactory factory = ControllerBuilder.Current.GetControllerFactory() as IExtendedControllerFactory;
-			var controller = factory.CreateController(RequestContext, (Type) RequestContext.RouteData.Values["controller"]);
+			var controller = factory.CreateController(this.RequestContext,
+			                                          (Type) this.RequestContext.RouteData.Values["controller"]);
 			try
 			{
-				controller.Execute(RequestContext);
+				controller.Execute(this.RequestContext);
 			}
 			finally
 			{

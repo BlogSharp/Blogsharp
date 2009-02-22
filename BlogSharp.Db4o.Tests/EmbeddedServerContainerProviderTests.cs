@@ -14,10 +14,10 @@ namespace BlogSharp.Db4o.Tests
 		[SetUp]
 		public void SetUp()
 		{
-			objectServer = MockRepository.GenerateMock<IExtObjectServer>();
-			objectContainer = MockRepository.GenerateMock<IExtObjectContainer>();
-			objectServer.Expect(x => x.OpenClient()).Return(objectContainer);
-			provider = new EmbeddedServerContainerProvider(objectServer);
+			this.objectServer = MockRepository.GenerateMock<IExtObjectServer>();
+			this.objectContainer = MockRepository.GenerateMock<IExtObjectContainer>();
+			this.objectServer.Expect(x => x.OpenClient()).Return(this.objectContainer);
+			this.provider = new EmbeddedServerContainerProvider(this.objectServer);
 		}
 
 		#endregion
@@ -29,7 +29,7 @@ namespace BlogSharp.Db4o.Tests
 		[Test]
 		public void Should_return_client_instance()
 		{
-			Assert.AreEqual(objectContainer, objectServer.OpenClient());
+			Assert.AreEqual(this.objectContainer, this.objectServer.OpenClient());
 		}
 	}
 }

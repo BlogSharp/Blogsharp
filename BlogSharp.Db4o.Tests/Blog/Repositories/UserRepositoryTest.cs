@@ -14,7 +14,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		public override void SetUp()
 		{
 			base.SetUp();
-			userRepository = new UserRepository(objectContainerManager);
+			this.userRepository = new UserRepository(this.objectContainerManager);
 		}
 
 		#endregion
@@ -26,9 +26,9 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		{
 			var user = new User();
 			user.ID = 1;
-			userRepository.SaveUser(user);
-			userRepository.RemoveUser(user);
-			var id = objectContainer.GetID(user);
+			this.userRepository.SaveUser(user);
+			this.userRepository.RemoveUser(user);
+			var id = this.objectContainer.GetID(user);
 			Assert.True(id == 0);
 		}
 
@@ -38,9 +38,9 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			var user = new User();
 			user.ID = 1;
 			user.Email = "TestUserEmail";
-			userRepository.SaveUser(user);
+			this.userRepository.SaveUser(user);
 
-			var foundUser = userRepository.GetAuthorByEmail("TestUserEmail");
+			var foundUser = this.userRepository.GetAuthorByEmail("TestUserEmail");
 			Assert.NotNull(foundUser);
 			Assert.AreEqual(1, foundUser.ID);
 			Assert.AreEqual("TestUserEmail", foundUser.Email);
@@ -52,9 +52,9 @@ namespace BlogSharp.Db4o.Tests.Repositories
 			var user = new User();
 			user.ID = 1;
 			user.Username = "TestUser";
-			objectContainer.Store(user);
+			this.objectContainer.Store(user);
 
-			var foundUser = userRepository.GetAuthorByUsername("TestUser");
+			var foundUser = this.userRepository.GetAuthorByUsername("TestUser");
 			Assert.NotNull(foundUser);
 			Assert.AreEqual(1, foundUser.ID);
 			Assert.AreEqual("TestUser", foundUser.Username);
@@ -64,8 +64,8 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		public void Can_store_an_user()
 		{
 			var user = new User();
-			userRepository.SaveUser(user);
-			var id = objectContainer.GetID(user);
+			this.userRepository.SaveUser(user);
+			var id = this.objectContainer.GetID(user);
 			Assert.True(id > 0);
 		}
 	}

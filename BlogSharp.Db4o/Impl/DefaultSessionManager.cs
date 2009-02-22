@@ -22,7 +22,7 @@ namespace BlogSharp.Db4o.Impl
 		{
 			this.container = container;
 			this.provider = provider;
-			Wrapper = wrapper;
+			this.Wrapper = wrapper;
 			this.store = store;
 		}
 
@@ -37,28 +37,28 @@ namespace BlogSharp.Db4o.Impl
 
 			bool weAreSessionOwner = false;
 
-			IExtObjectContainer wrapped = store[alias];
+			IExtObjectContainer wrapped = this.store[alias];
 			IExtObjectContainer session;
 
 			if (wrapped == null)
 			{
-				var initializers = container.ResolveAll<IDb4oInitializationHandler>();
-				session = CreateObjectContainer(alias);
+				var initializers = this.container.ResolveAll<IDb4oInitializationHandler>();
+				session = this.CreateObjectContainer(alias);
 				foreach (var handler in initializers)
 				{
 					handler.HandleObjectContainerCreated(session);
 				}
 				weAreSessionOwner = true;
-				wrapped = WrapSession(Transaction.Current != null, session);
+				wrapped = this.WrapSession(Transaction.Current != null, session);
 
-				EnlistIfNecessary(weAreSessionOwner, wrapped);
-				store[alias] = wrapped;
+				this.EnlistIfNecessary(weAreSessionOwner, wrapped);
+				this.store[alias] = wrapped;
 			}
 			else
 			{
-				EnlistIfNecessary(weAreSessionOwner, wrapped);
+				this.EnlistIfNecessary(weAreSessionOwner, wrapped);
 				IObjectContainerProxy proxy = wrapped as IObjectContainerProxy;
-				wrapped = WrapSession(true, Wrapper.UnWrap(wrapped));
+				wrapped = this.WrapSession(true, this.Wrapper.UnWrap(wrapped));
 			}
 
 			return wrapped;
@@ -66,20 +66,20 @@ namespace BlogSharp.Db4o.Impl
 
 		public virtual IObjectContainer GetContainer()
 		{
-			return GetContainer(Constants.DefaultAlias);
+			return this.GetContainer(Constants.DefaultAlias);
 		}
 
 		#endregion
 
 		protected virtual IExtObjectContainer WrapSession(bool hasTransaction, IExtObjectContainer container)
 		{
-			IExtObjectContainer wrapped = Wrapper.Wrap(container, null, null);
+			IExtObjectContainer wrapped = this.Wrapper.Wrap(container, null, null);
 			return wrapped;
 		}
 
 		protected virtual IExtObjectContainer CreateObjectContainer(string alias)
 		{
-			IObjectContainerProvider containerProvider = provider.GetFactory(alias);
+			IObjectContainerProvider containerProvider = this.provider.GetFactory(alias);
 			return containerProvider.GetContainer();
 		}
 

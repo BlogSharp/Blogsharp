@@ -25,10 +25,10 @@ namespace BlogSharp.Db4o.Impl
 			get
 			{
 				IExtObjectContainer container;
-				Dictionary.TryGetValue(alias, out container);
+				this.Dictionary.TryGetValue(alias, out container);
 				return container;
 			}
-			set { Dictionary[alias] = value; }
+			set { this.Dictionary[alias] = value; }
 		}
 
 		#endregion

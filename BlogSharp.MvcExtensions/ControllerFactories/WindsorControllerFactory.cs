@@ -17,12 +17,12 @@ namespace BlogSharp.MvcExtensions.ControllerFactories
 
 		public IController CreateController(System.Web.Routing.RequestContext context, Type controllerType)
 		{
-			return GetControllerInstance(controllerType);
+			return this.GetControllerInstance(controllerType);
 		}
 
 		public override void ReleaseController(IController controller)
 		{
-			kernel.ReleaseComponent(controller);
+			this.kernel.ReleaseComponent(controller);
 			base.ReleaseController(controller);
 		}
 
@@ -30,7 +30,7 @@ namespace BlogSharp.MvcExtensions.ControllerFactories
 
 		protected override IController GetControllerInstance(Type controllerType)
 		{
-			return kernel.Resolve(controllerType) as IController;
+			return this.kernel.Resolve(controllerType) as IController;
 		}
 	}
 }

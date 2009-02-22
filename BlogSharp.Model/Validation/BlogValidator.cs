@@ -20,11 +20,11 @@ namespace BlogSharp.Model.Validation
 		/// </summary>
 		public BlogValidator()
 		{
-			RuleFor(x => x.Configuration).NotNull();
-			RuleFor(x => x.Founder).NotNull();
-			RuleFor(x => x.Host).NotNull().And().NotEmpty();
-			RuleFor(x => x.Name).NotNull().And().NotEmpty();
-			RuleFor(x => x.Title).NotEmpty();
+			this.RuleFor(x => x.Configuration).NotNull();
+			this.RuleFor(x => x.Founder).NotNull();
+			this.RuleFor(x => x.Host).NotNull().And().NotEmpty();
+			this.RuleFor(x => x.Name).NotNull().And().NotEmpty();
+			this.RuleFor(x => x.Title).NotEmpty();
 		}
 	}
 }

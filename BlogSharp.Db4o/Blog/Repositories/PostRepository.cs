@@ -22,8 +22,8 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		/// <returns></returns>
 		public IList<Post> GetByBlog(BlogSharp.Model.Blog blog)
 		{
-			return container.GetContainer().Query<Post>(x => x.Blog == blog,
-			                                            (x, y) => y.DatePublished.CompareTo(x.DatePublished));
+			return this.container.GetContainer().Query<Post>(x => x.Blog == blog,
+			                                                 (x, y) => y.DatePublished.CompareTo(x.DatePublished));
 		}
 
 		/// <summary>
@@ -35,8 +35,8 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		/// <returns></returns>
 		public IList<Post> GetByBlog(BlogSharp.Model.Blog blog, int skip, int take)
 		{
-			return container.GetContainer().Query<Post>(x => x.Blog == blog,
-			                                            (x, y) => x.DatePublished.CompareTo(y.DatePublished))
+			return this.container.GetContainer().Query<Post>(x => x.Blog == blog,
+			                                                 (x, y) => x.DatePublished.CompareTo(y.DatePublished))
 				.Skip(skip).Take(take).ToList();
 		}
 
@@ -51,7 +51,7 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		public IList<Post> GetByDate(BlogSharp.Model.Blog blog, DateTime date, int skip, int take)
 		{
 			date = date.Date;
-			return container.GetContainer().Query<Post>(x => x.Blog == blog && x.DatePublished >= date)
+			return this.container.GetContainer().Query<Post>(x => x.Blog == blog && x.DatePublished >= date)
 				.Skip(skip).Take(take).ToList();
 		}
 
@@ -65,7 +65,7 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		/// <returns></returns>
 		public IList<Post> GetByAuthor(BlogSharp.Model.Blog blog, int authorId, int skip, int take)
 		{
-			return container.GetContainer()
+			return this.container.GetContainer()
 				.Query<Post>(x => x.Blog == blog &&
 				                  x.User.ID == authorId)
 				.Skip(skip).Take(take).ToList();
@@ -82,10 +82,10 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		public IList<Post> GetByTag(BlogSharp.Model.Blog blog, string friendlyTagName, int skip, int take)
 		{
 			var tag =
-				container.GetContainer().Query<Tag>(x => x.FriendlyName == friendlyTagName && x.Blog == blog).SingleOrDefault();
+				this.container.GetContainer().Query<Tag>(x => x.FriendlyName == friendlyTagName && x.Blog == blog).SingleOrDefault();
 			if (tag == null)
 				return null;
-			container.GetContainer().Activate(tag, 3);
+			this.container.GetContainer().Activate(tag, 3);
 			return tag.Posts.Skip(skip).Take(take).ToList();
 		}
 
@@ -95,9 +95,9 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		/// <param name="post"></param>
 		public void SavePost(Post post)
 		{
-			SaveObject(post);
-			SaveObject(post.Comments);
-			SaveObject(post.Tags);
+			this.SaveObject(post);
+			this.SaveObject(post.Comments);
+			this.SaveObject(post.Tags);
 		}
 
 		/// <summary>
@@ -106,7 +106,7 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		/// <param name="post"></param>
 		public void DeletePost(Post post)
 		{
-			RemoveObject(post);
+			this.RemoveObject(post);
 		}
 
 		/// <summary>
@@ -117,8 +117,8 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		{
 			if (!comment.Post.Comments.Contains(comment))
 				comment.Post.AddComment(comment);
-			SaveObject(comment.Post.Comments);
-			SaveObject(comment);
+			this.SaveObject(comment.Post.Comments);
+			this.SaveObject(comment);
 		}
 
 		/// <summary>
@@ -128,8 +128,8 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		public void DeleteComment(PostComment comment)
 		{
 			comment.Post.Comments.Remove(comment);
-			SaveObject(comment.Post.Comments);
-			RemoveObject(comment);
+			this.SaveObject(comment.Post.Comments);
+			this.RemoveObject(comment);
 		}
 
 		/// <summary>
@@ -139,14 +139,14 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		/// <returns></returns>
 		public Post GetByTitle(BlogSharp.Model.Blog blog, string friendlyTitle)
 		{
-			return container.GetContainer()
+			return this.container.GetContainer()
 				.Query<Post>(x => x.FriendlyTitle == friendlyTitle)
 				.SingleOrDefault();
 		}
 
 		public Post GetPostById(BlogSharp.Model.Blog blog, int id)
 		{
-			return container.GetContainer()
+			return this.container.GetContainer()
 				.Query<Post>(x => x.ID == id)
 				.SingleOrDefault();
 		}

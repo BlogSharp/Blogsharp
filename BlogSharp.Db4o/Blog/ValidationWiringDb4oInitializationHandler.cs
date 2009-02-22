@@ -20,8 +20,8 @@ namespace BlogSharp.Db4o.Blog
 		public void HandleObjectContainerCreated(IExtObjectContainer extObjectContainer)
 		{
 			var factory = EventRegistryFactory.ForObjectContainer(extObjectContainer);
-			factory.Creating += ValidationHandler;
-			factory.Updating += ValidationHandler;
+			factory.Creating += this.ValidationHandler;
+			factory.Updating += this.ValidationHandler;
 		}
 
 		#endregion
@@ -30,7 +30,7 @@ namespace BlogSharp.Db4o.Blog
 		{
 			try
 			{
-				ValidateObject(args.Object);
+				this.ValidateObject(args.Object);
 			}
 			catch (ValidationException ex)
 			{
@@ -43,9 +43,9 @@ namespace BlogSharp.Db4o.Blog
 		{
 			var type = obj.GetType();
 			var validatorType = typeof (IValidatorBase<>).MakeGenericType(type);
-			if (container.HasComponent(validatorType))
+			if (this.container.HasComponent(validatorType))
 			{
-				var validator = container.Resolve(validatorType) as IValidatorBase;
+				var validator = this.container.Resolve(validatorType) as IValidatorBase;
 				validator.ValidateAndThrowException(obj);
 			}
 		}

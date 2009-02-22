@@ -22,8 +22,8 @@ namespace BlogSharp.Model
 		/// </summary>
 		public Blog()
 		{
-			Authors = new List<User>();
-			Posts = new List<Post>();
+			this.Authors = new List<User>();
+			this.Posts = new List<Post>();
 		}
 
 		/// <summary>

@@ -17,7 +17,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 
 		public string Name
 		{
-			get { return System.IO.Path.GetFileName(Path); }
+			get { return System.IO.Path.GetFileName(this.Path); }
 		}
 
 		public FileSystemType Type
@@ -32,7 +32,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 
 		public string Path
 		{
-			get { return fileName; }
+			get { return this.fileName; }
 		}
 
 		public string GetRelativePath(string root)
@@ -44,7 +44,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 
 		public override string ToString()
 		{
-			return Path;
+			return this.Path;
 		}
 	}
 }

@@ -10,7 +10,7 @@ namespace BlogSharp.CastleExtensions.Tests.DependencyResolvers
 	{
 		public SampleService1(string serviceId)
 		{
-			ServiceId = serviceId;
+			this.ServiceId = serviceId;
 		}
 
 		public string ServiceId { get; set; }
@@ -20,7 +20,7 @@ namespace BlogSharp.CastleExtensions.Tests.DependencyResolvers
 	{
 		public SampleService2(string serviceId)
 		{
-			ServiceId = serviceId;
+			this.ServiceId = serviceId;
 		}
 
 		public string ServiceId { get; set; }
@@ -30,7 +30,7 @@ namespace BlogSharp.CastleExtensions.Tests.DependencyResolvers
 	{
 		public SampleService3(int serviceId)
 		{
-			ServiceId = serviceId;
+			this.ServiceId = serviceId;
 		}
 
 		public int ServiceId { get; set; }
@@ -44,9 +44,9 @@ namespace BlogSharp.CastleExtensions.Tests.DependencyResolvers
 		[SetUp]
 		public void SetUp()
 		{
-			container = new WindsorContainer();
-			container.Kernel.Resolver.AddSubResolver(new ServiceIdResolver());
-			container.Register(Component.For<SampleService1>().Named("service1"))
+			this.container = new WindsorContainer();
+			this.container.Kernel.Resolver.AddSubResolver(new ServiceIdResolver());
+			this.container.Register(Component.For<SampleService1>().Named("service1"))
 				.Register(Component.For<SampleService2>().Named("service2"))
 				.Register(Component.For<SampleService3>().Named("service3"));
 		}
@@ -58,11 +58,11 @@ namespace BlogSharp.CastleExtensions.Tests.DependencyResolvers
 		[Test]
 		public void CanResolveDependencyWithServiceId()
 		{
-			var s1 = container.Resolve<SampleService1>();
-			var s2 = container.Resolve<SampleService2>();
+			var s1 = this.container.Resolve<SampleService1>();
+			var s2 = this.container.Resolve<SampleService2>();
 			Assert.That("service1", Is.EqualTo(s1.ServiceId));
 			Assert.That("service2", Is.EqualTo(s2.ServiceId));
-			Assert.Throws<HandlerException>(() => container.Resolve<SampleService3>());
+			Assert.Throws<HandlerException>(() => this.container.Resolve<SampleService3>());
 		}
 	}
 }

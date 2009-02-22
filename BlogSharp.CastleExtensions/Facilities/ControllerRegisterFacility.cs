@@ -8,7 +8,7 @@ namespace BlogSharp.CastleExtensions.Facilities
 	{
 		protected override void Init()
 		{
-			Kernel.ComponentModelCreated +=
+			this.Kernel.ComponentModelCreated +=
 				delegate(ComponentModel model)
 					{
 						if (typeof (IController).IsAssignableFrom(model.Implementation))

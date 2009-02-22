@@ -21,8 +21,8 @@ namespace BlogSharp.Model
 		/// </summary>
 		public Post()
 		{
-			Comments = new List<PostComment>();
-			Tags = new List<Tag>();
+			this.Comments = new List<PostComment>();
+			this.Tags = new List<Tag>();
 		}
 
 		/// <summary>
@@ -76,7 +76,7 @@ namespace BlogSharp.Model
 		/// <param name="comment">The Comment to add.</param>
 		public void AddComment(PostComment comment)
 		{
-			Comments.Add(comment);
+			this.Comments.Add(comment);
 			comment.Post = this;
 		}
 	}

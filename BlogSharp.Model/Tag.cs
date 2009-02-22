@@ -22,7 +22,7 @@ namespace BlogSharp.Model
 		/// </summary>
 		public Tag()
 		{
-			Posts = new List<Post>();
+			this.Posts = new List<Post>();
 		}
 
 		/// <summary>

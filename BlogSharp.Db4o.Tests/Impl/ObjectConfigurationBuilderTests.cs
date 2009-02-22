@@ -12,7 +12,7 @@ namespace BlogSharp.Db4o.Tests.Impl
 		public override void SetUp()
 		{
 			base.SetUp();
-			objectServerConfigurationBuilder = new DefaultConfigurationBuilder();
+			this.objectServerConfigurationBuilder = new DefaultConfigurationBuilder();
 		}
 
 		#endregion
@@ -22,7 +22,7 @@ namespace BlogSharp.Db4o.Tests.Impl
 		[Test]
 		public void Test_if_builder_can_return_configuration()
 		{
-			var configuration = objectServerConfigurationBuilder.GetConfiguration(null);
+			var configuration = this.objectServerConfigurationBuilder.GetConfiguration(null);
 			Assert.NotNull(configuration);
 		}
 	}

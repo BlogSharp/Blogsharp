@@ -28,11 +28,11 @@ namespace BlogSharp.Core.Impl.EventHandlers.Membership
 		public void Handle(UserRegisteredEventArgs eventArgs)
 		{
 			User user = eventArgs.User;
-			ITemplate template = templateSource.GetTemplateWithKey("membership_welcome");
+			ITemplate template = this.templateSource.GetTemplateWithKey("membership_welcome");
 			var context = new Dictionary<string, object>();
 			context["user"] = user;
-			string merged = templateEngine.Merge(template, context);
-			mailService.Send(new MailAddress(user.Email, user.Username), null, null, "Registration information", merged);
+			string merged = this.templateEngine.Merge(template, context);
+			this.mailService.Send(new MailAddress(user.Email, user.Username), null, null, "Registration information", merged);
 		}
 
 		#endregion

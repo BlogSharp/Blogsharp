@@ -14,8 +14,8 @@ namespace BlogSharp.Db4o.Tests.Impl
 		[SetUp]
 		public void SetUp()
 		{
-			objectServer = MockRepository.GenerateMock<IExtObjectServer>();
-			objectContainerProvider = new EmbeddedServerContainerProvider(objectServer);
+			this.objectServer = MockRepository.GenerateMock<IExtObjectServer>();
+			this.objectContainerProvider = new EmbeddedServerContainerProvider(this.objectServer);
 		}
 
 		#endregion
@@ -29,15 +29,15 @@ namespace BlogSharp.Db4o.Tests.Impl
 		public void Can_open_client_with_configuration()
 		{
 			var configuration = Db4oFactory.NewConfiguration();
-			objectContainerProvider.GetContainer(configuration);
-			objectServer.AssertWasCalled(x => x.OpenClient(configuration));
+			this.objectContainerProvider.GetContainer(configuration);
+			this.objectServer.AssertWasCalled(x => x.OpenClient(configuration));
 		}
 
 		[Test]
 		public void Can_open_client_without_configuration()
 		{
-			objectContainerProvider.GetContainer();
-			objectServer.AssertWasCalled(x => x.OpenClient());
+			this.objectContainerProvider.GetContainer();
+			this.objectServer.AssertWasCalled(x => x.OpenClient());
 		}
 	}
 }

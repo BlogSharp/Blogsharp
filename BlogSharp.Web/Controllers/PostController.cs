@@ -20,20 +20,20 @@ namespace BlogSharp.Web.Controllers
 
 		public ActionResult List(int page)
 		{
-			var posts = postService.GetPostsByBlogPaged(CurrentBlog, 0, CurrentBlog.Configuration.PageSize);
+			var posts = this.postService.GetPostsByBlogPaged(this.CurrentBlog, 0, this.CurrentBlog.Configuration.PageSize);
 			return View(posts);
 		}
 
 		public ActionResult ListByTag(string tagName, int page)
 		{
 			var tag = tagName;
-			var posts = postService.GetPostsByTagPaged(CurrentBlog, tagName, 0, CurrentBlog.Configuration.PageSize);
-			return View("PostByTagList", new {tag = tag, posts = posts});
+			var posts = this.postService.GetPostsByTagPaged(this.CurrentBlog, tagName, 0, this.CurrentBlog.Configuration.PageSize);
+			return this.View("PostByTagList", new {tag = tag, posts = posts});
 		}
 
 		public ActionResult Read(string friendlyTitle)
 		{
-			var post = postService.GetPostByFriendlyTitle(CurrentBlog, friendlyTitle);
+			var post = this.postService.GetPostByFriendlyTitle(this.CurrentBlog, friendlyTitle);
 			return View(post);
 		}
 
@@ -41,20 +41,20 @@ namespace BlogSharp.Web.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult AddComment(int postId, PostComment comment)
 		{
-			var post = postService.GetPostById(CurrentBlog, postId);
+			var post = this.postService.GetPostById(this.CurrentBlog, postId);
 			comment.Post = post;
 			comment.Date = DateTime.Now;
 			using (var tranScope = new TransactionScope())
 			{
 				try
 				{
-					postService.AddComment(comment);
+					this.postService.AddComment(comment);
 					tranScope.Complete();
 				}
 				catch (ValidationException vex)
 				{
 					Transaction.Current.Rollback();
-					ModelState.AddValidationExceptionToModel("comment", vex);
+					this.ModelState.AddValidationExceptionToModel("comment", vex);
 				}
 			}
 			return View("Read", post);

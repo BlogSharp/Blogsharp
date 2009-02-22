@@ -13,7 +13,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Template
 		[SetUp]
 		public void SetUp()
 		{
-			templateEngineRegistry = new TemplateEngineRegistry();
+			this.templateEngineRegistry = new TemplateEngineRegistry();
 		}
 
 		#endregion
@@ -25,17 +25,17 @@ namespace BlogSharp.Core.Impl.Tests.Services.Template
 		public void Can_register_key_using_key()
 		{
 			var mock = MockRepository.GenerateMock<ITemplateEngine>();
-			templateEngineRegistry.RegisterTemplateEngine("blah", mock);
-			Assert.That(templateEngineRegistry.GetTemplateEngine("blah"), Is.EqualTo(mock));
+			this.templateEngineRegistry.RegisterTemplateEngine("blah", mock);
+			Assert.That(this.templateEngineRegistry.GetTemplateEngine("blah"), Is.EqualTo(mock));
 		}
 
 		[Test]
 		public void Can_unregister_using_key()
 		{
 			var mock = MockRepository.GenerateMock<ITemplateEngine>();
-			templateEngineRegistry.RegisterTemplateEngine("blah", mock);
-			templateEngineRegistry.UnregisterTemplateEngine("blah");
-			Assert.Null(templateEngineRegistry.GetTemplateEngine("blah"));
+			this.templateEngineRegistry.RegisterTemplateEngine("blah", mock);
+			this.templateEngineRegistry.UnregisterTemplateEngine("blah");
+			Assert.Null(this.templateEngineRegistry.GetTemplateEngine("blah"));
 		}
 	}
 }

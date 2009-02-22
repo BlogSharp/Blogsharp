@@ -17,17 +17,17 @@
 		[SetUp]
 		public void SetUp()
 		{
-			postService = MockRepository.GenerateMock<IPostService>();
-			blogContextProvider = MockRepository.GenerateMock<BlogContextProvider>();
-			blog = new Blog
-			       	{
-			       		Configuration = new BlogConfiguration {PageSize = 10}
-			       	};
-			blogContextProvider.Expect(x => x.GetCurrentBlogContext())
-				.Return(new BlogContext {Blog = blog})
+			this.postService = MockRepository.GenerateMock<IPostService>();
+			this.blogContextProvider = MockRepository.GenerateMock<BlogContextProvider>();
+			this.blog = new Blog
+			            	{
+			            		Configuration = new BlogConfiguration {PageSize = 10}
+			            	};
+			this.blogContextProvider.Expect(x => x.GetCurrentBlogContext())
+				.Return(new BlogContext {Blog = this.blog})
 				.Repeat.Any();
-			controller = new PostController(postService);
-			BlogContextProvider.Current = blogContextProvider;
+			this.controller = new PostController(this.postService);
+			BlogContextProvider.Current = this.blogContextProvider;
 		}
 
 		[TearDown]
@@ -47,19 +47,19 @@
 		public void Can_insert_post_comment()
 		{
 			var postComment = new PostComment();
-			postService.Expect(x => x.GetPostById(blog, 1))
+			this.postService.Expect(x => x.GetPostById(this.blog, 1))
 				.Return(new Post {FriendlyTitle = "m"});
-			var actionResult = controller.AddComment(1, postComment) as RedirectToRouteResult;
+			var actionResult = this.controller.AddComment(1, postComment) as RedirectToRouteResult;
 			Assert.That(actionResult, Is.Not.Null);
-			postService.AssertWasCalled(x => x.AddComment(postComment));
+			this.postService.AssertWasCalled(x => x.AddComment(postComment));
 		}
 
 		[Test]
 		public void Can_list_posts_with_certain_tag()
 		{
 			var postList = new List<Post>();
-			postService.Expect(x => x.GetPostsByTagPaged(blog, "myTag", 0, 10)).Return(postList);
-			var result = controller.ListByTag("myTag", 1) as ViewResult;
+			this.postService.Expect(x => x.GetPostsByTagPaged(this.blog, "myTag", 0, 10)).Return(postList);
+			var result = this.controller.ListByTag("myTag", 1) as ViewResult;
 			var data = result.ViewData.Model;
 			Assert.That(data, Is.Not.Null);
 		}
@@ -67,18 +67,18 @@
 		[Test]
 		public void Can_list_the_posts_paged()
 		{
-			postService
+			this.postService
 				.Expect(x => x.GetPostsByBlogPaged(
-				             	Arg<Blog>.Is.Equal(blog),
+				             	Arg<Blog>.Is.Equal(this.blog),
 				             	Arg<int>.Is.Anything,
 				             	Arg<int>.Is.Anything))
 				.Return(new List<Post>());
 
-			ViewResult view = controller.List(0) as ViewResult;
-			postService.AssertWasCalled(x => x.GetPostsByBlogPaged(
-			                                 	Arg<Blog>.Is.Equal(blog),
-			                                 	Arg<int>.Is.Anything,
-			                                 	Arg<int>.Is.NotEqual(0)));
+			ViewResult view = this.controller.List(0) as ViewResult;
+			this.postService.AssertWasCalled(x => x.GetPostsByBlogPaged(
+			                                      	Arg<Blog>.Is.Equal(this.blog),
+			                                      	Arg<int>.Is.Anything,
+			                                      	Arg<int>.Is.NotEqual(0)));
 			Assert.NotNull(view.ViewData.Model);
 			Assert.That(view.ViewData.Model as IList<Post>, Is.Not.Null);
 		}
@@ -88,12 +88,12 @@
 		{
 			string friendlyTitle = "my-friendly-title";
 
-			postService
-				.Expect(x => x.GetPostByFriendlyTitle(blog, friendlyTitle))
+			this.postService
+				.Expect(x => x.GetPostByFriendlyTitle(this.blog, friendlyTitle))
 				.Return(new Post {Title = "osman"});
-			ViewResult view = controller.Read(friendlyTitle) as ViewResult;
-			postService
-				.AssertWasCalled(x => x.GetPostByFriendlyTitle(blog, "my-friendly-title"));
+			ViewResult view = this.controller.Read(friendlyTitle) as ViewResult;
+			this.postService
+				.AssertWasCalled(x => x.GetPostByFriendlyTitle(this.blog, "my-friendly-title"));
 			Assert.NotNull(view.ViewData.Model);
 		}
 	}

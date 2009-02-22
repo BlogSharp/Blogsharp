@@ -31,7 +31,7 @@ namespace BlogSharp.Model.Validation
 			{
 				var sb = new StringBuilder();
 				sb.AppendLine("Validation error has occured on following properties:");
-				foreach (var error in Errors)
+				foreach (var error in this.Errors)
 				{
 					sb.AppendLine(error.Message);
 				}

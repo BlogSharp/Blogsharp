@@ -29,13 +29,13 @@ namespace BlogSharp.Core.Impl.Installers
 
 		public void Execute()
 		{
-			if (isInitialized)
+			if (this.isInitialized)
 				return;
 
-			var blog = blogRepository.GetBlog();
+			var blog = this.blogRepository.GetBlog();
 			if (blog != null)
 			{
-				isInitialized = true;
+				this.isInitialized = true;
 				return;
 			}
 
@@ -68,17 +68,17 @@ namespace BlogSharp.Core.Impl.Installers
 			           		Tags = new List<Tag> {tag},
 			           		Title = title,
 			           		Content = "Great blog post is here you are.",
-			           		FriendlyTitle = generator.GenerateUrl("{0}", title),
+			           		FriendlyTitle = this.generator.GenerateUrl("{0}", title),
 			           		DateCreated = DateTime.Now,
 			           		DatePublished = DateTime.Now
 			           	};
 			tag.Posts.Add(post);
 			blog.Configuration = new BlogConfiguration {PageSize = 10};
 			blog.Posts.Add(post);
-			userRepository.SaveUser(user);
-			blogRepository.SaveBlog(blog);
-			postRepository.SavePost(post);
-			isInitialized = true;
+			this.userRepository.SaveUser(user);
+			this.blogRepository.SaveBlog(blog);
+			this.postRepository.SavePost(post);
+			this.isInitialized = true;
 		}
 
 		#endregion

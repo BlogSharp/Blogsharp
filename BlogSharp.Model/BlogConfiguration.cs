@@ -31,7 +31,7 @@ namespace BlogSharp.Model
 		/// </summary>
 		public BlogConfiguration()
 		{
-			innerDict = new Dictionary<string, object>(10);
+			this.innerDict = new Dictionary<string, object>(10);
 		}
 
 		#endregion
@@ -43,9 +43,9 @@ namespace BlogSharp.Model
 		/// </summary>
 		public int PageSize
 		{
-			get { return Get(x => x.PageSize); }
+			get { return this.Get(x => x.PageSize); }
 
-			set { Set(x => x.PageSize, value); }
+			set { this.Set(x => x.PageSize, value); }
 		}
 
 		#endregion
@@ -58,8 +58,8 @@ namespace BlogSharp.Model
 		/// <param name="key">The key to store the value.</param>
 		public object this[string key]
 		{
-			get { return innerDict[key]; }
-			set { innerDict[key] = value; }
+			get { return this.innerDict[key]; }
+			set { this.innerDict[key] = value; }
 		}
 
 		/// <summary>
@@ -69,7 +69,7 @@ namespace BlogSharp.Model
 		/// <returns>The associated value for such key.</returns>
 		public object GetValue(string key)
 		{
-			return innerDict[key];
+			return this.innerDict[key];
 		}
 
 		/// <summary>
@@ -80,7 +80,7 @@ namespace BlogSharp.Model
 		/// <returns>The associated value for such key.</returns>
 		public T GetValue<T>(string key)
 		{
-			return (T) innerDict[key];
+			return (T) this.innerDict[key];
 		}
 
 		/// <summary>
@@ -90,7 +90,7 @@ namespace BlogSharp.Model
 		/// <param name="value">The value to set.</param>
 		public void SetValue(string key, object value)
 		{
-			innerDict[key] = value;
+			this.innerDict[key] = value;
 		}
 
 		/// <summary>
@@ -101,7 +101,7 @@ namespace BlogSharp.Model
 		/// <typeparam name="T">The Type of the value.</typeparam>
 		public void SetValue<T>(string key, T value)
 		{
-			innerDict[key] = value;
+			this.innerDict[key] = value;
 		}
 
 		/// <summary>
@@ -112,7 +112,7 @@ namespace BlogSharp.Model
 		/// <returns>The value or the default value for his type.</returns>
 		public U Get<U>(Expression<Func<BlogConfiguration, U>> exp)
 		{
-			return (U) (innerDict[GetKey(exp)] ?? default(U));
+			return (U) (this.innerDict[this.GetKey(exp)] ?? default(U));
 		}
 
 		#endregion
@@ -140,7 +140,7 @@ namespace BlogSharp.Model
 		/// <typeparam name="U">The type of the value of the function.</typeparam>
 		private void Set<U>(Expression<Func<BlogConfiguration, U>> exp, U value)
 		{
-			innerDict[GetKey(exp)] = value;
+			this.innerDict[this.GetKey(exp)] = value;
 		}
 
 		#endregion

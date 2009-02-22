@@ -18,14 +18,14 @@ namespace BlogSharp.Db4o.Impl
 			var wrapper = new CastleObjectContainerInterceptor(realContainer, closeDelegate, disposeDelegate);
 			var wrapped =
 				(IExtObjectContainer)
-				proxyGenerator.CreateInterfaceProxyWithTarget(typeof (IExtObjectContainer),
-				                                              new[]
-				                                              	{
-				                                              		typeof (IExtObjectContainer),
-				                                              		typeof (IObjectContainerProxy),
-				                                              		typeof (IObjectContainer)
-				                                              	},
-				                                              privateRevealer, wrapper);
+				this.proxyGenerator.CreateInterfaceProxyWithTarget(typeof (IExtObjectContainer),
+				                                                   new[]
+				                                                   	{
+				                                                   		typeof (IExtObjectContainer),
+				                                                   		typeof (IObjectContainerProxy),
+				                                                   		typeof (IObjectContainer)
+				                                                   	},
+				                                                   privateRevealer, wrapper);
 			return wrapped;
 		}
 

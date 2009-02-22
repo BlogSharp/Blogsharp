@@ -16,12 +16,12 @@ namespace BlogSharp.Db4o.Impl
 
 		public IExtObjectContainer GetContainer()
 		{
-			return objectServer.OpenClient() as IExtObjectContainer;
+			return this.objectServer.OpenClient() as IExtObjectContainer;
 		}
 
 		public IExtObjectContainer GetContainer(IConfiguration configuration)
 		{
-			return objectServer.OpenClient(configuration) as IExtObjectContainer;
+			return this.objectServer.OpenClient(configuration) as IExtObjectContainer;
 		}
 
 		#endregion

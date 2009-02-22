@@ -8,7 +8,7 @@ namespace BlogSharp.Core.Event.PostEvents
 		public PostRemovedEventArgs(IPostService postService, Post post)
 			: base(postService)
 		{
-			Post = post;
+			this.Post = post;
 		}
 
 		public Post Post { get; private set; }

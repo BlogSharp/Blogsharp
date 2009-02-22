@@ -45,7 +45,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Native
 
 		protected override bool ReleaseHandle()
 		{
-			return NativeMethods.CloseHandle(handle);
+			return NativeMethods.CloseHandle(this.handle);
 		}
 
 		private static void HandleError(int error)

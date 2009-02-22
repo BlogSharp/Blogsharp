@@ -14,12 +14,12 @@ namespace BlogSharp.Db4o.Blog.Repositories
 
 		public void SaveBlog(BlogSharp.Model.Blog blog)
 		{
-			SaveObject(blog);
+			this.SaveObject(blog);
 		}
 
 		public void DeleteBlog(BlogSharp.Model.Blog blog)
 		{
-			RemoveObject(blog);
+			this.RemoveObject(blog);
 		}
 
 		#endregion
@@ -28,7 +28,7 @@ namespace BlogSharp.Db4o.Blog.Repositories
 
 		public BlogSharp.Model.Blog GetBlog()
 		{
-			return container.GetContainer()
+			return this.container.GetContainer()
 				.Query<Model.Blog>()
 				.SingleOrDefault();
 		}

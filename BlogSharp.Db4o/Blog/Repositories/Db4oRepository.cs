@@ -15,7 +15,7 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		{
 			try
 			{
-				container.GetContainer().Store(obj);
+				this.container.GetContainer().Store(obj);
 			}
 			catch (EventException eventException)
 			{
@@ -27,7 +27,7 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		{
 			try
 			{
-				container.GetContainer().Delete(obj);
+				this.container.GetContainer().Delete(obj);
 			}
 			catch (EventException eventException)
 			{

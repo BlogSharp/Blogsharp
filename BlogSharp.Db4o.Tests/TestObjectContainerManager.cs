@@ -15,12 +15,12 @@
 
 		public Db4objects.Db4o.IObjectContainer GetContainer()
 		{
-			return objectContainer;
+			return this.objectContainer;
 		}
 
 		public Db4objects.Db4o.IObjectContainer GetContainer(string alias)
 		{
-			return objectContainer;
+			return this.objectContainer;
 		}
 
 		#endregion

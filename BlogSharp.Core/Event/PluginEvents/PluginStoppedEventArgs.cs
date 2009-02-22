@@ -7,7 +7,7 @@ namespace BlogSharp.Core.Event.PluginEvents
 		public PluginStoppedEventArgs(IPluginService service, IPlugin plugin)
 			: base(service)
 		{
-			Plugin = plugin;
+			this.Plugin = plugin;
 		}
 
 		public IPlugin Plugin { get; set; }

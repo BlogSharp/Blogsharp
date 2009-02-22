@@ -20,7 +20,7 @@ namespace BlogSharp.Core.Impl.Services.Template
 		{
 			this.fileServices = fileServices;
 			this.templateEngineRegistry = templateEngineRegistry;
-			keyToTemplate = new Dictionary<string, Func<ITemplate>>();
+			this.keyToTemplate = new Dictionary<string, Func<ITemplate>>();
 		}
 
 		#region ITemplateSource Members
@@ -28,7 +28,7 @@ namespace BlogSharp.Core.Impl.Services.Template
 		public ITemplate GetTemplateFromFile(string file)
 		{
 			string output;
-			using (var stream = fileServices.OpenFileForRead(file))
+			using (var stream = this.fileServices.OpenFileForRead(file))
 			{
 				using (var reader = new StreamReader(stream))
 				{
@@ -37,12 +37,12 @@ namespace BlogSharp.Core.Impl.Services.Template
 				}
 				stream.Close();
 			}
-			return GetTemplateFromString(output);
+			return this.GetTemplateFromString(output);
 		}
 
 		public ITemplate GetTemplateWithKey(string key)
 		{
-			return keyToTemplate[key]();
+			return this.keyToTemplate[key]();
 		}
 
 		public ITemplate GetTemplateFromString(string content)
@@ -51,7 +51,7 @@ namespace BlogSharp.Core.Impl.Services.Template
 			if (m.Success)
 			{
 				string engineKey = m.Groups["key"].Value;
-				ITemplateEngine engine = templateEngineRegistry.GetTemplateEngine(engineKey);
+				ITemplateEngine engine = this.templateEngineRegistry.GetTemplateEngine(engineKey);
 				return new DefaultTemplate(content.Substring(m.Index + m.Length + 1), engine);
 			}
 			else
@@ -62,17 +62,17 @@ namespace BlogSharp.Core.Impl.Services.Template
 
 		public void RegisterTemplateWithFile(string key, string file)
 		{
-			keyToTemplate[key] = () => GetTemplateFromFile(file);
+			this.keyToTemplate[key] = () => this.GetTemplateFromFile(file);
 		}
 
 		public void RegisterTemplateWithString(string key, string content)
 		{
-			keyToTemplate[key] = () => GetTemplateFromString(content);
+			this.keyToTemplate[key] = () => this.GetTemplateFromString(content);
 		}
 
 		public void UnregisterTemplate(string key)
 		{
-			keyToTemplate.Remove(key);
+			this.keyToTemplate.Remove(key);
 		}
 
 		#endregion

@@ -9,39 +9,39 @@ namespace BlogSharp.Model.Tests.Validators
 		[Test]
 		public void Should_raise_error_when_comment_is_not_specified()
 		{
-			ShouldHaveErrors(x => x.Comment, null);
-			ShouldHaveErrors(x => x.Comment, null);
+			this.ShouldHaveErrors(x => x.Comment, null);
+			this.ShouldHaveErrors(x => x.Comment, null);
 		}
 
 		[Test]
 		public void Should_raise_error_when_email_is_empty()
 		{
-			ShouldHaveErrors(x => x.Email, null);
-			ShouldHaveErrors(x => x.Email, "");
+			this.ShouldHaveErrors(x => x.Email, null);
+			this.ShouldHaveErrors(x => x.Email, "");
 		}
 
 		[Test]
 		public void Should_raise_error_when_email_is_in_invalid_format()
 		{
-			ShouldHaveErrors(x => x.Email, "aaaa");
-			ShouldHaveErrors(x => x.Email, "aaa@aaa");
-			ShouldHaveErrors(x => x.Email, "aaa@aaa.");
-			ShouldNotHaveErrors(x => x.Email, "aaa@aaa.com");
+			this.ShouldHaveErrors(x => x.Email, "aaaa");
+			this.ShouldHaveErrors(x => x.Email, "aaa@aaa");
+			this.ShouldHaveErrors(x => x.Email, "aaa@aaa.");
+			this.ShouldNotHaveErrors(x => x.Email, "aaa@aaa.com");
 		}
 
 
 		[Test]
 		public void Should_raise_error_when_web_is_in_invalid_format()
 		{
-			ShouldHaveErrors(x => x.Web, "aaaa");
-			ShouldHaveErrors(x => x.Web, "http://aaa");
-			ShouldNotHaveErrors(x => x.Web, "http://tunatoksoz.com");
+			this.ShouldHaveErrors(x => x.Web, "aaaa");
+			this.ShouldHaveErrors(x => x.Web, "http://aaa");
+			this.ShouldNotHaveErrors(x => x.Web, "http://tunatoksoz.com");
 		}
 
 		[Test]
 		public void Should_raise_no_error_when_web_is_in_invalid_format()
 		{
-			ShouldNotHaveErrors(x => x.Web, "");
+			this.ShouldNotHaveErrors(x => x.Web, "");
 		}
 	}
 }

@@ -16,7 +16,7 @@ namespace BlogSharp.Core.Impl.EventHandlers.Membership
 		                                             ITemplateSource templateSource)
 		{
 			this.mailService = mailService;
-			templateEngine = engine;
+			this.templateEngine = engine;
 			this.templateSource = templateSource;
 		}
 
@@ -28,9 +28,9 @@ namespace BlogSharp.Core.Impl.EventHandlers.Membership
 			var dictionary = new Dictionary<string, object>();
 			dictionary.Add("user", user);
 			dictionary.Add("newPassword", eventArgs.NewPassword);
-			ITemplate template = templateSource.GetTemplateWithKey("membership_passwordreset");
-			string output = templateEngine.Merge(template, dictionary);
-			mailService.Send(new MailAddress(user.Email, user.Username), null, null, "Password Reset Request", output);
+			ITemplate template = this.templateSource.GetTemplateWithKey("membership_passwordreset");
+			string output = this.templateEngine.Merge(template, dictionary);
+			this.mailService.Send(new MailAddress(user.Email, user.Username), null, null, "Password Reset Request", output);
 		}
 
 		#endregion

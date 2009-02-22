@@ -14,27 +14,27 @@ namespace BlogSharp.Db4o.Blog.Repositories
 
 		public Model.User GetAuthorByUsername(string username)
 		{
-			return container.GetContainer().Query<Model.User>(x => x.Username == username).SingleOrDefault();
+			return this.container.GetContainer().Query<Model.User>(x => x.Username == username).SingleOrDefault();
 		}
 
 		public Model.User GetAuthorByEmail(string email)
 		{
-			return container.GetContainer().Query<Model.User>(x => x.Email == email).SingleOrDefault();
+			return this.container.GetContainer().Query<Model.User>(x => x.Email == email).SingleOrDefault();
 		}
 
 		public void SaveUser(Model.User user)
 		{
-			SaveObject(user);
+			this.SaveObject(user);
 		}
 
 		public void RemoveUser(Model.User user)
 		{
-			RemoveObject(user);
+			this.RemoveObject(user);
 		}
 
 		public Model.User GetById(int id)
 		{
-			return container.GetContainer().Query<Model.User>(x => x.ID == id).SingleOrDefault();
+			return this.container.GetContainer().Query<Model.User>(x => x.ID == id).SingleOrDefault();
 		}
 
 		#endregion

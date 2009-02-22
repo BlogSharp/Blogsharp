@@ -16,7 +16,7 @@ namespace BlogSharp.Db4o
 
 		public void Commit(Enlistment enlistment)
 		{
-			objectContainer.Commit();
+			this.objectContainer.Commit();
 		}
 
 		public void InDoubt(Enlistment enlistment)
@@ -30,7 +30,7 @@ namespace BlogSharp.Db4o
 
 		public void Rollback(Enlistment enlistment)
 		{
-			objectContainer.Rollback();
+			this.objectContainer.Rollback();
 		}
 
 		#endregion

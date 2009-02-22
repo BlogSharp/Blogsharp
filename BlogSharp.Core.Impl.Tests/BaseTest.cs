@@ -10,13 +10,13 @@ namespace BlogSharp.Core.Impl.Tests
 		[SetUp]
 		public virtual void SetUp()
 		{
-			container = new WindsorContainer();
+			this.container = new WindsorContainer();
 		}
 
 		[TearDown]
 		public void TearDown()
 		{
-			OnTearDown();
+			this.OnTearDown();
 		}
 
 		public virtual void OnTearDown()

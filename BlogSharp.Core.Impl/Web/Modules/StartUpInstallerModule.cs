@@ -18,7 +18,7 @@ namespace BlogSharp.Core.Impl.Web.Modules
 
 		public void Init(HttpApplication context)
 		{
-			context.BeginRequest += HandleBeginRequest;
+			context.BeginRequest += this.HandleBeginRequest;
 		}
 
 		public void Dispose()
@@ -29,7 +29,7 @@ namespace BlogSharp.Core.Impl.Web.Modules
 
 		private void HandleBeginRequest(object sender, EventArgs e)
 		{
-			installer.Execute();
+			this.installer.Execute();
 		}
 	}
 }

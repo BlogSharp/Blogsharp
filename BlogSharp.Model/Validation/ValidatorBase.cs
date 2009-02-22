@@ -28,7 +28,7 @@ namespace BlogSharp.Model.Validation
 		/// <param name="instance">Object to Validate.</param>
 		public void ValidateAndThrowException(object instance)
 		{
-			ValidateAndThrowException((T) instance);
+			this.ValidateAndThrowException((T) instance);
 		}
 
 		#endregion
@@ -42,7 +42,7 @@ namespace BlogSharp.Model.Validation
 		/// <exception cref="ValidationException">Exception thown when the instance is not valid.</exception>
 		public virtual void ValidateAndThrowException(T instance)
 		{
-			var validationResult = Validate(instance);
+			var validationResult = this.Validate(instance);
 
 			if (!validationResult.IsValid)
 			{
@@ -67,7 +67,7 @@ namespace BlogSharp.Model.Validation
 		/// <exception cref="ValidationException">Exception thown when the instance is not valid.</exception>
 		public virtual void ValidateAndThrowException(T instance, params Expression<Func<T, object>>[] expression)
 		{
-			var validationResult = Validate(instance, expression);
+			var validationResult = this.Validate(instance, expression);
 
 			if (!validationResult.IsValid)
 			{

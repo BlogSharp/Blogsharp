@@ -15,7 +15,7 @@ namespace BlogSharp.Core.Event.PostEvents
 
 		public Post Post
 		{
-			get { return post; }
+			get { return this.post; }
 		}
 
 		#region ICancellableEvent Members

@@ -23,7 +23,7 @@ namespace BlogSharp.Db4o.Impl
 			{
 				bool proceed;
 				object returnValue = base.Invoke(invocation.Method, invocation.Arguments, out proceed);
-				if (returnValue == container)
+				if (returnValue == this.container)
 					returnValue = invocation.Proxy as IExtObjectContainer;
 				// Avoid invoking the actual implementation
 				if (!proceed)

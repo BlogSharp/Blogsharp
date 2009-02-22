@@ -19,8 +19,8 @@ namespace BlogSharp.Db4o.Impl
 			ObjectContainerCloseDelegate close,
 			ObjectContainerDisposeDelegate dispose)
 		{
-			closeDelegate = close;
-			disposeDelegate = dispose;
+			this.closeDelegate = close;
+			this.disposeDelegate = dispose;
 			this.container = container;
 		}
 
@@ -35,27 +35,27 @@ namespace BlogSharp.Db4o.Impl
 			else if (methodName.Equals("get_InnerContainer"))
 			{
 				proceed = false;
-				return container;
+				return this.container;
 			}
 			else if (methodName.Equals("Ext"))
 			{
 				proceed = false;
-				return container;
+				return this.container;
 			}
 			else if (methodName.Equals("Close"))
 			{
 				proceed = false;
-				if (closeDelegate != null)
-					closeDelegate(container);
+				if (this.closeDelegate != null)
+					this.closeDelegate(this.container);
 				return false;
 			}
 			else if (methodName.Equals("Dispose"))
 			{
 				proceed = false;
-				if (closeDelegate != null)
-					closeDelegate(container);
-				if (disposeDelegate != null)
-					disposeDelegate(container);
+				if (this.closeDelegate != null)
+					this.closeDelegate(this.container);
+				if (this.disposeDelegate != null)
+					this.disposeDelegate(this.container);
 				return null;
 			}
 			else

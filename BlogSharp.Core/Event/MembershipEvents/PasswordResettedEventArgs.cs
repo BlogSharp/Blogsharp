@@ -8,8 +8,8 @@ namespace BlogSharp.Core.Event.MembershipEvents
 		public PasswordResettedEventArgs(IMembershipService service, User user, string newPassword)
 			: base(service)
 		{
-			User = user;
-			NewPassword = newPassword;
+			this.User = user;
+			this.NewPassword = newPassword;
 		}
 
 		public User User { get; private set; }
