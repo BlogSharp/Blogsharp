@@ -31,7 +31,7 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		public void Can_delete_an_user()
 		{
 			var user = new User();
-			user.Id = 1;
+			user.ID = 1;
 			userRepository.SaveUser(user);
 			userRepository.RemoveUser(user);
 			var id = objectContainer.GetID(user);
@@ -42,13 +42,13 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		public void Can_get_by_username()
 		{
 			var user = new User();
-			user.Id = 1;
+			user.ID = 1;
 			user.Username = "TestUser";
 			objectContainer.Store(user);
 
 			var foundUser = userRepository.GetAuthorByUsername("TestUser");
 			Assert.NotNull(foundUser);
-			Assert.AreEqual(1, foundUser.Id);
+			Assert.AreEqual(1, foundUser.ID);
 			Assert.AreEqual("TestUser", foundUser.Username);
 		}
 
@@ -56,13 +56,13 @@ namespace BlogSharp.Db4o.Tests.Repositories
 		public void Can_get_by_email()
 		{
 			var user = new User();
-			user.Id = 1;
+			user.ID = 1;
 			user.Email = "TestUserEmail";
 			userRepository.SaveUser(user);
 
 			var foundUser = userRepository.GetAuthorByEmail("TestUserEmail");
 			Assert.NotNull(foundUser);
-			Assert.AreEqual(1, foundUser.Id);
+			Assert.AreEqual(1, foundUser.ID);
 			Assert.AreEqual("TestUserEmail", foundUser.Email);
 		}
 	}

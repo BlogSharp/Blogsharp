@@ -34,7 +34,7 @@ namespace BlogSharp.Db4o.Blog.Repositories
 
 		public Model.User GetById(int id)
 		{
-			return container.GetContainer().Query<Model.User>(x => x.Id == id).SingleOrDefault();
+			return container.GetContainer().Query<Model.User>(x => x.ID == id).SingleOrDefault();
 		}
 
 		#endregion

@@ -67,7 +67,7 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		{
 			return container.GetContainer()
 				.Query<Post>(x => x.Blog == blog && 
-				                  x.User.Id == authorId)
+				                  x.User.ID == authorId)
 				.Skip(skip).Take(take).ToList();
 		}
 
@@ -147,7 +147,7 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		public Post GetPostById(BlogSharp.Model.Blog blog, int id)
 		{
 			return container.GetContainer()
-				.Query<Post>(x => x.Id == id)
+				.Query<Post>(x => x.ID == id)
 				.SingleOrDefault();
 		}
 

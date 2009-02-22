@@ -25,7 +25,7 @@
 			<td valign="top">Comment:</td>
 			<td><%= Html.TextArea("comment.Comment","",10,50,null) %> <%= Html.ValidationMessage("comment.Comment") %></td>
 		</tr>
-		<%=Html.Hidden("postId",post.Id)%>
+		<%=Html.Hidden("postId",post.ID)%>
 		<%=Html.AntiForgeryToken()%>
 	</table>
 	<p></p>

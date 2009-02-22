@@ -1,14 +1,30 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+// <copyright file="ValidationError.cs" company="BlogSharp">
+// Apache Licence 2.0 
+// </copyright>
+// <author>Gonzalo Brusella</author>
+// <email>gonzalo@brusella.com.ar</email>
+// <date>2009-02-21</date>
 
 namespace BlogSharp.Model.Validation
 {
-	public class ValidationError
-	{
-		public object Object { get; set; }
-		public string PropertyName { get; set; }
-		public string Message { get; set; }
-	}
+    /// <summary>
+    /// An Error dureing the Validation Process.
+    /// </summary>
+    public class ValidationError
+    {
+        /// <summary>
+        /// Gets or sets Object.
+        /// </summary>
+        public object Object { get; set; }
+
+        /// <summary>
+        /// Gets or sets PropertyName.
+        /// </summary>
+        public string PropertyName { get; set; }
+
+        /// <summary>
+        /// Gets or sets Message.
+        /// </summary>
+        public string Message { get; set; }
+    }
 }

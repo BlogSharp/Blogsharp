@@ -43,12 +43,12 @@ namespace BlogSharp.Core.Impl.Installers
 			           		Username = "blogsharp",
 			           		Password = "blogsharp",
 			           		Email = "blogsh@rp.com",
-			           		Id = 1
+			           		ID = 1
 			           	};
 
 			blog = new Blog
 			       	{
-			       		Id = 1,
+			       		ID = 1,
 			       		Title = "BlogSharp Blogs",
 			       		Authors = new List<User> {user},
 			       		Founder = user,
@@ -57,11 +57,11 @@ namespace BlogSharp.Core.Impl.Installers
 						Name="BlogSharp",
 			       	};
 
-			var tag = new Tag { Id = 1, Name = "Welcome", FriendlyName = "welcome", Blog=blog};
+			var tag = new Tag { ID = 1, Name = "Welcome", FriendlyName = "welcome", Blog=blog};
 			string title = "Welcome to Blogsharp!";
 			var post = new Post
 			           	{
-			           		Id = 1,
+			           		ID = 1,
 			           		Blog = blog,
 			           		User = user,
 			           		Tags = new List<Tag> {tag},

@@ -14,7 +14,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 		protected FileSystemInfoBase(string fileName)
 		{
 			this.fileName = fileName;
-			this.parent = parent;
+			//this.parent = parent;
 		}
 
 		protected readonly string fileName;

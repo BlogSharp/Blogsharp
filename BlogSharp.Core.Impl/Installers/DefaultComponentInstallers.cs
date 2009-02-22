@@ -9,6 +9,7 @@ using BlogSharp.Core.Services.Mail;
 using BlogSharp.Core.Services.Post;
 using BlogSharp.Core.Structure;
 using BlogSharp.Model.Validation;
+using BlogSharp.Model.Validation.Interfaces;
 using BlogSharp.MvcExtensions;
 using BlogSharp.MvcExtensions.ControllerFactories;
 using Castle.MicroKernel.Registration;

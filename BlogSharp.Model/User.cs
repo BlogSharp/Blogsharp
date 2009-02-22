@@ -1,27 +1,53 @@
-using System;
-using System.Collections.Generic;
+// <copyright file="User.cs" company="BlogSharp">
+// Apache Licence 2.0 
+// </copyright>
+// <author>Gonzalo Brusella</author>
+// <email>gonzalo@brusella.com.ar</email>
+// <date>2009-02-21</date>
 
 namespace BlogSharp.Model
 {
-	[Serializable]
-	public class User : IEntity
-	{
-		public User()
-		{
-			Posts = new List<Post>();
-			Blogs = new List<Blog>();
-		}
+    using System;
+    using System.Collections.Generic;
 
-		public IList<Post> Posts { get; set; }
+    /// <summary>
+    /// Represent a User of the system.
+    /// </summary>
+    [Serializable]
+    public class User : Entity
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="User" /> class. 
+        /// </summary>
+        public User()
+        {
+            this.Posts = new List<Post>();
+            this.Blogs = new List<Blog>();
+        }
 
-		public IList<Blog> Blogs { get; set; }
+        /// <summary>
+        /// Gets or sets Posts.
+        /// </summary>
+        public IList<Post> Posts { get; set; }
 
-		public string Username { get; set; }
+        /// <summary>
+        /// Gets or sets Blogs.
+        /// </summary>
+        public IList<Blog> Blogs { get; set; }
 
-		public string Password { get; set; }
+        /// <summary>
+        /// Gets or sets Username.
+        /// </summary>
+        public string Username { get; set; }
 
-		public string Email { get; set; }
+        /// <summary>
+        /// Gets or sets Password.
+        /// </summary>
+        public string Password { get; set; }
 
-		public int Id { get; set; }
-	}
+        /// <summary>
+        /// Gets or sets Email.
+        /// </summary>
+        public string Email { get; set; }
+    }
 }
