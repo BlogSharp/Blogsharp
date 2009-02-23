@@ -76,12 +76,15 @@
     <Compile Include="Db4oMode.cs" />
     <Compile Include="Db4oWrapper.cs" />
     <Compile Include="IDb4oInitializationHandler.cs" />
+    <Compile Include="IIdentifierGenerator.cs" />
     <Compile Include="Impl\CastleObjectContainerInterceptor.cs" />
     <Compile Include="Impl\CastleObjectContainerWrapper.cs" />
     <Compile Include="Impl\DefaultConfigurationBuilder.cs" />
     <Compile Include="Impl\DefaultContainerProviderProvider.cs" />
     <Compile Include="Impl\DefaultSessionManager.cs" />
     <Compile Include="Impl\EmbeddedServerContainerProvider.cs" />
+    <Compile Include="Impl\IdGenerators\GuidGenerator.cs" />
+    <Compile Include="Impl\IdGenerators\HiLoGenerator.cs" />
     <Compile Include="Impl\RemoteServerContainerProvider.cs" />
     <Compile Include="Impl\ThreadContextObjectContainerStore.cs" />
     <Compile Include="Impl\TransactionProtectionInterceptor.cs" />

@@ -116,6 +116,7 @@
     <Compile Include="Services\FileSystem\SearchOptions.cs" />
     <Compile Include="Services\Mail\IMailService.cs" />
     <Compile Include="Services\Membership\IMembershipService.cs" />
+    <Compile Include="Services\Ping\IPingService.cs" />
     <Compile Include="Services\Plugin\IPlugin.cs" />
     <Compile Include="Services\Plugin\IPluginService.cs" />
     <Compile Include="Services\Post\IPostService.cs" />

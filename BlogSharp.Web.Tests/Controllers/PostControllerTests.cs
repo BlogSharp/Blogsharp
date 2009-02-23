@@ -49,7 +49,8 @@
 			var postComment = new PostComment();
 			this.postService.Expect(x => x.GetPostById(this.blog, 1))
 				.Return(new Post {FriendlyTitle = "m"});
-			var actionResult = this.controller.AddComment(1, postComment) as RedirectToRouteResult;
+			var actionResult = this.controller.AddComment(1, postComment);
+			Assert.That(((ViewResult) actionResult).ViewName == "Read");
 			Assert.That(actionResult, Is.Not.Null);
 			this.postService.AssertWasCalled(x => x.AddComment(postComment));
 		}

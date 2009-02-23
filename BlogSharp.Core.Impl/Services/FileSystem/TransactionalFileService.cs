@@ -186,14 +186,13 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 					directory = directoriesToBeSearched[count - 1];
 					directoriesToBeSearched.RemoveAt(count - 1);
 
-					using (
-						var directoryHandle = this.GetFileHandleForInfo(directory + Path.DirectorySeparatorChar + @"*", tranHandle,
-						                                                out win32findData))
+					using (var directoryHandle = this.GetFileHandleForInfo(
+						directory + Path.DirectorySeparatorChar + @"*", tranHandle, out win32findData))
 					{
 						while (NativeMethods.FindNextFile(directoryHandle, out win32findData))
 						{
 							if (win32findData.cFileName.Equals("..") ||
-							    win32findData.cFileName.Equals("."))
+								win32findData.cFileName.Equals("."))
 								continue;
 							bool isFile = 0 == (win32findData.dwFileAttributes & 0x10);
 							string relative = directory + Path.DirectorySeparatorChar + win32findData.cFileName;
