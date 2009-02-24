@@ -29,7 +29,7 @@ namespace BlogSharp.MvcExtensions.Tests.Handlers
 		protected override void Execute(RequestContext requestContext)
 		{
 			throw new Exception();
-			base.Execute(requestContext);
+			//base.Execute(requestContext);
 		}
 
 

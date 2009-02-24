@@ -10,7 +10,7 @@ namespace BlogSharp.Model.Interfaces
 	/// <summary>
 	/// Represents a PlugIn Info.
 	/// </summary>
-	public interface IPluginInfo : IIdentifiable<int>
+	public interface IPluginInfo : IEntity
 	{
 		/// <summary>
 		/// Gets or sets Guid.

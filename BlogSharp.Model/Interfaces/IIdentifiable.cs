@@ -7,13 +7,15 @@
 
 namespace BlogSharp.Model.Interfaces
 {
+	using System;
+
 	/// <summary>
 	/// Represents an Identificable entity.
 	/// </summary>
 	/// <typeparam name="T">Type of the ID.</typeparam>
+	[Obsolete("Do not use this class. Use The abstract Entity instead.")]
 	public interface IIdentifiable<T>
 	{
-		//TODO: Check if this is really Needed.
 		/// <summary>
 		/// Gets or sets ID.
 		/// </summary>

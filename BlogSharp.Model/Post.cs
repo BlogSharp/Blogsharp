@@ -5,16 +5,16 @@
 // <email>gonzalo@brusella.com.ar</email>
 // <date>2009-02-21</date>
 
-
 namespace BlogSharp.Model
 {
 	using System;
 	using System.Collections.Generic;
+	using Interfaces;
 
 	/// <summary>
 	/// Represents a Post into the Blog.
 	/// </summary>
-	public class Post : Entity
+	public class Post : Entity, IPostable, ITaggable, ICommentable
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Post" /> class. 
@@ -25,6 +25,29 @@ namespace BlogSharp.Model
 			this.Tags = new List<Tag>();
 		}
 
+		/// <summary>
+		/// Gets or sets Title.
+		/// </summary>
+		public string Title { get; set; }
+
+		/// <summary>
+		/// Gets or sets FriendlyTitle.
+		/// </summary>
+		public string FriendlyTitle { get; set; }
+
+		#region Implementation of ICommentable
+		/// <summary>
+		/// Gets or sets Comments.
+		/// </summary>
+		public IList<PostComment> Comments { get; set; }
+    	#endregion
+		#region Implementation of ITaggable
+		/// <summary>
+		/// Gets or sets Tags.
+		/// </summary>
+		public IList<Tag> Tags { get; set; }
+		#endregion
+		#region Implementation of IPostable
 		/// <summary>
 		/// Gets or sets Blog.
 		/// </summary>
@@ -46,38 +69,27 @@ namespace BlogSharp.Model
 		public DateTime DatePublished { get; set; }
 
 		/// <summary>
-		/// Gets or sets Title.
-		/// </summary>
-		public string Title { get; set; }
-
-		/// <summary>
-		/// Gets or sets FriendlyTitle.
-		/// </summary>
-		public string FriendlyTitle { get; set; }
-
-		/// <summary>
 		/// Gets or sets Content.
 		/// </summary>
 		public string Content { get; set; }
 
-		/// <summary>
-		/// Gets or sets Tags.
-		/// </summary>
-		public IList<Tag> Tags { get; set; }
-
-		/// <summary>
-		/// Gets or sets Comments.
-		/// </summary>
-		public IList<PostComment> Comments { get; set; }
-
+		#endregion
+		#region Implementation of ICommentable
 		/// <summary>
 		/// Adds a Comment to a Post.
 		/// </summary>
 		/// <param name="comment">The Comment to add.</param>
-		public void AddComment(PostComment comment)
+		/// <param name="post">The Post to comment.</param>
+		public void AddComment(PostComment comment, ICommentable post)
 		{
-			this.Comments.Add(comment);
-			comment.Post = this;
+			if (post == null)
+			{
+				post = this;
+			}
+
+			post.Comments.Add(comment);
+			comment.Post = post;
 		}
-	}
+		#endregion
+        }
 }

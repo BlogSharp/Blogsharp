@@ -5,10 +5,10 @@
 // <email>gonzalo@brusella.com.ar</email>
 // <date>2009-02-21</date>
 
-
 namespace BlogSharp.Model
 {
 	using System;
+	using Interfaces;
 
 	/// <summary>
 	/// Represents a Comment to an entry.
@@ -19,7 +19,7 @@ namespace BlogSharp.Model
 		/// <summary>
 		/// Gets or sets Post.
 		/// </summary>
-		public Post Post { get; set; }
+		public ICommentable Post { get; set; }
 
 		/// <summary>
 		/// Gets or sets Comment.

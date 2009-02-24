@@ -116,7 +116,7 @@ namespace BlogSharp.Db4o.Blog.Repositories
 		public void SaveComment(PostComment comment)
 		{
 			if (!comment.Post.Comments.Contains(comment))
-				comment.Post.AddComment(comment);
+				comment.Post.AddComment(comment, null);
 			this.SaveObject(comment.Post.Comments);
 			this.SaveObject(comment);
 		}
