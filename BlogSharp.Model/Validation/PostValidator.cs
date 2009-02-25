@@ -21,7 +21,7 @@ namespace BlogSharp.Model.Validation
 		public PostValidator()
 		{
 			this.RuleFor(x => x.Blog).NotNull();
-			this.RuleFor(x => x.Content).NotNull().And().NotEmpty();
+			this.RuleFor(x => x.Content).NotNull().And.NotEmpty();
 			this.RuleFor(x => x.FriendlyTitle).NotEmpty();
 			this.RuleFor(x => x.Title).NotEmpty();
 			this.RuleFor(x => x.User).NotNull();
