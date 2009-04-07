@@ -61,7 +61,7 @@ namespace BlogSharp.NHibernate.Tests
 			}
 			using(var session=factory.OpenSession())
 			{
-				var item = session.CreateCriteria<Blog>().UniqueResult<Blog>();
+				var item = session.CreateCriteria(typeof(Blog)).UniqueResult<Blog>();
 				var pageSize = item.Configuration.PageSize;
 				Assert.That(pageSize,Is.EqualTo(3));
 			}
