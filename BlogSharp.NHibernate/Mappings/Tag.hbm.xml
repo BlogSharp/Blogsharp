@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+									 assembly="BlogSharp.Model"
+									 namespace="BlogSharp.Model">
+	<class name="Tag">
+		<id name="ID"
+				type="Int64">
+			<generator class="hilo"/>
+		</id>
+		<property name="Name"/>
+		<property name="FriendlyName"/>
+		<many-to-one name="Blog" column="BlogId" not-null="true"/>
+		<bag name="Posts" lazy="true" table="PostTag" cascade="all">
+			<key column="TagId"/>
+			<many-to-many class="Post" column="PostId"/>
+		</bag>
+	</class>
+</hibernate-mapping>

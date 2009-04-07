@@ -17,7 +17,7 @@ namespace BlogSharp.Model
 	/// Represents the Blog Configuration.
 	/// </summary>
 	[Serializable]
-	public class BlogConfiguration : Entity
+	public class BlogConfiguration
 	{
 		/// <summary>
 		/// The internal dictionary used to store the config.
@@ -41,7 +41,7 @@ namespace BlogSharp.Model
 		/// <summary>
 		/// Gets or sets PageSize.
 		/// </summary>
-		public int PageSize
+		public virtual int PageSize
 		{
 			get { return this.Get(x => x.PageSize); }
 
@@ -56,7 +56,7 @@ namespace BlogSharp.Model
 		/// Gets or sets a value for the given key.
 		/// </summary>
 		/// <param name="key">The key to store the value.</param>
-		public object this[string key]
+		public virtual object this[string key]
 		{
 			get { return this.innerDict[key]; }
 			set { this.innerDict[key] = value; }
@@ -67,7 +67,7 @@ namespace BlogSharp.Model
 		/// </summary>
 		/// <param name="key">The key to search.</param>
 		/// <returns>The associated value for such key.</returns>
-		public object GetValue(string key)
+		public virtual object GetValue(string key)
 		{
 			return this.innerDict[key];
 		}
@@ -78,7 +78,7 @@ namespace BlogSharp.Model
 		/// <param name="key">The key to search.</param>
 		/// <typeparam name="T">The type of the value.</typeparam>
 		/// <returns>The associated value for such key.</returns>
-		public T GetValue<T>(string key)
+		public virtual T GetValue<T>(string key)
 		{
 			return (T) this.innerDict[key];
 		}
@@ -88,7 +88,7 @@ namespace BlogSharp.Model
 		/// </summary>
 		/// <param name="key">The key to set.</param>
 		/// <param name="value">The value to set.</param>
-		public void SetValue(string key, object value)
+		public virtual void SetValue(string key, object value)
 		{
 			this.innerDict[key] = value;
 		}
@@ -99,7 +99,7 @@ namespace BlogSharp.Model
 		/// <param name="key">The key to set.</param>
 		/// <param name="value">The value to set.</param>
 		/// <typeparam name="T">The Type of the value.</typeparam>
-		public void SetValue<T>(string key, T value)
+		public virtual void SetValue<T>(string key, T value)
 		{
 			this.innerDict[key] = value;
 		}
@@ -110,9 +110,9 @@ namespace BlogSharp.Model
 		/// <param name="exp">The expression who retults in a key name.</param>
 		/// <typeparam name="U">The Type of the Key.</typeparam>
 		/// <returns>The value or the default value for his type.</returns>
-		public U Get<U>(Expression<Func<BlogConfiguration, U>> exp)
+		public virtual U Get<U>(Expression<Func<BlogConfiguration, U>> exp)
 		{
-			return (U) (this.innerDict[this.GetKey(exp)] ?? default(U));
+			return (U) (Convert.ChangeType(this.innerDict[this.GetKey(exp)] ?? default(U),typeof(U)));
 		}
 
 		#endregion

@@ -22,48 +22,48 @@ namespace BlogSharp.Model
 		/// </summary>
 		public Blog()
 		{
-			this.Authors = new List<User>();
+			this.Writers = new List<User>();
 			this.Posts = new List<Post>();
 		}
 
 		/// <summary>
 		/// Gets or sets Configuration.
 		/// </summary>
-		public BlogConfiguration Configuration { get; set; }
+		public virtual BlogConfiguration Configuration { get; set; }
 
 		/// <summary>
 		/// Gets or sets Name.
 		/// </summary>
-		public string Name { get; set; }
+		public virtual string Name { get; set; }
 
 		/// <summary>
 		/// Gets or sets Founder.
 		/// </summary>
-		public User Founder { get; set; }
+		public virtual User Founder { get; set; }
 
 		/// <summary>
 		/// Gets or sets Authors.
 		/// </summary>
-		public IList<User> Authors { get; set; }
+		public virtual IList<User> Writers { get; set; }
 
 		/// <summary>
 		/// Gets or sets Posts.
 		/// </summary>
-		public IList<Post> Posts { get; set; }
+		public virtual IList<Post> Posts { get; set; }
 
 		/// <summary>
 		/// Gets or sets Title.
 		/// </summary>
-		public string Title { get; set; }
+		public virtual string Title { get; set; }
 
 		/// <summary>
 		/// Gets or sets Host.
 		/// </summary>
-		public string Host { get; set; }
+		public virtual string Host { get; set; }
 
 		/// <summary>
 		/// Gets or sets a value indicating whether IsInitialized.
 		/// </summary>
-		public bool IsInitialized { get; set; }
+		public virtual bool IsInitialized { get; set; }
 	}
 }

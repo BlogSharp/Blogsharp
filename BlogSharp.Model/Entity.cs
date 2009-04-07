@@ -22,7 +22,7 @@ namespace BlogSharp.Model
 		/// <summary>
 		/// Gets or sets ID.
 		/// </summary>
-		public int ID { get; set; }
+		public virtual long ID { get; set; }
 
 		#endregion
 	}

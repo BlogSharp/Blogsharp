@@ -28,51 +28,52 @@ namespace BlogSharp.Model
 		/// <summary>
 		/// Gets or sets Title.
 		/// </summary>
-		public string Title { get; set; }
+		public virtual string Title { get; set; }
 
 		/// <summary>
 		/// Gets or sets FriendlyTitle.
 		/// </summary>
-		public string FriendlyTitle { get; set; }
+		public virtual string FriendlyTitle { get; set; }
 
 		#region Implementation of ICommentable
 		/// <summary>
 		/// Gets or sets Comments.
 		/// </summary>
-		public IList<PostComment> Comments { get; set; }
+		public virtual IList<PostComment> Comments { get; set; }
     	#endregion
 		#region Implementation of ITaggable
 		/// <summary>
 		/// Gets or sets Tags.
 		/// </summary>
-		public IList<Tag> Tags { get; set; }
+		public virtual IList<Tag> Tags { get; set; }
 		#endregion
 		#region Implementation of IPostable
 		/// <summary>
 		/// Gets or sets Blog.
 		/// </summary>
-		public Blog Blog { get; set; }
+		public virtual Blog Blog { get; set; }
 
 		/// <summary>
 		/// Gets or sets User.
 		/// </summary>
-		public User User { get; set; }
+		public virtual User User { get; set; }
 
 		/// <summary>
 		/// Gets or sets DateCreated.
 		/// </summary>
-		public DateTime DateCreated { get; set; }
+		public virtual DateTime DateCreated { get; set; }
 
 		/// <summary>
 		/// Gets or sets DatePublished.
 		/// </summary>
-		public DateTime DatePublished { get; set; }
+		public virtual DateTime DatePublished { get; set; }
 
 		/// <summary>
 		/// Gets or sets Content.
 		/// </summary>
-		public string Content { get; set; }
+		public virtual string Content { get; set; }
 
+		public virtual string Email{ get; set; }
 		#endregion
 		#region Implementation of ICommentable
 		/// <summary>
@@ -80,7 +81,7 @@ namespace BlogSharp.Model
 		/// </summary>
 		/// <param name="comment">The Comment to add.</param>
 		/// <param name="post">The Post to comment.</param>
-		public void AddComment(PostComment comment, ICommentable post)
+		public virtual void AddComment(PostComment comment, ICommentable post)
 		{
 			if (post == null)
 			{

@@ -28,21 +28,21 @@ namespace BlogSharp.Model
 		/// <summary>
 		/// Gets or sets Name.
 		/// </summary>
-		public string Name { get; set; }
+		public virtual string Name { get; set; }
 
 		/// <summary>
 		/// Gets or sets FriendlyName.
 		/// </summary>
-		public string FriendlyName { get; set; }
+		public virtual string FriendlyName { get; set; }
 
 		/// <summary>
 		/// Gets or sets Blog.
 		/// </summary>
-		public Blog Blog { get; set; }
+		public virtual Blog Blog { get; set; }
 
 		/// <summary>
 		/// Gets or sets Posts.
 		/// </summary>
-		public IList<Post> Posts { get; set; }
+		public virtual IList<Post> Posts { get; set; }
 	}
 }

@@ -51,7 +51,7 @@ namespace BlogSharp.Core.Impl.Installers
 			       	{
 			       		ID = 1,
 			       		Title = "BlogSharp Blogs",
-			       		Authors = new List<User> {user},
+			       		Writers = new List<User> {user},
 			       		Founder = user,
 			       		Configuration = new BlogConfiguration {PageSize = 10},
 			       		Host = "localhost",

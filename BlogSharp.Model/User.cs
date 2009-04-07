@@ -29,26 +29,26 @@ namespace BlogSharp.Model
 		/// <summary>
 		/// Gets or sets Posts.
 		/// </summary>
-		public IList<Post> Posts { get; set; }
+		public virtual IList<Post> Posts { get; set; }
 
 		/// <summary>
 		/// Gets or sets Blogs.
 		/// </summary>
-		public IList<Blog> Blogs { get; set; }
+		public virtual IList<Blog> Blogs { get; set; }
 
 		/// <summary>
 		/// Gets or sets Username.
 		/// </summary>
-		public string Username { get; set; }
+		public virtual string Username { get; set; }
 
 		/// <summary>
 		/// Gets or sets Password.
 		/// </summary>
-		public string Password { get; set; }
+		public virtual string Password { get; set; }
 
 		/// <summary>
 		/// Gets or sets Email.
 		/// </summary>
-		public string Email { get; set; }
+		public virtual string Email { get; set; }
 	}
 }
