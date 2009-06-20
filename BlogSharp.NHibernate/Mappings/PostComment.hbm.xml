@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+									 assembly="BlogSharp.Model"
+									 namespace="BlogSharp.Model">
+  <class name="PostComment">
+    <id name="ID"
+				type="Int64">
+      <generator class="hilo"/>
+    </id>
+    <many-to-one name="Post" class="BlogSharp.Model.Post, BlogSharp.Model"/>
+    <property name="Comment"/>
+    <property name="Email"/>
+    <property name="Name"/>
+    <many-to-one name="Commentor" class="BlogSharp.Model.User, BlogSharp.Model"/>
+    <property name="Web"/>
+    <property name="Date"/>
+  </class>
+</hibernate-mapping>

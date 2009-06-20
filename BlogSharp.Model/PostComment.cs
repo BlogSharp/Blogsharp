@@ -36,6 +36,12 @@ namespace BlogSharp.Model
 		/// </summary>
 		public string Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets the commentor. 
+        /// This is a registered user comment (such as the blog owner).
+        /// </summary>
+        public User Commentor { get; set; }
+
 		/// <summary>
 		/// Gets or sets Web.
 		/// </summary>

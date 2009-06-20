@@ -73,6 +73,9 @@ namespace BlogSharp.Model
 		/// </summary>
 		public virtual string Content { get; set; }
 
+        /// <summary>
+        /// Gets or sets Email.
+        /// </summary>
 		public virtual string Email{ get; set; }
 		#endregion
 		#region Implementation of ICommentable

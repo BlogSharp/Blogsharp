@@ -5,7 +5,6 @@
 // <email>gonzalo@brusella.com.ar</email>
 // <date>2009-02-21</date>
 
-
 namespace BlogSharp.Model.Validation
 {
 	using FluentValidation;

@@ -154,10 +154,6 @@
       <Project>{ABDABEBC-B92A-4F36-AC07-6874B4932C21}</Project>
       <Name>BlogSharp.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlogSharp.Db4o\BlogSharp.Db4o.csproj">
-      <Project>{CDEB5615-0DC9-4C81-A1B0-4E1A488A91BB}</Project>
-      <Name>BlogSharp.Db4o</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BlogSharp.Model\BlogSharp.Model.csproj">
       <Project>{ACD93612-B2E7-4D51-9127-C306EF1F386C}</Project>
       <Name>BlogSharp.Model</Name>
@@ -185,7 +181,6 @@
     <None Include="Views\Shared\application.spark" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\Membership\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
