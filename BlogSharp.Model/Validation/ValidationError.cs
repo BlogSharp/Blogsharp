@@ -8,7 +8,7 @@
 namespace BlogSharp.Model.Validation
 {
 	/// <summary>
-	/// An Error dureing the Validation Process.
+	/// An Error during the Validation Process.
 	/// </summary>
 	public class ValidationError
 	{

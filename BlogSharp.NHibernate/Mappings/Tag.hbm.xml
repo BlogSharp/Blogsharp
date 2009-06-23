@@ -9,7 +9,6 @@
 		</id>
 		<property name="Name"/>
 		<property name="FriendlyName"/>
-		<many-to-one name="Blog" column="BlogId" not-null="true"/>
 		<bag name="Posts" lazy="true" table="PostTag" cascade="all">
 			<key column="TagId"/>
 			<many-to-many class="Post" column="PostId"/>

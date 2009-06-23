@@ -20,9 +20,9 @@ namespace BlogSharp.Model.Interfaces
 		Blog Blog { get; set; }
 
 		/// <summary>
-		/// Gets or sets User.
+        /// Gets or sets Publisher.
 		/// </summary>
-		User User { get; set; }
+		User Publisher { get; set; }
 
 		/// <summary>
 		/// Gets or sets DateCreated.

@@ -7,16 +7,19 @@
 				type="Int64">
 			<generator class="hilo"/>
 		</id>
-		<property name="Username"/>
-		<property name="Password"/>
-		<property name="Email"/>
+		<property name="Username" not-null="true"/>
+		<property name="Password" not-null="true"/>
+		<property name="Email" not-null="true"/>
 		<bag name="Blogs" lazy="true" table="UserBlog" cascade="all">
 			<key column="UserId"/>
 			<many-to-many class="Blog" column="BlogId"/>
 		</bag>
-		<bag name="Posts" lazy="true" cascade="all">
+    <property name="Biography"/>
+    <property name="BirthDate"/>
+    
+		<!-- <bag name="Posts" lazy="true" cascade="all">
 			<key column="UserId"/>
 			<one-to-many class="Post"/>
-		</bag>
+		</bag> -->
 	</class>
 </hibernate-mapping>

@@ -11,7 +11,7 @@ namespace BlogSharp.Model
 	using Interfaces;
 
 	/// <summary>
-	/// Represennts all the entitys.
+	/// Represents all the entities.
 	/// </summary>
 	[Serializable]
 	public abstract class Entity : IEntity

@@ -10,7 +10,7 @@ namespace BlogSharp.Model.Interfaces
 	using System.Collections.Generic;
 
 	/// <summary>
-	/// Base Interface for all the tagable Items.
+	/// Base Interface for all the taggable Items.
 	/// </summary>
 	public interface ITaggable
 	{

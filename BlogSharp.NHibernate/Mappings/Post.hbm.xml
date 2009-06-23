@@ -7,9 +7,18 @@
 				type="Int64">
 			<generator class="hilo"/>
 		</id>
-		<property name="Title" length="200"/>
-		<property name="FriendlyTitle" length="50"/>
-		<property name="Email"/>
-		<many-to-one name="Blog" class="BlogSharp.Model.Blog, BlogSharp.Model"/>
+		<property name="Title" />
+		<property name="FriendlyTitle"/>
+		<!--<property name="Email"/>-->
+    <bag name="Tags" lazy="true" table="PostTags">
+      <key column="PostId"/>
+      <many-to-many class="Tag" column="TagId"/>
+    </bag>
+		<many-to-one name="Blog" class="BlogSharp.Model.Blog, BlogSharp.Model" not-null="true"/>
+    <many-to-one name="Publisher" class="BlogSharp.Model.User, BlogSharp.Model" not-null="true" />
+    <property name="DateCreated" not-null="true" />
+    <property name="DatePublished" />
+    <property name="Published" />
+    <property name="Content" />
 	</class>
 </hibernate-mapping>

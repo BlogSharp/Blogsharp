@@ -6,21 +6,25 @@
 		<id name="ID" type="Int64">
 			<generator class="hilo"/>
 		</id>
-		<property name="Name"/>
+		<property name="Name" not-null="true"/>
 		<property name="Title"/>
-		<property name="Host"/>
-		<property name="IsInitialized"/>
-		<bag name="Posts"
+		<property name="Host" not-null="true"/>
+		<property name="IsInitialized" not-null="true"/>
+    <many-to-one name="Founder" class="BlogSharp.Model.User, BlogSharp.Model" not-null="true"/>
+		
+    <bag name="Posts"
 				 inverse="true"
 				 lazy="true"
 				 cascade="all">
 			<key column="BlogId"/>
 			<one-to-many class="Post"/>
 		</bag>
+    
 		<bag name="Writers" table="UserBlog" lazy="true" cascade="all">
 			<key column="BlogId"/>
-			<many-to-many class="User" column="UserId"/>
+			<many-to-many class="BlogSharp.Model.User, BlogSharp.Model" column="UserId"/>
 		</bag>
+    
 		<component name="Configuration">
 			<map name="innerDict" access="field"
 					 table="BlogConfiguration" cascade="all">

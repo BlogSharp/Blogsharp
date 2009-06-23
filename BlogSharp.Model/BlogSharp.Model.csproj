@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Blog.cs" />
     <Compile Include="BlogConfiguration.cs" />
+    <Compile Include="CommentableEntity.cs" />
     <Compile Include="Interfaces\ICommentable.cs" />
     <Compile Include="Interfaces\IEntity.cs" />
     <Compile Include="Interfaces\IIdentifiable.cs" />

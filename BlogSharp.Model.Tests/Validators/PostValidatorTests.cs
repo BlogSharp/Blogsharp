@@ -36,7 +36,7 @@ namespace BlogSharp.Model.Tests.Validators
 		[Test]
 		public void Should_raise_error_when_User_is_null()
 		{
-			this.ShouldHaveErrors(x => x.User, null);
+			this.ShouldHaveErrors(x => x.Publisher, null);
 		}
 	}
 }

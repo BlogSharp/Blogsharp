@@ -14,21 +14,21 @@ namespace BlogSharp.Model.Interfaces
 	/// </summary>
 	public interface ICommentable
 	{
-		/// <summary>
-		/// Gets or sets Blog.
-		/// </summary>
-		Blog Blog { get; set; }
+        ///// <summary>
+        ///// Gets or sets Blog.
+        ///// </summary>
+        // Blog Blog { get; set; }
 
 		/// <summary>
 		/// Gets or sets Comments.
 		/// </summary>
-		IList<PostComment> Comments { get; set; }
+		IList<ICommentable> Comments { get; set; }
 
 		/// <summary>
 		/// Adds a Comment to a Post.
 		/// </summary>
 		/// <param name="comment">The Comment to add.</param>
-		/// <param name="post">The Post to comment.</param>
-		void AddComment(PostComment comment, ICommentable post);
+        /// <param name="commented">The commented entity.</param>
+        void AddComment(ICommentable comment, ICommentable commented);
 	}
 }

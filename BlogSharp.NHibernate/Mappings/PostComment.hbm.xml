@@ -9,10 +9,16 @@
     </id>
     <many-to-one name="Post" class="BlogSharp.Model.Post, BlogSharp.Model"/>
     <property name="Comment"/>
+    <many-to-one name="Commenter" class="BlogSharp.Model.User, BlogSharp.Model"/>
     <property name="Email"/>
     <property name="Name"/>
-    <many-to-one name="Commentor" class="BlogSharp.Model.User, BlogSharp.Model"/>
     <property name="Web"/>
     <property name="Date"/>
+    <property name="Published"/>
+    <property name="Spam"/>
+    <bag name="Comments" lazy="true" cascade="all">
+      <key column="ID"/>
+      <many-to-many class="PostComment" column="ParentCommentId"/>
+    </bag>
   </class>
 </hibernate-mapping>

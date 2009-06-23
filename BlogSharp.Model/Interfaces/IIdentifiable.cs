@@ -10,7 +10,7 @@ namespace BlogSharp.Model.Interfaces
 	using System;
 
 	/// <summary>
-	/// Represents an Identificable entity.
+	/// Represents an Identifiable entity.
 	/// </summary>
 	/// <typeparam name="T">Type of the ID.</typeparam>
 	[Obsolete("Do not use this class. Use The abstract Entity instead.")]

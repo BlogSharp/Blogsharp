@@ -5,10 +5,10 @@
 // <email>gonzalo@brusella.com.ar</email>
 // <date>2009-02-21</date>
 
-
 namespace BlogSharp.Model.Validation
 {
-	using FluentValidation;
+    using System;
+    using FluentValidation;
 
 	/// <summary>
 	/// A Validator class for the User Class.
@@ -23,6 +23,17 @@ namespace BlogSharp.Model.Validation
 			this.RuleFor(x => x.Email).NotEmpty().And.NotNull().And.EmailAddress();
 			this.RuleFor(x => x.Password).NotNull().And.NotEmpty();
 			this.RuleFor(x => x.Username).NotEmpty().And.NotNull();
+		    // this.RuleFor(x => x.BirthDate).Must(BeAValidDate);
 		}
+
+	    /// <summary>
+	    /// Checks the date to be valid.
+	    /// </summary>
+	    /// <param name="date">The date to check.</param>
+	    /// <returns>True if valid.</returns>
+	    private static bool BeAValidDate(DateTime? date)
+	    {
+	        return date.HasValue && date.Value < DateTime.Now;
+	    }
 	}
 }

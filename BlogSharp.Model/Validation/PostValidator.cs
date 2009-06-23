@@ -5,13 +5,12 @@
 // <email>gonzalo@brusella.com.ar</email>
 // <date>2009-02-21</date>
 
-
 namespace BlogSharp.Model.Validation
 {
 	using FluentValidation;
 
 	/// <summary>
-	/// A Validator class for the Post Class.
+    /// A Validator class for the <see cref="Post" /> Class.
 	/// </summary>
 	public class PostValidator : ValidatorBase<Post>
 	{
@@ -24,7 +23,7 @@ namespace BlogSharp.Model.Validation
 			this.RuleFor(x => x.Content).NotNull().And.NotEmpty();
 			this.RuleFor(x => x.FriendlyTitle).NotEmpty();
 			this.RuleFor(x => x.Title).NotEmpty();
-			this.RuleFor(x => x.User).NotNull();
+			this.RuleFor(x => x.Publisher).NotNull();
 		}
 	}
 }

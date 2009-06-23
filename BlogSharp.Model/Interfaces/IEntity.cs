@@ -4,10 +4,11 @@
 // <author>Gonzalo Brusella</author>
 // <email>gonzalo@brusella.com.ar</email>
 // <date>2009-02-21</date>
+
 namespace BlogSharp.Model.Interfaces
 {
 	/// <summary>
-	/// Base Interface for all the entitys.
+	/// Base Interface for all the entities.
 	/// </summary>
 	public interface IEntity
 	{

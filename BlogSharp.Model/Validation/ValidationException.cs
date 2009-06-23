@@ -5,7 +5,6 @@
 // <email>gonzalo@brusella.com.ar</email>
 // <date>2009-02-21</date>
 
-
 namespace BlogSharp.Model.Validation
 {
 	using System;
@@ -30,7 +29,7 @@ namespace BlogSharp.Model.Validation
 			get
 			{
 				var sb = new StringBuilder();
-				sb.AppendLine("Validation error has occured on following properties:");
+				sb.AppendLine("Validation error has occurred on following properties:");
 				foreach (var error in this.Errors)
 				{
 					sb.AppendLine(error.Message);

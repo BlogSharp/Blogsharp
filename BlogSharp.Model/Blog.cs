@@ -10,7 +10,7 @@ namespace BlogSharp.Model
 	using System;
 	using System.Collections.Generic;
 
-	/// <summary>
+    /// <summary>
 	/// The Blog Main Class.
 	/// </summary>
 	[Serializable]
@@ -48,7 +48,7 @@ namespace BlogSharp.Model
 		/// <summary>
 		/// Gets or sets Posts.
 		/// </summary>
-		public virtual IList<Post> Posts { get; set; }
+        public virtual IList<Post> Posts { get; set; }
 
 		/// <summary>
 		/// Gets or sets Title.
