@@ -18,15 +18,16 @@ namespace BlogSharp.Model.Validation
         /// <summary>
         /// Initializes a new instance of the <see cref="PostCommentValidator" /> class. 
         /// </summary>
-        public PostCommentValidator()
+		public PostCommentValidator()
         {
-            this.RuleFor(x => x.Comment).NotEmpty();
+        	this.RuleFor(x => x.Comment).NotEmpty();
 
-            this.RuleFor(x => x.Commenter).NotNull().When(x => string.IsNullOrEmpty(x.Email) && string.IsNullOrEmpty(x.Name) && string.IsNullOrEmpty(x.Web));
+        	this.RuleFor(x => x.Commenter).NotNull().When(
+        		x => string.IsNullOrEmpty(x.Email) && string.IsNullOrEmpty(x.Name) && string.IsNullOrEmpty(x.Web));
 
-            //this.RuleFor(x => x.Name).NotEmpty().When(x => x.Commenter.Equals(null));
-            //this.RuleFor(x => x.Email).NotEmpty().And.EmailAddress().When(x => x.Commenter.Equals(null));
-            //this.RuleFor(x => x.Web).NotEmpty().And.Url().When(x => !string.IsNullOrEmpty(x.Web) && x.Commenter.Equals(null));
+        	this.RuleFor(x => x.Name).NotEmpty().When(x => x.Commenter==null);
+			this.RuleFor(x => x.Email).NotEmpty().And.EmailAddress().When(x => x.Commenter == null);
+        	this.RuleFor(x => x.Web).Url().When(x => !string.IsNullOrEmpty(x.Web) && x.Commenter == null);
         }
     }
 }
