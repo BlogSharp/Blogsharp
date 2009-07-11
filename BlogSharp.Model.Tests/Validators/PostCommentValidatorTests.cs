@@ -9,8 +9,9 @@ namespace BlogSharp.Model.Tests.Validators
 		[Test]
 		public void Should_raise_error_when_comment_is_not_specified()
 		{
+
 			this.ShouldHaveErrors(x => x.Comment, null);
-			this.ShouldHaveErrors(x => x.Comment, null);
+			this.ShouldHaveErrors(x => x.Comment, "");
 		}
 
 		[Test]
@@ -39,7 +40,7 @@ namespace BlogSharp.Model.Tests.Validators
 		}
 
 		[Test]
-		public void Should_raise_no_error_when_web_is_in_invalid_format()
+		public void Should_raise_no_error_when_web_is_null()
 		{
 			this.ShouldNotHaveErrors(x => x.Web, "");
 		}

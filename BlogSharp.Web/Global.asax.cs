@@ -1,5 +1,6 @@
 ﻿namespace BlogSharp.Web
 {
+	using System;
 	using System.Web;
 	using System.Web.Mvc;
 	using System.Web.Routing;
@@ -59,7 +60,7 @@
 				container = new WindsorContainer("Configuration/castle.xml");
 				ViewEngines.Engines.Add(engine);
 			}
-			catch
+			catch(Exception exception)
 			{
 			}
 			container.Kernel.Resolver.AddSubResolver(new ListResolver(container.Kernel));

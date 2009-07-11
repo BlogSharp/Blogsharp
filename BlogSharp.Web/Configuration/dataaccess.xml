@@ -1,16 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <castle>
-	<facilities>
-		<facility id="db4oFacility" 
-			store="BlogSharp.Db4o.Impl.WebObjectContainerStore, BlogSharp.Db4o" 
-			type="BlogSharp.Db4o.Db4oFacility, BlogSharp.Db4o">
-			<objectContainer id="defaultContainer" Mode="EmbeddedServer" path="mydb.yap"/>
-		</facility>
-	</facilities>
-	<components>
-		<component id="BlogRepository" service="BlogSharp.Core.Persistence.Repositories.IBlogRepository,BlogSharp.Core" type="BlogSharp.Db4o.Blog.Repositories.BlogRepository,BlogSharp.Db4o"/>
-		<component id="UserRepository" service="BlogSharp.Core.Persistence.Repositories.IUserRepository,BlogSharp.Core" type="BlogSharp.Db4o.Blog.Repositories.UserRepository,BlogSharp.Db4o"/>
-		<component id="PostRepository" service="BlogSharp.Core.Persistence.Repositories.IPostRepository,BlogSharp.Core" type="BlogSharp.Db4o.Blog.Repositories.PostRepository,BlogSharp.Db4o"/>
-		<component id="Db4oValidator" service="BlogSharp.Db4o.IDb4oInitializationHandler,BlogSharp.Db4o" type="BlogSharp.Db4o.Blog.ValidationWiringDb4oInitializationHandler, BlogSharp.Db4o"/>
-	</components>
+
 </castle>
