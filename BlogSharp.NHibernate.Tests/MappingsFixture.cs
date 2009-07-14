@@ -63,13 +63,14 @@ namespace BlogSharp.NHibernate.Tests
                     var blog = new Blog();
                     var user = new User();
                     var post = new Post();
+                    var tag = new Tag();
                     var postComment = new PostComment();
 
                     var configuration = new BlogConfiguration();
                     configuration.PageSize = 3;
                     configuration["osman"] = "mahmut";
 
-                    user.Username = "DefaultUser";
+                    user.UserName = "DefaultUser";
                     user.Password = "DefaultPass";
                     user.Email = "default@mail.com";
                     user.Blogs.Add(blog);
@@ -97,6 +98,11 @@ namespace BlogSharp.NHibernate.Tests
                     postComment.Name = "Some One";
                     postComment.Comment = "Some One wrote here!!";
 
+                    tag.Name = "Tag";
+                    tag.FriendlyName = "Tagged";
+                    tag.Posts.Add(post);
+                    post.Tags.Add(tag);
+
                     var blogVal = new BlogValidator();
                     blogVal.ValidateAndThrowException(blog);
 
@@ -109,10 +115,14 @@ namespace BlogSharp.NHibernate.Tests
                     var userVal = new UserValidator();
                     userVal.ValidateAndThrowException(user);
 
+                    var tagVal = new TagValidator();
+                    tagVal.ValidateAndThrowException(tag);
+
                     session.Save(user);
                     session.Save(blog);
                     session.Save(post);
                     session.Save(postComment);
+                    session.Save(tag);
 
                     tran.Commit();
                 }

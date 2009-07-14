@@ -63,7 +63,7 @@ namespace BlogSharp.Core.Impl.Installers
 
             var user = new User
                            {
-                               Username = "BlogSharp",
+                               UserName = "BlogSharp",
                                Password = "BlogSharp",
                                Email = "blogbharp@blogsharp.com",
                                ID = 1

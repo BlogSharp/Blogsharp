@@ -1,25 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
 									 assembly="BlogSharp.Model"
-									 namespace="BlogSharp.Model">
-	<class name="User" table="`User`">
-		<id name="ID"
+									 namespace="BlogSharp.Model"
+                   default-access="backfield">
+  <class name="User" table="`User" optimistic-lock="version">
+    <id name="ID"
 				type="Int64">
-			<generator class="hilo"/>
-		</id>
-		<property name="Username" not-null="true"/>
-		<property name="Password" not-null="true"/>
-		<property name="Email" not-null="true"/>
-		<bag name="Blogs" lazy="true" table="UserBlog" cascade="all">
-			<key column="UserId"/>
-			<many-to-many class="Blog" column="BlogId"/>
-		</bag>
+      <generator class="hilo"/>
+    </id>
+    <version name="Version" />
+    <property name="UserName" not-null="true"/>
+    <property name="Password" not-null="true"/>
+    <property name="Email" not-null="true"/>
+    <bag name="Blogs" lazy="true" table="UserBlog" cascade="all">
+      <key column="UserId"/>
+      <many-to-many class="Blog" column="BlogId"/>
+    </bag>
     <property name="Biography"/>
     <property name="BirthDate"/>
-    
-		<!-- <bag name="Posts" lazy="true" cascade="all">
+
+    <!-- <bag name="Posts" lazy="true" cascade="all">
 			<key column="UserId"/>
 			<one-to-many class="Post"/>
 		</bag> -->
-	</class>
+  </class>
 </hibernate-mapping>

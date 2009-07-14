@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
 									 assembly="BlogSharp.Model"
-									 namespace="BlogSharp.Model">
-  <class name="PostComment">
+									 namespace="BlogSharp.Model"
+                   default-access="backfield">
+  <class name="PostComment" optimistic-lock="version">
     <id name="ID"
 				type="Int64">
       <generator class="hilo"/>
     </id>
+    <version name="Version" />
     <many-to-one name="Post" class="BlogSharp.Model.Post, BlogSharp.Model"/>
     <property name="Comment"/>
     <many-to-one name="Commenter" class="BlogSharp.Model.User, BlogSharp.Model"/>
@@ -21,4 +23,5 @@
       <many-to-many class="PostComment" column="ParentCommentId"/>
     </bag>
   </class>
+
 </hibernate-mapping>

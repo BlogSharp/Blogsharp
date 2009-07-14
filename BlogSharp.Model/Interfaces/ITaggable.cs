@@ -7,21 +7,16 @@
 
 namespace BlogSharp.Model.Interfaces
 {
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 
-	/// <summary>
-	/// Base Interface for all the taggable Items.
-	/// </summary>
-	public interface ITaggable
-	{
-		/// <summary>
-		/// Gets or sets Blog.
-		/// </summary>
-		Blog Blog { get; set; }
-
-		/// <summary>
-		/// Gets or sets Tags.
-		/// </summary>
-		IList<Tag> Tags { get; set; }
-	}
+    /// <summary>
+    /// Base Interface for all the taggable Items.
+    /// </summary>
+    public interface ITaggable : IEntity
+    {
+        /// <summary>
+        /// Gets or sets Tags.
+        /// </summary>
+        IList<Tag> Tags { get; set; }
+    }
 }

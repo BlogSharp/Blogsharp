@@ -5,7 +5,6 @@
 // <email>gonzalo@brusella.com.ar</email>
 // <date>2009-02-21</date>
 
-
 namespace BlogSharp.Core.Services.Search
 {
 	using Model.Interfaces;
@@ -16,7 +15,7 @@ namespace BlogSharp.Core.Services.Search
 	public interface IIndexContributor
 	{
 		/// <summary>
-		/// Searchas for a phrase.
+		/// Searches for a phrase.
 		/// </summary>
 		/// <param name="phrase">Phrase to search.</param>
 		/// <returns>The Search Content.</returns>

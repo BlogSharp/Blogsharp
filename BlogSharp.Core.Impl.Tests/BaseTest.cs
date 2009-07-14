@@ -1,26 +1,52 @@
+// <copyright file="BaseTest.cs" company="BlogSharp">
+// Apache Licence 2.0 
+// </copyright>
+// <author>Gonzalo Brusella</author>
+// <email>gonzalo@brusella.com.ar</email>
+// <date>2009-02-21</date>
+
 namespace BlogSharp.Core.Impl.Tests
 {
-	using Castle.Windsor;
-	using NUnit.Framework;
+    using Castle.Windsor;
+    using NUnit.Framework;
 
-	public class BaseTest
-	{
-		private IWindsorContainer container;
+    /// <summary>
+    /// The base of all tests.
+    /// </summary>
+    public class BaseTest
+    {
+        /// <summary>
+        /// The IOC container.
+        /// </summary>
+        private IWindsorContainer container;
 
-		[SetUp]
-		public virtual void SetUp()
-		{
-			this.container = new WindsorContainer();
-		}
+        /// <summary>
+        /// The SetUp for all tests.
+        /// </summary>
+        [SetUp]
+        public virtual void SetUp()
+        {
+            this.container = new WindsorContainer();
+        }
 
-		[TearDown]
-		public void TearDown()
-		{
-			this.OnTearDown();
-		}
+        /// <summary>
+        /// The Tear Down (destruct) of all tests.
+        /// </summary>
+        [TearDown]
+        public void TearDown()
+        {
+            this.OnTearDown();
+            if (this.container != null)
+            {
+                this.container.Dispose();
+            }
+        }
 
-		public virtual void OnTearDown()
-		{
-		}
-	}
+        /// <summary>
+        /// method called to allow to each test to handle his own tear down.
+        /// </summary>
+        public virtual void OnTearDown()
+        {
+        }
+    }
 }

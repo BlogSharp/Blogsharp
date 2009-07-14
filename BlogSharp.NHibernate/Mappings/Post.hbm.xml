@@ -1,24 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
 									 assembly="BlogSharp.Model"
-									 namespace="BlogSharp.Model">
-	<class name="Post">
-		<id name="ID"
+									 namespace="BlogSharp.Model"
+                   default-access="backfield">
+  <class name="Post" optimistic-lock="version">
+    <id name="ID"
 				type="Int64">
-			<generator class="hilo"/>
-		</id>
-		<property name="Title" />
-		<property name="FriendlyTitle"/>
-		<!--<property name="Email"/>-->
+      <generator class="hilo"/>
+    </id>
+    <version name="Version" />
+    <property name="Title" />
+    <property name="FriendlyTitle"/>
+    <!--<property name="Email"/>-->
     <bag name="Tags" lazy="true" table="PostTags">
       <key column="PostId"/>
       <many-to-many class="Tag" column="TagId"/>
     </bag>
-		<many-to-one name="Blog" class="BlogSharp.Model.Blog, BlogSharp.Model" not-null="true"/>
+    <many-to-one name="Blog" class="BlogSharp.Model.Blog, BlogSharp.Model" not-null="true"/>
     <many-to-one name="Publisher" class="BlogSharp.Model.User, BlogSharp.Model" not-null="true" />
     <property name="DateCreated" not-null="true" />
     <property name="DatePublished" />
     <property name="Published" />
     <property name="Content" />
-	</class>
+  </class>
 </hibernate-mapping>

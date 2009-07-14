@@ -57,6 +57,7 @@
     <Compile Include="Validators\BlogValidationTests.cs" />
     <Compile Include="Validators\PostCommentValidatorTests.cs" />
     <Compile Include="Validators\PostValidatorTests.cs" />
+    <Compile Include="Validators\TagValidatorTests.cs" />
     <Compile Include="Validators\UserValidatorTests.cs" />
     <Compile Include="Validators\ValidationTestBase.cs" />
   </ItemGroup>

@@ -1,3 +1,11 @@
+//--------------------------------------------------------------------------------------------------------------------- 
+// <copyright file="AntiGoogleWebAcceleratorFilter.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   Defines the AntiGoogleWebAcceleratorFilter type.
+// </summary>
+//---------------------------------------------------------------------------------------------------------------------
 namespace BlogSharp.MvcExtensions.Filters
 {
 	using System.Web.Mvc;

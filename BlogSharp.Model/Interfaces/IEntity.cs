@@ -16,5 +16,10 @@ namespace BlogSharp.Model.Interfaces
 		/// Gets or sets ID.
 		/// </summary>
 		long ID { get; set; }
+
+        /// <summary>
+        /// Gets Version.
+        /// </summary>
+        int Version { get; }
 	}
 }

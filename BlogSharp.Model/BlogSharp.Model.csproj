@@ -51,7 +51,6 @@
     <Compile Include="CommentableEntity.cs" />
     <Compile Include="Interfaces\ICommentable.cs" />
     <Compile Include="Interfaces\IEntity.cs" />
-    <Compile Include="Interfaces\IIdentifiable.cs" />
     <Compile Include="Interfaces\IPluginInfo.cs" />
     <Compile Include="Interfaces\IPostable.cs" />
     <Compile Include="Interfaces\ITaggable.cs" />
@@ -68,6 +67,7 @@
     <Compile Include="Validation\PostValidator.cs" />
     <Compile Include="Validation\Rules\UrlValidationExtension.cs" />
     <Compile Include="Validation\Rules\UrlValidationRule.cs" />
+    <Compile Include="Validation\TagValidator.cs" />
     <Compile Include="Validation\UserValidator.cs" />
     <Compile Include="Validation\ValidationError.cs" />
     <Compile Include="Validation\ValidationException.cs" />
