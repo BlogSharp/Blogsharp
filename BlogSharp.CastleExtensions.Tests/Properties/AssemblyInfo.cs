@@ -1,11 +1,4 @@
-﻿// <copyright file="AssemblyInfo.cs" company="BlogSharp">
-// Apache Licence 2.0 
-// </copyright>
-// <author>Gonzalo Brusella</author>
-// <email>gonzalo@brusella.com.ar</email>
-// <date>2009-02-21</date>
-
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 

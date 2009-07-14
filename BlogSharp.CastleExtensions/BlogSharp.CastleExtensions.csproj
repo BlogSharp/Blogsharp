@@ -64,6 +64,8 @@
     <Compile Include="DependencyResolvers\ListResolver.cs" />
     <Compile Include="DependencyResolvers\ServiceIdResolver.cs" />
     <Compile Include="Facilities\ControllerRegisterFacility.cs" />
+    <Compile Include="Facilities\EnrichFacility\EnrichWithFacility.cs" />
+    <Compile Include="Facilities\EnrichFacility\FluentRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

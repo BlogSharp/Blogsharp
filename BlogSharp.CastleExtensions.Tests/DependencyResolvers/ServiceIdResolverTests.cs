@@ -1,9 +1,3 @@
-// <copyright file="ServiceIdResolverTests.cs" company="BlogSharp">
-// Apache Licence 2.0 
-// </copyright>
-// <author>Gonzalo Brusella</author>
-// <email>gonzalo@brusella.com.ar</email>
-// <date>2009-02-21</date>
 namespace BlogSharp.CastleExtensions.Tests.DependencyResolvers
 {
     using Castle.MicroKernel.Handlers;
