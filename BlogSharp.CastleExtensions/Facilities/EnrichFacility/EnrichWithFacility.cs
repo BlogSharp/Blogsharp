@@ -10,7 +10,7 @@
 		public const string ExtendWithPropertyKey = "extendwith";
 		protected override void Init()
 		{
-			Kernel.ComponentCreated += new Castle.MicroKernel.ComponentInstanceDelegate(Kernel_ComponentCreated);
+			Kernel.ComponentCreated += Kernel_ComponentCreated;
 		}
 
 		void Kernel_ComponentCreated(Castle.Core.ComponentModel model, object instance)
