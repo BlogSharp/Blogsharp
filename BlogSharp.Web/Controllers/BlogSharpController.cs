@@ -8,7 +8,7 @@ namespace BlogSharp.Web.Controllers
 	{
 		protected virtual Blog CurrentBlog
 		{
-			get { return this.CurrentBlogContext.Blog; }
+			get { return CurrentBlogContext.Blog; }
 		}
 
 		protected virtual BlogContext CurrentBlogContext

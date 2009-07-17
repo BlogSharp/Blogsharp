@@ -24,7 +24,7 @@
 		                      DependencyModel dependency)
 		{
 			Type t = dependency.TargetType.GetGenericArguments()[0];
-			return this.kernel.ResolveAll(t, null);
+			return kernel.ResolveAll(t, null);
 		}
 
 		public bool CanResolve(CreationContext context, ISubDependencyResolver parentResolver,

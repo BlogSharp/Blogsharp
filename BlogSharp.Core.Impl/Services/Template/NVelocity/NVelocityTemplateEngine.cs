@@ -24,7 +24,7 @@ namespace BlogSharp.Core.Impl.Services.Template.NVelocity
 			{
 				ncontext.Put(pair.Key, pair.Value);
 			}
-			this.velocityEngine.Evaluate(ncontext, output, "merger", template.GetContent());
+			velocityEngine.Evaluate(ncontext, output, "merger", template.GetContent());
 		}
 
 		public string Merge(ITemplate template, IDictionary<string, object> context)
@@ -35,7 +35,7 @@ namespace BlogSharp.Core.Impl.Services.Template.NVelocity
 				ncontext.Put(pair.Key, pair.Value);
 			}
 			StringWriter sw = new StringWriter();
-			this.velocityEngine.Evaluate(ncontext, sw, "merger", template.GetContent());
+			velocityEngine.Evaluate(ncontext, sw, "merger", template.GetContent());
 			return sw.GetStringBuilder().ToString();
 		}
 

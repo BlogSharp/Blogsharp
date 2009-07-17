@@ -15,9 +15,9 @@ namespace BlogSharp.Core.Impl.Tests.Services.Template
 		[SetUp]
 		public void SetUp()
 		{
-			this.fileService = MockRepository.GenerateMock<IFileService>();
-			this.templateEngineRegistry = MockRepository.GenerateMock<ITemplateEngineRegistry>();
-			this.templateSource = new DefaultTemplateSource(this.fileService, this.templateEngineRegistry);
+			fileService = MockRepository.GenerateMock<IFileService>();
+			templateEngineRegistry = MockRepository.GenerateMock<ITemplateEngineRegistry>();
+			templateSource = new DefaultTemplateSource(fileService, templateEngineRegistry);
 		}
 
 		#endregion
@@ -31,8 +31,8 @@ namespace BlogSharp.Core.Impl.Tests.Services.Template
 		public void Can_get_template_from_from_content_and_sets_correct_template_engine()
 		{
 			string content = "#templateengine(spark)\nyet another team";
-			ITemplate template = this.templateSource.GetTemplateFromString(content);
-			this.templateEngineRegistry.AssertWasCalled(x => x.GetTemplateEngine("spark"));
+			ITemplate template = templateSource.GetTemplateFromString(content);
+			templateEngineRegistry.AssertWasCalled(x => x.GetTemplateEngine("spark"));
 			Assert.That(template.GetContent(), Is.EqualTo("yet another team"));
 		}
 
@@ -47,9 +47,9 @@ namespace BlogSharp.Core.Impl.Tests.Services.Template
 			fileStream.Position = 0;
 
 			string fileName = "blah";
-			this.fileService.Expect(x => x.OpenFileForRead(fileName)).Return(fileStream);
-			ITemplate template = this.templateSource.GetTemplateFromFile("blah");
-			this.templateEngineRegistry.AssertWasCalled(x => x.GetTemplateEngine("spark"));
+			fileService.Expect(x => x.OpenFileForRead(fileName)).Return(fileStream);
+			ITemplate template = templateSource.GetTemplateFromFile("blah");
+			templateEngineRegistry.AssertWasCalled(x => x.GetTemplateEngine("spark"));
 			Assert.That(template.GetContent(), Is.EqualTo("yet another team"));
 		}
 
@@ -58,9 +58,9 @@ namespace BlogSharp.Core.Impl.Tests.Services.Template
 		public void Can_register_with_content()
 		{
 			string content = "#templateengine(spark)\nyet another team";
-			this.templateSource.RegisterTemplateWithString("blah", content);
-			ITemplate template = this.templateSource.GetTemplateWithKey("blah");
-			this.templateEngineRegistry.AssertWasCalled(x => x.GetTemplateEngine("spark"));
+			templateSource.RegisterTemplateWithString("blah", content);
+			ITemplate template = templateSource.GetTemplateWithKey("blah");
+			templateEngineRegistry.AssertWasCalled(x => x.GetTemplateEngine("spark"));
 			Assert.That(template.GetContent(), Is.EqualTo("yet another team"));
 		}
 
@@ -75,12 +75,12 @@ namespace BlogSharp.Core.Impl.Tests.Services.Template
 			fileStream.Position = 0;
 
 			string fileName = "blah";
-			this.fileService.Expect(x => x.OpenFileForRead(fileName)).Return(fileStream);
+			fileService.Expect(x => x.OpenFileForRead(fileName)).Return(fileStream);
 
 
-			this.templateSource.RegisterTemplateWithFile("mail", "blah");
-			ITemplate template = this.templateSource.GetTemplateWithKey("mail");
-			this.templateEngineRegistry.AssertWasCalled(x => x.GetTemplateEngine("spark"));
+			templateSource.RegisterTemplateWithFile("mail", "blah");
+			ITemplate template = templateSource.GetTemplateWithKey("mail");
+			templateEngineRegistry.AssertWasCalled(x => x.GetTemplateEngine("spark"));
 			Assert.That(template.GetContent(), Is.EqualTo("yet another team"));
 		}
 	}

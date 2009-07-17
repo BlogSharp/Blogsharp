@@ -26,7 +26,7 @@
 	{
 		public SimpleServiceRequiringClass(IList<ISample> samples)
 		{
-			this.Samples = samples;
+			Samples = samples;
 		}
 
 		public IList<ISample> Samples { get; set; }

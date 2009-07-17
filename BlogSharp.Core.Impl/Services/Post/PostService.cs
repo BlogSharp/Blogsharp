@@ -20,64 +20,64 @@ namespace BlogSharp.Core.Impl.Services.Post
 		public void AddPost(Model.Post post)
 		{
 			var postAdding = new PostAddingEventArgs(this, post);
-			this.PostAdding.Raise(postAdding);
+			PostAdding.Raise(postAdding);
 			if (postAdding.Cancel)
 				return;
-			this.postRepository.SavePost(post);
+			postRepository.SavePost(post);
 			var postAdded = new PostAddedEventArgs(this, post);
-			this.PostAdded.Raise(postAdded);
+			PostAdded.Raise(postAdded);
 		}
 
 		public void AddComment(PostComment comment)
 		{
 			var commentAdding = new CommentAddingEventArgs(this, comment);
-			this.CommentAdding.Raise(commentAdding);
+			CommentAdding.Raise(commentAdding);
 			if (commentAdding.Cancel)
 				return;
-			this.postRepository.SaveComment(comment);
+			postRepository.SaveComment(comment);
 			var commentAdded = new CommentAddedEventArgs(this, comment);
-			this.CommentAdded.Raise(commentAdded);
+			CommentAdded.Raise(commentAdded);
 		}
 
 		public void RemoveComment(PostComment comment)
 		{
-			this.postRepository.DeleteComment(comment);
+			postRepository.DeleteComment(comment);
 		}
 
 		public void RemovePost(Model.Post post)
 		{
 			var postRemoving = new PostRemovingEventArgs(this, post);
-			this.PostRemoving.Raise(postRemoving);
+			PostRemoving.Raise(postRemoving);
 			if (postRemoving.Cancel)
 				return;
-			this.postRepository.DeletePost(post);
+			postRepository.DeletePost(post);
 			var postRemoved = new PostRemovedEventArgs(this, post);
-			this.PostRemoved.Raise(postRemoved);
+			PostRemoved.Raise(postRemoved);
 		}
 
 		public Model.Post GetPostById(Blog blog, int id)
 		{
-			return this.postRepository.GetPostById(blog, id);
+			return postRepository.GetPostById(blog, id);
 		}
 
 		public Model.Post GetPostByFriendlyTitle(Blog blog, string friendlyTitle)
 		{
-			return this.postRepository.GetByTitle(blog, friendlyTitle);
+			return postRepository.GetByTitle(blog, friendlyTitle);
 		}
 
 		public IList<Model.Post> GetPostsByBlog(Blog blog)
 		{
-			return this.postRepository.GetByBlog(blog);
+			return postRepository.GetByBlog(blog);
 		}
 
 		public IList<Model.Post> GetPostsByBlogPaged(Blog blog, int skip, int take)
 		{
-			return this.postRepository.GetByBlog(blog, skip, take);
+			return postRepository.GetByBlog(blog, skip, take);
 		}
 
 		public IList<Model.Post> GetPostsByTagPaged(Blog blog, string friendlyTagName, int skip, int take)
 		{
-			return this.postRepository.GetByTag(blog, friendlyTagName, skip, take);
+			return postRepository.GetByTag(blog, friendlyTagName, skip, take);
 		}
 
 

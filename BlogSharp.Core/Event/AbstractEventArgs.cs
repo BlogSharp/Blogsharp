@@ -15,7 +15,7 @@ namespace BlogSharp.Core.Event
 
 		public virtual object Source
 		{
-			get { return this.source; }
+			get { return source; }
 		}
 
 		#endregion

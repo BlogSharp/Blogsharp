@@ -16,7 +16,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Template
 		[SetUp]
 		public void SetUp()
 		{
-			this.velocityEngine = new NVelocityTemplateEngine(new VelocityEngine());
+			velocityEngine = new NVelocityTemplateEngine(new VelocityEngine());
 		}
 
 		#endregion
@@ -31,7 +31,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Template
 			var context = new Dictionary<string, object>();
 			context["person"] = new {Name = "Mahmut"};
 			StringWriter sw = new StringWriter();
-			this.velocityEngine.Merge(template, context, sw);
+			velocityEngine.Merge(template, context, sw);
 			Assert.AreEqual("Mahmut", sw.GetStringBuilder().ToString());
 		}
 	}

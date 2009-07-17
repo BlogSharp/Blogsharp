@@ -19,7 +19,7 @@ namespace BlogSharp.Core.Impl.Web
 			if (items[BLOGCONTEXTKEY] == null)
 			{
 				var blogContext = new BlogContext();
-				blogContext.Blog = this.blogRepository.GetBlog();
+				blogContext.Blog = blogRepository.GetBlog();
 				items[BLOGCONTEXTKEY] = blogContext;
 			}
 

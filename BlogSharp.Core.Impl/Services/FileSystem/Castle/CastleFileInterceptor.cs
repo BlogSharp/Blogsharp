@@ -24,12 +24,12 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Castle
 				IDirectory dir = invocation.InvocationTarget as IDirectory;
 				string current = dir.Path;
 				string parent = new DirectoryInfo(current).Parent.FullName;
-				if (this.parentDirectory == null)
+				if (parentDirectory == null)
 				{
-					this.parentDirectory = this.fileService.GetDirectory(parent);
+					parentDirectory = fileService.GetDirectory(parent);
 				}
 
-				invocation.ReturnValue = this.parentDirectory;
+				invocation.ReturnValue = parentDirectory;
 			}
 			else
 				invocation.Proceed();

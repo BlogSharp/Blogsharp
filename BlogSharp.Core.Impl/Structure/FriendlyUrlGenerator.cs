@@ -15,7 +15,7 @@ namespace BlogSharp.Core.Impl.Structure
 			var list = new List<string>();
 			foreach (string s in args)
 			{
-				string replaced = this.regex.Replace(s, "-");
+				string replaced = regex.Replace(s, "-");
 				list.Add(replaced);
 			}
 			return string.Format(format, list.ToArray());

@@ -11,19 +11,19 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 		internal File(string fileName, NativeMethods.WIN32_FIND_DATA fileData)
 			: base(fileName)
 		{
-			this.findData = fileData;
+			findData = fileData;
 		}
 
 		#region IFile Members
 
 		public long Length
 		{
-			get { return this.findData.nFileSizeHigh; }
+			get { return findData.nFileSizeHigh; }
 		}
 
 		public FileAttributes Attributes
 		{
-			get { return (FileAttributes) this.findData.dwFileAttributes; }
+			get { return (FileAttributes) findData.dwFileAttributes; }
 		}
 
 		#endregion

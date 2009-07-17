@@ -29,14 +29,14 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 
 		public virtual bool FileExists(string file)
 		{
-			using (var tranHandle = this.GetKtmTransactionHandle())
-			using (var handle = this.GetFileHandleForInfo(file, tranHandle))
+			using (var tranHandle = GetKtmTransactionHandle())
+			using (var handle = GetFileHandleForInfo(file, tranHandle))
 				return !handle.IsInvalid;
 		}
 
 		public virtual bool DirectoryExists(string directory)
 		{
-			return this.FileExists(directory);
+			return FileExists(directory);
 		}
 
 		public virtual void DeleteFile(IFile file)
@@ -46,20 +46,20 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 
 		public virtual void DeleteFile(string file)
 		{
-			using (var tranHandle = this.GetKtmTransactionHandle())
+			using (var tranHandle = GetKtmTransactionHandle())
 				NativeMethods.DeleteFileTransacted(file, tranHandle);
 		}
 
 		public virtual void MoveFile(string source, string destination)
 		{
-			using (var tranHandle = this.GetKtmTransactionHandle())
+			using (var tranHandle = GetKtmTransactionHandle())
 				NativeMethods.MoveFileTransacted(source, destination, IntPtr.Zero, IntPtr.Zero,
 				                                 NativeMethods.MoveFileFlags.MOVEFILE_REPLACE_EXISTING, tranHandle);
 		}
 
 		public virtual void MoveFile(IFile source, string destination)
 		{
-			using (var tranHandle = this.GetKtmTransactionHandle())
+			using (var tranHandle = GetKtmTransactionHandle())
 				NativeMethods.MoveFileTransacted(source.Path, destination, IntPtr.Zero, IntPtr.Zero,
 				                                 NativeMethods.MoveFileFlags.MOVEFILE_REPLACE_EXISTING, tranHandle);
 		}
@@ -67,7 +67,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 		public virtual void CopyFile(string source, string destination)
 		{
 			bool pbCancel = false;
-			using (var tranHandle = this.GetKtmTransactionHandle())
+			using (var tranHandle = GetKtmTransactionHandle())
 				NativeMethods.CopyFileTransacted(source, destination, IntPtr.Zero, IntPtr.Zero, ref pbCancel,
 				                                 NativeMethods.CopyFileFlags.COPY_FILE_FAIL_IF_EXISTS, tranHandle);
 		}
@@ -79,7 +79,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 
 		public Stream OpenFileForRead(string source)
 		{
-			return this.OpenFile(source, FileMode.Open, FileAccess.Read, FileShare.None);
+			return OpenFile(source, FileMode.Open, FileAccess.Read, FileShare.None);
 		}
 
 		public Stream OpenFileForRead(IFile file)
@@ -89,7 +89,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 
 		public Stream OpenFileForWrite(string source)
 		{
-			return this.OpenFile(source, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+			return OpenFile(source, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
 		}
 
 		public Stream OpenFileForWrite(IFile file)
@@ -99,17 +99,17 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 
 		public Stream OpenFile(string path, FileMode fileMode, FileAccess access, FileShare fileShare)
 		{
-			return this.OpenFileUnManaged(path, fileMode, access, fileShare);
+			return OpenFileUnManaged(path, fileMode, access, fileShare);
 		}
 
 		public IFile GetFile(string file)
 		{
 			NativeMethods.WIN32_FIND_DATA findData;
-			using (var tranHandle = this.GetKtmTransactionHandle())
-			using (var fileHandle = this.GetFileHandleForInfo(file, tranHandle, out findData))
+			using (var tranHandle = GetKtmTransactionHandle())
+			using (var fileHandle = GetFileHandleForInfo(file, tranHandle, out findData))
 			{
 				if (!fileHandle.IsInvalid)
-					return this.factory.CreateFileWithProxy(this, file, findData);
+					return factory.CreateFileWithProxy(this, file, findData);
 				else
 					throw new FileNotFoundException();
 			}
@@ -118,11 +118,11 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 		public IDirectory GetDirectory(string directory)
 		{
 			NativeMethods.WIN32_FIND_DATA findData;
-			using (var tranHandle = this.GetKtmTransactionHandle())
-			using (var fileHandle = this.GetFileHandleForInfo(directory, tranHandle, out findData))
+			using (var tranHandle = GetKtmTransactionHandle())
+			using (var fileHandle = GetFileHandleForInfo(directory, tranHandle, out findData))
 			{
 				if (!fileHandle.IsInvalid)
-					return this.factory.CreateDirectoryWithProxy(this, directory);
+					return factory.CreateDirectoryWithProxy(this, directory);
 				else
 					throw new DirectoryNotFoundException();
 			}
@@ -131,7 +131,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 		public IFile CreateFile(string file, FileMode fileMode, FileAccess fileAccess, FileShare fileShare,
 		                        FileSystemRights fileSystemRights, FileOptions fileOptions, FileSecurity fileSecurity)
 		{
-			using (var tranHandle = this.GetKtmTransactionHandle())
+			using (var tranHandle = GetKtmTransactionHandle())
 			{
 				int dwFlagsAndAttributes = (int) fileOptions;
 				dwFlagsAndAttributes |= 0x100000;
@@ -145,36 +145,36 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 					if (fileHandle.IsInvalid)
 						throw new InvalidOperationException();
 				}
-				return this.GetFile(file);
+				return GetFile(file);
 			}
 		}
 
 		public IFile CreateFile(string file, FileMode fileMode, FileAccess fileAccess, FileShare fileShare)
 		{
-			return this.CreateFile(file, fileMode, fileAccess, fileShare, 0, FileOptions.None, null);
+			return CreateFile(file, fileMode, fileAccess, fileShare, 0, FileOptions.None, null);
 		}
 
 		public IFile CreateFile(string file, FileMode fileMode)
 		{
-			FileAccess access = this.GetFileAccessFromFileMode(fileMode);
-			return this.CreateFile(file, fileMode, access);
+			FileAccess access = GetFileAccessFromFileMode(fileMode);
+			return CreateFile(file, fileMode, access);
 		}
 
 		public IFile CreateFile(string file, FileMode fileMode, FileAccess fileAccess)
 		{
-			return this.CreateFile(file, fileMode, fileAccess, FileShare.Read);
+			return CreateFile(file, fileMode, fileAccess, FileShare.Read);
 		}
 
 
 		public IFile CreateFile(string file)
 		{
-			return this.CreateFile(file, FileMode.CreateNew);
+			return CreateFile(file, FileMode.CreateNew);
 		}
 
 		public IEnumerable<IFileSystemInfo> SearchDirectory(string directory, string searchPattern,
 		                                                    SearchOptions searchOptions, SearchLocation searchLocation)
 		{
-			using (var tranHandle = this.GetKtmTransactionHandle())
+			using (var tranHandle = GetKtmTransactionHandle())
 			{
 				NativeMethods.WIN32_FIND_DATA win32findData;
 				var directoriesToBeSearched = new List<string>(8) {directory};
@@ -186,29 +186,29 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 					directory = directoriesToBeSearched[count - 1];
 					directoriesToBeSearched.RemoveAt(count - 1);
 
-					using (var directoryHandle = this.GetFileHandleForInfo(
+					using (var directoryHandle = GetFileHandleForInfo(
 						directory + Path.DirectorySeparatorChar + @"*", tranHandle, out win32findData))
 					{
 						while (NativeMethods.FindNextFile(directoryHandle, out win32findData))
 						{
 							if (win32findData.cFileName.Equals("..") ||
-								win32findData.cFileName.Equals("."))
+							    win32findData.cFileName.Equals("."))
 								continue;
 							bool isFile = 0 == (win32findData.dwFileAttributes & 0x10);
 							string relative = directory + Path.DirectorySeparatorChar + win32findData.cFileName;
 							if (isFile & (searchOptions & SearchOptions.File) != 0)
-								output.Add(this.factory.CreateFileWithProxy(this, relative, win32findData));
+								output.Add(factory.CreateFileWithProxy(this, relative, win32findData));
 							else if (!isFile)
 							{
 								if (searchLocation == SearchLocation.Recursive)
 									directoriesToBeSearched.Add(relative);
 								if ((searchOptions & SearchOptions.Directory) != 0)
-									output.Add(this.factory.CreateDirectoryWithProxy(this, relative));
+									output.Add(factory.CreateDirectoryWithProxy(this, relative));
 							}
 						}
 					}
 				}
-				this.SortListByTypeAndName(output);
+				SortListByTypeAndName(output);
 				return new ReadOnlyCollection<IFileSystemInfo>(output);
 			}
 		}
@@ -228,9 +228,9 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 		protected virtual Stream OpenFileUnManaged(string source, FileMode fileMode, FileAccess fileAccess,
 		                                           FileShare fileShare)
 		{
-			using (var tranHandle = this.GetKtmTransactionHandle())
+			using (var tranHandle = GetKtmTransactionHandle())
 			{
-				var fileHandle = this.GetFileHandle(source, tranHandle, fileMode, fileAccess, fileShare);
+				var fileHandle = GetFileHandle(source, tranHandle, fileMode, fileAccess, fileShare);
 				var stream = new FileStream(fileHandle, fileAccess);
 				if (fileMode == FileMode.Append)
 					stream.Position = stream.Length;
@@ -261,7 +261,7 @@ namespace BlogSharp.Core.Impl.Services.FileSystem
 		protected virtual SafeFileHandle GetFileHandleForInfo(string source, KtmTransactionHandle tranHandle)
 		{
 			NativeMethods.WIN32_FIND_DATA data;
-			return this.GetFileHandleForInfo(source, tranHandle, out data);
+			return GetFileHandleForInfo(source, tranHandle, out data);
 		}
 
 		protected virtual FileAccess GetFileAccessFromFileMode(FileMode fileMode)

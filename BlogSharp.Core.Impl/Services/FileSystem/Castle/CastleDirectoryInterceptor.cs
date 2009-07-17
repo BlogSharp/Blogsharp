@@ -16,12 +16,12 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Castle
 		{
 			if (invocation.Method.Name.Equals("get_Children"))
 			{
-				if (this.collection == null)
+				if (collection == null)
 				{
 					IDirectory dir = invocation.InvocationTarget as IDirectory;
-					this.collection = base.fileService.SearchDirectory(dir.Path, "*.*", SearchOptions.Both, SearchLocation.TopDirectory);
+					collection = base.fileService.SearchDirectory(dir.Path, "*.*", SearchOptions.Both, SearchLocation.TopDirectory);
 				}
-				invocation.ReturnValue = this.collection;
+				invocation.ReturnValue = collection;
 			}
 			else
 				base.Intercept(invocation);

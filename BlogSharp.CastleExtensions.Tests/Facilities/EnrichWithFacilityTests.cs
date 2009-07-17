@@ -1,6 +1,5 @@
 ﻿namespace BlogSharp.CastleExtensions.Tests.Facilities
 {
-	using System;
 	using Castle.MicroKernel.Registration;
 	using Castle.Windsor;
 	using CastleExtensions.Facilities.EnrichFacility;
@@ -9,7 +8,7 @@
 	[TestFixture]
 	public class EnrichWithFacilityTests
 	{
-		private WindsorContainer container;
+		#region Setup/Teardown
 
 		[SetUp]
 		public void SetUp()
@@ -18,16 +17,21 @@
 			container.AddFacility<EnrichWithFacility>();
 		}
 
+		#endregion
+
+		private WindsorContainer container;
+
 		[Test]
 		public void CanEnrich_when_singleton()
 		{
 			container.Register(Component.For<IService>().ImplementedBy<MyService>()
 			                   	.EnrichWith((kernel, instance) => ((IService) instance).I++));
 			var service = container.Resolve<IService>();
-			Assert.That(service.I,Is.EqualTo(1));
+			Assert.That(service.I, Is.EqualTo(1));
 			service = container.Resolve<IService>();
 			Assert.That(service.I, Is.EqualTo(1));
 		}
+
 		[Test]
 		public void CanEnrich_when_transient()
 		{
@@ -45,14 +49,14 @@
 		int I { get; set; }
 	}
 
-	public class MyService:IService
+	public class MyService : IService
 	{
-		public int I
-		{
-			get; set;
-		}
-	}
+		#region IService Members
 
+		public int I { get; set; }
+
+		#endregion
+	}
 
 
 	public interface IService2
@@ -63,10 +67,15 @@
 	public class MyService2 : IService2
 	{
 		private static int x;
-		public  int I
+
+		#region IService2 Members
+
+		public int I
 		{
 			get { return x; }
 			set { x = value; }
 		}
+
+		#endregion
 	}
 }

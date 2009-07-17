@@ -13,7 +13,7 @@ namespace BlogSharp.Core.Impl.Services.Mail
 		{
 			this.defaultFromAddress = defaultFromAddress;
 			this.defaultDisplayName = defaultDisplayName;
-			this.smtpClient = new SmtpClient(host, port);
+			smtpClient = new SmtpClient(host, port);
 		}
 
 		#region IMailService Members
@@ -24,19 +24,19 @@ namespace BlogSharp.Core.Impl.Services.Mail
 			m.ReplyTo = replyto;
 			m.Subject = subject;
 			m.Body = message;
-			this.smtpClient.Send(m);
+			smtpClient.Send(m);
 		}
 
 		public void Send(MailAddress to, MailAddress replyto, string subject, string message)
 		{
-			this.Send(to, replyto, new MailAddress(this.defaultFromAddress, this.defaultDisplayName),
-			          subject, message);
+			Send(to, replyto, new MailAddress(defaultFromAddress, defaultDisplayName),
+			     subject, message);
 		}
 
 		public void Send(MailAddress to, string subject, string message)
 		{
-			this.Send(to, null, new MailAddress(this.defaultFromAddress, this.defaultDisplayName),
-			          subject, message);
+			Send(to, null, new MailAddress(defaultFromAddress, defaultDisplayName),
+			     subject, message);
 		}
 
 		#endregion

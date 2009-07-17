@@ -7,8 +7,8 @@ namespace BlogSharp.Core.Event.MembershipEvents
 		public UserValidatingEvent(IMembershipService service, string userName, string password)
 			: base(service)
 		{
-			this.Username = userName;
-			this.Password = password;
+			Username = userName;
+			Password = password;
 		}
 
 		public string Password { get; set; }

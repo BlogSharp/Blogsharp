@@ -8,7 +8,7 @@ namespace BlogSharp.Core.Event.PostEvents
 		public CommentAddingEventArgs(IPostService postService, PostComment comment)
 			: base(postService)
 		{
-			this.Comment = comment;
+			Comment = comment;
 		}
 
 		public PostComment Comment { get; private set; }

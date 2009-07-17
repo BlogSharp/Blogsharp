@@ -18,11 +18,11 @@ namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 		[SetUp]
 		public void SetUp()
 		{
-			this.mailServiceMock = MockRepository.GenerateMock<IMailService>();
-			this.templateEngineMock = MockRepository.GenerateMock<ITemplateEngine>();
-			this.templateSourceMock = MockRepository.GenerateMock<ITemplateSource>();
-			this.listener = new SendWelcomeEmailUserRegisteredEventListener(this.mailServiceMock, this.templateEngineMock,
-			                                                                this.templateSourceMock);
+			mailServiceMock = MockRepository.GenerateMock<IMailService>();
+			templateEngineMock = MockRepository.GenerateMock<ITemplateEngine>();
+			templateSourceMock = MockRepository.GenerateMock<ITemplateSource>();
+			listener = new SendWelcomeEmailUserRegisteredEventListener(mailServiceMock, templateEngineMock,
+			                                                           templateSourceMock);
 		}
 
 		#endregion
@@ -37,15 +37,15 @@ namespace BlogSharp.Core.Impl.Tests.EventHandlers.Membership
 		{
 			var author = new User {Email = "blah@blah.com"};
 			var membershipServiceMock = MockRepository.GenerateMock<IMembershipService>();
-			this.listener.Handle(new UserRegisteredEventArgs(membershipServiceMock, author));
-			this.templateSourceMock.AssertWasCalled(x => x.GetTemplateWithKey("membership_welcome"));
-			this.mailServiceMock.AssertWasCalled(x => x.Send(
-			                                          	Arg<MailAddress>.Matches(y => y.Address == "blah@blah.com"),
-			                                          	Arg<MailAddress>.Is.Anything,
-			                                          	Arg<MailAddress>.Is.Anything,
-			                                          	Arg<string>.Is.Anything,
-			                                          	Arg<string>.Is.Anything
-			                                          	));
+			listener.Handle(new UserRegisteredEventArgs(membershipServiceMock, author));
+			templateSourceMock.AssertWasCalled(x => x.GetTemplateWithKey("membership_welcome"));
+			mailServiceMock.AssertWasCalled(x => x.Send(
+			                                     	Arg<MailAddress>.Matches(y => y.Address == "blah@blah.com"),
+			                                     	Arg<MailAddress>.Is.Anything,
+			                                     	Arg<MailAddress>.Is.Anything,
+			                                     	Arg<string>.Is.Anything,
+			                                     	Arg<string>.Is.Anything
+			                                     	));
 		}
 	}
 }

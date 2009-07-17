@@ -17,13 +17,13 @@ namespace BlogSharp.Core.Impl.Services.Template
 
 		public string GetContent()
 		{
-			return this.content;
+			return content;
 		}
 
 
 		public ITemplateEngine Engine
 		{
-			get { return this.engine; }
+			get { return engine; }
 		}
 
 		#endregion

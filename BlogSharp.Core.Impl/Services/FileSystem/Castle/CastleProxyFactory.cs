@@ -12,14 +12,14 @@ namespace BlogSharp.Core.Impl.Services.FileSystem.Castle
 
 		public IFile CreateFileWithProxy(IFileService fileService, string fileName, NativeMethods.WIN32_FIND_DATA findData)
 		{
-			return this.proxyGenerator.CreateInterfaceProxyWithTarget<IFile>(new File(fileName, findData),
-			                                                                 new CastleFileInterceptor(fileService));
+			return proxyGenerator.CreateInterfaceProxyWithTarget<IFile>(new File(fileName, findData),
+			                                                            new CastleFileInterceptor(fileService));
 		}
 
 		public IDirectory CreateDirectoryWithProxy(IFileService fileService, string fileName)
 		{
-			return this.proxyGenerator.CreateInterfaceProxyWithTarget<IDirectory>(new Directory(fileName),
-			                                                                      new CastleDirectoryInterceptor(fileService));
+			return proxyGenerator.CreateInterfaceProxyWithTarget<IDirectory>(new Directory(fileName),
+			                                                                 new CastleDirectoryInterceptor(fileService));
 		}
 
 		#endregion

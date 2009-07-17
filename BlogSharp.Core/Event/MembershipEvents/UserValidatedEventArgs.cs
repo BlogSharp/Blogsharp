@@ -8,7 +8,7 @@ namespace BlogSharp.Core.Event.MembershipEvents
 		public UserValidatedEventArgs(IMembershipService membershipService, User user)
 			: base(membershipService)
 		{
-			this.User = user;
+			User = user;
 		}
 
 		public User User { get; set; }

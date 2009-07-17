@@ -22,7 +22,7 @@ namespace BlogSharp.MvcExtensions.Tests
 		/// Prepares the controller context.
 		/// </summary>
 		/// <returns>The controller context.</returns>
-        public static ControllerContext PrepareControllerContext()
+		public static ControllerContext PrepareControllerContext()
 		{
 			var requestContext = PrepareRequestContext();
 			var controllerBase = MockRepository.GenerateStub<ControllerBase>();
@@ -31,10 +31,10 @@ namespace BlogSharp.MvcExtensions.Tests
 		}
 
 		/// <summary>
-        /// Prepares the request context.
+		/// Prepares the request context.
 		/// </summary>
-        /// <returns>The request context.</returns>
-        public static RequestContext PrepareRequestContext()
+		/// <returns>The request context.</returns>
+		public static RequestContext PrepareRequestContext()
 		{
 			var httpResponse = MockRepository.GenerateStub<HttpResponseBase>();
 			var httpRequest = MockRepository.GenerateStub<HttpRequestBase>();
@@ -44,7 +44,7 @@ namespace BlogSharp.MvcExtensions.Tests
 			httpContext.Expect(x => x.Response).Return(httpResponse).Repeat.Any();
 			httpContext.Expect(x => x.Request).Return(httpRequest).Repeat.Any();
 
-            var requestContext = MockRepository.GenerateStub<RequestContext>(httpContext, new RouteData());
+			var requestContext = MockRepository.GenerateStub<RequestContext>(httpContext, new RouteData());
 			return requestContext;
 		}
 	}

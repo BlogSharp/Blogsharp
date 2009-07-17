@@ -11,7 +11,7 @@ namespace BlogSharp.Model
 	using System.Collections.Generic;
 	using Interfaces;
 
-    /// <summary>
+	/// <summary>
 	/// A Tag into the Blog.
 	/// </summary>
 	[Serializable]
@@ -22,7 +22,7 @@ namespace BlogSharp.Model
 		/// </summary>
 		public Tag()
 		{
-			this.Posts = new List<ITaggable>();
+			Posts = new List<ITaggable>();
 		}
 
 		/// <summary>
@@ -38,6 +38,6 @@ namespace BlogSharp.Model
 		/// <summary>
 		/// Gets or sets Posts.
 		/// </summary>
-        public virtual IList<ITaggable> Posts { get; set; }
+		public virtual IList<ITaggable> Posts { get; set; }
 	}
 }
