@@ -487,7 +487,7 @@
         </member>
         <member name="M:Castle.MicroKernel.Facilities.AbstractFacility.Terminate">
             <summary>
-            Terminates the Facility, invokind the <see cref="M:Castle.MicroKernel.Facilities.AbstractFacility.Dispose"/> and setting 
+            Terminates the Facility, invokes the <see cref="M:Castle.MicroKernel.Facilities.AbstractFacility.Dispose"/> method and sets 
             the Kernel to a null reference.
             </summary>
         </member>
@@ -584,6 +584,18 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="T:Castle.MicroKernel.Facilities.OnCreate.OnCreateFacility">
+            <summary>
+            This facility allows modification on objects after they are created
+            </summary>
+        </member>
+        <member name="M:Castle.MicroKernel.Facilities.OnCreate.OnCreateFacility.HandleComponentCreated(Castle.Core.ComponentModel,System.Object)">
+            <summary>
+            Handles the ComponentCreated event and invoke the delegate stored in ExtendedProperties of <see cref="T:Castle.Core.ComponentModel"/>
+            </summary>
+            <param name="model"></param>
+            <param name="instance"></param>
         </member>
         <member name="T:Castle.Facilities.Remoting.RemoteActivator">
             <summary>
@@ -1732,6 +1744,11 @@
             Gets or sets the proxy hook.
             </summary>
         </member>
+        <member name="P:Castle.MicroKernel.Proxy.ProxyOptions.Selector">
+            <summary>
+            Gets or sets the interceptor selector.
+            </summary>
+        </member>
         <member name="P:Castle.MicroKernel.Proxy.ProxyOptions.OmitTarget">
             <summary>
             Determines if the proxied component uses a target.
@@ -1778,6 +1795,12 @@
             <param name="model">The component model.</param>
             <param name="createOnDemand">true if the options should be created if not present.</param>
             <returns>The associated proxy options for the component model.</returns>
+        </member>
+        <member name="T:Castle.MicroKernel.Registration.Facilities.OnCreateComponentDescriptor`1">
+            <summary>
+            Adds the actions to ExtendedProperties.
+            </summary>
+            <typeparam name="S"></typeparam>
         </member>
         <member name="M:Castle.MicroKernel.Registration.Lifestyle.LifestyleGroup`1.Is(Castle.Core.LifestyleType)">
             <summary>
@@ -2569,6 +2592,13 @@
             <param name="interceptors">The interceptors.</param>
             <returns></returns>
         </member>
+        <member name="M:Castle.MicroKernel.Registration.ComponentRegistration`1.SelectInterceptorsWith(Castle.Core.Interceptor.IInterceptorSelector)">
+            <summary>
+            Sets the interceptor selector for this component.
+            </summary>
+            <param name="selector"></param>
+            <returns></returns>
+        </member>
         <member name="M:Castle.MicroKernel.Registration.ComponentRegistration`1.Startable">
             <summary>
             Marks the component as startable.
@@ -2593,6 +2623,15 @@
             <param name="stopMethod">The stop method.</param>
             <returns></returns>
             <remarks>Be sure that you first added the <see cref="T:Castle.Facilities.Startable.StartableFacility"/> 
+            to the kernel, before registering this component.</remarks>
+        </member>
+        <member name="M:Castle.MicroKernel.Registration.ComponentRegistration`1.OnCreate(Castle.MicroKernel.Facilities.OnCreate.OnCreateActionDelegate{`0}[])">
+            <summary>
+            Stores a set of <see cref="T:Castle.MicroKernel.Facilities.OnCreate.OnCreateActionDelegate`1"/> which will be invoked when the component
+            is created
+            </summary>
+            <param name="actions">A setof actions</param>
+            <remarks>Be sure that you first added the <see cref="T:Castle.MicroKernel.Facilities.OnCreate.OnCreateFacility"/> 
             to the kernel, before registering this component.</remarks>
         </member>
         <member name="M:Castle.MicroKernel.Registration.ComponentRegistration`1.ActAs(System.Object[])">
@@ -2643,6 +2682,33 @@
             <param name="descriptor">The descriptor.</param>
             <returns></returns>
         </member>
+        <member name="M:Castle.MicroKernel.Registration.ComponentRegistration`1.UsingFactoryMethod``1(Castle.MicroKernel.Registration.Function{``0})">
+            <summary>
+            Uses a factory method to instantiate the component.
+            Requires the <see cref="T:Castle.Facilities.FactorySupport.FactorySupportFacility"/> to be installed.
+            </summary>
+            <typeparam name="T">Implementation type</typeparam>
+            <param name="factoryMethod">Factory method</param>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.MicroKernel.Registration.ComponentRegistration`1.UsingFactoryMethod``1(System.Converter{Castle.MicroKernel.IKernel,``0})">
+            <summary>
+            Uses a factory method to instantiate the component.
+            Requires the <see cref="T:Castle.Facilities.FactorySupport.FactorySupportFacility"/> to be installed.
+            </summary>
+            <typeparam name="T">Implementation type</typeparam>
+            <param name="factoryMethod">Factory method</param>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.MicroKernel.Registration.ComponentRegistration`1.UsingFactory``2(System.Converter{``0,``1})">
+            <summary>
+            Uses a factory to instantiate the component
+            </summary>
+            <typeparam name="U">Factory type. This factory has to be registered in the kernel.</typeparam>
+            <typeparam name="V">Implementation type.</typeparam>
+            <param name="factory">Factory invocation</param>
+            <returns></returns>
+        </member>
         <member name="P:Castle.MicroKernel.Registration.ComponentRegistration`1.Name">
             <summary>
             The name of the component. Will become the key for the component in the kernel.
@@ -2690,6 +2756,24 @@
             For example singleton and transient (also known as 'factory').
             </summary>
             <value>The with lifestyle.</value>
+        </member>
+        <member name="T:Castle.MicroKernel.Registration.KernelToT`1">
+            <summary>
+            Helper wrapper around Converter
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Castle.MicroKernel.Registration.GenericFactoryWithKernel`1">
+            <summary>
+            Helper factory class
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Castle.MicroKernel.Registration.GenericFactory`1">
+            <summary>
+            Helper factory class
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="T:Castle.MicroKernel.Registration.ComponentRegistration">
             <summary>
@@ -4235,11 +4319,43 @@
             <typeparam name="T">The facility type.</typeparam>
             <param name="key"></param>
         </member>
+        <member name="M:Castle.MicroKernel.IKernel.AddFacility``1(System.String,System.Action{``0})">
+            <summary>
+            Creates and adds an <see cref="T:Castle.MicroKernel.IFacility"/> facility to the kernel.
+            </summary>
+            <typeparam name="T">The facility type.</typeparam>
+            <param name="key"></param>
+            <param name="onCreate">The callback for creation.</param>
+        </member>
+        <member name="M:Castle.MicroKernel.IKernel.AddFacility``1(System.String,System.Func{``0,System.Object})">
+            <summary>
+            Creates and adds an <see cref="T:Castle.MicroKernel.IFacility"/> facility to the kernel.
+            </summary>
+            <typeparam name="T">The facility type.</typeparam>
+            <param name="key"></param>
+            <param name="onCreate">The callback for creation.</param>
+        </member>
         <member name="M:Castle.MicroKernel.IKernel.AddFacility``1">
             <summary>
             Creates and adds an <see cref="T:Castle.MicroKernel.IFacility"/> facility to the kernel.
             </summary>
             <typeparam name="T">The facility type.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.MicroKernel.IKernel.AddFacility``1(System.Action{``0})">
+            <summary>
+            Creates and adds an <see cref="T:Castle.MicroKernel.IFacility"/> facility to the kernel.
+            </summary>
+            <typeparam name="T">The facility type.</typeparam>
+            <param name="onCreate">The callback for creation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.MicroKernel.IKernel.AddFacility``1(System.Func{``0,System.Object})">
+            <summary>
+            Creates and adds an <see cref="T:Castle.MicroKernel.IFacility"/> facility to the kernel.
+            </summary>
+            <typeparam name="T">The facility type.</typeparam>
+            <param name="onCreate">The callback for creation.</param>
             <returns></returns>
         </member>
         <member name="M:Castle.MicroKernel.IKernel.GetFacilities">
