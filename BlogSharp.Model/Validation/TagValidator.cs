@@ -1,11 +1,4 @@
-﻿// <copyright file="TagValidator.cs" company="BlogSharp">
-// Apache Licence 2.0 
-// </copyright>
-// <author>Gonzalo Brusella</author>
-// <email>gonzalo@brusella.com.ar</email>
-// <date>2009-07-11</date>
-
-namespace BlogSharp.Model.Validation
+﻿namespace BlogSharp.Model.Validation
 {
 	using FluentValidation;
 

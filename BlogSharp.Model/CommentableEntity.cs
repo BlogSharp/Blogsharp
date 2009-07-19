@@ -1,11 +1,4 @@
-﻿// <copyright file="CommentableEntity.cs" company="BlogSharp">
-// Apache Licence 2.0 
-// </copyright>
-// <author>Gonzalo Brusella</author>
-// <email>gonzalo@brusella.com.ar</email>
-// <date>2009-06-23</date>
-
-namespace BlogSharp.Model
+﻿namespace BlogSharp.Model
 {
 	using System;
 	using System.Collections.Generic;

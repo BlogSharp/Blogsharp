@@ -1,11 +1,3 @@
-// <copyright file="UrlValidationRule.cs" company="BlogSharp">
-// Apache Licence 2.0 
-// </copyright>
-// <author>Gonzalo Brusella</author>
-// <email>gonzalo@brusella.com.ar</email>
-// <date>2009-02-21</date>
-
-
 namespace BlogSharp.Model.Validation.Rules
 {
 	using FluentValidation.Validators;
@@ -17,7 +9,7 @@ namespace BlogSharp.Model.Validation.Rules
 	public class UrlValidationRule<T> : RegularExpressionValidator<T>
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="UrlValidationRule" /> class. 
+		/// Initializes a new instance of the <see cref="UrlValidationRule{T}" /> class. 
 		/// </summary>
 		public UrlValidationRule()
 			: base(
