@@ -46,7 +46,7 @@
 		[Test]
 		public void Can_insert_post_comment()
 		{
-			var postComment = new PostComment();
+			var postComment = new Feedback();
 			postService.Expect(x => x.GetPostById(blog, 1))
 				.Return(new Post {FriendlyTitle = "m"});
 			var actionResult = controller.AddComment(1, postComment);

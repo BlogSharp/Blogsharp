@@ -15,7 +15,8 @@ namespace BlogSharp.Model.Tests.Validators
 		[Test]
 		public void Should_raise_error_when_Blog_is_null()
 		{
-			ShouldHaveErrors(x => x.Blog, null);
+			ShouldHaveErrors(new Post{Blog=null},x => x.Blog);
+			ShouldNotHaveErrors(new Post{Blog=new Blog()},x => x.Blog);
 		}
 
 		/// <summary>
@@ -24,8 +25,9 @@ namespace BlogSharp.Model.Tests.Validators
 		[Test]
 		public void Should_raise_error_when_Content_is_null_or_empty()
 		{
-			ShouldHaveErrors(x => x.Content, null);
-			ShouldHaveErrors(x => x.Content, string.Empty);
+			ShouldHaveErrors(new Post{Content=null},x => x.Content);
+			ShouldHaveErrors(new Post { Content = string.Empty }, x => x.Content);
+			ShouldNotHaveErrors(new Post{Content="a"},x => x.Content);
 		}
 
 		/// <summary>
@@ -34,8 +36,9 @@ namespace BlogSharp.Model.Tests.Validators
 		[Test]
 		public void Should_raise_error_when_FriendlyTitle_is_null_or_empty()
 		{
-			ShouldHaveErrors(x => x.FriendlyTitle, null);
-			ShouldHaveErrors(x => x.FriendlyTitle, string.Empty);
+			ShouldHaveErrors(new Post{FriendlyTitle=null},x => x.FriendlyTitle);
+			ShouldHaveErrors(new Post{FriendlyTitle=string.Empty},x => x.FriendlyTitle);
+			ShouldNotHaveErrors(new Post{FriendlyTitle="a"},x => x.FriendlyTitle);
 		}
 
 		/// <summary>
@@ -44,8 +47,9 @@ namespace BlogSharp.Model.Tests.Validators
 		[Test]
 		public void Should_raise_error_when_Title_is_null_or_empty()
 		{
-			ShouldHaveErrors(x => x.Title, null);
-			ShouldHaveErrors(x => x.Title, string.Empty);
+			ShouldHaveErrors(new Post{Title=null},x => x.Title);
+			ShouldHaveErrors(new Post{Title=string.Empty},x => x.Title);
+			ShouldNotHaveErrors(new Post{Title="aaa"},x => x.Title);
 		}
 
 		/// <summary>
@@ -54,7 +58,7 @@ namespace BlogSharp.Model.Tests.Validators
 		[Test]
 		public void Should_raise_error_when_User_is_null()
 		{
-			ShouldHaveErrors(x => x.Publisher, null);
+			ShouldHaveErrors(new Post{Publisher=null},x => x.Publisher);
 		}
 	}
 }

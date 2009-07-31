@@ -28,7 +28,7 @@ namespace BlogSharp.Core.Impl.Services.Post
 			PostAdded.Raise(postAdded);
 		}
 
-		public void AddComment(PostComment comment)
+		public void AddComment(Feedback comment)
 		{
 			var commentAdding = new CommentAddingEventArgs(this, comment);
 			CommentAdding.Raise(commentAdding);
@@ -39,7 +39,7 @@ namespace BlogSharp.Core.Impl.Services.Post
 			CommentAdded.Raise(commentAdded);
 		}
 
-		public void RemoveComment(PostComment comment)
+		public void RemoveComment(Feedback comment)
 		{
 			postRepository.DeleteComment(comment);
 		}

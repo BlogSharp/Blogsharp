@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\Guard.cs" />
     <Compile Include="Persistence\IDataInitializer.cs" />
     <Compile Include="Persistence\Repositories\IBlogRepository.cs" />
     <Compile Include="Persistence\Repositories\IPostRepository.cs" />
@@ -114,13 +115,14 @@
     <Compile Include="Services\FileSystem\IFileService.cs" />
     <Compile Include="Services\FileSystem\IFileSystemInfo.cs" />
     <Compile Include="Services\FileSystem\SearchOptions.cs" />
+    <Compile Include="Services\Http\IHttpClient.cs" />
     <Compile Include="Services\Mail\IMailService.cs" />
     <Compile Include="Services\Membership\IMembershipService.cs" />
-    <Compile Include="Services\Ping\IPingService.cs" />
     <Compile Include="Services\Plugin\IPlugin.cs" />
     <Compile Include="Services\Plugin\IPluginService.cs" />
     <Compile Include="Services\Post\IPostService.cs" />
     <Compile Include="Services\Search\IIndexContributor.cs" />
+    <Compile Include="Services\Search\ISearchContent.cs" />
     <Compile Include="Services\Search\ISearchContentTransformer.cs" />
     <Compile Include="Services\Search\ISearchService.cs" />
     <Compile Include="Services\Template\ITemplate.cs" />

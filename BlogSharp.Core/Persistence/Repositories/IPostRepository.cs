@@ -68,13 +68,13 @@ namespace BlogSharp.Core.Persistence.Repositories
 		/// Adds the comment
 		/// </summary>
 		/// <param name="comment"></param>
-		void SaveComment(PostComment comment);
+		void SaveComment(Feedback comment);
 
 		/// <summary>
 		/// Delete comment
 		/// </summary>
 		/// <param name="comment"></param>
-		void DeleteComment(PostComment comment);
+		void DeleteComment(Feedback comment);
 
 		/// <summary>
 		/// Get the post via SEO friendly title in url-rewrite.

@@ -87,7 +87,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared Libs", "Shared Libs"
 		SharedLibs\nunit.core.dll = SharedLibs\nunit.core.dll
 		SharedLibs\nunit.core.extensions.dll = SharedLibs\nunit.core.extensions.dll
 		SharedLibs\nunit.framework.dll = SharedLibs\nunit.framework.dll
-		SharedLibs\nunit.framework.extensions.dll = SharedLibs\nunit.framework.extensions.dll
 		SharedLibs\nunit.framework.xml = SharedLibs\nunit.framework.xml
 		SharedLibs\NVelocity.dll = SharedLibs\NVelocity.dll
 		SharedLibs\NVelocity.xml = SharedLibs\NVelocity.xml
@@ -104,6 +103,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared Libs", "Shared Libs"
 		SharedLibs\System.Web.Routing.dll = SharedLibs\System.Web.Routing.dll
 		SharedLibs\xVal.dll = SharedLibs\xVal.dll
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSharp.Migrations", "BlogSharp.Migrations\BlogSharp.Migrations.csproj", "{C2AABD87-275B-4F6B-96CB-E152C88FA2CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -163,6 +164,10 @@ Global
 		{0BDF5C37-165C-4EAC-8706-D54BE7F93F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BDF5C37-165C-4EAC-8706-D54BE7F93F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BDF5C37-165C-4EAC-8706-D54BE7F93F9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2AABD87-275B-4F6B-96CB-E152C88FA2CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2AABD87-275B-4F6B-96CB-E152C88FA2CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2AABD87-275B-4F6B-96CB-E152C88FA2CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2AABD87-275B-4F6B-96CB-E152C88FA2CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -181,5 +186,6 @@ Global
 		{FD1F0595-EF35-4CFD-87E2-1E5F7E170026} = {96F9E349-A9B3-408B-99EB-F38E742412B4}
 		{0676A837-82B2-45CF-B97A-8011211F1779} = {4BA237E6-3243-493F-A4F1-8C7F7B03B6F3}
 		{0BDF5C37-165C-4EAC-8706-D54BE7F93F9F} = {4BA237E6-3243-493F-A4F1-8C7F7B03B6F3}
+		{C2AABD87-275B-4F6B-96CB-E152C88FA2CF} = {4BA237E6-3243-493F-A4F1-8C7F7B03B6F3}
 	EndGlobalSection
 EndGlobal

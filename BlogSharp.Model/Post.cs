@@ -8,7 +8,7 @@ namespace BlogSharp.Model
 	/// Represents a Post into the Blog.
 	/// </summary>
 	[Serializable]
-	public class Post : CommentableEntity, IPostable, ITaggable
+	public class Post : Entity
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Post" /> class. 
@@ -70,5 +70,15 @@ namespace BlogSharp.Model
 		public virtual string Content { get; set; }
 
 		#endregion
+
+		public IList<Feedback> Feedbacks
+		{
+			get; set;
+		}
+
+		public void AddFeedback(Feedback feedback)
+		{
+			this.Feedbacks.Add(feedback);
+		}
 	}
 }

@@ -15,7 +15,9 @@ namespace BlogSharp.Model.Tests.Validators
 	public class ValidationTestBase<TValidator, TValidatee>
 		where TValidator : AbstractValidator<TValidatee>, new()
 		where TValidatee : class, new()
+
 	{
+
 		#region Setup/Teardown
 
 		/// <summary>
@@ -34,32 +36,19 @@ namespace BlogSharp.Model.Tests.Validators
 		/// </summary>
 		private TValidator validator;
 
-		/// <summary>
-		/// Generic function to validate an error returning function.
-		/// </summary>
-		/// <typeparam name="TValue">The genetic value.</typeparam>
-		/// <param name="expression">The errer expression.</param>
-		/// <param name="value">The comparing value.</param>
-		/// <exception cref="ArgumentNullException"><c>expression</c> is null.</exception>
-		protected virtual void ShouldHaveErrors<TValue>(Expression<Func<TValidatee, TValue>> expression, TValue value)
+		protected virtual void ShouldHaveErrors(TValidatee value, Expression<Func<TValidatee, object>> expression)
 		{
-			if (expression == null)
-			{
-				throw new ArgumentNullException("expression");
-			}
-
-			validator.ShouldHaveValidationErrorFor(expression, value);
+			var result = validator.Validate(value, expression);
+			if (result.IsValid)
+				throw new AssertionException("This object should not be valid");
 		}
 
-		/// <summary>
-		/// Generic function to validate an non error returning function.
-		/// </summary>
-		/// <typeparam name="TValue">The genetic value.</typeparam>
-		/// <param name="expression">The errer expression.</param>
-		/// <param name="value">The comparing value.</param>
-		protected virtual void ShouldNotHaveErrors<TValue>(Expression<Func<TValidatee, TValue>> expression, TValue value)
+		protected virtual void ShouldNotHaveErrors(TValidatee value,Expression<Func<TValidatee,object>> expression)
 		{
-			validator.ShouldNotHaveValidationErrorFor(expression, value);
+			var result=validator.Validate(value, expression);
+			if (!result.IsValid)
+				throw new AssertionException("This object should be valid");
 		}
+
 	}
 }

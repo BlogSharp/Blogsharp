@@ -7,8 +7,8 @@ namespace BlogSharp.Core.Services.Post
 	public interface IPostService
 	{
 		void AddPost(Model.Post post);
-		void AddComment(PostComment comment);
-		void RemoveComment(PostComment comment);
+		void AddComment(Feedback comment);
+		void RemoveComment(Feedback comment);
 		void RemovePost(Model.Post post);
 		Model.Post GetPostById(Blog blog, int id);
 		Model.Post GetPostByFriendlyTitle(Blog blog, string friendlyTitle);

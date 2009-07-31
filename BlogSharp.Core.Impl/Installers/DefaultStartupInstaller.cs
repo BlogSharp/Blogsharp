@@ -1,10 +1,3 @@
-// <copyright file="DefaultStartupInstaller.cs" company="BlogSharp">
-// Coypyleft 2009 Apache Licence 2.0 
-// </copyright>
-// <author>Gonzalo Brusella</author>
-// <email>gonzalo@brusella.com.ar</email>
-// <date>2009-06-20</date>
-
 namespace BlogSharp.Core.Impl.Installers
 {
 	using System;

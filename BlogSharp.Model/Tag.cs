@@ -15,7 +15,7 @@ namespace BlogSharp.Model
 		/// </summary>
 		public Tag()
 		{
-			Posts = new List<ITaggable>();
+			Posts = new List<Post>();
 		}
 
 		/// <summary>
@@ -31,6 +31,6 @@ namespace BlogSharp.Model
 		/// <summary>
 		/// Gets or sets Posts.
 		/// </summary>
-		public virtual IList<ITaggable> Posts { get; set; }
+		public virtual IList<Post> Posts { get; set; }
 	}
 }

@@ -30,7 +30,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		[Test]
 		public void AddComment_calls_underlying_repository()
 		{
-			var postComment = new PostComment();
+			var postComment = new Feedback();
 			postService.AddComment(postComment);
 			postRepository.AssertWasCalled(x => x.SaveComment(postComment));
 		}
@@ -82,7 +82,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		public void Events_raised_for_comment_and_post_actions()
 		{
 			var post = MockRepository.GenerateStub<Model.Post>();
-			var postComment = MockRepository.GenerateStub<PostComment>();
+			var postComment = MockRepository.GenerateStub<Feedback>();
 			bool p1 = false, p2 = false, p3 = false, p4 = false;
 			bool c1 = false, c2 = false;
 			postService.CommentAdded += delegate(CommentAddedEventArgs eventArgs)
@@ -133,7 +133,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		[Test]
 		public void RemoveComment_calls_underlyting_repository_to_delete()
 		{
-			var comment = new PostComment();
+			var comment = new Feedback();
 			postService.RemoveComment(comment);
 			postRepository.AssertWasCalled(x => x.DeleteComment(comment));
 		}
@@ -150,7 +150,7 @@ namespace BlogSharp.Core.Impl.Tests.Services.Post
 		public void Repository_is_not_called_if_event_is_cancelled()
 		{
 			var post = MockRepository.GenerateStub<Model.Post>();
-			var postComment = MockRepository.GenerateStub<PostComment>();
+			var postComment = MockRepository.GenerateStub<Feedback>();
 
 			postService.CommentAdded += delegate { throw new AssertionException("Shouldn't be called"); };
 			postService.CommentAdding += x => x.Cancel = true;

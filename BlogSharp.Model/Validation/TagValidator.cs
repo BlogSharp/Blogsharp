@@ -12,9 +12,9 @@
 		/// </summary>
 		public TagValidator()
 		{
-			RuleFor(x => x.Name).NotNull().And.NotEmpty();
-			RuleFor(x => x.FriendlyName).NotNull().And.NotEmpty();
-			RuleFor(x => x.Posts).NotEmpty();
+			RuleFor(x => x.Name).NotNull().NotEmpty();
+			RuleFor(x => x.FriendlyName).NotNull().NotEmpty();
+			RuleFor(x => x.Posts).NotNull();
 		}
 	}
 }

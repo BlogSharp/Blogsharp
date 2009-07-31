@@ -15,10 +15,10 @@ namespace BlogSharp.Model.Tests.Validators
 		[Test]
 		public void TestShouldRaiseErrorWhenEmailIsInInvalidFormat()
 		{
-			ShouldHaveErrors(x => x.Email, "aaa");
-			ShouldHaveErrors(x => x.Email, "aaa@aaa");
-			ShouldHaveErrors(x => x.Email, "aaa@aaa.");
-			ShouldNotHaveErrors(x => x.Email, "aaa@aaa.com");
+
+			ShouldHaveErrors(new User{Email="aa@aaa"}, x => x.Email);
+			ShouldHaveErrors(new User { Email = "aa@aaa." }, x => x.Email);
+			ShouldNotHaveErrors(new User {Email = "aa@aaa.com"}, x => x.Email);
 		}
 
 		/// <summary>
@@ -27,8 +27,8 @@ namespace BlogSharp.Model.Tests.Validators
 		[Test]
 		public void TestShouldRaiseErrorWhenEmailIsNullOrEmpty()
 		{
-			ShouldHaveErrors(x => x.Email, null);
-			ShouldHaveErrors(x => x.Email, string.Empty);
+			ShouldHaveErrors(new User{Email = null}, x => x.Email);
+			ShouldHaveErrors(new User{Email=""}, x => x.Email);
 		}
 
 		/// <summary>
@@ -37,8 +37,8 @@ namespace BlogSharp.Model.Tests.Validators
 		[Test]
 		public void TestShouldRaiseErrorWhenPasswordIsNullOrEmpty()
 		{
-			ShouldHaveErrors(x => x.Password, null);
-			ShouldHaveErrors(x => x.Password, string.Empty);
+			ShouldHaveErrors(new User{Password=null},x=>x.Password);
+			ShouldHaveErrors(new User{Password = ""},x=>x.Password);
 		}
 
 		/// <summary>
@@ -47,8 +47,8 @@ namespace BlogSharp.Model.Tests.Validators
 		[Test]
 		public void TestShouldRaiseErrorWhenUserNameIsNullOrEmpty()
 		{
-			ShouldHaveErrors(x => x.UserName, null);
-			ShouldHaveErrors(x => x.UserName, string.Empty);
+			ShouldHaveErrors(new User {UserName=null }, x => x.UserName);
+			ShouldHaveErrors(new User { UserName = "" }, x => x.UserName);
 		}
 	}
 }

@@ -4,44 +4,52 @@ namespace BlogSharp.Model.Tests.Validators
 	using Validation;
 
 	[TestFixture]
-	public class PostCommentValidatorTests : ValidationTestBase<PostCommentValidator, PostComment>
+	public class PostCommentValidatorTests : ValidationTestBase<CommentValidator, Comment>
 	{
 		[Test]
 		public void Should_raise_error_when_comment_is_not_specified()
 		{
-			ShouldHaveErrors(x => x.Comment, null);
-			ShouldHaveErrors(x => x.Comment, "");
+			ShouldHaveErrors(new Comment{Text=null},x=>x.Text);
+			ShouldHaveErrors(new Comment {Text = string.Empty}, x => x.Text);
+			ShouldNotHaveErrors(new Comment { Text = "aaaa" }, x => x.Text);
 		}
 
 		[Test]
-		public void Should_raise_error_when_email_is_empty()
+		public void Should_raise_error_when_email_is_empty_and_no_user_is_present()
 		{
-			ShouldHaveErrors(x => x.Email, null);
-			ShouldHaveErrors(x => x.Email, "");
+			ShouldHaveErrors(new Comment {Email = null, Commenter = null}, x => x.Email);
+			ShouldHaveErrors(new Comment { Email = string.Empty, Commenter = null }, x => x.Email);
+		}
+
+		[Test]
+		public void Should_not_raise_error_when_email_is_empty_and_user_is_present()
+		{
+			ShouldNotHaveErrors(new Comment { Email = null, Commenter = new User { } }, x => x.Email);
+			ShouldNotHaveErrors(new Comment { Email = null, Commenter = new User { } }, x => x.Email);
 		}
 
 		[Test]
 		public void Should_raise_error_when_email_is_in_invalid_format()
 		{
-			ShouldHaveErrors(x => x.Email, "aaaa");
-			ShouldHaveErrors(x => x.Email, "aaa@aaa");
-			ShouldHaveErrors(x => x.Email, "aaa@aaa.");
-			ShouldNotHaveErrors(x => x.Email, "aaa@aaa.com");
+			ShouldHaveErrors(new Comment{Email="aaa",Commenter = null},x=>x.Email);
+			ShouldHaveErrors(new Comment { Email = "aaa@aaa", Commenter = null }, x => x.Email);
+			ShouldHaveErrors(new Comment { Email = "aaa@aaa.", Commenter = null }, x => x.Email);
+			ShouldNotHaveErrors(new Comment { Email = "aaa@aaa.com", Commenter = null }, x => x.Email);
 		}
 
 
 		[Test]
 		public void Should_raise_error_when_web_is_in_invalid_format()
 		{
-			ShouldHaveErrors(x => x.Web, "aaaa");
-			ShouldHaveErrors(x => x.Web, "http://aaa");
-			ShouldNotHaveErrors(x => x.Web, "http://tunatoksoz.com");
+			ShouldHaveErrors(new Comment{Web="aaa"},x=>x.Web);
+			ShouldHaveErrors(new Comment { Web = "http://aaa" }, x => x.Web);
+			ShouldNotHaveErrors(new Comment { Web = "http://aaa.com" }, x => x.Web);
 		}
 
 		[Test]
-		public void Should_raise_no_error_when_web_is_null()
+		public void Should_not_raise_error_when_web_is_null()
 		{
-			ShouldNotHaveErrors(x => x.Web, "");
+			ShouldNotHaveErrors(new Comment{Web=null},x=>x.Web);
 		}
 	}
 }

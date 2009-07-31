@@ -5,12 +5,12 @@ namespace BlogSharp.Core.Event.PostEvents
 
 	public class CommentAddedEventArgs : AbstractEventArgs<IPostService>
 	{
-		public CommentAddedEventArgs(IPostService postService, PostComment comment)
+		public CommentAddedEventArgs(IPostService postService, Feedback comment)
 			: base(postService)
 		{
 			Comment = comment;
 		}
 
-		public PostComment Comment { get; private set; }
+		public Feedback Comment { get; private set; }
 	}
 }

@@ -39,10 +39,9 @@ namespace BlogSharp.Web.Controllers
 
 		[AcceptVerbs(HttpVerbs.Post)]
 		[ValidateAntiForgeryToken]
-		public ActionResult AddComment(int postId, PostComment comment)
+		public ActionResult AddComment(int postId, Feedback comment)
 		{
 			var post = postService.GetPostById(CurrentBlog, postId);
-			comment.Post = post;
 			comment.Date = DateTime.Now;
 			using (var tranScope = new TransactionScope())
 			{

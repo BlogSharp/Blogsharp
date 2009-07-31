@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace BlogSharp.Model
+﻿namespace BlogSharp.Core.Services.Search
 {
+	using System;
 	public interface ISearchContent
 	{
 		string Title { get; set; }

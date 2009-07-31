@@ -13,7 +13,7 @@ namespace BlogSharp.Model.Validation
 		public PostValidator()
 		{
 			RuleFor(x => x.Blog).NotNull();
-			RuleFor(x => x.Content).NotNull().And.NotEmpty();
+			RuleFor(x => x.Content).NotNull().NotEmpty();
 			RuleFor(x => x.FriendlyTitle).NotEmpty();
 			RuleFor(x => x.Title).NotEmpty();
 			RuleFor(x => x.Publisher).NotNull();

@@ -59,7 +59,7 @@ namespace BlogSharp.Model.Validation
 		/// <exception cref="ValidationException">Exception thrown when the instance is not valid.</exception>
 		public virtual void ValidateAndThrowException(T instance, params Expression<Func<T, object>>[] expression)
 		{
-			var validationResult = Validate(instance, expression);
+			var validationResult = Validate(instance);
 
 			if (!validationResult.IsValid)
 			{
