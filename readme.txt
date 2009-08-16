@@ -1,2 +1,4 @@
-This is a sample readme file.
-We're going to change this.
+Contributors:
+Gonzalo Brusella
+Doga Oztuzun
+Tuna Toksoz
