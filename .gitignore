@@ -1,0 +1,21 @@
+<<<<<<< HEAD:.gitignore
+**/*.suo
+**/*.user
+**/*.sln*
+bin
+obj
+_ReSharper*
+dist
+output
+=======
+obj
+bin
+_ReSharper.*
+*.csproj.user
+*.resharper.user
+*.resharper
+*.suo
+*.cache
+*~
+*.swp
+>>>>>>> semantic-model:.gitignore
