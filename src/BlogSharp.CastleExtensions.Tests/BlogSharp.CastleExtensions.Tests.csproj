@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3310EA27-977F-4ED8-81F8-9484AC8EB757}</ProjectGuid>
+    <ProjectGuid>{BA5E82A2-BE03-40E2-B834-021F25B49862}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlogSharp.CastleExtensions</RootNamespace>
-    <AssemblyName>BlogSharp.CastleExtensions</AssemblyName>
+    <RootNamespace>BlogSharp.CastleExtensions.Tests</RootNamespace>
+    <AssemblyName>BlogSharp.CastleExtensions.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,23 +33,31 @@
   <ItemGroup>
     <Reference Include="Castle.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\Castle.Core.dll</HintPath>
+      <HintPath>..\..\SharedLibs\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.DynamicProxy2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\Castle.DynamicProxy2.dll</HintPath>
+      <HintPath>..\..\SharedLibs\Castle.DynamicProxy2.dll</HintPath>
     </Reference>
     <Reference Include="Castle.MicroKernel, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\Castle.MicroKernel.dll</HintPath>
+      <HintPath>..\..\SharedLibs\Castle.MicroKernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedLibs\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.5.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedLibs\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework.extensions, Version=2.4.5.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedLibs\nunit.framework.extensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -61,15 +69,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DependencyResolvers\ListResolver.cs" />
-    <Compile Include="DependencyResolvers\ServiceIdResolver.cs" />
-    <Compile Include="Facilities\ControllerRegisterFacility.cs" />
-    <Compile Include="Facilities\EnrichFacility\EnrichWithFacility.cs" />
-    <Compile Include="Facilities\EnrichFacility\FluentRegistration.cs" />
+    <Compile Include="DependencyResolvers\ListResolverTests.cs" />
+    <Compile Include="DependencyResolvers\ServiceIdResolverTests.cs" />
+    <Compile Include="Facilities\EnrichWithFacilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Registration\" />
+    <ProjectReference Include="..\BlogSharp.CastleExtensions\BlogSharp.CastleExtensions.csproj">
+      <Project>{3310EA27-977F-4ED8-81F8-9484AC8EB757}</Project>
+      <Name>BlogSharp.CastleExtensions</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

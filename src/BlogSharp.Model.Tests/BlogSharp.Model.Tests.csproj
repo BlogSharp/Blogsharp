@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F1045769-5738-438A-AAE8-F898DDC192E8}</ProjectGuid>
+    <ProjectGuid>{49F9553E-CB6B-4AED-8FC5-ED0676E1D710}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlogSharp.Web.Tests</RootNamespace>
-    <AssemblyName>BlogSharp.Web.Tests</AssemblyName>
+    <RootNamespace>BlogSharp.Model.Tests</RootNamespace>
+    <AssemblyName>BlogSharp.Model.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,60 +31,51 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedLibs\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.5.0.9015, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\..\SharedLibs\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Abstractions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC Beta\Assemblies\System.Web.Abstractions.dll</HintPath>
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC Beta\Assemblies\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Routing, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC Beta\Assemblies\System.Web.Routing.dll</HintPath>
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\PostControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validators\BlogValidationTests.cs" />
+    <Compile Include="Validators\PostCommentValidatorTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Validators\PostValidatorTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Validators\TagValidatorTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Validators\UserValidatorTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Validators\ValidationTestBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlogSharp.Core.Impl\BlogSharp.Core.Impl.csproj">
-      <Project>{71467906-275B-46B0-97FD-4FAB644448B6}</Project>
-      <Name>BlogSharp.Core.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BlogSharp.Core\BlogSharp.Core.csproj">
-      <Project>{ABDABEBC-B92A-4F36-AC07-6874B4932C21}</Project>
-      <Name>BlogSharp.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BlogSharp.Model\BlogSharp.Model.csproj">
       <Project>{ACD93612-B2E7-4D51-9127-C306EF1F386C}</Project>
       <Name>BlogSharp.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlogSharp.Web\BlogSharp.Web.csproj">
-      <Project>{FD1F0595-EF35-4CFD-87E2-1E5F7E170026}</Project>
-      <Name>BlogSharp.Web</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Routes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

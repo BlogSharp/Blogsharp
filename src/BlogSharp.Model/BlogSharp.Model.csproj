@@ -5,15 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C2AABD87-275B-4F6B-96CB-E152C88FA2CF}</ProjectGuid>
+    <ProjectGuid>{ACD93612-B2E7-4D51-9127-C306EF1F386C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlogSharp.Migrations</RootNamespace>
-    <AssemblyName>BlogSharp.Migrations</AssemblyName>
+    <RootNamespace>BlogSharp.Model</RootNamespace>
+    <AssemblyName>BlogSharp.Model</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>
-    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,9 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentMigrator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="FluentValidation, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\FluentMigrator.dll</HintPath>
+      <HintPath>..\..\SharedLibs\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -44,17 +42,41 @@
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blog.cs" />
+    <Compile Include="BlogConfiguration.cs" />
+    <Compile Include="Feedback.cs" />
+    <Compile Include="Interfaces\IEntity.cs" />
+    <Compile Include="PluginInfo.cs" />
+    <Compile Include="Post.cs" />
+    <Compile Include="Comment.cs" />
+    <Compile Include="PostComment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="v10\TODO.txt" />
+    <Compile Include="Tag.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="Validation\BlogValidator.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="Validation\Interfaces\IValidatorBase.cs" />
+    <Compile Include="Validation\PostCommentValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Validation\PostValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Validation\Rules\UrlValidationExtension.cs" />
+    <Compile Include="Validation\Rules\UrlValidationRule.cs" />
+    <Compile Include="Validation\TagValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Validation\UserValidator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Validation\ValidationError.cs" />
+    <Compile Include="Validation\ValidationException.cs" />
+    <Compile Include="Validation\ValidatorBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

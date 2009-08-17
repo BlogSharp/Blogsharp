@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BA5E82A2-BE03-40E2-B834-021F25B49862}</ProjectGuid>
+    <ProjectGuid>{2925BBF2-86E3-4231-B0C9-AF4E4D02317E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlogSharp.CastleExtensions.Tests</RootNamespace>
-    <AssemblyName>BlogSharp.CastleExtensions.Tests</AssemblyName>
+    <RootNamespace>BlogSharp.MvcExtensions</RootNamespace>
+    <AssemblyName>BlogSharp.MvcExtensions</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,51 +33,65 @@
   <ItemGroup>
     <Reference Include="Castle.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.DynamicProxy2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\Castle.DynamicProxy2.dll</HintPath>
+      <HintPath>..\..\SharedLibs\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.MicroKernel, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\Castle.MicroKernel.dll</HintPath>
+      <HintPath>..\..\SharedLibs\Castle.MicroKernel.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Windsor, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+    <Reference Include="MvcContrib, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\SharedLibs\MvcContrib.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.4.5.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+    <Reference Include="MvcContrib.FluentHtml, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\nunit.framework.dll</HintPath>
+      <HintPath>..\..\SharedLibs\MvcContrib.FluentHtml.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework.extensions, Version=2.4.5.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+    <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SharedLibs\nunit.framework.extensions.dll</HintPath>
+      <HintPath>..\..\SharedLibs\Spark.dll</HintPath>
+    </Reference>
+    <Reference Include="Spark.Web.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedLibs\Spark.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedLibs\System.Web.Abstractions.dll</HintPath>
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedLibs\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedLibs\System.Web.Routing.dll</HintPath>
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DependencyResolvers\ListResolverTests.cs" />
-    <Compile Include="DependencyResolvers\ServiceIdResolverTests.cs" />
-    <Compile Include="Facilities\EnrichWithFacilityTests.cs" />
+    <Compile Include="ActionResults\RedirectToRefererResult.cs" />
+    <Compile Include="BlogSharpView.cs" />
+    <Compile Include="ControllerFactories\WindsorControllerFactory.cs" />
+    <Compile Include="Filters\AntiGoogleWebAcceleratorFilter.cs" />
+    <Compile Include="Filters\CompressionFilter.cs" />
+    <Compile Include="Handlers\BlogMvcHandler.cs" />
+    <Compile Include="Handlers\BlogMvcRouteHandler.cs" />
+    <Compile Include="IExtendedControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlogSharp.CastleExtensions\BlogSharp.CastleExtensions.csproj">
-      <Project>{3310EA27-977F-4ED8-81F8-9484AC8EB757}</Project>
-      <Name>BlogSharp.CastleExtensions</Name>
+    <ProjectReference Include="..\BlogSharp.Model\BlogSharp.Model.csproj">
+      <Project>{ACD93612-B2E7-4D51-9127-C306EF1F386C}</Project>
+      <Name>BlogSharp.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
