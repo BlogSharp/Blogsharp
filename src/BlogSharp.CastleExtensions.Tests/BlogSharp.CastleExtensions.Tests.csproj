@@ -71,7 +71,6 @@
   <ItemGroup>
     <Compile Include="DependencyResolvers\ListResolverTests.cs" />
     <Compile Include="DependencyResolvers\ServiceIdResolverTests.cs" />
-    <Compile Include="Facilities\EnrichWithFacilityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +78,9 @@
       <Project>{3310EA27-977F-4ED8-81F8-9484AC8EB757}</Project>
       <Name>BlogSharp.CastleExtensions</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Facilities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
