@@ -53,6 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappings\BlogMap.cs" />
+    <Compile Include="Mappings\CommentCommentMap.cs" />
+    <Compile Include="Mappings\CommentMap.cs" />
+    <Compile Include="Mappings\EntityBaseMap.cs" />
+    <Compile Include="Mappings\PostCommentMap.cs" />
+    <Compile Include="Mappings\PostMap.cs" />
+    <Compile Include="Mappings\TagMap.cs" />
+    <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,15 +68,6 @@
       <Project>{ACD93612-B2E7-4D51-9127-C306EF1F386C}</Project>
       <Name>BlogSharp.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Mappings\Blog.hbm.xml" />
-    <EmbeddedResource Include="Mappings\Post.hbm.xml" />
-    <EmbeddedResource Include="Mappings\Tag.hbm.xml" />
-    <EmbeddedResource Include="Mappings\User.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Mappings\PostComment.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Persistence\Repositories\" />

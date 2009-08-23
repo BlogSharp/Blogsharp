@@ -14,10 +14,12 @@ namespace BlogSharp.Model
 		/// </summary>
 		public Blog()
 		{
-			Writers = new List<User>();
-			Posts = new List<Post>();
+			writers = new List<User>();
+			posts = new List<Post>();
 		}
 
+		private IList<User> writers;
+		private IList<Post> posts;
 		/// <summary>
 		/// Gets or sets Configuration.
 		/// </summary>
@@ -36,12 +38,32 @@ namespace BlogSharp.Model
 		/// <summary>
 		/// Gets or sets Authors.
 		/// </summary>
-		public virtual IList<User> Writers { get; set; }
+		public virtual IEnumerable<User> Writers 
+		{
+			get{ return writers;}
+		}
 
 		/// <summary>
 		/// Gets or sets Posts.
 		/// </summary>
-		public virtual IList<Post> Posts { get; set; }
+		public virtual IEnumerable<Post> Posts
+		{
+			get{ return posts;}
+		}
+
+		public virtual void AddPost(Post post)
+		{
+			if (!this.posts.Contains(post))
+			{
+				this.posts.Add(post);
+				post.Blog = this;
+			}
+		}
+
+		public virtual void AddWriter(User user)
+		{
+			this.writers.Add(user);
+		}
 
 		/// <summary>
 		/// Gets or sets Title.

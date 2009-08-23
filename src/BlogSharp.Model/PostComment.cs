@@ -25,7 +25,7 @@
 		}
 		private IList<CommentComment> comments;
 		public virtual PostComment Parent { get; set; }
-		public virtual IEnumerable<CommentComment> SubComments
+		public virtual IEnumerable<CommentComment> Comments
 		{
 			get{ return comments;}
 		}

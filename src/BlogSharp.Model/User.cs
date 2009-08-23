@@ -56,32 +56,6 @@ namespace BlogSharp.Model
 		/// </summary>
 		public virtual DateTime? BirthDate { get; set; }
 
-		public override bool Equals(object obj)
-		{
-			if (ReferenceEquals(null, obj)) return false;
-			if (ReferenceEquals(this, obj)) return true;
-			if (obj.GetType() != typeof (User)) return false;
-			return Equals((User) obj);
-		}
 
-		public virtual bool Equals(User other)
-		{
-			if (ReferenceEquals(null, other)) return false;
-			if (ReferenceEquals(this, other)) return true;
-			return Equals(other.UserName, UserName) && Equals(other.Password, Password) && Equals(other.Email, Email) && Equals(other.Biography, Biography) && other.BirthDate.Equals(BirthDate);
-		}
-
-		public override int GetHashCode()
-		{
-			unchecked
-			{
-				int result = (UserName != null ? UserName.GetHashCode() : 0);
-				result = (result*397) ^ (Password != null ? Password.GetHashCode() : 0);
-				result = (result*397) ^ (Email != null ? Email.GetHashCode() : 0);
-				result = (result*397) ^ (Biography != null ? Biography.GetHashCode() : 0);
-				result = (result*397) ^ (BirthDate.HasValue ? BirthDate.Value.GetHashCode() : 0);
-				return result;
-			}
-		}
 	}
 }

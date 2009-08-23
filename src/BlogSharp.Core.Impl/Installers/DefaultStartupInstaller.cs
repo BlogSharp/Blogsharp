@@ -66,13 +66,12 @@ namespace BlogSharp.Core.Impl.Installers
 			       	{
 			       		ID = 1,
 			       		Title = "BlogSharp Blogs",
-			       		Writers = new List<User> {user},
 			       		Founder = user,
 			       		Configuration = new BlogConfiguration {PageSize = 10},
 			       		Host = "localhost",
 			       		Name = "BlogSharp",
 			       	};
-
+			blog.AddWriter(user);
 			var tag = new Tag {ID = 1, Name = "Welcome", FriendlyName = "welcome"};
 			var title = "Welcome to BlogSharp!";
 			var post = new Post
@@ -88,7 +87,7 @@ namespace BlogSharp.Core.Impl.Installers
 			           	};
 			tag.AddPost(post);
 			blog.Configuration = new BlogConfiguration {PageSize = 10};
-			blog.Posts.Add(post);
+			blog.AddPost(post);
 			userRepository.SaveUser(user);
 			blogRepository.SaveBlog(blog);
 			postRepository.SavePost(post);

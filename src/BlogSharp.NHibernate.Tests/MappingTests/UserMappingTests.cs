@@ -63,7 +63,12 @@ namespace BlogSharp.NHibernate.Tests.MappingTests
 			Assert.That(user.ID,Is.GreaterThan(0));
 
 			DoInNewSessionAndTransaction(session=>userGet=session.Get<User>(user.ID));
-			Assert.That(user,Is.EqualTo(userGet));
+			Assert.That(user.ID,Is.EqualTo(userGet.ID));
+			Assert.That(user.Biography, Is.EqualTo(userGet.Biography));
+			Assert.That(user.Email, Is.EqualTo(userGet.Email));
+			Assert.That(user.BirthDate, Is.EqualTo(userGet.BirthDate));
+			Assert.That(user.Password, Is.EqualTo(userGet.Password));
+			Assert.That(user.UserName, Is.EqualTo(userGet.UserName));
 
 			DoInNewSessionAndTransaction(session=>
 			                             	{

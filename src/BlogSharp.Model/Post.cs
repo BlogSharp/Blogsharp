@@ -31,8 +31,6 @@ namespace BlogSharp.Model
 		/// </summary>
 		public virtual string FriendlyTitle { get; set; }
 
-		#region Implementation of ITaggable
-
 		/// <summary>
 		/// Gets or sets Tags.
 		/// </summary>
@@ -44,7 +42,6 @@ namespace BlogSharp.Model
 			}
 		}
 
-		#endregion
 
 		#region Implementation of IPostable
 
