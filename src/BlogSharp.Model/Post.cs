@@ -10,12 +10,15 @@ namespace BlogSharp.Model
 	[Serializable]
 	public class Post : Entity
 	{
+		private IList<PostComment> comments;
+		private IList<Tag> tags;
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Post" /> class. 
 		/// </summary>
 		public Post()
 		{
-			Tags = new List<Tag>();
+			this.tags = new List<Tag>();
+			this.comments = new List<PostComment>();
 		}
 
 		/// <summary>
@@ -33,7 +36,13 @@ namespace BlogSharp.Model
 		/// <summary>
 		/// Gets or sets Tags.
 		/// </summary>
-		public virtual IList<Tag> Tags { get; set; }
+		public virtual IEnumerable<Tag> Tags
+		{
+			get
+			{
+				return tags;
+			}
+		}
 
 		#endregion
 
@@ -70,15 +79,27 @@ namespace BlogSharp.Model
 		public virtual string Content { get; set; }
 
 		#endregion
-
-		public IList<Feedback> Feedbacks
+		
+		public virtual IEnumerable<PostComment> Comments
 		{
-			get; set;
+			get { return comments; }
 		}
 
-		public void AddFeedback(Feedback feedback)
+		public virtual void AddComment(PostComment comment)
 		{
-			this.Feedbacks.Add(feedback);
+			if (!this.comments.Contains(comment))
+			{
+				this.comments.Add(comment);
+				comment.Parent = this;
+			}
+		}
+		public virtual void AddTag(Tag tag)
+		{
+			if (!this.tags.Contains(tag))
+			{
+				this.tags.Add(tag);
+				tag.AddPost(this);
+			}
 		}
 	}
 }

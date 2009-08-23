@@ -108,7 +108,7 @@
 			Assert.That(FakePingbackService.TargetUri, Is.Not.Null.Or.Not.Empty);
 		}
 
-		[Test]
+		[Test,Ignore]
 		public void Can_process_pingback()
 		{
 			var mysite = "http://mysite.com/hello-world.aspx";

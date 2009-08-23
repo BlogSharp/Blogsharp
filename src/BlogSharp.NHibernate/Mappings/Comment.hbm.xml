@@ -4,35 +4,34 @@
 									 namespace="BlogSharp.Model"
                    default-access="backfield">
 	<class name="Comment" optimistic-lock="version" abstract="true">
-		<id name="ID" type="Int64" column="CommentID">
+		<id name="ID"
+				type="Int64">
 			<generator class="hilo"/>
 		</id>
-		<many-to-one name="User" class="BlogSharp.Model.User, BlogSharp.Model"/>
+		<version name="Version" />
+		<property name="Text"/>
+		<many-to-one name="Commenter" class="BlogSharp.Model.User, BlogSharp.Model"/>
 		<property name="Email"/>
 		<property name="Name"/>
 		<property name="Web"/>
 		<property name="Date"/>
 		<property name="Published"/>
 		<property name="Spam"/>
-		<property name="Text" not-null="true"/>
 
-
-		<joined-subclass name="PostComment">
-			<key column="CommentID"/>
-			<many-to-one name="Parent" class="BlogSharp.Model.Post, BlogSharp.Model"/>
+		<subclass name="CommentComment">
 			<bag name="Comments" lazy="true" cascade="all" access="field.camelcase">
 				<key column="ID"/>
-				<many-to-many class="CommentComment" column="ParentFeedbackId"/>
-			</bag>
-		</joined-subclass>
-		<joined-subclass name="CommentComment">
-			<key column="CommentID"/>
-			<many-to-one name="Parent" class="BlogSharp.Model.Comment, BlogSharp.Model"/>
-			<bag name="Comments" lazy="true" cascade="all" access="field.camelcase">
-				<key column="CommentId"/>
 				<one-to-many class="CommentComment"/>
 			</bag>
-		</joined-subclass>
-  </class>
+			<many-to-one name="Parent"/>
+		</subclass>
+		<subclass name="PostComment">
+			<bag name="Comments" lazy="true" cascade="all" access="field.camelcase">
+				<key column="ID"/>
+				<one-to-many class="CommentComment"/>
+			</bag>
+			<many-to-one name="Parent"/>
+		</subclass>
+	</class>
 
 </hibernate-mapping>

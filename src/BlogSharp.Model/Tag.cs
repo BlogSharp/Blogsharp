@@ -10,12 +10,13 @@ namespace BlogSharp.Model
 	[Serializable]
 	public class Tag : Entity
 	{
+		private IList<Post> posts;
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Tag" /> class. 
 		/// </summary>
 		public Tag()
 		{
-			Posts = new List<Post>();
+			this.posts = new List<Post>();
 		}
 
 		/// <summary>
@@ -31,6 +32,21 @@ namespace BlogSharp.Model
 		/// <summary>
 		/// Gets or sets Posts.
 		/// </summary>
-		public virtual IList<Post> Posts { get; set; }
+		public virtual IEnumerable<Post> Posts
+		{
+			get
+			{
+				return posts;
+			}
+		}
+
+		public virtual void AddPost(Post post)
+		{
+			if(!this.posts.Contains(post))
+			{
+				this.posts.Add(post);
+				post.AddTag(this);
+			}
+		}
 	}
 }

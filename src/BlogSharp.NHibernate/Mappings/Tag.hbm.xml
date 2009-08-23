@@ -11,7 +11,7 @@
     <version name="Version" />
     <property name="Name"/>
 		<property name="FriendlyName"/>
-		<bag name="Posts" lazy="true" table="PostTag" cascade="all">
+		<bag name="Posts" lazy="true" table="PostTag" cascade="all" access="field.camelcase">
 			<key column="TagId"/>
 			<many-to-many class="Post" column="PostId"/>
 		</bag>

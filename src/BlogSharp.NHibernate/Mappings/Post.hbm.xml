@@ -4,7 +4,7 @@
 									 namespace="BlogSharp.Model"
                    default-access="backfield">
   <class name="Post" optimistic-lock="version">
-    <id name="ID"
+    <id name="ID" column="PostID"
 				type="Int64">
       <generator class="hilo"/>
     </id>
@@ -12,10 +12,15 @@
     <property name="Title" />
     <property name="FriendlyTitle"/>
     <!--<property name="Email"/>-->
-    <bag name="Tags" lazy="true" table="PostTags">
-      <key column="PostId"/>
+    <bag name="Tags" lazy="true" table="PostTags" access="field.camelcase">
+      <key column="PostID"/>
       <many-to-many class="Tag" column="TagId"/>
     </bag>
+
+		<bag name="Comments" lazy="true" access="field.camelcase">
+			<key column="PostID"/>
+			<one-to-many class="Comment"/>
+		</bag>
     <many-to-one name="Blog" class="BlogSharp.Model.Blog, BlogSharp.Model" not-null="true"/>
     <many-to-one name="Publisher" class="BlogSharp.Model.User, BlogSharp.Model" not-null="true" />
     <property name="DateCreated" not-null="true" />

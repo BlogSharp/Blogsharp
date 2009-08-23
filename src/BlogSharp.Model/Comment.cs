@@ -19,7 +19,7 @@ namespace BlogSharp.Model
 		/// Gets or sets the commenter. 
 		/// This is a registered user comment (such as the blog owner).
 		/// </summary>
-		public virtual User Commenter { get; set; }
+		public virtual User User { get; set; }
 
 		/// <summary>
 		/// Gets or sets Web.

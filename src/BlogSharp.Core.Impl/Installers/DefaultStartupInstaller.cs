@@ -80,14 +80,13 @@ namespace BlogSharp.Core.Impl.Installers
 			           		ID = 1,
 			           		Blog = blog,
 			           		Publisher = user,
-			           		Tags = new List<Tag> {tag},
 			           		Title = title,
 			           		Content = "Great blog post is here you are.",
 			           		FriendlyTitle = generator.GenerateUrl("{0}", title),
 			           		DateCreated = DateTime.Now,
 			           		DatePublished = DateTime.Now
 			           	};
-			tag.Posts.Add(post);
+			tag.AddPost(post);
 			blog.Configuration = new BlogConfiguration {PageSize = 10};
 			blog.Posts.Add(post);
 			userRepository.SaveUser(user);

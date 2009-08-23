@@ -32,15 +32,5 @@
 			ShouldHaveErrors(new Tag {Name = string.Empty}, x => x.Name);
 			ShouldNotHaveErrors(new Tag{Name="aaa"},x=>x.Name);
 		}
-
-		/// <summary>
-		/// Tests the Posts property for null.
-		/// </summary>
-		[Test]
-		public void TestShouldRaiseErrorWhenPostsIsNull()
-		{
-			ShouldHaveErrors(new Tag {Posts = null}, x => x.Posts);
-			ShouldNotHaveErrors(new Tag{Posts=new List<Post>()}, x => x.Posts);
-		}
 	}
 }

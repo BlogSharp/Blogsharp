@@ -15,14 +15,14 @@ namespace BlogSharp.Model.Validation
 		{
 			RuleFor(x => x.Text).NotNull().NotEmpty();
 
-			RuleFor(x => x.Commenter)
+			RuleFor(x => x.User)
 				.NotNull()
 				.When(x => string.IsNullOrEmpty(x.Email) && string.IsNullOrEmpty(x.Name) && string.IsNullOrEmpty(x.Web));
 
-			RuleFor(x => x.Name).NotEmpty().When(x => x.Commenter == null);
-			RuleFor(x => x.Email).NotEmpty().When(x => x.Commenter == null);
-			RuleFor(x => x.Email).EmailAddress().When(x => x.Commenter == null);
-			RuleFor(x => x.Web).Url().When(x => !string.IsNullOrEmpty(x.Web) && x.Commenter == null);
+			RuleFor(x => x.Name).NotEmpty().When(x => x.User == null);
+			RuleFor(x => x.Email).NotEmpty().When(x => x.User == null);
+			RuleFor(x => x.Email).EmailAddress().When(x => x.User == null);
+			RuleFor(x => x.Web).Url().When(x => !string.IsNullOrEmpty(x.Web) && x.User == null);
 		}
 	}
 }

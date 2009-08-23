@@ -3,7 +3,7 @@
 									 assembly="BlogSharp.Model"
 									 namespace="BlogSharp.Model"
                    default-access="backfield">
-  <class name="User" table="`User" optimistic-lock="version">
+  <class name="User" table="User" optimistic-lock="version">
     <id name="ID"
 				type="Int64">
       <generator class="hilo"/>
@@ -12,7 +12,7 @@
     <property name="UserName" not-null="true"/>
     <property name="Password" not-null="true"/>
     <property name="Email" not-null="true"/>
-    <bag name="Blogs" lazy="true" table="UserBlog" cascade="all">
+    <bag name="Blogs" lazy="true" table="UserBlog" cascade="all" access="field.camelcase">
       <key column="UserId"/>
       <many-to-many class="Blog" column="BlogId"/>
     </bag>

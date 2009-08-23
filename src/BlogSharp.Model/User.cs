@@ -14,10 +14,10 @@ namespace BlogSharp.Model
 		/// </summary>
 		public User()
 		{
-			// this.Posts = new List<Post>();
-			Blogs = new List<Blog>();
+			this.blogs = new List<Blog>();
 		}
 
+		private IList<Blog> blogs;
 		///// <summary>
 		///// Gets or sets Posts.
 		///// </summary>
@@ -26,7 +26,10 @@ namespace BlogSharp.Model
 		/// <summary>
 		/// Gets or sets Blogs.
 		/// </summary>
-		public virtual IList<Blog> Blogs { get; set; }
+		public virtual IEnumerable<Blog> Blogs
+		{
+			get{ return blogs;}
+		}
 
 		/// <summary>
 		/// Gets or sets UserName.
@@ -52,5 +55,33 @@ namespace BlogSharp.Model
 		/// Gets or sets BirthDate.
 		/// </summary>
 		public virtual DateTime? BirthDate { get; set; }
+
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			if (obj.GetType() != typeof (User)) return false;
+			return Equals((User) obj);
+		}
+
+		public virtual bool Equals(User other)
+		{
+			if (ReferenceEquals(null, other)) return false;
+			if (ReferenceEquals(this, other)) return true;
+			return Equals(other.UserName, UserName) && Equals(other.Password, Password) && Equals(other.Email, Email) && Equals(other.Biography, Biography) && other.BirthDate.Equals(BirthDate);
+		}
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				int result = (UserName != null ? UserName.GetHashCode() : 0);
+				result = (result*397) ^ (Password != null ? Password.GetHashCode() : 0);
+				result = (result*397) ^ (Email != null ? Email.GetHashCode() : 0);
+				result = (result*397) ^ (Biography != null ? Biography.GetHashCode() : 0);
+				result = (result*397) ^ (BirthDate.HasValue ? BirthDate.Value.GetHashCode() : 0);
+				return result;
+			}
+		}
 	}
 }

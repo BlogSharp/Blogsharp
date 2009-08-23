@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MappingsFixture.cs" />
+    <Compile Include="MappingTests\MappingsFixture.cs" />
+    <Compile Include="MappingTests\UserMappingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
